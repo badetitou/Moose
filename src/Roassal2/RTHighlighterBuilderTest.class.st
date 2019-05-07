@@ -32,13 +32,13 @@ b build.
 	hb highlightColor: [ :nb | Color r: nb / 10 g: 0 b: 0 ].
 	hb filter: [ :obj | obj isNumber ].
 	hb addEntry: [ :number | true ] named: 'Highlight'.
-	
+
 	hb build.
 
 b view.
 
 	el := b view elementFromModel: 'Highlight'.
-	el announce: TRMouseEnter.	
+	el announce: TRMouseEnter.
 ]
 
 { #category : #tests }
@@ -54,13 +54,13 @@ b build.
 	hb view: b view.
 	hb filter: [ :obj | obj isNumber ].
 	hb addEntry: [ :number | true ] named: 'Highlight' highlightColor: [ :nb | Color r: nb / 10 g: 0 b: 0 ].
-	
+
 	hb build.
 
 b view.
 
 	el := b view elementFromModel: 'Highlight'.
-	el announce: TRMouseEnter.	
+	el announce: TRMouseEnter.
 ]
 
 { #category : #tests }
@@ -75,19 +75,19 @@ b build.
 	hb := RTHighlighterBuilder new.
 	hb view: b view.
 	hb filter: [ :obj | obj isNumber ].
-	hb addEntry: [ :number | number < 5 ] named: '<5' highlightColor: [ :nb | Color r: nb / 10 g: 0.8 b: 0.8 ].	
+	hb addEntry: [ :number | number < 5 ] named: '<5' highlightColor: [ :nb | Color r: nb / 10 g: 0.8 b: 0.8 ].
 
-	hb addEntry: [ :number | number > 5 ] named: '>5' highlightColor: [ :nb | Color r: nb / 10 g: 0.8 b: 0.8 ] defaultColor: Color black.	
-		
+	hb addEntry: [ :number | number > 5 ] named: '>5' highlightColor: [ :nb | Color r: nb / 10 g: 0.8 b: 0.8 ] defaultColor: Color black.
+
 	hb build.
 
 b view.
 
 	el := b view elementFromModel: '<5'.
-	el announce: TRMouseEnter.	
-	
+	el announce: TRMouseEnter.
+
 	el := b view elementFromModel: '>5'.
-	el announce: TRMouseEnter.	
+	el announce: TRMouseEnter.
 ]
 
 { #category : #tests }
@@ -100,15 +100,15 @@ RTHighlighterBuilderTest >> testHighlightCompositeShape [
 	s add: RTBox new.
 	e := s element.
 	v add: e.
-	
+
 	hb := RTHighlighterBuilder new.
 	hb view: v.
 	hb addEntry: #isNil named: 'isNil'.
 	hb build.
-	
+
 	originalColorLabel := e trachelShape shapes first color.
 	originalColorBox := e trachelShape shapes second color.
-	
+
 	(v elementFromModel: 'isNil') announce: TRMouseEnter.
 	self assert: e trachelShape shapes first color ~= originalColorLabel.
 	self assert: e trachelShape shapes second color == originalColorBox.
@@ -124,15 +124,15 @@ RTHighlighterBuilderTest >> testHighlightCompositeShape2 [
 	s add: RTLabel new.
 	e := s element.
 	v add: e.
-	
+
 	hb := RTHighlighterBuilder new.
 	hb view: v.
 	hb addEntry: #isNil named: 'isNil'.
 	hb build.
 
-	originalColorBox := e trachelShape shapes first color.	
+	originalColorBox := e trachelShape shapes first color.
 	originalColorLabel := e trachelShape shapes second color.
-	
+
 	(v elementFromModel: 'isNil') announce: TRMouseEnter.
 	self assert: e trachelShape shapes first color ~= originalColorBox.
 	self assert: e trachelShape shapes second color == originalColorLabel.
@@ -153,7 +153,7 @@ RTHighlighterBuilderTest >> testSmallExample [
 	hb filter: [ :obj | obj isBehavior ].
 	hb view: b view.
 	hb addEntry: [ :cls | '*Array*' match: cls name ] named: 'Array'.
-	hb addEntry: [ :cls | '*Set*' match: cls name ] named: 'Set'.	
+	hb addEntry: [ :cls | '*Set*' match: cls name ] named: 'Set'.
 	hb addEntry: [ :cls | '*Hash*' match: cls name ] named: 'Hash'.
 	hb addEntry: [ :cls | '*Dictionary*' match: cls name ] named: 'Dictionary'.
 	hb build.
@@ -169,5 +169,5 @@ RTHighlighterBuilderTest >> testSmallExample [
 	self assert: originalColor ~= el trachelShape color.
 	highlighterElement announce: TRMouseLeave.
 	self assert: originalColor equals: el trachelShape color.
-	
+
 ]

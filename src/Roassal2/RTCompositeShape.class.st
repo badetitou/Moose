@@ -1,5 +1,5 @@
 "
-A RTCompositeShape describes a composite shape. 
+A RTCompositeShape describes a composite shape.
 
 The bounds of the element depends therefore on the composition. Consider the following example:
 -=-=-=-=-=-=-=-=-=-=-=-=
@@ -11,17 +11,17 @@ The bounds of the element depends therefore on the composition. Consider the fol
 	shape add: RTLabel new.
 	shape add: (RTBox new color: (Color blue alpha: 0.3)).
 	shape vertical.
-	
+
 	es := shape elementsOn: RTShape withAllSubclasses.
 	v addAll: es.
 
-	es do: [ :e | 
+	es do: [ :e |
 		methodElements := RTBox new elementsOn: e model rtmethods.
 		RTGridLayout on: methodElements.
 		v addAll: methodElements.
 		RTNest new
-			on: e 
-			inShape: #second 
+			on: e
+			inShape: #second
 			nest: methodElements.
 	].
 
@@ -43,23 +43,23 @@ Shapes composed in a RTCompositeShape may be relayouted after one of them has ch
 	s add: b3.
 	s horizontal.
 	s setAutomaticRelayout.
-	
+
 	e := s elementOn: 'click to expand'.
 	view := RTView new.
 	view add: e.
-	
+
 	e @ RTDraggable.
 	e @ RTPopup.
-	
+
 	e when: TRMouseClick do: [ :ev |
 		e trachelShape shapes second extent: 45 @ 45.
 		e trachelShape shapes third text: 'hello'.
 		view signalUpdate.
 	].
-	
+
 	view open
 -=-=-=-=-=-=-=-=-=-=-=-=
- 
+
 "
 Class {
 	#name : #RTCompositeShape,
@@ -75,7 +75,7 @@ Class {
 
 { #category : #'instance creation' }
 RTCompositeShape class >> with: shape1 with: shape2 [
-	^ self new 
+	^ self new
 		add: shape1;
 		add: shape2;
 		yourself
@@ -106,16 +106,16 @@ RTCompositeShape >> alignRight [
 RTCompositeShape >> allOfSameSize [
 	"Make all the added shape of the same size"
 	"Can be called before or after adding the shapes
-	
+
 	Example:
-	
+
 	box1 := RTBox new color: Color blue trans; size: 20.
 	box2 := RTBox new color: Color red trans; size: 10.
 
 	combo:= RTCompositeShape new allOfSameSize; add: box1; add: box2.
 
 	RTView new
-	    add: combo element. 
+	    add: combo element.
 
 
 	"
@@ -125,7 +125,7 @@ RTCompositeShape >> allOfSameSize [
 { #category : #'public - layout' }
 RTCompositeShape >> allOfSameSizeWithPadding [
 	"Make all the added shape of the same size, allow for a padding"
-	
+
 "
 v := RTView new.
 shape := RTCompositeShape new.
@@ -135,7 +135,7 @@ shape allOfSameSizeWithPadding.
 labels := shape elementsOn: #('Hello' 'Gutten Morgen' 'Hola').
 v addAll: labels.
 RTVerticalLineLayout on: labels.
-RTAlignment new elements: labels; right. 
+RTAlignment new elements: labels; right.
 v
 "
 	shapeFraming := #allOfSameSizeWithPadding
@@ -149,14 +149,14 @@ RTCompositeShape >> allShapes [
 
 { #category : #'attach point' }
 RTCompositeShape >> attachPoint: anAttachPoint [
-	self allShapes do: [ :s | 
-		((s isKindOf: RTAbstractLine) or: [ s isKindOf: RTLineDecoration ]) 
+	self allShapes do: [ :s |
+		((s isKindOf: RTAbstractLine) or: [ s isKindOf: RTLineDecoration ])
 			ifTrue: [ s attachPoint: anAttachPoint ] ]
 ]
 
 { #category : #accessing }
 RTCompositeShape >> automaticallyUpdateLayout [
-	^ automaticallyUpdateLayout 
+	^ automaticallyUpdateLayout
 ]
 
 { #category : #public }
@@ -206,7 +206,7 @@ RTCompositeShape >> height: aOneArgBlockOrColorOrSymbol [
 { #category : #'public - layout' }
 RTCompositeShape >> horizontal [
 	"Set the horizontal layout in the composite
-	
+
 	For example:
 	| c s1 s2 v |
 	c := RTCompositeShape new.
@@ -214,7 +214,7 @@ RTCompositeShape >> horizontal [
 	s2 := RTBox new color: Color red; size: 9.
 	c add: s1; add: s2.
 	c horizontal.
-	
+
 	v := RTView new.
 	v add: (c element).
 	v
@@ -242,10 +242,10 @@ RTCompositeShape >> setAutomaticRelayout [
 { #category : #hooks }
 RTCompositeShape >> setAutomaticUpdateLayoutIfNecessaryFor: ss and: trachelShape [
 	automaticallyUpdateLayout
-		ifTrue: [ 
+		ifTrue: [
 			| b |
 			b := TRExtentCallback new
-				block: [ :aShape :ratio | 
+				block: [ :aShape :ratio |
 					trachelShape resetInnerShapes.
 					trachelShape perform: layout.
 					trachelShape relayout ].
@@ -273,28 +273,28 @@ RTCompositeShape >> textFor: anElement [
 { #category : #'public - forwarding' }
 RTCompositeShape >> textHeight: aBlockOrNumber [
 	"Set the height of the text
-	
+
 	| b |
 	b := RTMondrian new.
 	b shape labeledBox
 	    borderColor: Color black;
 	    textHeight: 10.
-	    
+
 	b nodes: (1 to: 10).
 	b
 	"
-	(self shapesInstancesOf: RTLabel) do: [ :s | s height: aBlockOrNumber ]	
+	(self shapesInstancesOf: RTLabel) do: [ :s | s height: aBlockOrNumber ]
 ]
 
 { #category : #public }
 RTCompositeShape >> trachelShapeFor: anElement [
 "	^ self updateFor: anElement trachelShape: TRMultiCompositeShape new"
-	
+
 
 	| ss trachelShape |
 	trachelShape := TRCompositeShape new.
 	ss := shapes
-		collectWithIndex: [ :tupple :shapeIndex | 
+		collectWithIndex: [ :tupple :shapeIndex |
 			| s |
 			s := tupple first trachelShapeFor: anElement.
 			Array with: s with: tupple second ].
@@ -303,7 +303,7 @@ RTCompositeShape >> trachelShapeFor: anElement [
 	trachelShape perform: layout.
 	self setAutomaticUpdateLayoutIfNecessaryFor: ss and: trachelShape.
 	^ trachelShape
-	
+
 
 ]
 
@@ -311,25 +311,25 @@ RTCompositeShape >> trachelShapeFor: anElement [
 RTCompositeShape >> updateFor: anElement trachelShape: trachelShape [
 	| ss |
 	ss := shapes
-		collectWithIndex: [ :tupple :shapeIndex | 
+		collectWithIndex: [ :tupple :shapeIndex |
 			| s |
 			tupple first updateFor: anElement trachelShape: (anElement trachelShape shapes at: shapeIndex).
 			s := anElement trachelShape shapes at: shapeIndex.
 			Array with: s with: tupple second ].
 	trachelShape setShapes: ss.
-	 
+
 	trachelShape perform: shapeFraming.
 	trachelShape perform: layout.
 	self setAutomaticUpdateLayoutIfNecessaryFor: ss and: trachelShape.
 	^ trachelShape
-	
+
 
 ]
 
 { #category : #'public - layout' }
 RTCompositeShape >> vertical [
 	"Set the vertical layout in the composite
-	
+
 	For example:
 	| c s1 s2 v |
 	c := RTCompositeShape new.
@@ -337,7 +337,7 @@ RTCompositeShape >> vertical [
 	s2 := RTBox new color: Color red; size: 9.
 	c add: s1; add: s2.
 	c vertical.
-	
+
 	v := RTView new.
 	v add: (c element).
 	v
@@ -347,7 +347,7 @@ RTCompositeShape >> vertical [
 { #category : #public }
 RTCompositeShape >> width: aBlockOrValue [
 	"Set the width of all the contained shapes
-	
+
 	| c s1 s2 v |
 	c := RTCompositeShape new.
 	s1 := RTBox new color: Color blue; size: 5.
@@ -355,7 +355,7 @@ RTCompositeShape >> width: aBlockOrValue [
 	c add: s1; add: s2.
 	c width: 20.
 	c vertical.
-	
+
 	v := RTView new.
 	v add: (c element).
 	v

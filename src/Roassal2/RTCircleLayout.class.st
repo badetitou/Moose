@@ -10,7 +10,7 @@ Class {
 
 { #category : #'instance creation' }
 RTCircleLayout class >> scaleBy: aNumber [
-	
+
 	^self new scaleBy: aNumber
 ]
 
@@ -22,7 +22,7 @@ RTCircleLayout >> doExecute: elements [
 	angleIncrement := self computeIncrementalAngleFor: elements.
 	angle := self initialAngle.
 	elements
-		do: [ :each | 
+		do: [ :each |
 			| point |
 			point := center + (Point r: rad theta: angle).
 			angle := angle + angleIncrement.

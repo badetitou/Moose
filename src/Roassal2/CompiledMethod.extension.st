@@ -28,7 +28,7 @@ CompiledMethod >> computeDate [
 
 	nbOfSpaces size = 2
 		ifTrue: [ ^ DateAndTime fromString: (s copyAfter: $ ) ].
-	
+
 	"Default date, as it happens that some methods do not have a date"
 	^ DateAndTime epoch
 ]
@@ -38,7 +38,7 @@ CompiledMethod >> date [
 	"Return the DateAndTime associated to me"
 	^ (self properties includesKey: #date)
 		ifTrue: [ self properties at: #date ]
-		ifFalse: [ 
+		ifFalse: [
 			| m |
 			m := self computeDate.
 			self properties at: #date put: m.
@@ -53,16 +53,16 @@ CompiledMethod >> dateSinceEpoch [
 { #category : #'*roassal2' }
 CompiledMethod >> dependentClasses [
 	"Return the list of classes used myself. The result contains my superclass."
-	
+
 	"(Morph>>#drawOn:) dependentClasses"
-	| cll | 
+	| cll |
 	cll := Set new.
-	
+
 	"We unify a class and its metaclass"
-	self literalsDo: [ :l | 
+	self literalsDo: [ :l |
 					"We also check if the method is not an extension"
-					((l isVariableBinding 
-					and: [ l value notNil ]) 
+					((l isVariableBinding
+					and: [ l value notNil ])
 					and: [ l value isBehavior ])  ifTrue: [ cll add: l value ] ].
 	^ cll asArray
 ]
@@ -70,17 +70,17 @@ CompiledMethod >> dependentClasses [
 { #category : #'*Roassal2' }
 CompiledMethod >> dependentClassesWithOccurences [
 	"Return the list of classes used myself. The result contains my superclass. The result may contains multiple times the same element."
-	
+
 	"(Morph>>#drawOn:) dependentClassesWithOccurences"
 	"(CompiledMethod>>#dependentClassesWithOccurences) dependentClassesWithOccurences"
-	| cll | 
+	| cll |
 	cll := OrderedCollection new.
-	
+
 	"We unify a class and its metaclass"
-	self literalsDo: [ :l | 
+	self literalsDo: [ :l |
 					"We also check if the method is not an extension"
-					((l isVariableBinding 
-					and: [ l value notNil ]) 
+					((l isVariableBinding
+					and: [ l value notNil ])
 					and: [ l value isBehavior ])  ifTrue: [ cll add: l value ] ].
 	^ cll asArray
 ]
@@ -113,14 +113,14 @@ CompiledMethod >> numberOfLinesOfCode [
 CompiledMethod >> sourceCodeCached [
 	"Retrieve or reconstruct the source code for this method.
 	Cache the source to speedup accesses"
-	
+
 	"
 	[ 10000 timesRepeat: [ (self >> #sourceCodeCached) sourceCode ] ] timeToRun
 	[ 10000 timesRepeat: [ (self >> #sourceCodeCached) sourceCodeCached ] ] timeToRun
 	"
-	
-	(self hasProperty: #sourceCode) 
-		ifFalse: [ 
+
+	(self hasProperty: #sourceCode)
+		ifFalse: [
 			self propertyValueAt: #sourceCode put: self sourceCode.
 			self propertyValueAt: #sourceCode ].
 	^ self propertyValueAt: #sourceCode
@@ -131,14 +131,14 @@ CompiledMethod >> sourceCodeLinesCached [
 	"Retrieve or reconstruct the source code for this method.
 	Return the list of lines defining the source code.
 	Cache the source to speedup accesses"
-	
+
 	"
 	[ 10000 timesRepeat: [ (self >> #sourceCodeCached) sourceCode ] ] timeToRun
 	[ 10000 timesRepeat: [ (self >> #sourceCodeCached) sourceCodeCached ] ] timeToRun
 	"
-	
-	(self hasProperty: #sourceCodeLinesCached) 
-		ifFalse: [ 
+
+	(self hasProperty: #sourceCodeLinesCached)
+		ifFalse: [
 			self propertyValueAt: #sourceCodeLinesCached put: self sourceCode lines.
 			self propertyValueAt: #sourceCodeLinesCached ].
 	^ self propertyValueAt: #sourceCodeLinesCached
@@ -149,14 +149,14 @@ CompiledMethod >> sourceNonEmptyCodeLinesCached [
 	"Retrieve or reconstruct the source code for this method.
 	Return the list of lines defining the source code.
 	Cache the source to speedup accesses"
-	
+
 	"
 	[ 10000 timesRepeat: [ (self >> #sourceNonEmptyCodeLinesCached) sourceCodeLinesCached ] ] timeToRun
 	[ 10000 timesRepeat: [ (self >> #sourceNonEmptyCodeLinesCached) sourceNonEmptyCodeLinesCached ] ] timeToRun
 	"
-	
-	(self hasProperty: #sourceNonEmptyCodeLinesCached) 
-		ifFalse: [ 
+
+	(self hasProperty: #sourceNonEmptyCodeLinesCached)
+		ifFalse: [
 			self propertyValueAt: #sourceNonEmptyCodeLinesCached put: (self sourceCode lines reject: [ :l | l trim isEmpty ]).
 			self propertyValueAt: #sourceNonEmptyCodeLinesCached ].
 	^ self propertyValueAt: #sourceNonEmptyCodeLinesCached

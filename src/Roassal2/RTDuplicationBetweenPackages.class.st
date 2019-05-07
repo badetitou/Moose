@@ -6,14 +6,14 @@ Class {
 
 { #category : #accessing }
 RTDuplicationBetweenPackages >> description [
-	^ 
+	^
 'Two regular expressions are asked. Packages matching those regular expression are compared.
 Each red dot indicates duplication between methods.'
 ]
 
 { #category : #hooks }
 RTDuplicationBetweenPackages >> execute [
-	
+
 	| packageNamePattern1 packageNamePattern2 minimumLinesOfCodeToBeConsidered p1 methods1 p2 methods2 m |
 	packageNamePattern1 := UIManager default
 			request: '-- 1 -- Enter a pattern of a package (e.g., Roassal2 or Roassal2*)'
@@ -26,7 +26,7 @@ RTDuplicationBetweenPackages >> execute [
 			title: 'Enter the name of a package to visualize the duplication'.
 
 	minimumLinesOfCodeToBeConsidered := 5.
-	
+
 	p1 := RPackageOrganizer default packages select: [ :p | packageNamePattern1 match: p packageName ].
 	methods1 := (((p1 flatCollect: #methods) groupedBy: #methodClass) values flatCollect: #yourself) select: [ :me | me sourceNonEmptyCodeLinesCached size >= minimumLinesOfCodeToBeConsidered ].
 
@@ -36,7 +36,7 @@ RTDuplicationBetweenPackages >> execute [
 	m := RTDepMatrix new.
 	m shape box color: Color red.
 	m interaction popupText.
-	m function: [ :m1 :m2 | 
+	m function: [ :m1 :m2 |
 		| a1 a2 |
 		a1 := m1 sourceNonEmptyCodeLinesCached.
 		a2 := m2 sourceNonEmptyCodeLinesCached.

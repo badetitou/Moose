@@ -11,7 +11,7 @@ Class {
 RTAbout class >> menuCommandOn: aBuilder [
 	<worldMenu>
 	(aBuilder item: ('About ', self projectName) asSymbol)
-			order: 0.001; 
+			order: 0.001;
 			parent: self projectName asSymbol;
 			label: 'About ', self projectName;
 			help: 'Roassal credits';
@@ -25,7 +25,7 @@ RTAbout >> addAnimationTo: v [
 	v when: TRMouseClick do: [ :event | v clean ].
 	v
 		when: TRMouseMove
-		do: [ :event | 
+		do: [ :event |
 			e := (RTBox new
 				color: (Color red alpha: 0.2);
 				size: 20 atRandom + 5) element.

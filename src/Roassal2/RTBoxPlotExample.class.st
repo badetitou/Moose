@@ -1,5 +1,5 @@
 "
-RTBoxPlotExample new installTitle: 'BoxPlot1' 
+RTBoxPlotExample new installTitle: 'BoxPlot1'
 		code:
 		'
 | b createList r ds |
@@ -35,7 +35,7 @@ ds := RTBoxPlotDataSet new.
 b axisX noLabel; noTick.
 b build.
 ^ b view.
- 
+
 ]
 
 { #category : #icons }
@@ -63,7 +63,7 @@ RTBoxPlotExample >> exampleBoxPlot2 [
 	createList := [ :size :d1 :d2 | (1 to: size) collect: [ :i | d1 + (r next * (d2 - d1)) ] ].
 	b := RTGrapher new.
 	(1 to: 10)
-		do: [ :i | 
+		do: [ :i |
 			| ds |
 			ds := RTBoxPlotDataSet new.
 			ds points: (createList value: 20 value: 0 value: 20).
@@ -113,7 +113,7 @@ today := d := Date today.
 	d := d next.].
 b build.
 ^ b view.
- 
+
 ]
 
 { #category : #icons }
@@ -161,7 +161,7 @@ b axisX labelRotation: -30;
 	numberOfLabels: 10.
 b build.
 ^ b view.
- 
+
 ]
 
 { #category : #icons }
@@ -210,12 +210,12 @@ today := d := Date today.
 	if: [ :item | item median < 5 ] fillColor: [ Color orange ];
 	if: [ :item | item hasOutlier ] fillColor: [ Color red ].
 	ds boxLineShape color: Color blue.
-	
+
 	ds points: (createList value: 20 value: 0 value: 20).
 	ds model: d.
 	ds x: [ :date| date julianDayNumber - today julianDayNumber + 1 ].
 	b add: ds.
-	
+
 	d := d next.].
 
 b axisX labelRotation: -30;
@@ -223,7 +223,7 @@ b axisX labelRotation: -30;
 	numberOfLabels: 10.
 b build.
 ^ b view.
- 
+
 ]
 
 { #category : #icons }
@@ -264,7 +264,7 @@ RTBoxPlotExample >> exampleMethodDistribution [
 	b := RTGrapher new.
 	b extent: 400 @ 200.
 	RTShape withAllSubclasses
-		do: [ :cls | 
+		do: [ :cls |
 			ds := RTBoxPlotDataSet new.
 			ds points: (cls rtmethods collect: #numberOfLinesOfCode).
 			b add: ds ].
@@ -321,7 +321,7 @@ b addDecorator: deco.
 
 b build.
 ^ b view
- 
+
 ]
 
 { #category : #icons }

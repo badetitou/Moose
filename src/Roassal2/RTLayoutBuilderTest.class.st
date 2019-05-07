@@ -25,7 +25,7 @@ RTLayoutBuilderTest >> testConditional [
 	v := RTView new.
 	es := RTBox elementsOn: (1 to: 20).
 	v addAll: es.
-	
+
 	eb := RTEdgeBuilder new
 				view: v;
 				elements: (es copyFrom: 1 to: 10);
@@ -36,7 +36,7 @@ RTLayoutBuilderTest >> testConditional [
 				else: RTTreeLayout new;
 				overall: RTHorizontalLineLayout new.
 	lb setUpElements: es.
-	
+
 	self assert: (es collect: #position) asArray equals: (((Array new: 20) at: 1 put: ((3.0@3.0)); at: 2 put: ((13.0@3.0)); at: 3 put: ((23.0@3.0)); at: 4 put: ((33.0@3.0)); at: 5 put: ((3.0@13.0)); at: 6 put: ((13.0@13.0)); at: 7 put: ((23.0@13.0)); at: 8 put: ((33.0@13.0)); at: 9 put: ((3.0@23.0)); at: 10 put: ((13.0@23.0)); at: 11 put: ((48.0@3.0)); at: 12 put: ((56.0@3.0)); at: 13 put: ((64.0@3.0)); at: 14 put: ((72.0@3.0)); at: 15 put: ((80.0@3.0)); at: 16 put: ((88.0@3.0)); at: 17 put: ((96.0@3.0)); at: 18 put: ((104.0@3.0)); at: 19 put: ((112.0@3.0)); at: 20 put: ((120.0@3.0)); yourself))
 ]
 
@@ -58,7 +58,7 @@ RTLayoutBuilderTest >> testFlowOnEmpty02 [
 	"Juraj had a problem on some point. This tests describes the problematic situation"
 	| b |
 	b := RTMondrian new.
-	b layout flow. 
+	b layout flow.
 	b build.
 ]
 
@@ -72,7 +72,7 @@ RTLayoutBuilderTest >> testHorizontalTreeAndAttachPoint [
 	edges := b edges connectFrom: [ :x | x//2 ].
 
 	b shape arrowedLine color: Color red; centeredAttachPoint.
-	b edges source: (Array with: 3->2 with: 9->7) connectFrom: #key to: #value. 
+	b edges source: (Array with: 3->2 with: 9->7) connectFrom: #key to: #value.
 
 	"We test the attachpoints"
 	allEdges := b view edges.
@@ -84,7 +84,7 @@ RTLayoutBuilderTest >> testHorizontalTreeAndAttachPoint [
 	"We set a tree layout"
 	b layout tree userDefinedEdges: edges.
 	b build.
-	
+
 	"We test the attachpoints"
 	allEdges := b view edges.
 	lastTwoEdges := allEdges copyFrom: (allEdges size - 1) to: allEdges size.
@@ -103,7 +103,7 @@ RTLayoutBuilderTest >> testHorizontalTreeAndNoAttachPoint [
 	edges := b edges connectFrom: [ :x | x//2 ].
 
 	b shape arrowedLine color: Color red; centeredAttachPoint.
-	b edges source: (Array with: 3->2 with: 9->7) connectFrom: #key to: #value. 
+	b edges source: (Array with: 3->2 with: 9->7) connectFrom: #key to: #value.
 
 	"We test the attachpoints"
 	allEdges := b view edges.
@@ -111,12 +111,12 @@ RTLayoutBuilderTest >> testHorizontalTreeAndNoAttachPoint [
 	lastTwoEdges := allEdges copyFrom: (allEdges size - 2) to: allEdges size.
 	self assert: (firstEdges allSatisfy: [ :e | e shape attachPoint class == RTCenteredAttachPoint ] ).
 	self assert: (lastTwoEdges allSatisfy: [ :e | e shape attachPoint class == RTCenteredAttachPoint ]).
-	 
-	
+
+
 	"We set a tree layout"
 	b layout horizontalTree doNotAttachPoint; userDefinedEdges: edges.
 	b build.
-	
+
 	"We test the attachpoints"
 	allEdges := b view edges.
 	lastTwoEdges := allEdges copyFrom: (allEdges size - 2) to: allEdges size.
@@ -135,7 +135,7 @@ RTLayoutBuilderTest >> testSugiyamaAndVerticalAttach [
 	edge := RTLine edgeFrom: e1 to: e2.
 	builder setUpElements: (Array with: e1 with: e2).
 
-	self assert: edge shape attachPoint class equals: RTVerticalAttachPoint 
+	self assert: edge shape attachPoint class equals: RTVerticalAttachPoint
 ]
 
 { #category : #'tests - attach point' }
@@ -148,7 +148,7 @@ RTLayoutBuilderTest >> testTreeAndVerticalAttach [
 	edge := RTLine edgeFrom: e1 to: e2.
 	builder setUpElements: (Array with: e1 with: e2).
 
-	self assert: edge shape attachPoint class equals: RTVerticalAttachPoint 
+	self assert: edge shape attachPoint class equals: RTVerticalAttachPoint
 ]
 
 { #category : #'tests - attach point' }
@@ -161,7 +161,7 @@ RTLayoutBuilderTest >> testVerticalTreeAndAttachPoint [
 	edges := b edges connectFrom: [ :x | x//2 ].
 
 	b shape arrowedLine color: Color red; centeredAttachPoint.
-	b edges source: (Array with: 3->2 with: 9->7) connectFrom: #key to: #value. 
+	b edges source: (Array with: 3->2 with: 9->7) connectFrom: #key to: #value.
 
 	"We test the attachpoints"
 	allEdges := b view edges.
@@ -173,7 +173,7 @@ RTLayoutBuilderTest >> testVerticalTreeAndAttachPoint [
 	"We set a tree layout"
 	b layout tree userDefinedEdges: edges.
 	b build.
-	
+
 	"We test the attachpoints"
 	allEdges := b view edges.
 	lastTwoEdges := allEdges copyFrom: (allEdges size - 1) to: allEdges size.
@@ -192,7 +192,7 @@ RTLayoutBuilderTest >> testVerticalTreeAndNoAttachPoint [
 	edges := b edges connectFrom: [ :x | x//2 ].
 
 	b shape arrowedLine color: Color red; centeredAttachPoint.
-	b edges source: (Array with: 3->2 with: 9->7) connectFrom: #key to: #value. 
+	b edges source: (Array with: 3->2 with: 9->7) connectFrom: #key to: #value.
 
 	"We test the attachpoints"
 	allEdges := b view edges.
@@ -200,12 +200,12 @@ RTLayoutBuilderTest >> testVerticalTreeAndNoAttachPoint [
 	lastTwoEdges := allEdges copyFrom: (allEdges size - 2) to: allEdges size.
 	self assert: (firstEdges allSatisfy: [ :e | e shape attachPoint class == RTCenteredAttachPoint ] ).
 	self assert: (lastTwoEdges allSatisfy: [ :e | e shape attachPoint class == RTCenteredAttachPoint ]).
-	 
-	
+
+
 	"We set a tree layout"
 	b layout tree doNotAttachPoint; userDefinedEdges: edges.
 	b build.
-	
+
 	"We test the attachpoints"
 	allEdges := b view edges.
 	lastTwoEdges := allEdges copyFrom: (allEdges size - 2) to: allEdges size.

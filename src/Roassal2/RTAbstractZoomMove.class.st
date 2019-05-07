@@ -36,7 +36,7 @@ RTAbstractZoomMove >> on: view during: seconds [
 							evaluator: [ :t | initialScale interpolateTo: (initialScale * self step ) at: t ];
 							timer: (TRVITimer new cycleLength: seconds);
 							yourself.
-	
+
 
 
 ]
@@ -55,5 +55,5 @@ RTAbstractZoomMove >> start [
 
 { #category : #'stepping and presenter' }
 RTAbstractZoomMove >> step [
-	self subclassResponsibility 
+	self subclassResponsibility
 ]

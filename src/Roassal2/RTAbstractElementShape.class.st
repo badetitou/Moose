@@ -40,7 +40,7 @@ RTAbstractElementShape >> borderWidth [
 RTAbstractElementShape >> borderWidth: aValueOrAOneArgBlock [
 	"aValueOrAOneArgBlock is applied on the object model"
 	self borderWidthElement: [ :anElement | aValueOrAOneArgBlock rtValue: anElement model ]
-	
+
 ]
 
 { #category : #accessing }
@@ -97,7 +97,7 @@ RTAbstractElementShape >> initialize [
 	width := self defaultWidth.
 	height := self defaultHeight.
 	borderWidth := 1
-	
+
 ]
 
 { #category : #configuration }

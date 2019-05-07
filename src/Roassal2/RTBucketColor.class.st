@@ -16,7 +16,7 @@ Class {
 
 { #category : #examples }
 RTBucketColor class >> example [
-	
+
 	|n elements view|
 	n := RTBucketColor numberOfColors: 5 command: #asInteger scope: ($a to: $z).
 	n colorScheme: 'Blues'.
@@ -29,7 +29,7 @@ RTBucketColor class >> example [
 
 { #category : #examples }
 RTBucketColor class >> example1 [
-	
+
 	|n elements view |
 	n := RTBucketColor numberOfColors: 5 scope: (1 to: 35).
 	elements := (RTBox new size: 20; color: n) elementsOn: (1 to: 30).
@@ -60,8 +60,8 @@ RTBucketColor >> bucketIndexOf: anObject [
 
 	|value |
 	value := command value: anObject.
-	^ (self buckets collect: #first) detect: [ :step | value <= step ]. 
-	
+	^ (self buckets collect: #first) detect: [ :step | value <= step ].
+
 ]
 
 { #category : #'as yet unclassified' }
@@ -91,7 +91,7 @@ RTBucketColor >> initialize [
 
 { #category : #'as yet unclassified' }
 RTBucketColor >> initializeBuckets [
-	
+
 	|values min max delta  |
 	values := scope collect: [:v | command rtValue: v].
 	values sort: [ :a :b | a < b ].
@@ -114,7 +114,7 @@ RTBucketColor >> numberOfBuckets: anInteger [
 { #category : #'as yet unclassified' }
 RTBucketColor >> palette [
 
-	^ colorScheme isNil 
+	^ colorScheme isNil
 		ifTrue: [ self defaultPalette ]
 		ifFalse: [ (RTColorPalette paletteFor: colorScheme) colors: numberOfBuckets scheme: colorScheme
 			]
@@ -123,7 +123,7 @@ RTBucketColor >> palette [
 { #category : #'as yet unclassified' }
 RTBucketColor >> rtValue: anObject [
 
-	^ (self buckets detect: [ :pair | pair first = (self bucketIndexOf: anObject) ] ) second	
+	^ (self buckets detect: [ :pair | pair first = (self bucketIndexOf: anObject) ] ) second
 
 ]
 

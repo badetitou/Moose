@@ -35,8 +35,8 @@ RTConstrainedDraggableView >> initialize [
 { #category : #hooks }
 RTConstrainedDraggableView >> initializeElement: aView [
 
-	aView canvas 
-		when: TRMouseDragging 
+	aView canvas
+		when: TRMouseDragging
 		do: [ :e |
 			| translation |
 			translation := constraint value: aView value: e step negated.

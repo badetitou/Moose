@@ -10,7 +10,7 @@ Class {
 
 { #category : #running }
 RTVerticalMultipleDataTest >> setUp [
-	super setUp.			
+	super setUp.
 	b := RTGrapher new.
 
 	d := RTVerticalMultipleData new.
@@ -20,7 +20,7 @@ RTVerticalMultipleDataTest >> setUp [
 	d addMetric: #fourth.
 
 	b add: d.
-	
+
 	"d barChartWithBarTitle: #first rotation: -30.
 	"
 	b axisX noTick; noLabel.

@@ -15,10 +15,10 @@ e1 translateBy: 10 @ 8.
 
 v add: (RTLine edgeFrom: e1 to: e2).
 
-v addMenu: 'do' callback: [ 
+v addMenu: 'do' callback: [
 	v edges first @ RTMakeEdgeNotUpdatable.
-	v edges first trachelShape color: Color red; width: 3. 
-	
+	v edges first trachelShape color: Color red; width: 3.
+
 	v signalUpdate ].
 
 v
@@ -32,8 +32,8 @@ Class {
 
 { #category : #hooks }
 RTMakeEdgeNotUpdatable >> initializeElement: edge [
-	edge shape 
+	edge shape
 		colorElement: [ :l | l trachelShape color ];
 		width: [ :l | l trachelShape width ]
-	
+
 ]

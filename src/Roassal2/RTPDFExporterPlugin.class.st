@@ -6,13 +6,13 @@ Class {
 
 { #category : #hooks }
 RTPDFExporterPlugin >> description [
-	^ 'When you open a visualization, you can export it by clicking on the "..." icon. 
+	^ 'When you open a visualization, you can export it by clicking on the "..." icon.
 By loading this plugin, you will be able to export the visualization as a PDF file.'
 ]
 
 { #category : #hooks }
 RTPDFExporterPlugin >> execute [
-	Gofer new 
+	Gofer new
 		smalltalkhubUser: 'azazael' project: 'RTPDFExporter';
 		package: 'ConfigurationOfRTPDFExporter'; load.
 	(Smalltalk at: #ConfigurationOfRTPDFExporter) loadDevelopment

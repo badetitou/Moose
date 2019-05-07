@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : #'public - metrics' }
-RTDynamicEqualizerGrapher >> addName: aString metric: aBlockClosureOrSymbol [ 
+RTDynamicEqualizerGrapher >> addName: aString metric: aBlockClosureOrSymbol [
 	metrics add: (Array with: aString with: aBlockClosureOrSymbol)
 ]
 
@@ -20,7 +20,7 @@ RTDynamicEqualizerGrapher >> example01 [
 	self new example01
 	"
 	| b |
-	b := RTDynamicEqualizerGrapher new. 
+	b := RTDynamicEqualizerGrapher new.
 	b maxY: 20.
 	b minY: -20.
 	b addName: 'X1' metric: [ :anArray | anArray first ].
@@ -38,7 +38,7 @@ RTDynamicEqualizerGrapher >> example01 [
 RTDynamicEqualizerGrapher >> initialize [
 	super initialize.
 	metrics := OrderedCollection new.
-	
+
 	self axisX noLabel; noTick
 ]
 
@@ -51,16 +51,16 @@ RTDynamicEqualizerGrapher >> numberOfMetrics [
 RTDynamicEqualizerGrapher >> object: anObject [
 	| values |
 	values := metrics collect: [ :tupple | tupple second rtValue: anObject ].
-	barElements ifNil: [ 
+	barElements ifNil: [
 		barElements := self elementsOn: values.
 		RTHorizontalLineLayout on: barElements.
 		view addAll: barElements.
 		].
-	
+
 	RTMetricNormalizer new
 		elements: barElements;
 		normalizeHeight: #yourself min: self minY max: self maxX.
-		
+
 	view signalUpdate
 ]
 

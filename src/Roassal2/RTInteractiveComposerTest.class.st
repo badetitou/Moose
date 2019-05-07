@@ -18,7 +18,7 @@ RTInteractiveComposerTest >> testBasic [
 	| b window |
 	i
 		forCollectionOf: Class
-		do: [ :someClasses | 
+		do: [ :someClasses |
 			b := RTMondrian new.
 			b nodes: someClasses.
 			b normalizer
@@ -28,7 +28,7 @@ RTInteractiveComposerTest >> testBasic [
 			b ].
 	i
 		for: Class
-		do: [ :aClass | 
+		do: [ :aClass |
 			b := RTMondrian new.
 			b shape label text: #selector.
 			b nodes: aClass rtmethods.
@@ -37,7 +37,7 @@ RTInteractiveComposerTest >> testBasic [
 			b ].
 	window := i openOn: Collection withAllSubclasses.
 	window delete.
-	
+
 	(i openOn: Collection) delete.
 	(i openOn: Array) delete.
 	i openOn: 'hello world'
@@ -48,7 +48,7 @@ RTInteractiveComposerTest >> testBasic2 [
 	| b w1 w2 w3 |
 	i
 		forCollectionOf: Class
-		do: [ :someClasses | 
+		do: [ :someClasses |
 			b := RTMondrian new.
 			b nodes: someClasses.
 			b normalizer
@@ -58,7 +58,7 @@ RTInteractiveComposerTest >> testBasic2 [
 			b ].
 	i
 		for: Class
-		do: [ :aClass | 
+		do: [ :aClass |
 			b := RTMondrian new.
 			b nodes: aClass rtmethods.
 			b edges connectToAll: #dependentMethods.
@@ -67,14 +67,14 @@ RTInteractiveComposerTest >> testBasic2 [
 			b ].
 	i
 		for: CompiledMethod
-		do: [ :aMethod | 
+		do: [ :aMethod |
 			b := RTMondrian new.
 			b shape label.
 			b node: aMethod sourceCode.
 			b ].
-	
+
 	self assert: (i ruleFor: Array methods first) notNil.
-		
+
 	w1 := i openOn: Collection withAllSubclasses.
 	w2 := i openOn: Array.
 	w3 := i openOn: Array rtmethods first.

@@ -20,5 +20,5 @@ RTInteraction >> accept: aVisitor with: args [
 
 { #category : #hooks }
 RTInteraction >> initializeElement: element [
-	self subclassResponsibility 
+	self subclassResponsibility
 ]

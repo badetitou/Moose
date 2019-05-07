@@ -1,5 +1,5 @@
 "
-A RTSVGElementPopup is a single element popup. 
+A RTSVGElementPopup is a single element popup.
 
 The element may be any translatable Roassal Shape.
 "
@@ -20,7 +20,7 @@ RTSVGElementPopup >> addEventHandlers: aStream id: aString element: aRTElement  
 	visitor := RTSVGVisitor new stream: aStream; center: aNumber; yourself.
 	visitor canvas: myElement encompassingRectangle.
 	visitor visitElement: myElement.
-	aStream 
+	aStream
 		nextPutAll: (self mouseAction: aString);
 		nextPutAll:  '</g>'
 ]

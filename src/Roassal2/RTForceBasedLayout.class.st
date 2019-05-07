@@ -97,29 +97,29 @@ Class {
 }
 
 { #category : #algorithm }
-RTForceBasedLayout >> accumulate: aQuad [ 
+RTForceBasedLayout >> accumulate: aQuad [
 
 	| cx cy k random |
-	
+
 	cx := 0.
 	cy := 0.
-	
+
 	aQuad charge: 0; cx: 0; cy: 0.
-	
+
 	random := Random new.
-	
+
 	aQuad leaf ifFalse: [ aQuad nodes do: [ :e | e isNil ifFalse: [ self accumulate: e.
 																aQuad charge: aQuad charge + e charge.
 																cx := cx + (e charge * e cx).
 																cy := cy + (e charge * e cy) ] ] ].
-												
+
 	aQuad node isNil ifFalse: [ aQuad leaf ifFalse: [ aQuad node translateTo: aQuad node position + (random next - 0.5 @ ( random next - 0.5)) ].
 								k := alpha * (self chargeOf: aQuad node).
 								aQuad charge: aQuad charge + k.
-								cx := cx + (k * aQuad node position x). 
+								cx := cx + (k * aQuad node position x).
 								cy := cy + (k * aQuad node position y).].
-							
-	aQuad charge = 0 ifTrue: [ ^ self ].				
+
+	aQuad charge = 0 ifTrue: [ ^ self ].
 	aQuad cx: cx / aQuad charge.
 	aQuad cy: cy / aQuad charge.
 ]
@@ -132,7 +132,7 @@ RTForceBasedLayout >> addEdge: anEdge [
 { #category : #updating }
 RTForceBasedLayout >> addEdges: someEdges [
 	someEdges
-		do: [ :e | 
+		do: [ :e |
 			| from to |
 			from := e from.
 			to := e to.
@@ -146,7 +146,7 @@ RTForceBasedLayout >> addNodes: nodeElements [
 	"Initialize the meta data associated to the nodes. At that stage, position of nodes is not modified"
 	nodes := nodes, nodeElements.
 	nodeElements
-		do: [ :e | 
+		do: [ :e |
 			weights add: (Association key: e value: 0).
 			oldPositions add: (Association key: e value: e position) ].
 
@@ -159,9 +159,9 @@ RTForceBasedLayout >> charge: aFloat [
 ]
 
 { #category : #algorithm }
-RTForceBasedLayout >> chargeOf: aNode [ 
+RTForceBasedLayout >> chargeOf: aNode [
 
-	^ charges at: aNode ifAbsent: [ ^ charge ] 
+	^ charges at: aNode ifAbsent: [ ^ charge ]
 ]
 
 { #category : #'initialize-release' }
@@ -181,19 +181,19 @@ RTForceBasedLayout >> doExecute: nodeElements [
 
 { #category : #configuration }
 RTForceBasedLayout >> doNotUseProgressBar [
-	shouldUseProgressBar := false	
+	shouldUseProgressBar := false
 ]
 
 { #category : #algorithm }
 RTForceBasedLayout >> fix: aNode at: aPoint [
 
-	fixedNodes at: aNode put: aPoint  
+	fixedNodes at: aNode put: aPoint
 ]
 
 { #category : #algorithm }
 RTForceBasedLayout >> gravityAt: aPoint [
 
-	center := aPoint 
+	center := aPoint
 ]
 
 { #category : #accessing }
@@ -232,7 +232,7 @@ RTForceBasedLayout >> initialize [
 { #category : #testing }
 RTForceBasedLayout >> isFixed: aNode [
 
-	^ fixedNodes includesKey: aNode 
+	^ fixedNodes includesKey: aNode
 ]
 
 { #category : #testing }
@@ -250,7 +250,7 @@ RTForceBasedLayout >> length: aFloat [
 { #category : #algorithm }
 RTForceBasedLayout >> lengthOf: anEdge [
 
-	^ lengths at: anEdge ifAbsent: [ ^ length ] 
+	^ lengths at: anEdge ifAbsent: [ ^ length ]
 ]
 
 { #category : #accessing }
@@ -287,11 +287,11 @@ RTForceBasedLayout >> prepareNodes: nodeElements [
 	oldPositions := Dictionary new.
 	nodes := nodeElements.
 	nodes
-		do: [ :e | 
+		do: [ :e |
 			weights add: (Association key: e value: 0).
 			oldPositions add: (Association key: e value: e position) ].
 	edges
-		do: [ :e | 
+		do: [ :e |
 			| from to |
 			from := e from.
 			to := e to.
@@ -320,43 +320,43 @@ RTForceBasedLayout >> removeNode: node [
 RTForceBasedLayout >> repulse: aNode from: aQuad [
 
 	| dx dy dn k p |
-	
+
 	dx := aQuad cx - aNode position x.
 	dy := aQuad cy - aNode position y.
-	
-	((dx closeTo: 0) and: [ dy closeTo: 0 ] ) ifFalse: [ 
-	
+
+	((dx closeTo: 0) and: [ dy closeTo: 0 ] ) ifFalse: [
+
 	dn := 1 / ((dx * dx) + (dy * dy)) sqrt.
-	
+
 	p := oldPositions at: aNode.
 	aQuad node ~= aNode ifTrue: [ aQuad corner x - aQuad origin x * dn < theta ifTrue: [ k := aQuad charge * dn * dn.
 																							oldPositions at: aNode put: p x - (dx * k) @ (p y - (dy * k) ).
 																							^ self].
-												
+
 									(aQuad node isNil not and: [ dn < 1e9 ]) ifTrue: [ k := (self chargeOf: aQuad node) * dn * dn * alpha.
 																					  oldPositions at: aNode put: p x - (dx * k) @ (p y - (dy * k) ) ] ]. ].
-																			
+
 	(aQuad charge closeTo: 0) not ifTrue: [ aQuad nodes do: [ :e | e isNil ifFalse: [ self repulse: aNode from: e ] ] ]
 ]
 
 { #category : #hook }
 RTForceBasedLayout >> runLayoutInJob [
-	[ :job | 
+	[ :job |
 	job
 		title: 'Laying out elements';
 		min: 1 - alpha;
 		max: 1.
 	nbIterations = 0
-		ifTrue: [ 
-			[ 
+		ifTrue: [
+			[
 			alpha := alpha * 0.99.
 			alpha > 0.005 ]
-				whileTrue: [ 
+				whileTrue: [
 					self step.
 					job currentValue: 1 - alpha ] ]
-		ifFalse: [ 
+		ifFalse: [
 			nbIterations
-				timesRepeat: [ 
+				timesRepeat: [
 					alpha := alpha * 0.99.
 					self step.
 					job currentValue: 1 - alpha ] ] ] asJob run
@@ -365,25 +365,25 @@ RTForceBasedLayout >> runLayoutInJob [
 { #category : #hook }
 RTForceBasedLayout >> runLayoutSimply [
 	nbIterations = 0
-		ifTrue: [ 
-			[ 
+		ifTrue: [
+			[
 			alpha := alpha * 0.99.
 			alpha > 0.005 ] whileTrue: [ self step ] ]
-		ifFalse: [ 
+		ifFalse: [
 			nbIterations
-				timesRepeat: [ 
+				timesRepeat: [
 					alpha := alpha * 0.99.
 					self step ] ]
 ]
 
 { #category : #algorithm }
-RTForceBasedLayout >> set: aNode charge: aFloat [ 
+RTForceBasedLayout >> set: aNode charge: aFloat [
 
 	charges at: aNode put: aFloat
 ]
 
 { #category : #algorithm }
-RTForceBasedLayout >> set: anEdge length: aFloat [ 
+RTForceBasedLayout >> set: anEdge length: aFloat [
 
 	lengths at: anEdge put: aFloat
 ]
@@ -392,11 +392,11 @@ RTForceBasedLayout >> set: anEdge length: aFloat [
 RTForceBasedLayout >> set: anEdge length: aFloat strength: another [
 
 	lengths at: anEdge put: aFloat.
-	strengths at: anEdge put: another 
+	strengths at: anEdge put: another
 ]
 
 { #category : #algorithm }
-RTForceBasedLayout >> set: anEdge strength: aFloat [ 
+RTForceBasedLayout >> set: anEdge strength: aFloat [
 
 	strengths at: anEdge put: aFloat
 ]
@@ -418,22 +418,22 @@ RTForceBasedLayout >> start: nodeElements [
 ]
 
 { #category : #events }
-RTForceBasedLayout >> step [ 
+RTForceBasedLayout >> step [
 	"run a step of the force layout algorithm"
-	| from to fp tp x y len k quad old |	
-		
+	| from to fp tp x y len k quad old |
+
 	"If there is no nodes, then there is not much to do"
 	nodes ifEmpty: [ ^ self ].
 	super step.
-	edges do: [ :e | 
-					from := e from. 
+	edges do: [ :e |
+					from := e from.
 					fp := from position.
-					to := e to. 
+					to := e to.
 					tp := to position.
 					x := tp x - fp x.
 					y := tp y - fp y.
 					len := ((x * x) + (y * y)) sqrt.
-					((len closeTo: 0) not) ifTrue: [ 
+					((len closeTo: 0) not) ifTrue: [
 						len :=  alpha * (self strengthOf: e) * ( len - (self lengthOf: e) ) / len.
 						x := x * len.
 						y := y * len.
@@ -441,26 +441,26 @@ RTForceBasedLayout >> step [
 						to translateTo: ( tp x - (x * k) )@( tp y - (y * k) ).
 						k := 1 -  k.
 						from translateTo: ( fp x + (x * k) )@( fp y + (y * k) ) ] ].
-			
+
 		k := alpha * gravity.
-		((k closeTo: 0) not) ifTrue: [ 
+		((k closeTo: 0) not) ifTrue: [
 			x := center x.
 			y := center y.
 			nodes do: [ :ea | | pos |
 					pos := ea position.
 					ea translateTo: (pos x + ((x - pos x)* k)) @ (pos y + (( y - pos y )* k )) ] ].
-				
+
 		quad := RTQuadTree withAll: nodes.
 		self accumulate: quad.
-		nodes do: [ :e | 
-			(self isFixed: e) 
+		nodes do: [ :e |
+			(self isFixed: e)
 				ifFalse: [ self repulse: e from: quad ]
 				ifTrue: [ translator translateTopLeftOf: e to: (fixedNodes at: e) ] ].
 
-		nodes do: [ :e | 
+		nodes do: [ :e |
 			old := e position.
-			e translateTo: 
-				(old x - (( (oldPositions at: e) x - old x ) * friction)) @ 
+			e translateTo:
+				(old x - (( (oldPositions at: e) x - old x ) * friction)) @
 				(old y - (( (oldPositions at: e) y - old y ) * friction)).
 			oldPositions at: e put: old.].
 ]
@@ -475,12 +475,12 @@ RTForceBasedLayout >> strength: aFloat [
 { #category : #algorithm }
 RTForceBasedLayout >> strengthOf: anEdge [
 
-	^ strengths at: anEdge ifAbsent: [ ^ strength ] 
+	^ strengths at: anEdge ifAbsent: [ ^ strength ]
 ]
 
 { #category : #configuration }
 RTForceBasedLayout >> useProgressBar [
-	shouldUseProgressBar := true	
+	shouldUseProgressBar := true
 ]
 
 { #category : #public }
@@ -488,5 +488,5 @@ RTForceBasedLayout >> userDefinedEdges: aCollectionOfEdges [
 	"useful to tell to the layout which edges have to be used for the layout"
 	userDefinedEdges := aCollectionOfEdges select: [ :e |
 		(nodes includes: e from) and: [ nodes includes: e to ] ]
-	
+
 ]

@@ -60,13 +60,13 @@ RTExploraNode >> addExpansionDirection: aDirection [
 { #category : #adding }
 RTExploraNode >> addListenerFor: anEvent onDirection: aDirection withBlock: aBlock [
 	| listener |
-	
+
 	listener := element.
 	iconOpen ifNotNil: [ listener := (Array with: iconOpen with: iconClose) asGroup ].
-		
+
 	self addExpansionDirection: aDirection.
 	self expandWithBlock: aBlock onDirection: aDirection.
-	
+
 	listener when: anEvent do: [ :event |
 		RTPopup removeLastPopup.
 		(self isExpandedOnDirection: aDirection)
@@ -74,9 +74,9 @@ RTExploraNode >> addListenerFor: anEvent onDirection: aDirection withBlock: aBlo
 			ifFalse: [ self exploreOnDirection: aDirection ].
 			((builder layout rtValue: self)
 				translator: (RTSmoothLayoutTranslator new nbCycles: 0.25))
-				on: ((builder nodes collect: [ :n | n element ]) asGroup).	
+				on: ((builder nodes collect: [ :n | n element ]) asGroup).
 		element view canvas signalUpdate].
-	
+
 
 ]
 
@@ -128,7 +128,7 @@ RTExploraNode >> collapseOnDirection: aDirection [
 			iconClose remove.
 			builder view add: iconOpen.
 		].
-		
+
 ]
 
 { #category : #adding }
@@ -201,13 +201,13 @@ RTExploraNode >> exploreOnDirection: aDirection [
 	objectsToAdd := self expansionOnDirection: aDirection.
 	objsAlreadyIn := objectsToAdd select: [ :obj | objs includes: obj ].
 	objectsToAdd := objectsToAdd reject: [ :obj | objs includes: obj ].
-	
+
 	nodesAlreadyIn := (builder view elements select: [ :el | objsAlreadyIn includes: el model ])
 		collect: [ :elem | elem attributes at: #node ].
 	newNodes := objectsToAdd collect: [ :obj | builder node: obj parent: self ].
-	
+
 	builder lastAddedNodes: newNodes.
-	
+
 	newNodes do: [ :node |
 		builder view add: node element.
 		node element translateTo: self element position ].
@@ -217,7 +217,7 @@ RTExploraNode >> exploreOnDirection: aDirection [
 		iconOpen remove.
 		builder view add: iconClose.
 		].
-	
+
 	(newNodes, nodesAlreadyIn) do: [ :el |
 		(aDirection value = #From)
 			ifTrue: [ self connectTo: el with: builder lineShape ]
@@ -325,7 +325,7 @@ RTExploraNode >> removeEdgesOnDirection: aDirection [
 { #category : #removing }
 RTExploraNode >> removeExpandedNode: aNode [
 	self assert: (aNode isKindOf: RTExploraNode).
-	directions keys do: [ :direction | 
+	directions keys do: [ :direction |
 		(expandedNodes at: direction) remove: aNode ifAbsent: [] ]
 ]
 

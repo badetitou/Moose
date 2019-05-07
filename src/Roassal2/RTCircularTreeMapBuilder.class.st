@@ -36,7 +36,7 @@ RTCircularTreeMapBuilder >> expandCircle: e with: parent [
 
 	e trachelShape position: parent x @ parent y.
 	e trachelShape extent: (parent r*2) @ (parent r*2).
-	
+
 ]
 
 { #category : #layout }
@@ -47,32 +47,32 @@ RTCircularTreeMapBuilder >> expandCircles: e parent: parent [
 	| cc |
 	self expandCircle: e with: parent.
 	(e attributes includesKey: self childrenKey) ifFalse: [ ^ self ].
-	(e attributes at: self childrenKey) do: [ :child | 
-		(child attributes includesKey: #circle) ifTrue: [ 
+	(e attributes at: self childrenKey) do: [ :child |
+		(child attributes includesKey: #circle) ifTrue: [
 			cc := self relToAbsCircle: (child attributes at: #circle) parent: parent.
 			self expandCircles: child parent: cc ] ].
 ]
 
 { #category : #private }
-RTCircularTreeMapBuilder >> findBestGapIn: gaps children: children index: i 
+RTCircularTreeMapBuilder >> findBestGapIn: gaps children: children index: i
 	cbounding: cbounding bounds: bounds circles: circles
 	 distance: distance closest: closest gap: gap ncircles: ncircles [
 	| gapCircle cdistance |
-	
-	gaps do: [ :cgap | 
+
+	gaps do: [ :cgap |
 		gapCircle := cgap makeGapCircle: (self weight2rad: (self weightOf: (children at: i) )).
 		cdistance := RTCircleTree distanceOf: cbounding and: gapCircle.
-		cdistance < distance ifTrue: [ 
-			cgap circles third isNotNil ifTrue: [ 
+		cdistance < distance ifTrue: [
+			cgap circles third isNotNil ifTrue: [
 				(RTCircleTree doIntersect: cgap circles third with: gapCircle )
 				ifTrue: [ cdistance := Float fmax. ] ]
-			ifFalse: [ 
-				[ :br | 
+			ifFalse: [
+				[ :br |
 					((bounds findStart: gapCircle) to: ncircles) do: [ :ccircle |
 						(RTCircleTree doIntersect: (circles at: ccircle) with: gapCircle)
 						ifTrue: [ cdistance := Float fmax. br value ] ]
 				] valueWithExit.  ] ].
-		cdistance < distance ifTrue: [ 
+		cdistance < distance ifTrue: [
 			^ Array with: cdistance with: gapCircle with: cgap.  ].
 	].
 	^ Array with: distance with: closest with: gap
@@ -90,17 +90,17 @@ RTCircularTreeMapBuilder >> initialize [
 
 { #category : #layout }
 RTCircularTreeMapBuilder >> layout: e [
-	
+
 	| children |
 	(e attributes includesKey: self childrenKey) ifFalse: [ ^ self ].
-	
+
 	children := e attributes at: self childrenKey.
 	children isEmpty ifTrue: [ ^ self ].
-	
+
 	children do: [ :child | self layout: child ].
 	self sortChildren: children.
 	self layoutNodes: children
-	
+
 ]
 
 { #category : #layout }
@@ -122,19 +122,19 @@ RTCircularTreeMapBuilder >> layoutNodes: children [
 	size > 100 ifTrue: [ size := 100 ].
 	circles := OrderedCollection new: size.
 	size = 0 ifTrue: [ ^ self ].
-	
+
 	bounds := RTBounds new max: 100.
-	
+
 	firstCircle := RTCircleTree new r: (self weight2rad: (self weightOf: children first)).
 	circles add: firstCircle.
 	cbounding := bounds push: firstCircle index: 1.
-	size > 1 ifTrue: [ 
+	size > 1 ifTrue: [
 		circle  := RTCircleTree new r: (self weight2rad: (self weightOf: children second)) .
 		circle translateBy: firstCircle center.
 		circle translateBy: (RTVector new x: firstCircle r + circle r y: 0).
 		circles add: circle.
 		cbounding := bounds push: circle index: 2.
-		size > 2 ifTrue: [ 
+		size > 2 ifTrue: [
 			| gaps closest gap ncircles |
 			gaps := OrderedCollection new.
 			gaps add: (RTGapTree new c1: firstCircle c2: circle).
@@ -146,21 +146,21 @@ RTCircularTreeMapBuilder >> layoutNodes: children [
 				distance := Float fmax.
 				closest := nil.
 				gap := nil.
-				arr := self findBestGapIn: gaps children: children index: i 
-					cbounding: cbounding bounds: bounds circles: circles 
+				arr := self findBestGapIn: gaps children: children index: i
+					cbounding: cbounding bounds: bounds circles: circles
 					distance: distance closest: closest gap: gap ncircles: ncircles.
-				
+
 				distance := arr first.
 				closest := arr second.
 				gap := arr third.
-				
+
 				gaps remove: gap.
 				gap addGapsTo: gaps closest: closest.
 				circles add: closest.
 				ncircles := ncircles + 1.
-				(cbounding r < (distance + closest r)) 
+				(cbounding r < (distance + closest r))
 					ifTrue: [ cbounding := bounds push: closest index: ncircles  ].
-				
+
 			] ] ].
 
 	scale := 1/ cbounding r.
@@ -170,7 +170,7 @@ RTCircularTreeMapBuilder >> layoutNodes: children [
 		c scaleFull: scale.
 		(children at: i) attributes at: #circle put: c.
 	 ].
-	
+
 	^ circles.
 ]
 

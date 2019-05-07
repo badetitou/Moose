@@ -21,10 +21,10 @@ RTRectangleTreeMap class >> fromContainerBounds: aRectangle withInset: anInteger
 	relativeCorner := aRectangle corner- (aRectangle extent /2).
 	((aRectangle width < (anInteger * 2)) or: [ aRectangle height < (anInteger * 2) ])
 		ifTrue: [ treeRectangle origin: relativeOrigin; corner: relativeCorner.]
-		ifFalse: [ 
-			treeRectangle origin: relativeOrigin +anInteger; 
+		ifFalse: [
+			treeRectangle origin: relativeOrigin +anInteger;
 			corner: relativeCorner -anInteger   ].
-	^ treeRectangle 
+	^ treeRectangle
 ]
 
 { #category : #accesing }
@@ -37,19 +37,19 @@ RTRectangleTreeMap >> addSubrectangle: aTreeRectangle [
 RTRectangleTreeMap >> computeHorizontalRemainingSubrectangleFrom: row [
 
 	| areaToLayout remainingSubrectangle currentRect currentOrigin |
-	
+
 	areaToLayout := row inject: 0 into: [ :s :e | s + (e attributes at: #area) ].
-	
+
 	remainingSubrectangle := RTRectangleTreeMap new.
-	
+
 	currentRect := self currentSubrectangle.
 	currentOrigin := currentRect origin.
-	
+
 	remainingSubrectangle origin: ((currentOrigin x + (areaToLayout / currentRect height)) @ currentOrigin y).
 	remainingSubrectangle corner: currentRect corner.
-	
+
 	^ remainingSubrectangle.
-	 
+
 ]
 
 { #category : #utils }
@@ -63,19 +63,19 @@ RTRectangleTreeMap >> computeRemainingSubrectangleFrom: row [
 RTRectangleTreeMap >> computeVerticalRemainingSubrectangleFrom: row [
 
 	| areaToLayout remainingSubrectangle currentRect currentOrigin |
-	
+
 	areaToLayout := row inject: 0 into: [ :s :e | s + (e attributes at: #area) ].
-	
+
 	remainingSubrectangle := RTRectangleTreeMap new.
-	
+
 	currentRect := self currentSubrectangle.
 	currentOrigin := currentRect origin.
-	
+
 	remainingSubrectangle origin: ((currentOrigin x) @ ((currentOrigin y) + (areaToLayout / currentRect width))).
 	remainingSubrectangle corner: currentRect corner.
-	
+
 	^ remainingSubrectangle.
-	 
+
 ]
 
 { #category : #accesing }

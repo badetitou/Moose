@@ -1,5 +1,5 @@
 "
-I am the abstract class for sunburst visualizations in Roassal2, check my subclasses 
+I am the abstract class for sunburst visualizations in Roassal2, check my subclasses
 
 * RTSunburstConstanWidthLayout
 * RtSunburstExtentLayout
@@ -37,15 +37,15 @@ RTAbstractSunburstLayout >> builder [
 { #category : #accessing }
 RTAbstractSunburstLayout >> builder: aBuilder [
 	builder := aBuilder
-	
+
 ]
 
 { #category : #public }
 RTAbstractSunburstLayout >> doExecute: elements [
 	| virtual |
-	
+
 	elements isEmpty ifTrue: [ ^  self ].
-	elements size = 1 ifTrue: [ 
+	elements size = 1 ifTrue: [
 		^ self layoutSunburst: elements first ].
 	virtual := RTArc element.
 	virtual attributes at: builder childrenKey put: elements.
@@ -81,7 +81,7 @@ RTAbstractSunburstLayout >> layoutSunburst: el [
 
 { #category : #accessing }
 RTAbstractSunburstLayout >> radialSpacing [
-	^ radialSpacing 
+	^ radialSpacing
 ]
 
 { #category : #accessing }

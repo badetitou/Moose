@@ -21,13 +21,13 @@ Class {
 { #category : #svg }
 RTInteractiveSVGExporter >> addButtons [
 	self interactions
-		do: [ :l | 
+		do: [ :l |
 			l
-				do: [ :i | 
+				do: [ :i |
 					(i type beginsWith: 'button')
-						ifTrue: [ 
+						ifTrue: [
 							(buttons includes: i fixedName)
-								ifFalse: [ 
+								ifFalse: [
 									buttonStart := i addSelf: stream startingPoint: buttonStart.
 									buttons add: i fixedName ] ] ] ].
 	stream nextPutAll: String cr
@@ -38,16 +38,16 @@ RTInteractiveSVGExporter >> addMarginsAndGlobals: bounds [
 	| notChecked |
 	notChecked := true.
 	self interactions
-		do: [ :l | 
+		do: [ :l |
 			l
-				do: [ :i | 
+				do: [ :i |
 					i type = 'popup'
-						ifTrue: [ 
+						ifTrue: [
 							i bounds: bounds.
 							marginX := marginX max: i xBound.
 							marginY := marginY max: i yBound ].
 					((i type beginsWith: 'button') and: [ notChecked ])
-						ifTrue: [ 
+						ifTrue: [
 							| val |
 							val := (TRLabelShape new
 								text: i getName;
@@ -55,7 +55,7 @@ RTInteractiveSVGExporter >> addMarginsAndGlobals: bounds [
 							paddingY := paddingY max: val.
 							notChecked := false ].
 					(globals includes: i class)
-						ifFalse: [ 
+						ifFalse: [
 							i addGlobalHandlers: stream.
 							globals add: i class ] ] ].
 ]
@@ -86,7 +86,7 @@ RTInteractiveSVGExporter >> addScript [
 
 { #category : #svg }
 RTInteractiveSVGExporter >> addStart: bounds [
-	self 
+	self
 		addVersion;
 		addMarginsAndGlobals: bounds;
 		addCanvasSize: bounds;
@@ -119,15 +119,15 @@ RTInteractiveSVGExporter >> getFinalBounds: bounds [
 	canvasWidth := (bounds width + 1 + marginX + paddingX) rounded.
 	canvasHeight := (bounds height + 1 + marginY + paddingY) rounded.
 	finalWidth := canvasWidth.
-	finalHeight  := canvasHeight.	
+	finalHeight  := canvasHeight.
 	code = nil
 		ifFalse: [ | maxW line w h|
 			maxW := 0.
 			line := ''.
-			code lines do: [ :l | 
+			code lines do: [ :l |
 				maxW := maxW max: l size.
 				maxW = l size
-					ifTrue: [ line := l ].	
+					ifTrue: [ line := l ].
 				].
 			w := (TRLabelShape new
 					text: line;
@@ -136,7 +136,7 @@ RTInteractiveSVGExporter >> getFinalBounds: bounds [
 					text: line;
 						height).
 			finalWidth := canvasWidth  + w.
-			finalHeight := canvasHeight max: (h * code lines size) 			
+			finalHeight := canvasHeight max: (h * code lines size)
 			  ].
 	^ Array with: finalWidth with: finalHeight
 ]

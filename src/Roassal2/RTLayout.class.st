@@ -49,7 +49,7 @@ RTLayout class >> isNotAbstract [
 { #category : #public }
 RTLayout class >> on: aCollection [
 	"main entry point of the class"
-	
+
 	"If aCollection is empty, then there is not much to do"
 	aCollection isEmpty ifTrue: [ ^ aCollection ].
 	self new applyOn: aCollection.
@@ -59,8 +59,8 @@ RTLayout class >> on: aCollection [
 { #category : #public }
 RTLayout class >> on: elements edges: edges [
 	"To make all the layout polymorphic"
-	
-	^ self on: elements 
+
+	^ self on: elements
 ]
 
 { #category : #public }
@@ -102,9 +102,9 @@ RTLayout >> doPost: elements [
 ]
 
 { #category : #accessing }
-RTLayout >> executeOnElements: elements [ 
+RTLayout >> executeOnElements: elements [
 	"Execute the layout, myself, on the elements"
-		
+
 	self doInitialize: elements.
 	self doExecute: elements asOrderedCollection.
 	self doPost: elements.
@@ -188,9 +188,9 @@ RTLayout >> pointerOf: aNode put: aValue [
 ]
 
 { #category : #utils }
-RTLayout >> rOf: aNode [ 
+RTLayout >> rOf: aNode [
 	^ aNode attributes at: #r ifAbsent: [ 0 ]
-	
+
 ]
 
 { #category : #utils }
@@ -211,8 +211,8 @@ RTLayout >> rightContourOf: aNode put: aValue [
 { #category : #events }
 RTLayout >> step [
 "	currentIteraction := currentIteraction + 1.
-	(currentIteraction \\ self iterationsToSendEvent) = 0 
-		ifTrue: [ self announce: (ROLayoutStep new 
+	(currentIteraction \\ self iterationsToSendEvent) = 0
+		ifTrue: [ self announce: (ROLayoutStep new
 											currentIteration: currentIteraction;
 											maxInterations: maxInterations) ].
 	"
@@ -244,7 +244,7 @@ RTLayout >> userDefinedEdges: edges [
 ]
 
 { #category : #utils }
-RTLayout >> xOf: aNode [ 
+RTLayout >> xOf: aNode [
 	^ aNode attributes at: #x ifAbsent: [ 0 ]
 ]
 

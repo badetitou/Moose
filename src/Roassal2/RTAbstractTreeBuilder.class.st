@@ -35,26 +35,26 @@ RTAbstractTreeBuilder >> color: aBlockOrObject [
 { #category : #private }
 RTAbstractTreeBuilder >> createElements: atree nesting: block1 leaves: block2 depth: depth [
 	| children e leaves nodes|
-	
+
 	e := shapeBuilder elementOn: atree.
 	self interaction setUpElement: e.
 	self elements add: e.
-	
+
 	children := block1 rtValue: atree.
 	e attributes at: #depth put: depth.
 	children := children collect: [ :child | | e2 |
-		e2 := self createElements: child nesting: block1 
+		e2 := self createElements: child nesting: block1
 			leaves: block2 depth: depth + 1.
 		e2 attributes at: #parent put: e.
 		e2 ] as: Array.
 	leaves := (block2 rtValue: atree) collect: [:child | | e2 |
-		e2 := self createElements: child nesting: #() 
+		e2 := self createElements: child nesting: #()
 			leaves: #() depth: depth +1.
 		e2 attributes at: #parent put: e.
 		e2 ] as: Array.
 	nodes := OrderedCollection new: (leaves size + children size).
 	nodes addAll: children; addAll: leaves.
-		
+
 	e attributes at: self childrenKey put: nodes.
 	^ e.
 ]
@@ -62,11 +62,11 @@ RTAbstractTreeBuilder >> createElements: atree nesting: block1 leaves: block2 de
 { #category : #private }
 RTAbstractTreeBuilder >> createElements: atree using: ablock depth: depth [
 	| children e |
-	
+
 	e := shapeBuilder elementOn: atree.
 	self interaction setUpElement: e.
 	self elements add: e.
-	
+
 	children := ablock rtValue: atree.
 	e attributes at: #depth put: depth.
 	children := children collect: [ :child | | e2 |
@@ -95,7 +95,7 @@ RTAbstractTreeBuilder >> explore: atree nesting: block1 leaves: block2 [
 { #category : #'public - building' }
 RTAbstractTreeBuilder >> explore: atree using: ablock [
 	^ (self from: (Array with: atree) using: ablock) first.
-	
+
 ]
 
 { #category : #'public - building' }
@@ -118,14 +118,14 @@ dic3 at: #one put: 1.
 
 data := Array with: dic1 with: dic2 with: dic3.
 
-colorNormalizer := RTMultiLinearColorForIdentity new 
+colorNormalizer := RTMultiLinearColorForIdentity new
 					objects: data.
 
 b := RTTreeMapBuilder new.
 b shape color: colorNormalizer.
-b from: data 
+b from: data
 b weight: [ :aDictionary | aDictionary size ].
-b 
+b
 	"
 	^ self from: objects using: [ :cap | #() ]
 ]
@@ -134,7 +134,7 @@ b
 RTAbstractTreeBuilder >> from: objects nesting: block1 leaves: block2 [
 
 	rootNodes := objects collect: [:obj | self createElements: obj nesting: block1 leaves: block2 depth: 1 ].
-	
+
 	^ rootNodes
 ]
 
@@ -158,17 +158,17 @@ dic3 at: #one put: 1.
 
 data := Array with: dic1 with: dic2 with: dic3.
 
-colorNormalizer := RTMultiLinearColorForIdentity new 
+colorNormalizer := RTMultiLinearColorForIdentity new
 					objects: data.
 
 b := RTTreeMapBuilder new.
 b shape color: colorNormalizer.
-b 
-    from: data 
-    using: [ :cap | #() ]. 
-    
+b
+    from: data
+    using: [ :cap | #() ].
+
 b weight: [ :aDictionary | aDictionary size ].
-b 
+b
 "
 	rootNodes := objects collect: [:obj | self createElements: obj using: ablock depth: 1 ].
 	^ rootNodes
@@ -183,25 +183,25 @@ RTAbstractTreeBuilder >> initialize [
 
 { #category : #color }
 RTAbstractTreeBuilder >> leafColor: aBlockOrColor [
-	self shape 
-		ifElement: [ :e | 
-			(e attributes includesKey: self childrenKey) and: 
+	self shape
+		ifElement: [ :e |
+			(e attributes includesKey: self childrenKey) and:
 			[ (e attributes at: self childrenKey) isEmpty ]  ]
 		fillColor: [:e | aBlockOrColor rtValue: e model ] .
 ]
 
 { #category : #weight }
 RTAbstractTreeBuilder >> leafWeight: block [
-	self weightElement: [ :e | 
-		(e attributes includesKey: #weight) 
+	self weightElement: [ :e |
+		(e attributes includesKey: #weight)
 			ifTrue: [ e attributes at: #weight ]
 			ifFalse: [ | w children |
 				children := e attributes at: self childrenKey.
-				children 
+				children
 					ifEmpty: [ w := block rtValue: e model ]
-					ifNotEmpty: [ 
+					ifNotEmpty: [
 						w := children
-							inject: 0 
+							inject: 0
 							into: [ :s :el | s + (weight rtValue: el) ] ].
 				w := w max: self minWeightValue.
 				e attributes at: #weight put: w.
@@ -246,8 +246,8 @@ RTAbstractTreeBuilder >> weightElement: block [
 	weight block recives an element of the square and return a number
 	self weightElement: [:element | 1 ]"
 	weight := block
-	
-	
+
+
 ]
 
 { #category : #weight }

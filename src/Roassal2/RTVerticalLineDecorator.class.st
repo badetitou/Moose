@@ -23,7 +23,7 @@ Add vertical lines for some values
 	b addDecorator: p.
 
 	b build.
-	^ b view 
+	^ b view
 -=-=-=-=-=
 "
 Class {
@@ -33,12 +33,12 @@ Class {
 }
 
 { #category : #drawing }
-RTVerticalLineDecorator >> render [	
+RTVerticalLineDecorator >> render [
 	| from to |
 	values do: [ :aValue |
 		from := builder getPixelPositionOf: aValue @ builder minY.
 		to := builder getPixelPositionOf: aValue @ builder maxY.
 		self lineFrom: from to: to ]
-		
-	
+
+
 ]

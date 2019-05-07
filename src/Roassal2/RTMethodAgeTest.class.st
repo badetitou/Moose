@@ -5,6 +5,6 @@ Class {
 }
 
 { #category : #tests }
-RTMethodAgeTest >> testMethodAge [ 
+RTMethodAgeTest >> testMethodAge [
 	self assert: RTAbstractElementShape computeYoungestMethod notNil
 ]

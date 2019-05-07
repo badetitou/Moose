@@ -12,10 +12,10 @@ RTGitHub class >> imageSource [  ^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9h
 RTGitHub class >> menuCommandOn: aBuilder [
 "	<worldMenu>"
 	(aBuilder item: ('GitHub') asSymbol)
-			order: 0.002; 
+			order: 0.002;
 			parent: #Roassal;
 			label: 'GitHub';
 			icon: self image;
 			action: [ WebBrowser openOn: 'https://github.com/ObjectProfile/Roassal2' ]
-	
+
 ]

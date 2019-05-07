@@ -50,7 +50,7 @@ RTCompoundElement >> doNesting [
 RTCompoundElement >> initialize [
 	super initialize.
 	children := RTGroup new.
-	
+
 ]
 
 { #category : #accessing }

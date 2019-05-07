@@ -1,5 +1,5 @@
 "
-RTCalendarExample new installTitle: 'VisualizationCSV' 
+RTCalendarExample new installTitle: 'VisualizationCSV'
 		code:
 '
 | b tab colors dictionary |
@@ -19,14 +19,14 @@ colors := #(#(165 0 38) #(215 48 38) #(244 109 67)
 b := RTCalendarBuilder new.
 b dateShape rectangle size: 15; color: Color white; borderColor: Color lightGray.
 b monthShape shape: (b monthShapePath: 15.0).
-b yearShape composite: [ :comp | 
+b yearShape composite: [ :comp |
 	comp add: (RTLabel new text: [ :d | d year ]; height: 20 ).
 	comp add: (RTBox new color: Color transparent). ] .
 b dates: ((Year year: 1990) to: (Year year: 2010) ).
 b dateLayout gapSize: 0.
 b monthLayout month.
 b yearLayout horizontalLine.
-b dateShape if: [ :d | dictionary includesKey: d ] color: 
+b dateShape if: [ :d | dictionary includesKey: d ] color:
 	[ :d | | value index |
 	value := (dictionary at: d)+0.05.
 	index := (value * 11/ 0.1)+1.
@@ -39,7 +39,7 @@ b build.
 ^ b view
 
 '
-	
+
 "
 Class {
 	#name : #RTCalendarExample,
@@ -88,20 +88,20 @@ dictByDate := (classes flatCollect: #methods) groupedBy: [ :m | m date ].
 maxPerDays := (dictByJulian values collect: #size) max.
 
 b := RTCalendarBuilder new.
-b yearShape composite: [ :comp | 
+b yearShape composite: [ :comp |
 	comp add: (RTLabel new text: [ :d | d year ]; height: 20 ).
 	comp add: (RTBox new color: Color lightGray trans)].
 b yearLayout verticalLine.
-b dateShape rectangle 
-	size: 15; 
+b dateShape rectangle
+	size: 15;
 	borderColor: Color lightGray;
 	color: Color lightGray;
 	if: [ :d| dictByJulian includesKey: d julianDayNumber ] color: [ :d| |i|
 		i := (dictByJulian at: d julianDayNumber) size / maxPerDays.
 		Color r: i g: 0 b: 0 ].
-b dateInteraction when: TRMouseClick do: [ :evt | 
+b dateInteraction when: TRMouseClick do: [ :evt |
 	(dictByJulian at: evt element model julianDayNumber ifAbsent: [ #() ]) inspect ].
-b dateInteraction popup text: [ :d | 
+b dateInteraction popup text: [ :d |
 	(dictByJulian at: d julianDayNumber ifAbsent: [ #() ]) size asString, ' Methods' ].
 b dates: (dictByDate keys min to: dictByDate keys max).
 ^ b
@@ -205,7 +205,7 @@ gfAD4Rc/EH4g/OIHwg+EX/xA+IHwyy/6DSC1D9R8yJyVAAAAAElFTkSuQmCC'
 RTCalendarExample >> exampleVisualizationCSV [
 <noTest>
 | b tab colors dictionary |
-tab := RTTabTable new 
+tab := RTTabTable new
 	input: (TRPlatform current downloadContent: 'http://bl.ocks.org/mbostock/raw/4063318/dji.csv')
 	usingDelimiter: $,.
 tab removeFirstRow.
@@ -223,14 +223,14 @@ colors := #(#(165 0 38) #(215 48 38) #(244 109 67)
 b := RTCalendarBuilder new.
 b dateShape rectangle size: 15; color: Color white; borderColor: Color lightGray.
 b monthShape shape: (b monthShapePath: 15.0).
-b yearShape composite: [ :comp | 
+b yearShape composite: [ :comp |
 	comp add: (RTLabel new text: [ :d | d year ]; height: 20 ).
 	comp add: (RTBox new color: Color transparent). ] .
 b dates: ((Year year: 1990) to: (Year year: 2010) ).
 b dateLayout gapSize: 0.
 b monthLayout month.
 b yearLayout horizontalLine.
-b dateShape if: [ :d | dictionary includesKey: d ] color: 
+b dateShape if: [ :d | dictionary includesKey: d ] color:
 	[ :d | | value index |
 	value := (dictionary at: d)+0.05.
 	index := ((value * 11/ 0.1)+1) asInteger.
@@ -448,11 +448,11 @@ RTCalendarExample >> exampleYearShape [
 | b |
 b := RTCalendarBuilder new.
 b dateShape if: [ :date | date dayOfWeek = 1 ] color: Color red.
-b yearShape composite: [ :comp | 
+b yearShape composite: [ :comp |
 	comp add: (RTLabel new text: [ :d | d year ]; height: 20 ).
-	comp add: (RTBox new color: [:d | 
-		(d year % 2 = 0) 
-			ifTrue: [Color lightGray alpha: 0.2] 
+	comp add: (RTBox new color: [:d |
+		(d year % 2 = 0)
+			ifTrue: [Color lightGray alpha: 0.2]
 			ifFalse: [ Color lightGreen alpha: 0.2 ]]). ] .
 b dates: (Year current to: Year current next).
 
@@ -580,18 +580,18 @@ RTCalendarExample >> exampleYearWithDayNames [
 
 | b |
 b := RTCalendarBuilder new.
-b dateShape composite: [ :com | 
-	com add: (RTEllipse new color: [ :d | 
+b dateShape composite: [ :com |
+	com add: (RTEllipse new color: [ :d |
 		d = Date today
 			ifTrue: [ Color blue alpha: 0.2 ]
 			ifFalse: [Color transparent] ]; size: 18).
 	com add: (RTLabel new text: [:d| d dayOfMonth];
-		color: [:d | (d dayOfWeek = 1) 
-			ifTrue: [Color red] 
+		color: [:d | (d dayOfWeek = 1)
+			ifTrue: [Color red]
 			ifFalse: [ Color black ] ]) ].
 
 b showDayNames.
-b yearShape composite: [ :comp | 
+b yearShape composite: [ :comp |
 	comp add: (RTLabel new text: [ :d | d year ]; height: 20 ).
 	comp add: (RTBox new color: [ Color blue alpha: 0.1 ]). ] .
 b dates: Year current.

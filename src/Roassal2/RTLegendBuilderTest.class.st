@@ -30,7 +30,7 @@ RTLegendBuilderTest >> testAddObjectText [
 	lb := RTLegendBuilder new.
 	lb addObject: 'hello world' text: [ :str | str substrings first ].
 	lb build.
-	
+
 	self assert: lb view numberOfElements equals: 2.
 	self assert: lb view elements second model equals: 'hello world'.
 	self assert: (lb view elements second shape textFor: lb view elements second) equals: 'hello'.
@@ -49,7 +49,7 @@ RTLegendBuilderTest >> testBelow [
 	lb below.
 	lb addText: 'Hello world'.
 	lb build.
-	
+
 	self assert: view numberOfElements equals: 3.
 	self assert: view elements first shape class == RTEllipse.
 	self assert: view elements third shape class == RTLabel.
@@ -73,13 +73,13 @@ RTLegendBuilderTest >> testEdgesWhenOnDemand [
 	lb := RTLegendBuilder new.
 	lb view: v.
 	lb onDemand.
-	
+
 	lb addRectanglePolymetricWidth: 'number of methods' height: 'Line of code' box: 'a Pharo class'.
 
 	lb build.
 
 	self assert: v canvas fixedShapes size equals: 1.
-	
+
 	lbl := v canvas fixedShapes first.
 	allElements := lb group flatCollect: #yourself.
 	edges := allElements select: [ :e | e class == RTEdge ].
@@ -90,7 +90,7 @@ RTLegendBuilderTest >> testEdgesWhenOnDemand [
 
 { #category : #tests }
 RTLegendBuilderTest >> testLayout [
-	
+
 	| firstInnerElement secondInnerElement |
 	firstInnerElement := b view elements second.
 	secondInnerElement := b view elements third.
@@ -105,7 +105,7 @@ RTLegendBuilderTest >> testLegendElement [
 	lb := RTLegendBuilder new.
 	lb addLineColor: Color red text: 'Meaning of this great red line'.
 	lb build.
-	
+
 	self assert: lb view elements first equals: lb legendElement
 
 ]
@@ -119,7 +119,7 @@ RTLegendBuilderTest >> testNumberOfElements [
 { #category : #tests }
 RTLegendBuilderTest >> testPolymorphicViewArrows [
 
-	
+
 	| lb view canvas |
 	lb := RTLegendBuilder new.
 	lb setAsFixed.
@@ -127,11 +127,11 @@ RTLegendBuilderTest >> testPolymorphicViewArrows [
 	lb addRectanglePolymetricWidth: 'number of methods' height: 'Line of code' box: 'a Pharo class'.
 	lb addColorFadingFrom: Color black to: Color red text: 'number of lines of code'.
 	lb build.
-	
+
 	view := lb view.
 	self assert: (view elements select: [ :el | el trachelShape isNotFixed ]) isEmpty.
 	self assert: (view edges select: [ :el | el trachelShape isNotFixed ]) isEmpty.
-	
+
 	canvas := view canvas.
 	self assert: canvas numberOfShapes equals: 0
 ]
@@ -149,7 +149,7 @@ RTLegendBuilderTest >> testRight [
 	lb right.
 	lb addText: 'Hello world'.
 	lb build.
-	
+
 	self assert: view numberOfElements equals: 3.
 	self assert: view elements first shape class == RTEllipse.
 	self assert: view elements third shape class == RTLabel.
@@ -163,7 +163,7 @@ RTLegendBuilderTest >> testaddColorFading [
 	lb := RTLegendBuilder new.
 	lb addColorFadingFrom: Color green to: Color black text: 'this is a test'.
 	lb build.
-	
+
 	self assert: lb view numberOfElements equals: 52.
 
 ]
@@ -175,7 +175,7 @@ RTLegendBuilderTest >> testaddColorFading02 [
 	lb := RTLegendBuilder new.
 	lb addColorFadingUsing: RTPalette c1 text: 'this is a test'.
 	lb build.
-	
+
 	self assert: lb view numberOfElements equals: 52.
 
 ]
@@ -187,7 +187,7 @@ RTLegendBuilderTest >> testaddColoredtext [
 	lb := RTLegendBuilder new.
 	lb addColoredText: 'hello' color: Color red.
 	lb build.
-	
+
 	self assert: lb view numberOfElements equals: 2.
 	self assert: lb view canvas shapes first class equals: TRBoxShape.
 	self assert: lb view canvas shapes second class equals: TRLabelShape.
@@ -201,7 +201,7 @@ RTLegendBuilderTest >> testaddLineColortext [
 	lb := RTLegendBuilder new.
 	lb addLineColor: Color red text: 'Meaning of this great red line'.
 	lb build.
-	
+
 	self assert: lb view numberOfElements equals: 3.
 
 ]

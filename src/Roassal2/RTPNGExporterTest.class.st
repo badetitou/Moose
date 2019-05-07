@@ -13,7 +13,7 @@ Class {
 RTPNGExporterTest >> setUp [
 	super setUp.
 	emptyExporter := RTPNGExporter new.
-	
+
 	view := RTView new.
 	exporter := RTPNGExporter new.
 	exporter builder: view.
@@ -46,7 +46,7 @@ RTPNGExporterTest >> testCameraPosition2 [
 { #category : #tests }
 RTPNGExporterTest >> testCameraScale [
 
-	self assert: exporter cameraScale equals: view canvas camera defaultCameraScale 
+	self assert: exporter cameraScale equals: view canvas camera defaultCameraScale
 ]
 
 { #category : #tests }
@@ -69,13 +69,13 @@ RTPNGExporterTest >> testExportWithScale [
 	emptyExporter withScale.
 	view canvas camera scale: 2.
 	emptyExporter builder: view.
-	
+
 	self assert: emptyExporter viewExtent equals: (7 @ 7).
 	self assert: emptyExporter viewHalfExtent equals: (3.5 @ 3.5).
 	self assert: emptyExporter saveWithScale.
-	
+
 	emptyExporter withoutScale.
 	self assert: (emptyExporter viewExtent closeTo: (6 @ 6)).
 	self assert: (emptyExporter viewHalfExtent closeTo: (3 @ 3)).
-	
+
 ]

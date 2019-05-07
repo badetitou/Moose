@@ -100,7 +100,7 @@ RTAnimatedScatterPlot >> getTableForClasses: classes [
 	"
 	self new getTableForClasses: { RTAnimatedScatterPlot . RTElement . RTShape }
 	"
-	
+
 	| s |
 	s := WriteStream on: String new.
 	classes do: [ :c |
@@ -122,7 +122,7 @@ RTAnimatedScatterPlot >> getTableForPackage: packageName [
 	"
 	self new getTableForPackage: 'Trachel'
 	"
-	
+
 	| s classes |
 	classes := ((TRPlatform current packageNamed: packageName) classes collect: #baseClass) asSet.
 	s := WriteStream on: String new.
@@ -149,7 +149,7 @@ RTAnimatedScatterPlot >> getTitleNumber: aFrameNumber table: table [
 RTAnimatedScatterPlot >> if: aBlockForCondition color: aBlockForColor [
 	properties add: [ :row :element |
 		(aBlockForCondition rtValue: row) ifTrue: [ element trachelShape color: ((aBlockForColor rtValue: row) alpha: 0.4) ] ]
-	
+
 ]
 
 { #category : #initialization }
@@ -176,7 +176,7 @@ RTAnimatedScatterPlot >> maxOfColumn: aBlock [
 RTAnimatedScatterPlot >> nextFrame [
 	frame := (frame + 1) min: self numberOfTables.
 	self renderFrame: frame
-	
+
 ]
 
 { #category : #'public - frames' }
@@ -188,7 +188,7 @@ RTAnimatedScatterPlot >> numberOfTables [
 RTAnimatedScatterPlot >> previousFrame [
 	frame := (frame - 1) max: 1.
 	self renderFrame: frame
-	
+
 ]
 
 { #category : #UI }
@@ -202,16 +202,16 @@ RTAnimatedScatterPlot >> renderFrame: aFrameNumber [
 	table := tables at: aFrameNumber.
 	elements := self allEntries collect: [ :entryName | view elementFromModel: entryName ].
 	elements
-		do: [ :e | 
+		do: [ :e |
 			"We get the row that we are interested in"
 			r := table values detect: [ :rrow | rrow first = e model ] ifNone: [ nil ].
 			r
-				ifNil: [ 
+				ifNil: [
 					newSize := 0.
 					newX := 0.
 					newY := 0 ].
 			r
-				ifNotNil: [ 
+				ifNotNil: [
 					newX := (x rtValue: r) max: maxX in: (0 to: self chartTotalSize).
 					newY := ((y rtValue: r) max: maxY in: (0 to: self chartTotalSize)) negated.
 					newSize := (size rtValue: r) max: sizeMax in: (5 to: 30).
@@ -243,20 +243,20 @@ RTAnimatedScatterPlot >> setAndCreateElements [
 RTAnimatedScatterPlot >> setButtons [
 	| menuBuilder |
 	menuBuilder := RTMenuBuilder new view: view.
-	
+
 	menuBuilder menu: 'previous' background: (Color lightBlue alpha: 0.4) callback: [ self previousFrame ].
 	menuBuilder menu: 'next' background: (Color lightBlue alpha: 0.4) callback: [ self nextFrame ].
 
 	menuBuilder menu: 'x-axis' submenu: '0' background: (Color red alpha: 0.4) callback: [ self x: 0. self renderCurrentFrame ].
-	menuBuilder menu: 'y-axis' submenu: '0' background: (Color red alpha: 0.4) callback: [ self y: 0. self renderCurrentFrame ].	
-	columns withIndexDo: [ :columnName :index | 
-		menuBuilder 
-			menu: 'x-axis' 
+	menuBuilder menu: 'y-axis' submenu: '0' background: (Color red alpha: 0.4) callback: [ self y: 0. self renderCurrentFrame ].
+	columns withIndexDo: [ :columnName :index |
+		menuBuilder
+			menu: 'x-axis'
 			submenu: columnName
 			background: (Color red alpha: 0.4)
 			callback: [ self x: [ :row | row at: (index + 1) ]. self setScale. self renderCurrentFrame ].
-		menuBuilder 
-			menu: 'y-axis' 
+		menuBuilder
+			menu: 'y-axis'
 			submenu: columnName
 			background: (Color red alpha: 0.4)
 			callback: [ self y: [ :row | row at: (index + 1) ]. self setScale. self renderCurrentFrame ].
@@ -281,7 +281,7 @@ RTAnimatedScatterPlot >> setScale [
 RTAnimatedScatterPlot >> setViewTitle [
 	labelShape := TRLabelShape new text: 'Hello'.
 	view canvas addFixedShape: labelShape.
-	TRConstraint stickAtTheBottomOfTheWindow: labelShape 
+	TRConstraint stickAtTheBottomOfTheWindow: labelShape
 
 ]
 

@@ -64,37 +64,37 @@ RTExploraBuilder >> addListenerBlock: listenerBlock [
 { #category : #adding }
 RTExploraBuilder >> buildNode: object parent: parent [
 	| node element elementIconOpen elementIconClose |
-	
+
 	node := RTExploraNode new.
 	node builder: self.
 	node id: self newNodeId.
 	node parentNode: parent.
-	element := RTElement new model: object.	
+	element := RTElement new model: object.
 	node element: element.
-	
+
 	element addShape: self shape shape.
-	
+
 	dragChildren ifTrue: [ element @ RTDraggableChildren ] ifFalse: [ element @ RTDraggable ].
 	popUp ifTrue: [ element @ (RTPopup new group: self explorePopUp) ].
-	
-	(icons) ifNotNil: [ 
+
+	(icons) ifNotNil: [
 
 		elementIconOpen := (icons first) elementOn: #iconOpen.
 		elementIconClose := (icons second) elementOn: #iconClose.
-		
+
 		RTConstraint move: ((Array with: elementIconOpen with: elementIconClose) asGroup) onTheRightOf: element.
 
 		element addCallback: (TRTranslationCallback new block: [
-			TRConstraint move: ((Array with: elementIconOpen with: elementIconClose) asGroup) onTheRightOf:element. 		
+			TRConstraint move: ((Array with: elementIconOpen with: elementIconClose) asGroup) onTheRightOf:element.
 			self view signalUpdate
 			]).
-	
+
 		node iconOpen: elementIconOpen.
 		node iconClose: elementIconClose.
-		]. 
+		].
 
 	nodeListeners do: [ :block | block value: node ].
-	
+
 	^ node
 ]
 
@@ -157,7 +157,7 @@ RTExploraBuilder >> explorePopUp [
 					(node explorationStatus: direction)
 					))) + (RTLabel new height: 8)]).
 			(RTVerticalLineLayout withGap: 0) on: group.
-			
+
 			RTNest new centerOn: background elements: group.
 			group addFirst: background ]
 ]
@@ -194,7 +194,7 @@ RTExploraBuilder >> initializeNodes [
 
 { #category : #layout }
 RTExploraBuilder >> lastAddedNodes [
-	^ lastAddedNodes 
+	^ lastAddedNodes
 ]
 
 { #category : #layout }
@@ -235,7 +235,7 @@ RTExploraBuilder >> newNodeId [
 ]
 
 { #category : #adding }
-RTExploraBuilder >> node: anObject [ 
+RTExploraBuilder >> node: anObject [
 	^ self node: anObject parent: nil.
 ]
 
@@ -275,7 +275,7 @@ RTExploraBuilder >> onLeftClickExplore: aBlock edges: edgeDirection direction: d
 ]
 
 { #category : #action }
-RTExploraBuilder >> onRightClickExplore: aBlock [ 
+RTExploraBuilder >> onRightClickExplore: aBlock [
 	self onRightClickExplore: aBlock edges: #To
 ]
 
@@ -316,7 +316,7 @@ RTExploraBuilder >> withIcons [
 { #category : #layout }
 RTExploraBuilder >> withIconsColor: aColor [
 		|iconOpen iconClose p1 p2|
-		
+
 		p1 := 'M401.625,267.75H344.25v-57.375c0-21.114-17.136-38.25-38.25-38.25s-38.25,17.117-38.25,38.25v57.375h-57.375
 				c-21.114,0-38.25,17.117-38.25,38.25c0,21.114,17.136,38.25,38.25,38.25h57.375v57.375c0,21.114,17.136,38.25,38.25,38.25
 				s38.25-17.117,38.25-38.25V344.25h57.375c21.114,0,38.25-17.136,38.25-38.25S422.739,267.75,401.625,267.75z M306,0
@@ -329,12 +329,12 @@ RTExploraBuilder >> withIconsColor: aColor [
 
 		iconOpen := (RTSVGPath new path: p1; color: aColor; scale: 0.025).
 		iconClose := (RTSVGPath new path: p2; color: aColor; scale: 0.025).
-		
+
 	self withIconsSVG: (Array with: iconOpen with: iconClose )
 ]
 
 { #category : #layout }
-RTExploraBuilder >> withIconsSVG: anRTSVGPathArray [ 
+RTExploraBuilder >> withIconsSVG: anRTSVGPathArray [
 	icons := anRTSVGPathArray
 ]
 

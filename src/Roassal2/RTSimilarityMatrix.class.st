@@ -29,12 +29,12 @@ RTSimilarityMatrix class >> comparingMethodSourceCode [
 			s := WriteStream on: String new.
 			class1 fileOutOn: s moveSource: false toFile: 0.
 			sourceCode1 := s contents.
-			
+
 			"We get the source code of class2"
 			s := WriteStream on: String new.
 			class2 fileOutOn: s moveSource: false toFile: 0.
 			sourceCode2 := s contents.
-			
+
 			(sourceCode1 lines intersection: sourceCode2 lines) size
 			/ ((1 max: (sourceCode1 lines union: sourceCode2 lines) size) + 1) "NB penalty for small methods"
 			];
@@ -151,16 +151,16 @@ RTSimilarityMatrix >> gridView [
 	| view |
 	view := RTView new.
 	view addAll: (pairs collect: [ :pair | self elementOn: pair For: view ]).
-	RTGridLayout new 
+	RTGridLayout new
 		gapSize: 0;
 		lineItemsCount: self gridSize;
 		on: view elements.
 	view @ RTDraggableView.
 
-	
+
 "	zoomIn := self zoomInButtonOn: view.
 	zoomOut := self zoomOutButtonOn: view.
-"	
+"
 "	ROHorizontalLineLayout on: { zoomIn . zoomOut }.
 "	"view @ (ROMiniMap new targetView: stack)."
 	view open.
@@ -199,18 +199,18 @@ RTSimilarityMatrix >> viewMatrix [
 	view := RTView new.
 	view @ RTDraggableView.
 	view addAll:
-		(pairs collect: [ : pair | 
+		(pairs collect: [ : pair |
 			self
-				elementOn: pair 
+				elementOn: pair
 				For: view ]).
-	RTGridLayout new 
+	RTGridLayout new
 		gapSize: 0;
 		lineItemsCount: self gridSize;
 		on: view elements.
 	view @ RTDraggableView.
 
-	
-	
+
+
 "	view @ (ROMiniMap new targetView: stack).
 "	view open.
 ]

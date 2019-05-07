@@ -20,14 +20,14 @@ RTDateLayout >> doExecute: elements [
 	i := Week dayNames indexOf: Week startDay.
 	elements do: [ :e | | date position week |
 		date := e model.
-		(date isKindOf: Date) ifTrue: [ 
+		(date isKindOf: Date) ifTrue: [
 			week := date asWeek.
 			currentWeek ifNil: [ currentWeek := week. index := index + 1. ].
 			currentWeek = week ifFalse: [ currentWeek := week. index := index +1 ].
 			position := (((date dayOfWeek + 7 - i) rem: 7)+1) @ index.
-		] ifFalse: [ 
-			(date isKindOf: Integer) 
-				ifTrue: [ position := date @ index. ] 
+		] ifFalse: [
+			(date isKindOf: Integer)
+				ifTrue: [ position := date @ index. ]
 				ifFalse: [ self error: 'invale value for date'. ] ].
 		e translateTo: (extent * position).
 		 ]

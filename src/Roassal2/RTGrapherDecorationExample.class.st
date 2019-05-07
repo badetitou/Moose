@@ -8,18 +8,18 @@ Class {
 RTGrapherDecorationExample >> exampleAreaDecorator [
 <noTest>
 | tab b colors icons deco image elements |
-tab := RTTabTable new input: (TRPlatform current 
-	downloadContent: 'https://dl.dropboxusercontent.com/s/b9syomd2h0np69s/International.txt?dl=0') 
+tab := RTTabTable new input: (TRPlatform current
+	downloadContent: 'https://dl.dropboxusercontent.com/s/b9syomd2h0np69s/International.txt?dl=0')
 	usingDelimiter: $,.
 b := RTGrapher new.
 b extent: 1000 @ 400.
 
-colors := (Array with: '#5e3782' with: '#d49935' with: '#81211d' with: '#238999') 
+colors := (Array with: '#5e3782' with: '#d49935' with: '#81211d' with: '#238999')
 	collect: [ :c | Color colorFrom: c ].
-icons := Array with: RTPolygon diamond with: RTEllipse new 
+icons := Array with: RTPolygon diamond with: RTEllipse new
 	with: RTBox new with: RTPolygon star.
 icons doWithIndex: [ :ic :i | ic size: 10; color: (colors at: i) ].
-	
+
 b addDecorator:(RTHorizontalTickLineDecorator new moveInFront; yourself).
 deco := RTContinuousDecorator new.
 
@@ -58,8 +58,8 @@ b build.
 elements := (b view canvas shapes) asGroup.
 image := 'https://dl.dropboxusercontent.com/s/v5b7fg4gzb4w4xs/dota.jpeg?dl=0'.
 image := (TRPlatform current download: image ) contents.
-image := RTBitmap new 
-	form: (TRPlatform  current formClass fromBinaryStream: image readStream); 
+image := RTBitmap new
+	form: (TRPlatform  current formClass fromBinaryStream: image readStream);
 	element.
 b view add: image.
 image pushBack.
@@ -273,7 +273,7 @@ b build.
 
 lb := RTLegendBuilder new.
 lb view: b view.
-colors doWithIndex: [ :c :i | 
+colors doWithIndex: [ :c :i |
 	lb addColor: c text: 'Series  ', i printString ].
 lb build.
 b view @ RTZoomableView @ RTZoomableBoxView.
@@ -349,7 +349,7 @@ table convertColumnsToFloat: (1 to: 4).
 
 g := RTGrapher new.
 d := RTData new.
-d dotShape 
+d dotShape
 	if: [ :row | row last = 'virginica' ] fillColor: Color blue trans;
 	if: [ :row | row last = 'setosa' ] fillColor: Color red trans.
 d points: table values.
@@ -392,7 +392,7 @@ AAAASUVORK5CYII='
 RTGrapherDecorationExample >> exampleLikertScale [
 
 | q11 q12 q21 q22 q3 t toVisualize b ds lb |
-q11 := #(A A SA SA A SA N A A SA N) groupedBy: #yourself. 
+q11 := #(A A SA SA A SA N A A SA N) groupedBy: #yourself.
 q12 := #(D SA SA SA A N SA A SA A A) groupedBy: #yourself.
 q21 := #(A N SA A SA A D A N A N) groupedBy: #yourself.
 q22 := #(D N SA A SA SA D A A SA A) groupedBy: #yourself.
@@ -583,7 +583,7 @@ clss do: [ :cls |
 	ds y: #numberOfLinesOfCode.
 	b add: ds.
 ].
-	
+
 b axisY; axisX.
 b build.
 
@@ -707,7 +707,7 @@ RTGrapherDecorationExample >> exampleVerticalAndHorizontalBars [
 	b addDecorator: p.
 
 	b build.
-	^ b view 
+	^ b view
 ]
 
 { #category : #icons }

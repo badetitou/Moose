@@ -6,11 +6,11 @@ Class {
 
 { #category : #accessing }
 RTSmallMultipleManyScript >> description [
-	^ 
+	^
 'Visualize a TSV file (like a CSV file but with tabulation instead of comma) as a matrix.
 The file should have 4 columns: time<TAB>n1<TAB>n2<TAB>weight.
 time is an integer value. It could represent a time period.
-n1 and n2 are string values. 
+n1 and n2 are string values.
 weight is a float value.
 
 Each time slice is represented as a matrix.'
@@ -19,7 +19,7 @@ Each time slice is represented as a matrix.'
 { #category : #hooks }
 RTSmallMultipleManyScript >> execute [
 	<script: 'RTSmallMultipleManyScript new execute'>
-	
+
 	| b times c tab |
 	times := OrderedCollection new.
 	tab := RTTabTable openTSVfile.
@@ -34,7 +34,7 @@ RTSmallMultipleManyScript >> execute [
 
 	c := RTComposer new.
 	times doWithIndex: [ :dic :index |
-		dic ifNotNil: [ 
+		dic ifNotNil: [
 			b := RTGradualDSM new.
 			b view: c view.
 			b objectsY: (dic keys collect: #key) asSet asArray sorted.
@@ -48,9 +48,9 @@ RTSmallMultipleManyScript >> execute [
 	].
 
 	c layout: RTCellLayout new.
-	
+
 	"We highlight only cells that are actually not gray (i.e., have a green component = 0)"
-	c propagateHighlightUsing: [ :el | 
+	c propagateHighlightUsing: [ :el |
 		(el trachelShape color green > 0)
 			ifTrue: [ #() ]
 			ifFalse: [ (el view elementsFromModel: el model) select: [ :ee | ee trachelShape color green = 0 ] ] ].

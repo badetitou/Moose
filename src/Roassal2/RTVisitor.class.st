@@ -23,9 +23,9 @@ RTVisitor >> nameFor: anElement [
 	Date: 12/05/2015
 	There are several shapes and edges, to handle the relations between the shapes RTVisitor
 	uses a dictionary(names) to asign one unique id to that shape"
-	(names includesKey: anElement) 
-		ifTrue: [ ^ names at: anElement ] 
-		ifFalse: [ 
+	(names includesKey: anElement)
+		ifTrue: [ ^ names at: anElement ]
+		ifFalse: [
 			| n |
 			n := names size printStringHex.
 			names at: anElement put: n.
@@ -34,17 +34,17 @@ RTVisitor >> nameFor: anElement [
 
 { #category : #helpers }
 RTVisitor >> number: n [
-	
+
 	| f |
-	^ n isNaN 
+	^ n isNaN
 		ifTrue: ['NaN']
-		ifFalse: [ n isInteger 
+		ifFalse: [ n isInteger
 			ifTrue: [ n asString ]
 			ifFalse: [ f := n asFloat.
-				f fractionPart isZero 
+				f fractionPart isZero
 					ifTrue: [ f rounded asString ]
 					ifFalse: [ f asString ] ]  ]
-		
+
 ]
 
 { #category : #visitor }

@@ -16,7 +16,7 @@ RTDynamicStackedGrapherTest >> testBarPosition [
 	b add: 5.
 	b add: 4.
 	b build.
-	
+
 	e5 := b view elementFromModel: 5.
 	e4 := b view elementFromModel: 4.
 	self assert: e5 position equals: (75.0@ -50).
@@ -33,7 +33,7 @@ RTDynamicStackedGrapherTest >> testBarPositionWithoutAnimation [
 	b add: 5.
 	b add: 4.
 	b build.
-	
+
 	e5 := b view elementFromModel: 5.
 	e4 := b view elementFromModel: 4.
 	self assert: e5 position equals: (75.0@ -50).
@@ -44,11 +44,11 @@ RTDynamicStackedGrapherTest >> testBarPositionWithoutAnimation [
 RTDynamicStackedGrapherTest >> testEmbeddedInComposer [
 
 	| a1 a2 composer a b |
-	a1:= Array 
-		with: (Array with: 'x' with: 10) 
-		with: (Array with: 'y' with: 20) 
+	a1:= Array
+		with: (Array with: 'x' with: 10)
+		with: (Array with: 'y' with: 20)
 		with: (Array with: 'z' with: 100).
-	a2 := Array 
+	a2 := Array
 		with: (Array with: 'x' with: 30)
 		with: (Array with: 'y' with: 20)
 		with: (Array with: 'z' with: 10).
@@ -98,7 +98,7 @@ RTDynamicStackedGrapherTest >> testGetY [
 { #category : #tests }
 RTDynamicStackedGrapherTest >> testNumberOfBars [
 
-	self assert: RTDynamicStackedGrapher new numberOfBars equals: RTDynamicStackedGrapher new defaultNumberOfBars 
+	self assert: RTDynamicStackedGrapher new numberOfBars equals: RTDynamicStackedGrapher new defaultNumberOfBars
 ]
 
 { #category : #tests }

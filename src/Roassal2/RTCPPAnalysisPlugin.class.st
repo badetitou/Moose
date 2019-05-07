@@ -12,16 +12,16 @@ RTCPPAnalysisPlugin >> description [
 { #category : #hooks }
 RTCPPAnalysisPlugin >> execute [
 	self inform: 'This is obsolete. You need to load DataStudio'
-"	Gofer new 
+"	Gofer new
 		smalltalkhubUser: 'ObjectProfile' project: 'Roassal2';
-		package: 'Roassal2-Plugins-CProjectVisualizer'; 
+		package: 'Roassal2-Plugins-CProjectVisualizer';
 		load."
 ]
 
 { #category : #testing }
 RTCPPAnalysisPlugin >> isLoaded [
 	^ RPackageOrganizer default includesPackageNamed: 'Roassal2-Plugins-CProjectVisualizer'
- 
+
 ]
 
 { #category : #hooks }

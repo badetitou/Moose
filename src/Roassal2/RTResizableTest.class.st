@@ -54,7 +54,7 @@ RTResizableTest >> testSimpleExample [
 	e announce: TRMouseClick new.
 	e announce: (TRMouseDragging new step: 5 @ 5).
 	e translateBy: 5 @ 5.
-	
+
 	"A bit strange this 'top'"
 	RTResizable new lazyInitializeElement: e; basicCallbackFor: RTElement new corner: #top
 ]

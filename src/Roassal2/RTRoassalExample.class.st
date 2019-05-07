@@ -1,9 +1,9 @@
 "
-RTRoassalExample new installTitle: 'GroupOfGroups' 
+RTRoassalExample new installTitle: 'GroupOfGroups'
 		code:
 		'
 ^ v'
-	
+
 "
 Class {
 	#name : #RTRoassalExample,
@@ -25,18 +25,18 @@ RTMetricNormalizer new
 	normalizeSize: #numberOfLinesOfCode min: 5 max: 30 using: [:vv | vv sqrt * 5 ];
 	normalizeColor: #numberOfMethods using: (Array with: Color green with: Color red );
 	alphaColor: 0.3.
-	 
-anim := RTForceLayoutStepping new view: v.
-v addAnimation: anim. 
 
-v addMenu: 'add edges' callback: [ 
+anim := RTForceLayoutStepping new view: v.
+v addAnimation: anim.
+
+v addMenu: 'add edges' callback: [
 	edges := RTEdgeBuilder new
 		view: v;
 		objects: RTObject withAllSubclasses;
 		connectFrom: #superclass.
 	anim addEdges: edges ].
 
-v addMenu: 'remove edges' callback: [ 
+v addMenu: 'remove edges' callback: [
 	v edges do: #remove.
 	anim removeAllEdges.
 	v signalUpdate ].
@@ -115,7 +115,7 @@ stepping := RTForceLayoutStepping new view: v.
 stepping after: [ v canvas camera focusOnCenter ].
 v addAnimation: stepping.
 
-v canvas addMenu: 'Add circle' callback: [ 
+v canvas addMenu: 'Add circle' callback: [
 	| el |
 	el := (RTEllipse new size: 20; color: (Color blue alpha: 0.4)) element.
 	el @ RTDraggable.
@@ -125,7 +125,7 @@ v canvas addMenu: 'Add circle' callback: [
 	v signalUpdate.
 ].
 
-v canvas addMenu: 'Add connected circle' callback: [ 
+v canvas addMenu: 'Add connected circle' callback: [
 	| el edge |
 	el := (RTEllipse new size: 20; color: (Color blue alpha: 0.4)) element.
 	el @ RTDraggable.
@@ -375,15 +375,15 @@ QPSB6EsfiD4QfekD0Zc+EH0g+tIHog9EX/pA9IHoa1v0F3yNzF9907LgAAAAAElFTkSuQmCC'
 RTRoassalExample >> exampleAnimatedCircle [
 	| nbOfCircles  v shape mousePos |
 	nbOfCircles := 25.
-	
+
 	mousePos := 50 @ 50.
 	v := RTView new.
 	shape := RTEllipse new sizeElement: [ :el | ((el position - mousePos) r abs / 3) min: 50 ]; color: (Color blue alpha: 0.4).
 	v addAll: (shape elementsOn: (1 to: nbOfCircles)).
 	RTGridLayout on: v elements.
-	
+
 	v when: TRMouseMove do: [ :evt |  Transcript show: evt position printString; cr . mousePos := evt position. v elements do: #updateShape. v canvas signalUpdate ].
-	
+
 
 	^ v
 ]
@@ -944,16 +944,16 @@ l2 := RTDoubleArrowedLine new
     attachPoint: ap;
     color: Color magenta;
     edgeFrom: e2 to: e1.
-    
+
 l3 := RTStyledMultiLine new
     head: RTEmptyDiamond asTail;
     tail: RTNoDecorationShape asHead;
     attachPoint: ap;
     color: Color magenta muchLighter;
     edgeFrom: e2 to: e3.
-    
+
 v add: l1; add: l2; add: l3.
-    
+
 v elements @ RTDraggable.
 ^ v
 ]
@@ -1055,7 +1055,7 @@ startingElement translateBy: -150 @ 0.
 "Building the bezier lines"
 shape := RTBezierLine new
 				centerOfObjects: (1 to: 20) inView: v.
-v addAll: (shape edgesFrom: startingElement toAll: es).		
+v addAll: (shape edgesFrom: startingElement toAll: es).
 
 	^ v
 ]
@@ -1103,8 +1103,8 @@ eQAAAABJRU5ErkJggg=='
 { #category : #sources }
 RTRoassalExample >> exampleBezierCurve [
 
-"Moving each extremity will reposition the control points"		
-| v e1 e2 l s p1 p2 | 
+"Moving each extremity will reposition the control points"
+| v e1 e2 l s p1 p2 |
 v := RTView new.
 
 e1 := (RTEllipse new size: 15; color: (Color blue alpha: 0.4)) element.
@@ -1128,12 +1128,12 @@ s := RTBezierLine new.
 s controllingElements: (Array with: p1 with: p2 ).
 l := s edgeFrom: e1 to: e2.
 
-e1 trachelShape addCallback: 
-	(TRTranslationCallback block: [ :shape :step | 
+e1 trachelShape addCallback:
+	(TRTranslationCallback block: [ :shape :step |
 		p1 translateTo: (e2 position x + e1 position x / 2) @ e1 position y.
 		p2 translateTo: (e2 position x + e1 position x / 2) @ e2 position y ]).
-e2 trachelShape addCallback: 
-	(TRTranslationCallback block: [ :shape :step | 
+e2 trachelShape addCallback:
+	(TRTranslationCallback block: [ :shape :step |
 		p1 translateTo: (e2 position x + e1 position x / 2) @ e1 position y.
 		p2 translateTo: (e2 position x + e1 position x / 2) @ e2 position y ]).
 
@@ -1247,13 +1247,13 @@ b := RTMondrian new.
 b shape circle.
 b nodes: pak.
 
-b shape lineDualWidth 
-	color: Color blue trans; 
+b shape lineDualWidth
+	color: Color blue trans;
 	withShorterDistanceAttachPoint;
 	widthFrom: [ :anEdge | (anEdge from model numberOfDependenciesToward: anEdge to model) sqrt  * 4];
 	widthTo: [ :anEdge | (anEdge to model numberOfDependenciesToward: anEdge from model) sqrt * 4].
 
-b edges 
+b edges
 	noRepetition; noBidirectional;
 	connectToAll: #dependentPackages.
 b layout circle.
@@ -1613,7 +1613,7 @@ RTRoassalExample >> exampleCellLayoutWithCircle [
 	view := RTView new.
 	els := RTEllipse new size: #yourself; elementsOn: ((1 to: 20) collect: [ :v | 50 atRandom ]).
 	view addAll: els.
-	
+
 	RTCellLayout new lineItemsCount: 5; on: view elements.
 	view @ RTDraggableView.
 	^ view
@@ -1661,7 +1661,7 @@ RTEdgeBuilder new
 	view: v;
 	moveBehind;
 	connectFrom: [ :vv | vv // 2 ].
-	
+
 setSizeAndColor value.
 
 s := RTForceLayoutStepping new view: v.
@@ -1669,7 +1669,7 @@ layout := RTForceBasedLayout new.
 s layout: layout.
 v addAnimation: s.
 
-setSizeAndColor := [ 
+setSizeAndColor := [
 		RTMetricNormalizer new
 			elements: es;
 			normalizeSize: #yourself;
@@ -1678,8 +1678,8 @@ setSizeAndColor := [
 		es do: [ :e | layout set: e charge: e model negated * 5 ].
 	 ].
 
-v addMenu: 'Change Weight' callback: [ 
-	es do: [ :e | e model: 30 atRandom ]. 
+v addMenu: 'Change Weight' callback: [
+	es do: [ :e | e model: 30 atRandom ].
 	setSizeAndColor value.
 	v signalUpdate.
 	].
@@ -2150,7 +2150,7 @@ eb toElements: classesElements.
 eb connectToAll: [ :a | authorsToClasses at: a ].
 
 RTMetricNormalizer new
-	view: v; 
+	view: v;
 	objects: authors;
 	normalizeSize: [ :a | (authorsToClasses at: a) size ].
 
@@ -2161,7 +2161,7 @@ authorsElements translateTo: classesElements center.
 
 
 l := RTForceBasedLayout new.
-authorsElements do: [:ae | l fix: ae at: ae position ]. 
+authorsElements do: [:ae | l fix: ae at: ae position ].
 l on: authorsElements, classesElements.
 ^ v
 
@@ -2227,7 +2227,7 @@ es3 := (RTEllipse new color: Color lightBlue; size: 20) elementsOn: (1 to: 20).
 RTForceBasedLayout on: es3.
 view addAll: es3.
 
-RTForceBasedLayout new 
+RTForceBasedLayout new
 	charge: -800;
 	on: (Array with: es1 with: es2 with: es3).
 
@@ -2328,7 +2328,7 @@ RTRoassalExample >> exampleCrosses [
 | v nbOfCrosses n s es |
 v := RTView new.
 
-nbOfCrosses := 300. 
+nbOfCrosses := 300.
 n := RTMultiLinearColorForIdentity new objects: (1 to: nbOfCrosses).
 
 s := RTShapeBuilder new cross; current.
@@ -2338,7 +2338,7 @@ es := s elementsOn: (1 to: nbOfCrosses).
 "The code above is equivalent to
 
 s := RTMultiCompositeShape new.
-s add: (RTBox new height: 10; width: 3). 
+s add: (RTBox new height: 10; width: 3).
 s add: (RTBox new height: 3; width: 10).
 s color: n.
 es := s elementsOn: (1 to: nbOfCrosses).
@@ -2647,18 +2647,18 @@ groups := RTGroup new.
 
 values do: [ :aValue |
 	g := RTGroup new.
-	resolutionVertical to: 1 by: -1 do: [ :y | 
+	resolutionVertical to: 1 by: -1 do: [ :y |
 		c := (aValue / maxValue >= (y / resolutionVertical)) ifTrue: [ Color orange ] ifFalse: [ Color gray ].
 		el := (RTEllipse new size: 20; color: c) element.
 		g add: el.
 		v add: el
 	].
 	RTVerticalLineLayout on: g.
-	g last  @ (RTLabeled new 
-					below; 
+	g last  @ (RTLabeled new
+					below;
 					text: aValue;
 					color: Color orange).
-	groups add: g. 
+	groups add: g.
 ].
 
 RTHorizontalLineLayout on: groups.
@@ -2720,7 +2720,7 @@ es do: [ :e |
 
 v addAll: edges.
 
-v when: TRMouseMove do: [ :evt |  
+v when: TRMouseMove do: [ :evt |
 	edges do: [ :edge |
 		edge to translateTo: (evt positionFromCamera - edge from position) / 5 + edge from position.
 	].
@@ -2780,10 +2780,10 @@ RTRoassalExample >> exampleDynamicBezierEdges [
 	v addAll: es.
 	RTCircleLayout new initialRadius: 150; on: es.
 
-	es @ (RTShowEdge new 
-				connectToAll: [ :value | value - 5 to: value + 5]; 
-				shape: [ :el | RTBezierLine new 
-									centerOfObjects: (el model - 5 to: el model + 5) inView: v; 
+	es @ (RTShowEdge new
+				connectToAll: [ :value | value - 5 to: value + 5];
+				shape: [ :el | RTBezierLine new
+									centerOfObjects: (el model - 5 to: el model + 5) inView: v;
 									color: (Color blue alpha: 0.4) ] ).
 
 
@@ -2932,8 +2932,8 @@ RTRoassalExample >> exampleDynamicLabelsAndEdges [
 	view addAll: elements.
 	RTCircleLayout new initialRadius: 150; on: elements.
 	elements @ (RTShowLabel new highlight: [ :value | value - 5 to: value + 5]; center; yourself).
-	elements @ (RTShowEdge new 
-						connectToAll: [ :value | value - 5 to: value + 5]; 
+	elements @ (RTShowEdge new
+						connectToAll: [ :value | value - 5 to: value + 5];
 						shape: (RTLine new color: (Color blue alpha: 0.4))).
 	^ view
 ]
@@ -2974,9 +2974,9 @@ RTRoassalExample >> exampleDynamicallyAdding [
 	v canvas addMenu: '+1' callback: [ c add: 42 ].
 
 	RTActiveAnimation new
-		blockToExecute: [ 
-			(v numberOfElements ~~ c size) ifTrue: 
-				[ v clean. 
+		blockToExecute: [
+			(v numberOfElements ~~ c size) ifTrue:
+				[ v clean.
 				  v addAll: ((RTBox new size: 8; color: Color blue) elementsOn: c).
 				  RTGridLayout on: v elements.
 				   ] ];
@@ -3169,7 +3169,7 @@ RTRoassalExample >> exampleEdgesInTooltip [
 	  - have no element smaller than 5 x 5 "
 
 	shapeBuilder := RTBoundedShapeBuilder new.
-	shapeBuilder 
+	shapeBuilder
 		rectangle;
 		width: [ :c | c numberOfVariables * 7 ]; height: #numberOfMethods.
 	elementClasses := shapeBuilder elementsOn: RTShape withAllSubclasses.
@@ -3178,7 +3178,7 @@ RTRoassalExample >> exampleEdgesInTooltip [
 	"The popup uses #group: to specify what is the group of elements to use
 	#group: takes as argument a two-arg block. The first argument is a RTGroup, to which elements have to be added.
 	the second argument, aClassElement, is the class element on which the popup is being triggered."
-	elementClasses @ (RTPopup new group: 
+	elementClasses @ (RTPopup new group:
 	[ :group :aClassElement |
 		methods := aClassElement model rtmethods.
 
@@ -3190,16 +3190,16 @@ RTRoassalExample >> exampleEdgesInTooltip [
 		edges := eb connectToAll: #dependentMethods.
 
 		RTTreeLayout on: methodElements edges: edges.
-		
-		
-		background := (RTBox new color: (Color blue alpha: 0.4)) element. 
+
+
+		background := (RTBox new color: (Color blue alpha: 0.4)) element.
 		RTNest new centerOn: background elements: methodElements.
 
 		label := (RTLabel new text: aClassElement model name asString) element.
 		TRConstraint move: label above: background.
-		
+
 		group add: label.
-		group add: background.	
+		group add: background.
 		group addAll: edges.
 		group addAll: methodElements.
 
@@ -3241,17 +3241,17 @@ b := RTMondrian new.
 
 b shape circle.
 b nodes: Collection withAllSubclasses.
-b edges moveBehind; connectFrom: #superclass.	
+b edges moveBehind; connectFrom: #superclass.
 
 b shape bezierLineFollowing: #superclass; color: (Color blue alpha: 0.4).
-b edges 
-	notUseInLayout; 
+b edges
+	notUseInLayout;
 	objects: [ :cls | '*Array*' match: cls name ];
 	connectToAll: #dependentClasses.
 
 b layout cluster.
 
-b normalizer 
+b normalizer
 	normalizeSize: #numberOfMethods min: 5 max: 35 using: #sqrt;
 	normalizeColor: #numberOfLinesOfCode using: (Array with: Color blue with: Color red ).
 
@@ -3428,7 +3428,7 @@ shape := RTEllipse new
 	color: Color white;
 	borderWidth: [ :vv | vv / 30 ];
 	borderColor: Color black.
-	
+
 v addAll: (shape elementsOn: (1 to: 10)).
 RTGridLayout on: v elements.
 ^ v
@@ -3556,8 +3556,8 @@ RTRoassalExample >> exampleFadingLetter [
 data := (RTView rtmethods flatCollect: #sourceCode) copyFrom: 1 to: 1500.
 data := data select: #isAlphaNumeric.
 mousePosition := 250 @ 250.
-shape := RTLabel new 
-	colorElement: [ :anElement | 
+shape := RTLabel new
+	colorElement: [ :anElement |
 		| d |
 		d := (anElement position - mousePosition) r abs.
 		d := d max: 1.
@@ -3970,15 +3970,15 @@ NTATHysF90T82y/Dvyb8+8C/+Tf/5t/8m3/zb/7Nv/k3/+bf/Jt/82/+zb/5N//m3/ybf/Nv
 RTRoassalExample >> exampleGrayScaling [
 | v es n |
 	v := RTView new.
-	n := RTGrayLinearColor new 
-				command: #asInteger; 
+	n := RTGrayLinearColor new
+				command: #asInteger;
 				scope: ($a to: $z).
-				
+
 	es := RTBox new
 				size: 40;
 				color: n;
 				elementsOn: ($a to: $z).
-				
+
 	v addAll: es.
 	es @ RTPopup.
 	RTGridLayout on: es.
@@ -4052,7 +4052,7 @@ RTRoassalExample >> exampleGroupOfGroups [
 
 | objects groups edgesBlock1 edgesBlock2 colorNormalizer groupsOfElements v predicate layoutClass filteredObjects shape elements edges |
 objects := Collection withAllSubclasses.
-groups := Array with:  
+groups := Array with:
 ([ :c | c name endsWith: 'List' ] -> RTGridLayout new) with:
 ([ :c | '*Set*' match: c name ] ->  RTForceBasedLayout new) with:
 ([ :c | '*Dictionary*' match: c name ] ->  RTTreeLayout new) with:
@@ -4074,22 +4074,22 @@ groups doWithIndex: [ :assoc :index |
 	elements @ RTPopup.
 	v add: elements.
 	groupsOfElements add: elements.
-"	edges := RTEdge 
+"	edges := RTEdge
 		buildEdgesFromObjects: filteredObjects from: #yourself toAll: edgesBlock1 using: (RTLine new color: Color red) scope: elements.
-"	
+"
 	edges := RTEdgeBuilder new
 					elements: elements;
 					connectToAll: edgesBlock1.
-							
-	v addAll: edges.	
+
+	v addAll: edges.
 
 	layoutClass  on: elements edges: edges.
 
 	RTEdgeBuilder new
 		elements: elements;
 		connectToAll: edgesBlock2.
-"	v addAll: (RTEdge 
-		buildEdgesFromObjects: filteredObjects from: #yourself toAll: edgesBlock2 using: (RTLine new color: Color green) scope: elements)."		
+"	v addAll: (RTEdge
+		buildEdgesFromObjects: filteredObjects from: #yourself toAll: edgesBlock2 using: (RTLine new color: Color green) scope: elements)."
 ].
 
 RTFlowLayout on: groupsOfElements.
@@ -4163,38 +4163,38 @@ RTRoassalExample >> exampleGroupedLayout [
 	view := RTView new.
 	group1 := (RTBox new color: (Color blue alpha: 0.3); size: 30) elementsOn: (1 to: 10).
 	group2 := (RTBox new color: (Color blue alpha: 0.3); size: 30) elementsOn: (1 to: 10).
-	
+
 	host1 := (RTBox new color: (Color green alpha: 0.3)) element.
 	host2 := (RTBox new color: (Color green alpha: 0.3)) element.
-	
+
 	view addAll: group1; addAll: group2; add: host1; add: host2.
-	
+
 	edgesGroup1 := RTEdgeBuilder new
 		view: view;
 		elements: group1;
-		connectFrom: [ :v | v //2 ].	
+		connectFrom: [ :v | v //2 ].
 	edgesGroup2 := RTEdgeBuilder new
 		view: view;
 		elements: group2;
 		connectFrom: [ :v | v //2 ].
 
-	
+
 	RTTreeLayout on: group1 edges: edgesGroup1.
 	RTTreeLayout on: group2 edges: edgesGroup2.
-	
+
 	RTNest new on: host1 nest: group1.
 	RTNest new on: host2 nest: group2.
-	
+
 	RTHorizontalLineLayout on: (Array with: host1 with: host2).
-	
+
 	host1 @ RTDraggable.
 	host2 @ RTDraggable.
-	
+
 	view canvas addMenu: 'In' callback: [ RTZoomInMove on: view ].
 	view canvas addMenu: 'Out' callback: [ RTZoomOutMove on: view ].
 
 	view @ RTDraggableView.
-	
+
 	^ view
 ]
 
@@ -4247,13 +4247,13 @@ shape
 	size: z;
 	color: [ :dd| | d |
 		d := dd + (da degreesToRadians sin * 100).
-		Color 
+		Color
 			h: (d % x) / x * 360
 			s: 1
 			l: (d / x) floor / y ].
 shape if: [ :d | toBeTrans includes: d ] color: Color transparent.
 v := RTView new.
-0 to: (x*y)-1 do: [ :d | 
+0 to: (x*y)-1 do: [ :d |
 	e := shape elementOn: d.
 	e translateTo: ((d % x) * z) @ ((d / x ) floor * z).
 	e attributes at: #p put: e position.
@@ -4263,14 +4263,14 @@ v elements when: TRMouseEnter do: [ :ev | | p el a |
 	el := ev element.
 	p := el attributes at: #p.
 	 RTLinearMove to: p during: 2 on: el.
-	a:= RTLinearMove 
-		to: (400 atRandom @ 400 atRandom)- 200 asPoint + p 
+	a:= RTLinearMove
+		to: (400 atRandom @ 400 atRandom)- 200 asPoint + p
 		during: 2 on: el.
 	a after: [ v addAnimation: (RTLinearMove to: p during: 2 on: el)].
 	v addAnimation: a.
 	v addAnimation: (RTRotationMove angle: 360* 2 during: 4 on: el).
 	 ].
-v addAnimation: (RTActiveAnimation new 
+v addAnimation: (RTActiveAnimation new
 	intervalInMilliseconds: 20;
 	blockToExecute: [
 		da := da - 1.
@@ -4361,7 +4361,7 @@ Hx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fX+EDGUbckNrlS/AAAAAASUVORK5CYII='
 { #category : #sources }
 RTRoassalExample >> exampleHighlightingNeighbourg [
 
-		
+
 	| v es |
 	v := RTView new.
 	es := ((RTBox new size: 30)" + RTLabel") elementsOn: (1 to: 16).
@@ -4399,11 +4399,11 @@ RTEdgeBuilder new
 	view: v;
 	elements: es;
 	connectFrom: #superclass.
-	
+
 v addAll: es.
 
 RTClusterLayout on: es.
-^ v 
+^ v
 ]
 
 { #category : #icons }
@@ -4598,19 +4598,19 @@ allClassElements := OrderedCollection new.
 
 v := RTView new.
 
-classes do: [ :cls | 
+classes do: [ :cls |
 	es := RTBox elementsOn: cls rtmethods.
 	es @ RTPopup.
-	
+
 	back := (RTBox new color: Color blue) element.
-	RTNest new 
+	RTNest new
 		layout: RTGridLayout new;
 		on: back nest: es.
 
 	enclosing := (RTBox new color: Color transparent) element.
 	label := (RTLabel new text: #name) elementOn: cls.
 	g1 := RTGroup withAll: (Array with: label with: back).
-	RTNest new 
+	RTNest new
 		layout: RTVerticalLineLayout new alignCenter;
 		on: enclosing nest: g1.
 
@@ -4620,7 +4620,7 @@ classes do: [ :cls |
 	v add: back.
 	v addAll: es.
 	v add: label.
-	
+
 	allClassElements add: enclosing.
 ].
 RTFlowLayout on: allClassElements.
@@ -4717,7 +4717,7 @@ vista add: (line edgeFrom: e2 to: e2).
 vista add: (line edgeFrom: e3 to: e4).
 
 
-"Decimos que dispocisión van a tener los elementos en la vista. 
+"Decimos que dispocisión van a tener los elementos en la vista.
 En este caso se van a disponer de manera circular"
 RTCircleLayout on: (Array with: e1 with: e2 with: e3 with: e4 ).
 
@@ -4836,7 +4836,7 @@ v addAll: elements.
 "We define an interaction to capture the exact moment an element is visible or invisible"
 visibleInteraction := RTVisible new.
 visibleInteraction
-	visibleBlock: [ :el | 
+	visibleBlock: [ :el |
 		Transcript show: 'refresh'; cr.
 		el trachelShape form: (forms at: el model).
 		el signalUpdate ].
@@ -4888,18 +4888,18 @@ RTRoassalExample >> exampleLinkingObjects [
 	v @ RTDraggableView.
 	labels := Set new.
 	associations
-		do: [ :assoc | 
+		do: [ :assoc |
 			labels
 				add: assoc key;
 				add: assoc value ].
 	labels
 		do:
-			[ :aLabel | 
+			[ :aLabel |
 			| n |
 			n := v elementFromModel: aLabel.
 			n
 				ifNil:
-					[ 
+					[
 					n := RTBox new + RTLabel elementOn: aLabel.
 					n @ RTDraggable ].
 			v add: n ].
@@ -5208,7 +5208,7 @@ startingElement translateBy: -150 @ 0.
 "Building the bezier lines"
 shape := RTBezierLine new
 				midPointInCenterOfObjects: (1 to: 20) inView: v.
-v addAll: (shape edgesFrom: startingElement toAll: es).		
+v addAll: (shape edgesFrom: startingElement toAll: es).
 
 
 	^ v
@@ -5257,7 +5257,7 @@ Dz/8rFr+AnBX68ww1MTcAAAAAElFTkSuQmCC'
 
 { #category : #sources }
 RTRoassalExample >> exampleMovingCamera [
-	
+
 	| v menu |
 	v := RTView new.
 	v add: (RTEllipse new size: 50) element.
@@ -5267,7 +5267,7 @@ RTRoassalExample >> exampleMovingCamera [
 	menu menu: '->' callback: [ v canvas camera translateBy: 10 @ 0. v signalUpdate ].
 	menu menu: 'V' callback: [ v canvas camera translateBy: 0 @ 10. v signalUpdate ].
 	menu menu: '^' callback: [ v canvas camera translateBy: 0 @ -10. v signalUpdate ].
-	 
+
 
 	^ v
 ]
@@ -5304,7 +5304,7 @@ es do: [ :e |
 
 v addAll: edges.
 
-v when: TRMouseMove do: [ :evt |  
+v when: TRMouseMove do: [ :evt |
 	edges do: [ :edge |
 		edge to translateTo: (evt position - edge from position) / 10 + edge from position.
 	].
@@ -5434,7 +5434,7 @@ RTRoassalExample >> exampleMovingGrid [
 		elements: es;
 		connectFrom: #yourself
 			toAll:
-				[ :value | 
+				[ :value |
 			value \\ size = 0
 				ifTrue: [ Array with: value + size ]
 				ifFalse: [ Array with: value + 1 with: value + size ] ].
@@ -5515,11 +5515,11 @@ es := RTLabel elementsOn: (1 to: 10).
 
 v addAll: es.
 
-es @ (RTPopup new 
+es @ (RTPopup new
 	named: #yourself
 	background: Color blue
-	group: [ :group :el |  
- 
+	group: [ :group :el |
+
 		group addAll: (RTEllipse elementsOn: (1 to: el model)).
 		RTWeightedCircleLayout new
 			initialRadius: 50;
@@ -5554,15 +5554,15 @@ es := (RTBox new color: (Color blue alpha: 0.4)) elementsOn: (RTShape withAllSub
 v addAll: es.
 
 RTNest new
-	for: es add: [ :group :model | 
+	for: es add: [ :group :model |
 		group addAll: (RTBox new elementsOn: model rtmethods).
 		RTGridLayout on: group ].
-	
-es @ (RTShowEdge new 
-			connectToAll: #dependentClasses; 
+
+es @ (RTShowEdge new
+			connectToAll: #dependentClasses;
 			shape: (RTLine new color: Color red);
 			yourself).
-es @ (RTShowLabel new 
+es @ (RTShowLabel new
 			color: Color red;
 			highlight: #dependentClasses; top; yourself).
 RTGridLayout on: es.
@@ -5626,7 +5626,7 @@ v addAll: (RTBox elementsOn: Collection withAllSubclasses).
 eb := RTEdgeBuilder new.
 eb shape orthoHorizontalLine.
 eb view: v.
-eb	
+eb
 	objects: Collection withAllSubclasses;
 	connectFrom: #superclass
 	to: #yourself;
@@ -5668,7 +5668,7 @@ v addAll: (RTBox elementsOn: Collection withAllSubclasses).
 eb := RTEdgeBuilder new.
 eb shape orthoVerticalLine.
 eb view: v.
-eb	
+eb
 	objects: Collection withAllSubclasses;
 	connectFrom: #superclass.
 
@@ -5740,7 +5740,7 @@ fPGB8MUHwgfCFx8IHwhffCC/qD8BcE4ipo/6xQAAAABJRU5ErkJggg=='
 { #category : #sources }
 RTRoassalExample >> exampleParallelCoordinate [
 | maxValue spaceBetweenLine lineHeight numberOfColumns numberOfLines values setOfElements v e t line|
- 
+
 "Configuration"
 maxValue := 40.
 spaceBetweenLine := 50.
@@ -5750,7 +5750,7 @@ numberOfLines := 100.
 
 "Script"
 values := OrderedCollection new.
-numberOfLines timesRepeat: [ 
+numberOfLines timesRepeat: [
 	t := OrderedCollection new.
 	numberOfColumns timesRepeat: [ t add: maxValue atRandom ].
 	values add: t.
@@ -5763,8 +5763,8 @@ setOfElements := OrderedCollection new.
 	values do: [ :setOfValues |
 		e := (RTEllipse new color: (Color red alpha: 0.3)) element.
 		t add: e.
-		e translateTo: 
-				(i * (spaceBetweenLine - 1)) @ 
+		e translateTo:
+				(i * (spaceBetweenLine - 1)) @
 					((setOfValues at: i) * lineHeight / maxValue) asFloat.
 		v add: e.
 	].
@@ -5774,11 +5774,11 @@ setOfElements := OrderedCollection new.
 2 to: numberOfColumns do: [ :column |
 	t := OrderedCollection new.
 	values doWithIndex: [ :setOfValues :index |
-		line := (RTLine new color: (Color red alpha: 0.3)) 
+		line := (RTLine new color: (Color red alpha: 0.3))
 			edgeFrom: ((setOfElements at: (column - 1)) at: index) to: ((setOfElements at: column) at: index).
 		v add: line.
 	].
-	
+
 ].
 ^ v
 ]
@@ -5887,7 +5887,7 @@ RTRoassalExample >> examplePlacingGroups [
 
 	v addAll: g1; addAll: g2.
 
-	RTEdgeBuilder new 
+	RTEdgeBuilder new
 		view: v;
 		objects: RTShape withAllSubclasses;
 		connectFrom: #superclass to: #yourself.
@@ -5967,7 +5967,7 @@ clss := RTShape withAllSubclasses.
 
 v := RTView new.
 v @ RTDraggableView.
-clss do: [ :cls | 
+clss do: [ :cls |
 	s := RTPolygon new.
 	ver := OrderedCollection new.
 	d := 0.
@@ -5976,7 +5976,7 @@ clss do: [ :cls |
 		d := d + (360 / cls rtmethods size).
 	 ].
 	s vertices: ver.
-	
+
 	composedShape := RTCompositeShape new.
 	composedShape add: s.
 	composedShape add: (RTEllipse new color: (Color red)).
@@ -6092,10 +6092,10 @@ shape := RTBox new size: #yourself; color: [ :value | (normalizer level: (value 
 es := shape elementsOn: (1 to: 100 by: 10).
 v addAll: es.
 
-v canvas addMenu: 'Press me!' callback: [ 
-	es do: [ :e | 
-		resizeAnimation := 
-			RTResizeMove new 
+v canvas addMenu: 'Press me!' callback: [
+	es do: [ :e |
+		resizeAnimation :=
+			RTResizeMove new
 				toExtent: (100 - e model) @ (100 - e model) on: e.
 		e model: (100 - e model).
 		v addAnimation: resizeAnimation ] ].
@@ -6135,7 +6135,7 @@ v add: handle.
 handle @ RTDraggable.
 TRConstraint move: handle onTheRightBelowOf: elements.
 
-callback := TRTranslationCallback new block: [ :shape :step | 
+callback := TRTranslationCallback new block: [ :shape :step |
 	elements extent: (handle encompassingRectangle topLeft - elements encompassingRectangle topLeft). v signalUpdate ].
 handle trachelShape addCallback: callback.
 
@@ -6169,11 +6169,11 @@ RTRoassalExample >> exampleRotatingAnimatedLabels [
 	| v shape timer |
 	v := RTView new.
 	timer := TRVITimer new cycleLength: 2.
-	
-	
+
+
 	shape := RTRotatedLabel new.
 	"shape angleInDegree: [ :cls | cls numberOfMethods negated / 1.5 ]."
-	shape angleInDegree: [ :cls | 
+	shape angleInDegree: [ :cls |
 		| valueEnd |
 		valueEnd := cls numberOfMethods negated / 1.5.
 		TRVIAnimatedValue new
@@ -6417,14 +6417,14 @@ paths add: 'M410.5,101.5c0-28.449-23.051-51.5-51.5-51.5s-51.5,23.051-51.5,51.5
 	c0-17.041,13.855-30.896,30.896-30.896s30.896,13.855,30.896,30.896S170.041,132.396,153,132.396S122.104,118.541,122.104,101.5z
 	 M183.896,410.5c0,17.033-13.855,30.896-30.896,30.896s-30.896-13.863-30.896-30.896s13.855-30.896,30.896-30.896
 	S183.896,393.467,183.896,410.5z'.
-	
+
 paths add: 'M209.965,376.166c-27.661,0-56.127-12.17-74.132-37.217c2.95,0.235,5.767,0.369,8.432,0.369
 	c68.315,0,44.845-77.526,114.953-78.272l31.584,26.337C295.598,345.639,253.787,376.166,209.965,376.166z M377.307,216.813
 	c20.352-31.97,65.783-117.074,83.15-150.175c1.074-1.869,1.543-3.747,1.543-5.541C462,55.038,456.635,50,450.734,50
 	c-2.348,0-4.795,0.805-7.008,2.666c-28.666,24.258-101.256,86.177-128.951,112.019c-26.286,24.585-26.387,35.826-34.902,76.354
 	l28.834,24.031C346.93,249.353,357.928,247.215,377.307,216.813z M393.334,252.966v174.7h-309V187.333h173.342
 	c11.232-30.704,29.875-45.725,96.194-103H50V462h377.666V199.052C415.831,219.923,405.772,237.961,393.334,252.966z'.
-	
+
 
 paths add: 'M118.672,424.778c78.741,6.521,50.544-77.132,123.401-77.903l31.55,26.338
 	C281.486,468.265,165.209,489.488,118.672,424.778z M360.125,302.636c24.493-38.44,100.367-167.347,100.367-167.347
@@ -6440,7 +6440,7 @@ paths add: 'M118.672,424.778c78.741,6.521,50.544-77.132,123.401-77.903l31.55,26.
 	c0.167,18.952-15.104,34.468-34.098,34.601c-18.977,0.135-34.417-15.121-34.517-34.081
 	C101.959,250.29,117.23,234.842,136.141,234.666z M308.341,381.125c0.369,38.423-15.138,63.838-28.866,78.74
 	c-0.252,0.269-0.537,0.504-0.789,0.755c90.208-10.126,155.555-73.879,107.559-135.42C362.674,360.338,342.74,367.11,308.341,381.125
-	z'.	
+	z'.
 
 paths add: 'M179.997,83.572V272.42c-15.98-17.393-43.605-38.143-70.619-36.524
 	c-32.408,1.941-38.563,36.646-10.562,62.864c47.141,44.139,94.575,109.268,105.167,163.24c0,0,140.646,0,184.41,0
@@ -6476,14 +6476,14 @@ paths add: 'M149.201,462l-48.81-83.796c29.764-23.725,54.763-43.234,53.67-81.087h
 	l40.358-5.873c-11.964-50.885-57.479-69.374-95.285-69.374c-75.705,0-125.545,68.262-101.907,143.635l6.116,19.503h-41.315v23.935
 	h45.909c0.616,1.001,23.514,59.864-41.573,118.153l20.498,35.189c16.166-8.858,34.12-15.76,55.276-15.76
 	C247.36,404.829,300.137,425.651,329.444,425.651z'.
-	
+
 paths add: 'M299.715,461.13c-94.312,2.166-176.276-59.753-195.785-153.012H49.734l8.188-41.354h41.369
 	c-0.218-9.804,0.165-19.596,0.938-29.292H63.047l7.938-41.354h35.533C132.739,82.586,230.829,17.764,383.484,66.522l-16.625,68.5
 	c-77.396-24.258-139.529-17.381-159.892,61.098h150.1l-7.917,41.354H200.857c-0.529,9.121-0.69,19.461-0.295,29.292H344.15
 	l-0.104,0.54c-23.77,7.239-43.852,21.902-58.121,40.813h-79.712c9.279,36.496,30.106,59.916,56.761,71.075
 	C263.549,410.001,276.244,439.362,299.715,461.13z M292.947,377.225c0,46.756,37.903,84.66,84.659,84.66s84.659-37.904,84.659-84.66
 	s-37.903-84.658-84.659-84.658S292.947,330.469,292.947,377.225z M420.312,367.84h-22.095v53.455H357.46V367.84h-22.096
-	l42.475-42.549L420.312,367.84z'.	
+	l42.475-42.549L420.312,367.84z'.
 
 normalizer := RTMultiLinearColorForIdentity new objects: paths.
 es := paths collect: [ :p | (RTSVGPath new path: p; color: normalizer; scale: 0.1) elementOn: p ].
@@ -6538,7 +6538,7 @@ RTRoassalExample >> exampleScaledNesting [
 	outter := OrderedCollection new.
 	view := RTView new.
 	view @ RTDraggableView.
-	
+
 	1 to: 200 by: 10 do: [ :i |
 		inner := (RTBox new color: (Color purple alpha: 0.2)) elementsOn: (1 to: i).
 		host := (RTBox new color: (Color yellow alpha: 0.1)) element.
@@ -6546,32 +6546,32 @@ RTRoassalExample >> exampleScaledNesting [
 
 		view add: host.
 		view addAll: inner.
-		edges := 
+		edges :=
 			RTEdgeBuilder new
 				view: view;
 				elements: inner;
 				connectFrom: [ :v | v // 2 ].
 
 		RTGridLayout new on: inner.
-		RTNest new		
+		RTNest new
 			on: host nest: inner.
 	].
 	RTGridLayout on: outter.
-	
+
 	trachelCanvas := view setUpCanvas.
 	TRFocusCenter on: trachelCanvas.
-	
+
 	"Zoom a specific element"
 	resizable := outter at: (Random new nextInt: outter size).
 	view addMenu: 'Smaller'
-		callback: [ view addAnimation: (RTResizeMove new 
-													toExtent: resizable extent * 0.6 
+		callback: [ view addAnimation: (RTResizeMove new
+													toExtent: resizable extent * 0.6
 													during: 0.3 on: resizable) ].
 	view addMenu: 'Bigger'
-		callback: [ view addAnimation: (RTResizeMove new 
-													toExtent: resizable extent * (1 / 0.6) 
+		callback: [ view addAnimation: (RTResizeMove new
+													toExtent: resizable extent * (1 / 0.6)
 													during: 0.3 on: resizable) ].
-	
+
 	^ view
 ]
 
@@ -6733,7 +6733,7 @@ values := RTObject withAllSubclasses.
 dots := (RTEllipse new color: (Color blue alpha: 0.5)) elementsOn: values.
 v addAll: dots.
 
-doLayout value. 
+doLayout value.
 ^ v
 ]
 
@@ -6931,7 +6931,7 @@ RTRoassalExample >> exampleSelfCalls [
 	classes := RTShape withAllSubclasses.
 	classes
 		do:
-			[ :class | 
+			[ :class |
 			classElement := (RTBox new color: (Color blue alpha: 0.4))
 				elementOn: class.
 			classElement @ RTPopup.
@@ -7061,7 +7061,7 @@ RTRoassalExample >> exampleSmoothLayout [
 	v canvas
 		addMenu: 'grid'
 		callback:
-			[ 
+			[
 			RTGridLayout new
 				translator: translator;
 				on: v elements.
@@ -7069,7 +7069,7 @@ RTRoassalExample >> exampleSmoothLayout [
 	v canvas
 		addMenu: 'hori'
 		callback:
-			[ 
+			[
 			RTHorizontalLineLayout new
 				translator: translator;
 				on: v elements.
@@ -7077,7 +7077,7 @@ RTRoassalExample >> exampleSmoothLayout [
 	v canvas
 		addMenu: 'treeV'
 		callback:
-			[ 
+			[
 			RTTreeLayout new
 				translator: translator;
 				on: v elements edges: v edges.
@@ -7085,7 +7085,7 @@ RTRoassalExample >> exampleSmoothLayout [
 	v canvas
 		addMenu: 'treeH'
 		callback:
-			[ 
+			[
 			RTHorizontalTreeLayout new
 				translator: translator;
 				on: v elements edges: v edges.
@@ -7093,7 +7093,7 @@ RTRoassalExample >> exampleSmoothLayout [
 	v canvas
 		addMenu: 'cluster'
 		callback:
-			[ 
+			[
 			RTClusterLayout new
 				translator: translator;
 				on: v elements edges: v edges.
@@ -7101,7 +7101,7 @@ RTRoassalExample >> exampleSmoothLayout [
 	v canvas
 		addMenu: 'circle'
 		callback:
-			[ 
+			[
 			RTCircleLayout new
 				translator: translator;
 				scaleBy: 0.8;
@@ -7110,7 +7110,7 @@ RTRoassalExample >> exampleSmoothLayout [
 	v canvas
 		addMenu: 'radial'
 		callback:
-			[ 
+			[
 			RTRadialTreeLayout new
 				translator: translator;
 				on: v elements.
@@ -7118,7 +7118,7 @@ RTRoassalExample >> exampleSmoothLayout [
 	v canvas
 		addMenu: 'sugiyama'
 		callback:
-			[ 
+			[
 			RTSugiyamaLayout new
 				translator: translator;
 				on: v elements.
@@ -7183,7 +7183,7 @@ es := s elementsOn: cls.
 v addAll: es.
 es @ RTPopup @ RTDraggable.
 RTFlowLayout on: es.
-^ v 
+^ v
 ]
 
 { #category : #icons }
@@ -7223,7 +7223,7 @@ RTRoassalExample >> exampleSpiralViz [
 	v := RTView new.
 	angle := 0.
 	classes
-		do: [ :c | 
+		do: [ :c |
 			shape := TRBezierShape new.
 			shape color: Color black.
 			shape
@@ -7234,7 +7234,7 @@ RTRoassalExample >> exampleSpiralViz [
 			shape
 				points:
 					(c methods
-						collect: [ :m | 
+						collect: [ :m |
 							incr := incr + (angle cos @ angle sin * 10).
 							(m numberOfLinesOfCode log * 25) @ (m sourceCode size log * 25)
 								+ incr ]).
@@ -7469,14 +7469,14 @@ RTRoassalExample >> exampleTwoColumnFlow [
 | firstColumn secondColumn associations firstElements secondElements v eb |
 firstColumn := #( 'WP A.1'  'WP A.2' 'WP A.3'  ).
 secondColumn := #('WP B.1'  'WP B.2'  'WP B.3' ).
-associations := OrderedCollection new. 
-associations 
+associations := OrderedCollection new.
+associations
 	add: 'WP A.1' -> 'WP A.2';
 	add: 'WP A.2' -> 'WP A.3' ;
 
 	 add: 'WP B.1' -> 'WP B.2' ;
 	add: 'WP B.2' -> 'WP B.3' ;
-	
+
 	 add: 'WP A.3' -> 'WP B.1' ;
 	 add: 'WP B.1' -> 'WP A.1' ;
 	 add: 'WP B.2' -> 'WP B.2' ;
@@ -7542,7 +7542,7 @@ associations := OrderedCollection new
 
 	add: 'WP B.1' -> 'WP B.2';
 	add: 'WP B.2' -> 'WP B.3';
-	
+
 	add: 'WP A.3' -> 'WP B.1';
 	add: 'WP B.1' -> 'WP A.1';
 	add: 'WP B.2' -> 'WP A.2';
@@ -7603,20 +7603,20 @@ RTRoassalExample >> exampleUseOfDecoration [
 	| view element decoration |
 	view := RTView new.
 	element := RTBox new size: 50; color: Color blue; element.
-	decoration := RTDecoration new 
+	decoration := RTDecoration new
 						shape: (RTEllipse new color: Color red; borderColor: Color black; size: 10)
 							tooltip: 'Set red color'
-							action: [ :anElement | 
+							action: [ :anElement |
 											anElement trachelShape color: Color red.
 											anElement signalUpdate. ];
 						shape: (RTEllipse new color: Color yellow; borderColor: Color black; size: 10)
 							tooltip: 'Set yellow color'
-							action: [ :anElement | 
+							action: [ :anElement |
 											anElement trachelShape color: Color yellow.
 											anElement signalUpdate. ];
 						shape: (RTEllipse new color: Color green; borderColor: Color black; size: 10)
 							tooltip: 'Set green color'
-							action: [ :anElement | 
+							action: [ :anElement |
 											anElement trachelShape color: Color green.
 											anElement signalUpdate. ].
 	element @ decoration @ RTDraggable.
@@ -7640,8 +7640,8 @@ RTRoassalExample >> exampleUseOfMetrics [
 
 | metrics classes view mb xAxis yAxis refresh elements |
 refresh := nil.
-metrics := Array with: 
-	(Array with: 'LOC' with: #numberOfLinesOfCode) with: 
+metrics := Array with:
+	(Array with: 'LOC' with: #numberOfLinesOfCode) with:
 	(Array with: 'NOM' with: #numberOfMethods ) with:
 	(Array with: 'NOA' with: #numberOfVariables).
 
@@ -7674,7 +7674,7 @@ refresh := [
 		normalizePosition: [:cls | (xAxis rtValue: cls) @ (yAxis rtValue: cls) negated ] min: 0@0 max: 200 @ 200.
 	view signalUpdate.
 ].
-refresh value. 
+refresh value.
 
 view canvas addShape: (TRLineShape new from: 0 @ 200 to: 200 @ 200).
 
@@ -7709,38 +7709,38 @@ RTRoassalExample >> exampleVectorEditing [
 	view := RTView new.
 	selected := nil.
 	statusBar := nil.
-	
+
 	view when: TRMouseClick do: [ :evt |
-		selected == #line ifTrue: [ 
+		selected == #line ifTrue: [
 			| ex1 ex2 line |
-			ex1 := (RTBox new size: 10; color: (Color purple alpha: 0.2)) element. 
+			ex1 := (RTBox new size: 10; color: (Color purple alpha: 0.2)) element.
 			ex2 := (RTBox new size: 10; color: (Color purple alpha: 0.2)) element.
 			ex1 translateTo: evt position.
 			ex2 translateTo: evt position + (100 @ 60).
 			ex1 @ RTHighlightable.
 			ex2 @ RTHighlightable.
-			ex1 @ RTDraggable. 
+			ex1 @ RTDraggable.
 			ex2 @ RTDraggable.
 			line := (RTLine new "width: 3;" color: (Color blue alpha: 0.2)) edgeFrom: ex1 to: ex2.
 			view addAll: (Array with: ex1 with: ex2 with: line ).
 			line trachelShape pushBack.
 		].
 
-		selected == #circle ifTrue: [ 
+		selected == #circle ifTrue: [
 			| ellipse |
-			ellipse := (RTEllipse new size: 40; color: (Color yellow alpha: 0.2)) element. 
-			ellipse translateTo: evt position.		
-			ellipse @ RTDraggable. 
-			view add: ellipse.		
+			ellipse := (RTEllipse new size: 40; color: (Color yellow alpha: 0.2)) element.
+			ellipse translateTo: evt position.
+			ellipse @ RTDraggable.
+			view add: ellipse.
 		].
 
-		
-		selected == #rectangle ifTrue: [ 
+
+		selected == #rectangle ifTrue: [
 			| box |
-			box := (RTBox new width: 40; height: 30; color: (Color blue alpha: 0.2)) element. 
-			box translateTo: evt position.		
-			box @ RTDraggable. 
-			view add: box.		
+			box := (RTBox new width: 40; height: 30; color: (Color blue alpha: 0.2)) element.
+			box translateTo: evt position.
+			box @ RTDraggable.
+			view add: box.
 		].
 		view canvas signalUpdate.
 	].
@@ -7790,10 +7790,10 @@ RTRoassalExample >> exampleVisualizingSoftwareWithBeziers [
 	self new exampleVisualizingSoftwareWithBeziers
 	"
 	| v inheritanceEdges shape helpBar1 helpBar2 elements eb classes |
-	
+
 	"The variable classes contains the Pharo classes that will be represented"
 	classes := Collection withAllSubclasses.
-	
+
 	v := RTView new.
 	shape := RTEllipse new
 		color: (Color red alpha: 0.4);
@@ -7819,7 +7819,7 @@ RTRoassalExample >> exampleVisualizingSoftwareWithBeziers [
 		bezierLineFollowing: #superclass;
 		color: (Color blue alpha: 0.1).
 	eb connectFrom: #yourself toAll: #dependentClasses.
-										
+
 	helpBar1 := TRLabelShape new
 		text:
 			'Circle = classes, size = number of methods; gray links = inheritance;'.
@@ -7953,33 +7953,33 @@ RTRoassalExample >> exampleWorm [
 
 | v s e last lineLength callback nbOfElements head |
 v := RTView new.
-s := RTEllipse new 
-				size: [ :m | m * 10 ]; 
+s := RTEllipse new
+				size: [ :m | m * 10 ];
 				color: (Color blue alpha: 0.4).
 nbOfElements := 10.
 last := nil.
-1 to: nbOfElements do: [ :i | 
+1 to: nbOfElements do: [ :i |
 	e := (s elementOn: i).
-	v add: e.		
+	v add: e.
 	last ifNotNil: [ v add: (RTLine new edgeFrom: e to: last) ].
-	last := e.		
+	last := e.
 ].
 
 lineLength := 40.
 
-callback := TRTranslationCallback 
-	block: [ :shape :step | 
+callback := TRTranslationCallback
+	block: [ :shape :step |
 			| diff alpha dist |
-			(shape element outgoingEdges collect: #to) do: [ :el | 
+			(shape element outgoingEdges collect: #to) do: [ :el |
 				diff := shape position - el position.
 				alpha := diff theta.
-				dist := ((diff x * diff x) + (diff y * diff y)) sqrt. 
+				dist := ((diff x * diff x) + (diff y * diff y)) sqrt.
 				el translateBy: (alpha cos * (dist - lineLength)) @ (alpha sin * (dist - lineLength)) ] ].
- 
+
 v elements do: [ :el | el trachelShape addCallback: callback ].
 
 head := v elements last.
-v when: TRMouseMove do: [ :evt | 
+v when: TRMouseMove do: [ :evt |
 	head translateBy: (evt positionFromCamera - head position) / 10.
 	v canvas signalUpdate ].
 

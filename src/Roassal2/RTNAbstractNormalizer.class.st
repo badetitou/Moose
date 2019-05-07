@@ -19,18 +19,18 @@ Class {
 
 { #category : #accessing }
 RTNAbstractNormalizer >> command [
-	
+
 	^command
 ]
 
 { #category : #accessing }
 RTNAbstractNormalizer >> command: aBlock [
-	
+
 	command := aBlock
 ]
 
 { #category : #accessing }
 RTNAbstractNormalizer >> rtValue: anEntity [
-	
+
 	self subclassResponsibility
 ]

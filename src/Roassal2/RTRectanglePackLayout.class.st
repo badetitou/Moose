@@ -11,7 +11,7 @@ gap
 
 freeSpace
 	- collection of spaces that can be used for next element insertion
-	
+
 bounds
 	- bounding box of all currently processed elements
 
@@ -31,18 +31,18 @@ Class {
 { #category : #'space-calculation' }
 RTRectanglePackLayout >> bestSpaceFor: anElement [
 	| elementsPadedBox suitableSpaces |
-	
+
 	elementsPadedBox := anElement encompassingRectangle extendBy: padding * 2.
-	
+
 	suitableSpaces := freeSpace select: [ :space |
 		elementsPadedBox width <= space width and:
 			[ elementsPadedBox height <= space height ] ].
-	
+
 	^ suitableSpaces
 		fold: [ :best :current |
-			| bestExt currentExt | 
+			| bestExt currentExt |
 			((currentExt := self extentByInserting: elementsPadedBox into: current) <
-			(bestExt := self extentByInserting: elementsPadedBox  into: best) or: [ 
+			(bestExt := self extentByInserting: elementsPadedBox  into: best) or: [
 				currentExt = bestExt and: [
 					current halfPerimeter < best halfPerimeter ] ])
 						ifTrue: [ current ]
@@ -58,23 +58,23 @@ RTRectanglePackLayout >> boundingBox [
 RTRectanglePackLayout >> doExecute: elements [
 	| sortedElements maxSpace |
 	bounds := 0@0.
-	
+
 	maxSpace := elements inject: 0@0 into: [ :sum :el |
 			sum + el extent ].
-		
+
 	padding := maxSpace / elements size * gap / 2.
-	
+
 	maxSpace := 1 + gap * maxSpace.
-	
+
 	freeSpace := Set new.
 	freeSpace add: (0@0 corner: maxSpace).
-	
+
 	sortedElements := SortedCollection sortBlock:  [ :larger :smaller |
 		larger  encompassingRectangle halfPerimeter >
 		smaller encompassingRectangle halfPerimeter ].
 	sortedElements addAll: elements.
-	
-	sortedElements size <= 2 ifTrue: [ 
+
+	sortedElements size <= 2 ifTrue: [
 		RTHorizontalLineLayout on: sortedElements.
 		^ self
 	].
@@ -87,7 +87,7 @@ RTRectanglePackLayout >> doExecute: elements [
 RTRectanglePackLayout >> extentByInserting: aRectangle into: aSpace [
 	| futureCorner |
 	futureCorner := aSpace origin + aRectangle extent.
-	
+
 	^	(((futureCorner x - bounds x) max: 0) +
 		((futureCorner y - bounds y) max: 0))
 		* "this is balancing magic"
@@ -116,7 +116,7 @@ RTRectanglePackLayout >> initialize [
 RTRectanglePackLayout >> packIn: anElement [
 	translator translateTopLeftOf: anElement to: (self bestSpaceFor: anElement) origin + padding.
 	bounds := bounds max: anElement encompassingRectangle bottomRight + padding.
-	
+
 	self recalculateFreeSpacesWith: anElement
 ]
 
@@ -137,13 +137,13 @@ RTRectanglePackLayout >> recalculateFreeSpacesWith: anElement [
 	freeSpace := freeSpace inject: Set new into: [ :set :space |
 		 set
 			addAll: (space areasOverlapingOutside:
-				(anElement encompassingRectangle expandBy: padding)); 
+				(anElement encompassingRectangle expandBy: padding));
 			yourself ].
-		
+
 	"remove subspaces"
-	freeSpace := freeSpace reject: [ :subspace | 
+	freeSpace := freeSpace reject: [ :subspace |
 		freeSpace anySatisfy: [ :space |
-			space ~~ subspace and: [ 
+			space ~~ subspace and: [
 				space containsRect: subspace ] ] ]
-	
+
 ]

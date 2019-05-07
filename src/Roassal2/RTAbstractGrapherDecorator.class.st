@@ -72,7 +72,7 @@ RTAbstractGrapherDecorator >> hasDatasets [
 { #category : #initialization }
 RTAbstractGrapherDecorator >> initialize [
 	super initialize.
-	shapeBuilder := RTShapeBuilder new. 
+	shapeBuilder := RTShapeBuilder new.
 	shapeBuilder line.
 	placedInFront := true.
 ]
@@ -93,7 +93,7 @@ RTAbstractGrapherDecorator >> isPointOverTheBuilder: aPoint [
 	Note that the point is translated from the camera"
 	| pp |
 	pp := self convertPointForGraph: aPoint.
-	
+
 	"Humm... I am not sure this is the best way to do this. What happens if the view is embedded?"
 	^ pp >= (0 @ 0) and: [ pp <= builder extent ]
 ]
@@ -147,7 +147,7 @@ RTAbstractGrapherDecorator >> moveInFront [
 
 { #category : #hooks }
 RTAbstractGrapherDecorator >> render [
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #accessing }

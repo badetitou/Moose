@@ -47,7 +47,7 @@ RTSelectionBox >> addBox: aColor [
 			borderWidth: 1;
 			color: Color transparent;
 			element.
-	lastClick isNil ifFalse: [ 
+	lastClick isNil ifFalse: [
 		box translateTo: lastClick position ].
 	aView add: box.
 	box trachelShape edges: edges.
@@ -63,8 +63,8 @@ RTSelectionBox >> initializeElement: view [
 	aView := view.
 	edges := aView edges.
 	edges do: #remove.
-	actions := Array 
-		with: 'Add box from and to'-> [ self addBox trachelShape condition: [ :rec :ed| 
+	actions := Array
+		with: 'Add box from and to'-> [ self addBox trachelShape condition: [ :rec :ed|
 			(rec containsPoint: ed from position) and: [ rec containsPoint: ed to position ] ] ]
 		with: 'Add box from'->[ self addBox trachelShape condition: [ :rec :ed |
 			rec containsPoint: ed from position ] ]
@@ -75,5 +75,5 @@ RTSelectionBox >> initializeElement: view [
 	aView when: TRMouseRightClick do: [ :evt |
 		lastClick := evt.
 		TRUtil instance widgetFactory menuForAssociations: actions on: aView ].
-		
+
 ]

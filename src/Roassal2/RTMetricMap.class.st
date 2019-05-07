@@ -30,9 +30,9 @@ RTMetricMap >> convertIntoSVGCountryName: aName [
 	aName = 'Mauritius' ifTrue: [ ^ #Mauritania ].
 	aName = 'Russian Federation' ifTrue: [ ^ #Russia ].
 	aName = 'Turkey' ifTrue: [ ^ #RepublicofTurkey ].
-	
+
 	#(
-		#('FR' #France) 
+		#('FR' #France)
 		#('UK' #GreatBritian)
 		#('DE' #Germany)
 		#('US' #UnitedStates)
@@ -41,7 +41,7 @@ RTMetricMap >> convertIntoSVGCountryName: aName [
 		#('AU' #Austria)
 		#('IE' #Israel)
 		#('IT' #Italy)) do: [ :arr | arr first = aName ifTrue: [ ^ arr second ] ].
-	
+
 	normalizedName := (aName copyWithoutAll: '. ') asSymbol.
 	^ (RTSVGPath class methodDict keys includes: normalizedName)
 			ifTrue: [ normalizedName ]
@@ -86,7 +86,7 @@ RTMetricMap >> countries: collection named: selectorOrBlockForName [
 RTMetricMap >> countries: collection named: selectorOrBlockForName metric: selectorOrBlockForMetric [
 	"Display a list of countries"
 	"E.g., countries: #(#('France' 50) #('Germany' 80)) named: #first metric: #second"
-	
+
 	"Example:
 	RTMapBuilder2 new countries: #(#('France' 20) #('Germany' 80)) named: #first metric: #second; open
 	"
@@ -104,7 +104,7 @@ RTMetricMap >> createView [
 RTMetricMap >> example01 [
 
 	"self new example01"
-	
+
 	| b |
 	b := RTMetricMap new.
 	b countries: #('France' 'Germany').
@@ -115,7 +115,7 @@ RTMetricMap >> example01 [
 RTMetricMap >> example02 [
 
 	"self new example02"
-	
+
 	| b |
 	b := RTMetricMap new.
 	b countries: #(#('France' 50) #('Germany' 80)) named: #first.
@@ -126,7 +126,7 @@ RTMetricMap >> example02 [
 RTMetricMap >> example03 [
 
 	"self new example03"
-	
+
 	| b |
 	b := RTMetricMap new.
 	b countries: #(#('France' 50) #('Germany' 80)) named: #first metric: #second.
@@ -544,14 +544,14 @@ RTMetricMap >> example05 [
 	data convertColumn: 4 to: [ :t | Integer readFrom: t ].
 	data convertColumn: 5 to: [ :t | Integer readFrom: t ].
 	data convertColumn: 9 to: [ :t | Integer readFrom: t ].
-	
+
 	b countries: data values named: #second metric: #third.
-	
+
 	b makeSelectable: #third as: 'Population'.
 	b makeSelectable: #fourth as: 'Documents'.
 	b makeSelectable: #fifth as: 'Citable documents'.
 	b makeSelectable: [ :row | row at: 9 ] as: 'H index'.
-	
+
 	^ b
 ]
 
@@ -650,10 +650,10 @@ RTMetricMap >> example06DeepIntoPharo [
 	data removeFirstRow.
 	data convertColumn: 1 to: [ :t | Integer readFrom: t ].
 	data gather: 2 using: [ :r1 :r2 | Array with: r1 first + r2 first with: r1 second ].
-	
+
 	b countries: RTSVGPath countries color: Color white.
 	b countries: data values named: #second metric: #first.
-	
+
 	^ b
 ]
 
@@ -703,23 +703,23 @@ b countries: table values named: #first metric: #third.
 RTMetricMap >> fillViewWithCountries: collection named: selectorOrBlockForName metric: selectorOrBlockForMetric [
 	"Display a list of countries"
 	"E.g., countries: #(#('France' 50) #('Germany' 80)) named: #first metric: #second"
-	
+
 	"Example:
 	RTMapBuilder2 new countries: #(#('France' 20) #('Germany' 80)) named: #first metric: #second; open
 	"
 	| cn maxValue tcountryName svgCountryName normalizedCountries |
 	"Initialize the color normalizer"
 	cn := RTMultiLinearColor new colors: (Array with:(Color r:0.8 g:0.8 b:1) with: (Color r:0 g:0 b:0.3)).
-	
+
 	"Get the maximum, useful since we need value between 0.0 and 1.0"
 	maxValue := (collection collect: selectorOrBlockForMetric) max.
-	
+
 	"We pick only the country we have the geographical position"
-	normalizedCountries := collection select: [ :country | 
+	normalizedCountries := collection select: [ :country |
 										tcountryName := selectorOrBlockForName rtValue: country.
-										svgCountryName := self convertIntoSVGCountryName: tcountryName. 
+										svgCountryName := self convertIntoSVGCountryName: tcountryName.
 										svgCountryName notNil ].
-									
+
 	normalizedCountries do: [ :country |
 		| elem |
 		tcountryName := selectorOrBlockForName rtValue: country.
@@ -738,14 +738,14 @@ RTMetricMap >> fillViewWithCountries: collection named: selectorOrBlockForName m
 RTMetricMap >> initialize [
 	super initialize.
 	pointShapeBuilder := RTShapeBuilder new.
-	
+
 ]
 
 { #category : #public }
 RTMetricMap >> makeSelectable: aBlock as: aTitle [
 	"Public method"
 	"Add a menu in the visualization. Useful to switch between metrics"
-	view canvas addMenu: aTitle callback: [ 
+	view canvas addMenu: aTitle callback: [
 		self cleanView.
 		self fillViewWithCountries: countryData named: countryName metric: aBlock ]
 ]
@@ -760,7 +760,7 @@ RTMetricMap >> routes: objects from: aPointBlock to: anotherPointBlock [
 	| toPixel fromPixel fromElement toElement edge |
 	shapeBuilder ensure: RTLine.
 	pointShapeBuilder ensure: RTEllipse.
-	
+
 	objects do: [ :object |
 		toPixel := self translateGeoPositionToPixels: (aPointBlock rtValue: object).
 		fromPixel := self translateGeoPositionToPixels: (anotherPointBlock rtValue: object).
@@ -770,23 +770,23 @@ RTMetricMap >> routes: objects from: aPointBlock to: anotherPointBlock [
 		toElement translateTo: toPixel.
 		view add: fromElement.
 		view add: toElement.
-		
+
 		edge := shapeBuilder edgeFrom: fromElement to: toElement.
 		view add: edge.
-	].	
+	].
 ]
 
 { #category : #utility }
 RTMetricMap >> translateGeoPositionToPixels: point [
 	"From https://github.com/thebyrd/world-news"
-	
+
 	| longitud latitud xFactor xoffset yFactor yoffset |
 	latitud := point x.
 	longitud := point y.
-	
+
 	xFactor := 2.6938.
 	xoffset := 465.4.
-	
+
 	yFactor := -2.6938.
 	yoffset := 227.066.
 	^ ((longitud * xFactor) + xoffset) @ ((latitud * yFactor) + yoffset)

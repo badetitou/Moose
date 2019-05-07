@@ -103,7 +103,7 @@ RTAbstractRegularTreeLayout >> inverseAttachPoint [
 	"Invert the attach point of all the considered edges. It is likely that all the attachpoint are the same, but we do not have a garanty"
 	self shouldSetDefaultAttachPoint ifFalse: [ ^ self ].
 	edges
-		do: [ :edge | 
+		do: [ :edge |
 			edge shape attachPoint inverted: true.
 			edge updateFromTo ]
 ]
@@ -111,14 +111,14 @@ RTAbstractRegularTreeLayout >> inverseAttachPoint [
 { #category : #accessing }
 RTAbstractRegularTreeLayout >> isLayered [
 	"Is the layout layered"
-	
+
 	^ isLayered
 ]
 
 { #category : #accessing }
 RTAbstractRegularTreeLayout >> isLayered: boolean [
 	"Is the layout layered"
-	
+
 	isLayered := boolean
 ]
 
@@ -150,7 +150,7 @@ RTAbstractRegularTreeLayout >> rearrangeByLayers: aGraph [
 { #category : #accessing }
 RTAbstractRegularTreeLayout >> shouldBeHorizontallyReversed [
 	"Return if the layout is horizontally reversed"
-	^ shouldBeHorizontallyReversed 
+	^ shouldBeHorizontallyReversed
 ]
 
 { #category : #accessing }
@@ -174,7 +174,7 @@ RTAbstractRegularTreeLayout >> verticallyReverse [
 	"Reverse the edge extremities"
 	"Here is an example:
 
-| b |	
+| b |
 b := RTMondrian new.
 b nodes: (1 to: 100).
 b edges connectFrom: [ :v | v // 2 ].
@@ -182,7 +182,7 @@ b layout tree verticallyReverse.
 b
 "
 	shouldBeVerticallyReversed := true
-	
+
 
 ]
 

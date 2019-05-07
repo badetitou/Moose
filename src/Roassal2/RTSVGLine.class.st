@@ -12,7 +12,7 @@ Class {
 
 { #category : #adding }
 RTSVGLine >> addOn: stream using: aSVGVisitor [
-	
+
 	self id: (aSVGVisitor nameFor: self element).
 	self openDef: stream.
 	self addPosition: stream.
@@ -26,7 +26,7 @@ RTSVGLine >> addOn: stream using: aSVGVisitor [
 	self closeTag: stream.
 	self addExternalInteractions: aSVGVisitor.
 	self closeDef: stream.
-	
+
 ]
 
 { #category : #adding }
@@ -50,7 +50,7 @@ RTSVGLine >> element: anElement from: aPoint to: anotherPoint width: anInteger c
 { #category : #accessing }
 RTSVGLine >> element: anElement from: aPoint to: anotherPoint width: anInteger color: aColor decoration: aLineDecoration [
 	self element: anElement from: aPoint to: anotherPoint  width: anInteger color: aColor.
-	self decoration: aLineDecoration 
+	self decoration: aLineDecoration
 ]
 
 { #category : #accessing }

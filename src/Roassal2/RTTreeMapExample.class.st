@@ -1,24 +1,24 @@
 "
-RTTreeMapExample new installTitle: 'FileSystem' 
+RTTreeMapExample new installTitle: 'FileSystem'
 		code:
 		'
 | b color |
 b := RTTreeMapBuilder new.
-color := RTScale linear 
+color := RTScale linear
 	domain: { 0. 12000.};
 	range: { Color gray. Color red }.
 b shape
 	color: Color transparent;
 	borderColor: Color black;
 	if: [ :f | f isFile ] color: [ :f | color scale: f size sqrt ].
-b 
-	leafWeight: [:f | f size sqrt ]; 
+b
+	leafWeight: [:f | f size sqrt ];
 	explore: FileSystem disk workingDirectory
 	nesting: #directories
 	leaves: #files.
 b build.
 ^ b view'
-	
+
 "
 Class {
 	#name : #RTTreeMapExample,
@@ -32,10 +32,10 @@ RTTreeMapExample >> example08 [
 	| b |
 	b := RTTreeMapBuilder new.
 	b shape fillColor: Color random.
-	
+
 	b from: (1 to: 5) using: [#()].
 	b weight: #yourself.
-	^ b 
+	^ b
 ]
 
 { #category : #icons }
@@ -54,11 +54,11 @@ RTTreeMapExample >> exampleCollectionSubclasses [
 
 | b  |
 b := RTTreeMapBuilder new.
-	
+
 b shape
 	color: Color transparent;
 	borderColor: Color black;
-	if: [ :obj | obj isClass ] color: [ :cls | 
+	if: [ :obj | obj isClass ] color: [ :cls |
 		(Smalltalk includesKey: (cls name, 'Test') asSymbol) ifTrue: [ Color green ]
 		ifFalse: [ Color gray ] ].
 b
@@ -115,14 +115,14 @@ RTTreeMapExample >> exampleFileSystem [
 <noTest>
 | b color |
 b := RTTreeMapBuilder new.
-color := RTScale linear 
+color := RTScale linear
 	domain: #(0 12000);
 	range: (Array with: Color gray with: Color red).
-b 
+b
 	color: Color transparent;
 	borderColor: Color black;
 	leafColor: [ :f | color scale: f size sqrt ];
-	leafWeight: [:f | f size sqrt ]; 
+	leafWeight: [:f | f size sqrt ];
 	explore: TRPlatform current workingDirectory
 	nesting: #directories
 	leaves: #files.
@@ -159,7 +159,7 @@ RTTreeMapExample >> exampleNumber [
 
 	| b |
 	b := RTTreeMapBuilder new.
-	b shape 
+	b shape
 		if: #even fillColor: Color lightGray;
 		if: #odd fillColor: Color purple.
 	b
@@ -247,7 +247,7 @@ b
     leafWeight: #linesOfCode;
     explore: SequenceableCollection
         using: [:cls | | subclasses  |
-            subclasses := cls subclasses sorted: [ :x :y| 
+            subclasses := cls subclasses sorted: [ :x :y|
                 x linesOfCode < y linesOfCode ].
             subclasses .
             ];
@@ -257,12 +257,12 @@ shape := RTLabel new.
 
 
 b build.
-b elements 
+b elements
     select: [ :el | (el attributes at: #elements) isEmpty ]
-    thenDo: [ :el | 
+    thenDo: [ :el |
         label := shape elementOn: el model.
         label trachelShape scaleBy: el extent x /label extent x.
-        
+
         (RTConstraint movable: label fix: el)
                 inner; stick.
             b view add: label ].

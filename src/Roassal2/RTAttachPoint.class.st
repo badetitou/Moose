@@ -1,5 +1,5 @@
 "
-I am the superclass of the class hierarchy describing attach points. An attach point indicates where lines start and end. 
+I am the superclass of the class hierarchy describing attach points. An attach point indicates where lines start and end.
 "
 Class {
 	#name : #RTAttachPoint,
@@ -23,7 +23,7 @@ RTAttachPoint class >> instance [
 RTAttachPoint class >> on: elementOrElements [
 	| els temp |
 	els := elementOrElements.
-	els isCollection 
+	els isCollection
 		ifFalse: [ els := Array with: els ].
 	temp := self setAttachPoint: els.
 	els do: #updateConnectedEdges.
@@ -34,7 +34,7 @@ RTAttachPoint class >> on: elementOrElements [
 RTAttachPoint class >> on: elementOrElements thenDo: aBlock [
 	| els temp |
 	els := elementOrElements.
-	els isCollection 
+	els isCollection
 		ifFalse: [ els := Array with: els ].
 	temp := self setAttachPoint: els.
 	aBlock value: temp.
@@ -51,7 +51,7 @@ RTAttachPoint class >> resetInstance [
 RTAttachPoint class >> setAttachPoint: els [
 	| temp shapes |
 	temp := self new.
-	shapes := els flatCollectAsSet: [ :e | 
+	shapes := els flatCollectAsSet: [ :e |
 		e connectedEdges collect: [ :ed | ed shape ] ].
 	shapes do: [ :s |
 		s attachPoint: temp ].
@@ -60,17 +60,17 @@ RTAttachPoint class >> setAttachPoint: els [
 
 { #category : #'public - hooks' }
 RTAttachPoint >> basicEndingPointOf: anEdge [
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #'public - hooks' }
 RTAttachPoint >> basicStartingPointOf: anEdge [
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #'public - hooks' }
 RTAttachPoint >> endingPointOf: anEdge [
-	(anEdge from = anEdge to) 
+	(anEdge from = anEdge to)
 		ifTrue: [ ^ anEdge from encompassingRectangle topCenter ].
     ^ inverted
         ifTrue: [ self basicStartingPointOf: anEdge ]
@@ -105,7 +105,7 @@ RTAttachPoint >> isInverted [
 
 { #category : #'public - hooks' }
 RTAttachPoint >> startingPointOf: anEdge [
-	(anEdge from = anEdge to) 
+	(anEdge from = anEdge to)
 		ifTrue: [ ^ anEdge from encompassingRectangle rightCenter ].
     ^ inverted
         ifTrue: [ self basicEndingPointOf: anEdge ]

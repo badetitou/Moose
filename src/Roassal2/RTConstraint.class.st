@@ -36,7 +36,7 @@ RTConstraint new
 	inner;
 	bottom;
 	move.
-v 
+v
  ] ] ]
 "
 Class {

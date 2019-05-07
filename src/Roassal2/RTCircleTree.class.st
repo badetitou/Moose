@@ -28,13 +28,13 @@ RTCircleTree class >> combine: c0 with: c1 [
 	vr lengthenBy: c0 r + c1 r.
 	vr scaleBy: 0.5.
 	r := vr magnitude.
-	r >= c0 r ifTrue: [ 
+	r >= c0 r ifTrue: [
 		vr shortenBy: c0 r.
 		vr add: c0 center.
 		inst := self new.
 		inst verctor: vr r: r.
 		^ inst ].
-	
+
 	^ c0 r >= c1 r ifTrue: [ c0 ] ifFalse: [ c1 ].
 ]
 

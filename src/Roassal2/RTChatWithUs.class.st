@@ -25,7 +25,7 @@ RTChatWithUs class >> discordPNGByteArray [
 RTChatWithUs class >> menuCommandOn: aBuilder [
 	<worldMenu>
 	(aBuilder item: #'Live chat')
-			order: 0.002; 
+			order: 0.002;
 			parent: self projectName asSymbol;
 			label: 'Live chat';
 			help: 'chat with Roassal team on discord';
@@ -45,13 +45,13 @@ RTChatWithUs >> open [
 		add:
 			(RTLabel
 				elementOn: 'Problems and bugs can be reported on:').
-				
+
 
 	labels
 		add:
 			((RTLabel new color: Color veryVeryDarkGray)
 				elementOn: 'https://github.com/moosetechnology/Moose/issues').
-				
+
 	labels
 		add:
 			(RTLabel
@@ -62,7 +62,7 @@ RTChatWithUs >> open [
 				elementOn: 'the moose mailing list or to the Slack #roassal channel').
 
 
-				
+
 	v add: labels.
 	RTVerticalLineLayout on: labels.
 

@@ -930,13 +930,13 @@ RTSVGPath class >> goldenSpiral: level start: p side: side direction: dir type: 
 	dir: the direction for rectangle in quadrants 1@1 = first quadrant etc
 	isNarrow: the arc direction"
 	| s point p1 p2 p3 goldenRatio si dirs d n ar |
-	ar := isNarrow 
+	ar := isNarrow
 		ifTrue: [  #(1 1 1 -1 1 -1 -1 -1 -1 -1 -1 1 -1 1 1 1) ]
 		ifFalse: [ #(1 1 -1 1 -1 1 -1 -1 -1 -1 1 -1 1 -1 1 1) ].
 	dirs := Dictionary new.
 	(1 to: 16 by: 4) do: [ :i|
 		dirs at: (ar at: i)@(ar at: i+1) put: (ar at: i+2)@(ar at: i+3) ].
-	goldenRatio := (1 + 5 sqrt)/2. 
+	goldenRatio := (1 + 5 sqrt)/2.
 	s := WriteStream on: (String new: 100).
 	point := [ :z| z x asFloat asString, ',', z y asFloat asString,' ' ].
 	s nextPutAll: 'M', (point value: p).
@@ -946,10 +946,10 @@ RTSVGPath class >> goldenSpiral: level start: p side: side direction: dir type: 
 	((dir = (-1 @ 1)) or: [ dir= (1@ -1) ]) ifTrue: [ n := n not. ].
 	1 to: level do: [ :i|
 		p3 := p+(d * si).
-		n ifTrue: [ 
+		n ifTrue: [
 			p1 :=p x @((0.55*(p3 y - p y))+ p y) .
 			p2 := ((0.45*(p3 x - p x))+p x ) @ p3 y.
-		] ifFalse: [ 
+		] ifFalse: [
 			p1 := ((0.55*(p3 x - p x))+p x ) @ p y.
 			p2 := p3 x @((0.45*(p3 y - p y))+ p y). ].
 		si := (si * goldenRatio)-si.
@@ -1004,7 +1004,7 @@ RTSVGPath >> borderWidthConstant [
 ]
 
 { #category : #accessing }
-RTSVGPath >> centeredPath: aString [ 
+RTSVGPath >> centeredPath: aString [
 	self path: aString.
 	keepInOriginalPosition := false.
 ]
@@ -1044,7 +1044,7 @@ RTSVGPath >> updateFor: anElement trachelShape: trShape [
 		fillColor: (self fillColor rtValue: anElement);
 		rotateByDegrees: (self rotationFor: anElement);
 		scaleBy: (self scaleFor: anElement).
-		
+
 	keepInOriginalPosition
 		ifTrue: [ trShape path: (path rtValue: anElement) ]
 		ifFalse: [ trShape centeredPath: (path rtValue: anElement) ].

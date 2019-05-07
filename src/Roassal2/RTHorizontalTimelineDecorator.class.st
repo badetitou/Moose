@@ -1,22 +1,22 @@
 "
-RTHorizontalTimelineDecorator defines a separation between lined up group of events. Such a decoration simply needs to have a particular identifier. 
+RTHorizontalTimelineDecorator defines a separation between lined up group of events. Such a decoration simply needs to have a particular identifier.
 
-[[[ 
+[[[
 	data := #(#(c1 0 5) #(c1 6 8) #(c2 0 5) #(c2 8 10) #(c3 0 10) #(c4 5 10) #(c5 5 8)).
 
 	b := RTTimeline new.
-	
+
 	s := RTTimelineSet new.
 	s objects: data.
 	s lineIdentifier: #first.
 	s start: #second.
 	s end: #third.
 	b add: s.
-	
-	b axisX 
+
+	b axisX
 		numberOfLabels: 5;
 		labelRotation: -45;
-		labelConversion: [ :v | Date year: 2015 day: v ]. 
+		labelConversion: [ :v | Date year: 2015 day: v ].
 
 	p := RTHorizontalTimelineDecorator new.
 	p addLineAboveIdentifier: 'c3'.
@@ -55,7 +55,7 @@ RTHorizontalTimelineDecorator >> initialize [
 ]
 
 { #category : #hooks }
-RTHorizontalTimelineDecorator >> render [	
+RTHorizontalTimelineDecorator >> render [
 	| from to lineIdentifiers offset |
 	lineIdentifiers := builder lineIdentifiers.
 	identifiers do: [ :id |
@@ -67,6 +67,6 @@ RTHorizontalTimelineDecorator >> render [
 		to := builder getPixelPositionOf: builder maxX @ aValue.
 		offset := 0 @ (self gapBetweenTimeLines / 2).
 		self lineFrom: from - offset to: to - offset ]
-		
-	
+
+
 ]

@@ -26,7 +26,7 @@ RTShapeBuilder >> arrowedLine [
 
 { #category : #'public - shape - attach point on edges' }
 RTShapeBuilder >> attachPoint: aBlockOrSymbol [
-	aBlockOrSymbol rtValue: shape 
+	aBlockOrSymbol rtValue: shape
 ]
 
 { #category : #'public - shape - edges' }
@@ -42,8 +42,8 @@ RTShapeBuilder >> bezierLineUsingObjects: aFollowBlock [
 	self error: 'Method is not finished!!!'.
 	elements := #().
 	self shape: (RTBezierLine new controllingElements: elements)
-	
- 
+
+
 ]
 
 { #category : #'public - shape - edges' }
@@ -52,8 +52,8 @@ RTShapeBuilder >> bezierLineUsingObjects: someObjects inView: view [
 	| elements |
 	elements := view elementsFromModels: someObjects.
 	self shape: (RTBezierLine new controllingElements: elements)
-	
- 
+
+
 ]
 
 { #category : #accessing }
@@ -71,7 +71,7 @@ RTShapeBuilder >> centeredAttachPoint [
 	"Set the vertical attach point for the edges to be built"
 	self attachPoint: #withCenteredAttachPoint
 
-	
+
 ]
 
 { #category : #'public - shapes' }
@@ -101,7 +101,7 @@ RTShapeBuilder >> createdElements [
 RTShapeBuilder >> cross [
 	| s |
 	s := RTCompositeShape new.
-	s add: (RTBox new height: 10; width: 3). 
+	s add: (RTBox new height: 10; width: 3).
 	s add: (RTBox new height: 3; width: 10).
 
 	^ self shape: s
@@ -127,8 +127,8 @@ RTShapeBuilder >> directedLine [
 RTShapeBuilder >> doesNotUnderstand: aMessage [
 	"we simply forward the messages we do not understand
 	to the actual shape implementation"
-	self shape 
-		perform: aMessage selector 
+	self shape
+		perform: aMessage selector
 		withArguments: aMessage arguments
 ]
 
@@ -184,15 +184,15 @@ RTShapeBuilder >> fillColor [
 RTShapeBuilder >> fontSize: aValueOrASymbolOrABlock [
 	"Make sure we have something that this message is meaningful"
 	self assert: [ #(RTLabel #RTCompositeShape) includes: shape class name ].
-	
+
 	shape class == RTLabel ifTrue: [ shape height: aValueOrASymbolOrABlock. ^ self ].
 	shape class == RTCompositeShape ifTrue: [ (shape allShapes select: [ :s | s class == RTLabel ]) do: [ :s | s height: aValueOrASymbolOrABlock ] ]
 ]
 
 { #category : #'public - shape - edges' }
 RTShapeBuilder >> gradientLineFrom: fromColor to: toColor [
-	self shape: (RTGradientColoredLine new colors: (Array with: fromColor with: toColor); 
-							precision: 100; 
+	self shape: (RTGradientColoredLine new colors: (Array with: fromColor with: toColor);
+							precision: 100;
 							gradientColorShape)
 ]
 
@@ -217,7 +217,7 @@ RTShapeBuilder >> horizontalAttachPoint [
 	"Set the vertical attach point for the edges to be built"
 	self attachPoint: #withHorizontalAttachPoint
 
-	
+
 ]
 
 { #category : #'public - shape - edges' }
@@ -231,13 +231,13 @@ RTShapeBuilder >> if: conditionBlock borderColor: colorBlock [
 	| oldBlockOrValue |
 	oldBlockOrValue := self borderColor.
 	^self borderColor: [ :aModel | (conditionBlock rtValue: aModel)
-									ifTrue: [ colorBlock rtValue: aModel ] 
-									ifFalse: [ 
-										"Having to create a new element is rather ugly. 
+									ifTrue: [ colorBlock rtValue: aModel ]
+									ifFalse: [
+										"Having to create a new element is rather ugly.
 										Ideally, the oldBlockOrValue has to be 'unwrapped' for the translation"
 										oldBlockOrValue rtValue: (RTElement on: aModel) ]].
-							
-						
+
+
 
 ]
 
@@ -247,11 +247,11 @@ RTShapeBuilder >> if: conditionBlock color: colorBlock [
 	| oldBlockOrValue |
 	oldBlockOrValue := self color.
 	^self color: [ :aModel | (conditionBlock rtValue: aModel)
-									ifTrue: [ colorBlock rtValue: aModel ] 
-									ifFalse: [ 
+									ifTrue: [ colorBlock rtValue: aModel ]
+									ifFalse: [
 										oldBlockOrValue rtValue: (RTElement on: aModel) ]].
-							
-						
+
+
 ]
 
 { #category : #'public - shapes' }
@@ -260,13 +260,13 @@ RTShapeBuilder >> if: conditionBlock fillColor: colorBlock [
 	| oldBlockOrValue |
 	oldBlockOrValue := self fillColor.
 	self fillColor: [ :aModel | (conditionBlock rtValue: aModel)
-									ifTrue: [ colorBlock rtValue: aModel ] 
-									ifFalse: [ 
-										"Having to create a new element is rather ugly. 
+									ifTrue: [ colorBlock rtValue: aModel ]
+									ifFalse: [
+										"Having to create a new element is rather ugly.
 										Ideally, the oldBlockOrValue has to be 'unwrapped' for the translation"
 										oldBlockOrValue rtValue: (RTElement on: aModel) ]].
-							
-						
+
+
 
 ]
 
@@ -276,13 +276,13 @@ RTShapeBuilder >> ifElement: conditionBlock borderColor: colorBlock [
 	| oldBlockOrValue |
 	oldBlockOrValue := self borderColor.
 	^self borderColorElement: [ :anElement | (conditionBlock rtValue: anElement)
-									ifTrue: [ colorBlock rtValue: anElement ] 
-									ifFalse: [ 
-										"Having to create a new element is rather ugly. 
+									ifTrue: [ colorBlock rtValue: anElement ]
+									ifFalse: [
+										"Having to create a new element is rather ugly.
 										Ideally, the oldBlockOrValue has to be 'unwrapped' for the translation"
 										oldBlockOrValue rtValue: anElement ]].
-							
-						
+
+
 
 ]
 
@@ -292,13 +292,13 @@ RTShapeBuilder >> ifElement: conditionBlock fillColor: colorBlock [
 	| oldBlockOrValue |
 	oldBlockOrValue := self fillColor.
 	^self fillColorElement: [ :anElement | (conditionBlock rtValue: anElement)
-									ifTrue: [ colorBlock rtValue: anElement ] 
-									ifFalse: [ 
-										"Having to create a new element is rather ugly. 
+									ifTrue: [ colorBlock rtValue: anElement ]
+									ifFalse: [
+										"Having to create a new element is rather ugly.
 										Ideally, the oldBlockOrValue has to be 'unwrapped' for the translation"
 										oldBlockOrValue rtValue: anElement ]].
-							
-						
+
+
 
 ]
 
@@ -322,10 +322,10 @@ RTShapeBuilder >> labeledAs: aBlock [
 	shape := RTCompositeShape new.
 	shape add: oldShape.
 	shape add: label.
-	
+
 	shape vertical.
 	shapeInitializer rtValue: shape.
-	
+
 	^ label
 ]
 
@@ -359,9 +359,9 @@ RTShapeBuilder >> labeledBoxUsing: aValueOrABlockOrASymbol [
 	b edges connectFrom: #superclass.
 	b layout sugiyama.
 	b
-	
+
 	Another example
-	
+
 b := RTMondrian new.
 b shape labeledBoxUsing: [:value | 'Value ', value asString ].
 
@@ -395,31 +395,31 @@ b := RTMondrian new.
 b shape label.
 b nodes: nodes.
 
-b shape lineDualWidth 
-	color: Color blue trans; 
+b shape lineDualWidth
+	color: Color blue trans;
 	withShorterDistanceAttachPoint;
 	widthFrom: [ :anEdge | weightValue value: anEdge from model value: anEdge to model ];
 	widthTo: [ :anEdge | weightValue value: anEdge to model value: anEdge from model ].
-b edges 
+b edges
 	noRepetition; noBidirectional;
 	connectToAll: [ :fromValue | toValue value: fromValue ].
 b layout force charge: -300.
 b
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 "
-	
+
 	self shape: RTLineDualWidth new
 ]
 
 { #category : #'public - shapes' }
 RTShapeBuilder >> linearFillColor: block within: groupOfObjects [
 	"Set the linear fill color for the nodes. The gradient goes from white to black. anObject could be a symbol, a block or a value. anObject is evaluated against the model of the node to be paint. aGroup is a collection of the model values. This is where the maximum is looked into."
-	
+
 	| max |
-	"If the collection is empty, then we return an arbitrary color. 
+	"If the collection is empty, then we return an arbitrary color.
 	 If the script is properly done, the color should not be used"
 	groupOfObjects isEmpty ifTrue: [ ^ Color red ].
-	
+
 	max := groupOfObjects maxValue: block.
 	self current color: [ :v | Color grayScale256: 256 - ((block rtValue: v) max: max in: (1 to: 256)) ]
 ]
@@ -436,7 +436,7 @@ RTShapeBuilder >> octagon [
 
 { #category : #'public - shapes' }
 RTShapeBuilder >> orthoHorizontalLine [
-	^ self shape: RTStyledMultiLine new orthoHorizontal 
+	^ self shape: RTStyledMultiLine new orthoHorizontal
 ]
 
 { #category : #'public - shapes' }
@@ -513,7 +513,7 @@ RTShapeBuilder >> shortestDistanceAttachPoint [
 	self attachPoint: #withShorterDistanceAttachPoint
 
 
-	
+
 ]
 
 { #category : #'public - shape - attach point on edges' }
@@ -522,7 +522,7 @@ RTShapeBuilder >> shortestDistanceAttachPointWithJump [
 	self attachPoint: #withShorterDistanceAttachPointWithJump
 
 
-	
+
 ]
 
 { #category : #'public - shapes' }
@@ -540,7 +540,7 @@ RTShapeBuilder >> styledLine [
 	"
 	Set a styled line in the shape builder. A styled line could be dashed, and with different styles.
 	Have a look to RTStyledMultiLine for the complete API.
-	
+
 	Here is an example:
 -=-=-=
 v := RTView new.
@@ -582,7 +582,7 @@ RTShapeBuilder >> verticalAttachPoint [
 	"Set the vertical attach point for the edges to be built"
 	self attachPoint: #withVerticallAttachPoint
 
-	
+
 ]
 
 { #category : #'public - shape - edges' }

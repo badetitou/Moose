@@ -25,10 +25,10 @@ RTComposerTest >> testAbove [
 
 	e2 := RTBox element.
 	view add: e2.
-	composer group: #second. 
+	composer group: #second.
 	composer move: #second above: #first.
 
-	self assert: e1 position equals: (0 @ 0).	
+	self assert: e1 position equals: (0 @ 0).
 	self assert: e1 position x equals: e2 position x.
 	self assert: e2 position y equals: -25.0.
 ]
@@ -65,10 +65,10 @@ RTComposerTest >> testBelow [
 
 	e2 := RTBox element.
 	view add: e2.
-	composer group: #second. 
+	composer group: #second.
 	composer move: #second below: #first.
 
-	self assert: e1 position equals: (0 @ 0).	
+	self assert: e1 position equals: (0 @ 0).
 	self assert: e1 position x equals: e2 position x.
 	self assert: e2 position y equals: 25.0.
 ]
@@ -88,14 +88,14 @@ RTComposerTest >> testGroup [
 	self assert: composer currentElementsAsGroup isEmpty.
 	e := RTEllipse element.
 	composer view add: e.
-	
+
 	self assert: composer allGroupedElements isEmpty.
 	self assert: composer currentElementsAsGroup asArray equals: (Array with: e).
 	"self assert: composer newElementsAsGroup asArray equals: (Array with: e)."
 	composer group: #first.
-		
+
 	self assert: composer newElementsAsGroup isEmpty.
-	self assert: composer allGroupedElements asArray equals: (Array with: e). 
+	self assert: composer allGroupedElements asArray equals: (Array with: e).
 ]
 
 { #category : #tests }
@@ -107,20 +107,20 @@ RTComposerTest >> testGroup02 [
 	self assert: composer currentElementsAsGroup isEmpty.
 	e := RTEllipse element.
 	composer view add: e.
-	
+
 	self assert: composer allGroupedElements isEmpty.
 	self assert: composer currentElementsAsGroup asArray equals: (Array with: e).
 	"self assert: composer newElementsAsGroup asArray equals: (Array with: e)."
 	composer group.
-		
+
 	self assert: composer newElementsAsGroup isEmpty.
-	self assert: composer allGroupedElements asArray equals: (Array with: e). 
+	self assert: composer allGroupedElements asArray equals: (Array with: e).
 ]
 
 { #category : #tests }
 RTComposerTest >> testLayoutOnNestingElements [
 	| lb rectangles |
-	
+
 	rectangles :=  #(a b) collect: [ :each |
 		lb := RTLegendBuilder new.
 		lb view: composer view.
@@ -135,7 +135,7 @@ RTComposerTest >> testLayoutOnNestingElements [
 		self assert: rec1 extent equals: rec2 extent.
 		self assert: rec1 equals: group first encompassingRectangle.
 		 ].
-	
+
 ]
 
 { #category : #tests }
@@ -176,23 +176,23 @@ RTComposerTest >> testLayoutOnNestingElementsAndLabeledShapes [
 	b build.
 	c group: #legend.
 	c layout: RTGridLayout new.
-	
+
 	r2 := (c getGroup: #hierarchy) encompassingRectangle.
-	self assert: (r1 extent - r2 extent) < (0.001 @ 0.001) 
+	self assert: (r1 extent - r2 extent) < (0.001 @ 0.001)
 ]
 
 { #category : #tests }
 RTComposerTest >> testMovingNestingElements [
 	| lb rectangles assertPosition |
-	
+
 	rectangles :=  #(a b) collect: [ :each |
 		lb := RTLegendBuilder new.
 		lb view: composer view.
 		lb build.
 		composer group: each.
 		(composer getGroup: each) encompassingRectangle ].
-	
-	assertPosition := [ 
+
+	assertPosition := [
 	#(a b) doWithIndex: [ :each :index | | group rec1 rec2 |
 		group := composer getGroup: each.
 		rec1 := group encompassingRectangle.
@@ -200,15 +200,15 @@ RTComposerTest >> testMovingNestingElements [
 		self assert: rec1 extent equals: rec2 extent.
 		self assert: rec1 equals: group first encompassingRectangle.
 		 ] ].
-	composer move: #a above: #b. 
+	composer move: #a above: #b.
 	assertPosition value.
-	composer move: #a below: #b. 
+	composer move: #a below: #b.
 	assertPosition value.
-	composer move: #a belowAlignFromLeft: #b. 
+	composer move: #a belowAlignFromLeft: #b.
 	assertPosition value.
-	composer move: #a onTheLeftOf: #b. 
+	composer move: #a onTheLeftOf: #b.
 	assertPosition value.
-	composer move: #a onTheRightOf: #b. 
+	composer move: #a onTheRightOf: #b.
 	assertPosition value.
 ]
 
@@ -222,10 +222,10 @@ RTComposerTest >> testOnTheLeftOf [
 
 	e2 := RTBox element.
 	view add: e2.
-	composer group: #second. 
+	composer group: #second.
 	composer move: #second onTheLeftOf: #first.
 
-	self assert: e1 position equals: (0 @ 0).	
+	self assert: e1 position equals: (0 @ 0).
 	self assert: e1 position y equals: e2 position y.
 	self assert: e2 position x equals: -25.5.
 ]
@@ -240,10 +240,10 @@ RTComposerTest >> testOnTheRightBelow [
 
 	e2 := RTBox element.
 	view add: e2.
-	composer group: #second. 
+	composer group: #second.
 	composer move: #second onTheRightBelowOf: #first.
 
-	self assert: e1 position equals: (0 @ 0).	
+	self assert: e1 position equals: (0 @ 0).
 	self assert: e2 position equals: (5.5 @ 25.5)
 ]
 
@@ -257,10 +257,10 @@ RTComposerTest >> testOnTheRightOf [
 
 	e2 := RTBox element.
 	view add: e2.
-	composer group: #second. 
+	composer group: #second.
 	composer move: #second onTheRightOf: #first.
 
-	self assert: e1 position equals: (0 @ 0).	
+	self assert: e1 position equals: (0 @ 0).
 	self assert: e1 position y equals: e2 position y.
 	self assert: e2 position x equals: 25.
 ]
@@ -312,25 +312,25 @@ RTComposerTest >> testPropagateHighlight [
 	e1 := (RTBox new color: Color gray) elementOn: 1.
 	composer view add: e1.
 	composer group: #first.
-	
+
 	e2 := (RTEllipse new color: Color gray) elementOn: 1.
 	composer view add: e2.
 	composer group: #second.
-	
+
 	e3 := (RTBox new color: Color gray) elementOn: 1.
 	composer view add: e3.
 	composer group: #third.
-	
+
 	composer propagateHighlightToAll.
 	composer move: #second onTheRightOf: #first.
 	composer move: #third onTheRightOf: #second.
-	
+
 	e1 announce: TRMouseEnter.
 	self assert: e1 trachelShape color ~~ Color gray.
 	self assert: e2 trachelShape color ~~ Color gray.
 	self assert: e3 trachelShape color ~~ Color gray.
 	e1 announce: TRMouseLeave.
-	
+
 	self assert: e1 trachelShape color == Color gray.
 	self assert: e2 trachelShape color == Color gray.
 	self assert: e3 trachelShape color == Color gray.
@@ -354,29 +354,29 @@ RTComposerTest >> testPropagateHighlightToAll [
 
 	| e1 e2 e3 |
 	e1 := (RTBox new color: Color gray) elementOn: 1.
-	composer view add: e1. 
+	composer view add: e1.
 	composer group: #first.
-	
+
 	e2 := (RTEllipse new color: Color gray) elementOn: 1.
 	composer view add: e2.
 	composer group: #second.
-	
+
 	e3 := (RTBox new color: Color gray) elementOn: 1.
 	composer view add: e3.
 	composer group: #third.
-	
-	
+
+
 	composer move: #second onTheRightOf: #first.
 	composer move: #third onTheRightOf: #second.
-	
+
 	composer propagateHighlightToAll.
-	
+
 	e1 announce: TRMouseEnter.
 	self assert: e1 trachelShape color ~~ Color gray.
 	self assert: e2 trachelShape color ~~ Color gray.
 	self assert: e3 trachelShape color ~~ Color gray.
 	e1 announce: TRMouseLeave.
-	
+
 	self assert: e1 trachelShape color == Color gray.
 	self assert: e2 trachelShape color == Color gray.
 	self assert: e3 trachelShape color == Color gray.
@@ -399,7 +399,7 @@ RTComposerTest >> testPropagateHighlightToAll [
 RTComposerTest >> testView [
 	self assert: composer view equals: view.
 	view := RTView new.
-	composer view: view. 
+	composer view: view.
 	self assert: composer view equals: view.
 ]
 
@@ -415,28 +415,28 @@ RTComposerTest >> testpropagateHighlightUsing [
 
 	| e1 e2 e3 |
 	e1 := (RTBox new color: Color gray) elementOn: 1.
-	composer view add: e1. 
+	composer view add: e1.
 	composer group: #first.
-	
+
 	e2 := (RTEllipse new color: Color gray) elementOn: 1.
 	composer view add: e2.
 	composer group: #second.
-	
+
 	e3 := (RTBox new color: Color gray) elementOn: 1.
 	composer view add: e3.
 	composer group: #third.
-	
+
 	composer move: #second onTheRightOf: #first.
 	composer move: #third onTheRightOf: #second.
-	
+
 	composer propagateHighlightUsing: [ :element | Array with: e2 ].
-	
+
 	e1 announce: TRMouseEnter.
 	self assert: e1 trachelShape color equals: Color gray.
 	self assert: e2 trachelShape color ~~ Color gray.
 	self assert: e3 trachelShape color equals: Color gray.
 	e1 announce: TRMouseLeave.
-	
+
 	self assert: e1 trachelShape color equals: Color gray.
 	self assert: e2 trachelShape color equals: Color gray.
 	self assert: e3 trachelShape color equals: Color gray.
@@ -456,7 +456,7 @@ RTComposerTest >> testpropagateHighlightUsing [
 	self assert: e2 trachelShape color ~~ Color gray.
 	self assert: e3 trachelShape color equals: Color gray.
 	e2 announce: TRMouseLeave.
-	
+
 	self assert: e1 trachelShape color equals: Color gray.
 	self assert: e2 trachelShape color equals: Color gray.
 	self assert: e3 trachelShape color equals: Color gray.

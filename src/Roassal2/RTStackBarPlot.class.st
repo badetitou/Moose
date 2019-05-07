@@ -30,11 +30,11 @@ RTStackBarPlot >> add: someValues title: aTitle [
 { #category : #'private - utility' }
 RTStackBarPlot >> addLabelToBarIfNecessary [
 	labelBlock ifNil: [ ^ self ].
-	view elements do: [ :e | 
+	view elements do: [ :e |
 		(labelConditionalBlock rtValue: e model)
-			ifTrue: [ e @ (RTLabeled new 
-				center; 
-				color: labelColor; 
+			ifTrue: [ e @ (RTLabeled new
+				center;
+				color: labelColor;
 				setAsShouldBeInTheFront;
 				text: labelBlock) ] ].
 ]
@@ -78,7 +78,7 @@ RTStackBarPlot >> addLegend: strings [
 RTStackBarPlot >> addLegendIfNecessary [
 	| l c |
 	legend ifNil: [ ^ self ].
-	
+
 	l := RTLegendBuilder new.
 	l right.
 	l view: view.
@@ -94,7 +94,7 @@ RTStackBarPlot >> addLegendIfNecessary [
 RTStackBarPlot >> barWidth: aWidthBlock height: aHeightBlock [
 	widthBlock := aWidthBlock.
 	heightBlock := aHeightBlock.
-	
+
 ]
 
 { #category : #accessing }
@@ -107,14 +107,14 @@ RTStackBarPlot >> createShapeBuilder [
 	| sb |
 	sb := RTShapeBuilder new.
 	sb
-			rectangle; 
+			rectangle;
 			height: [ :anObject | self height rtValue: anObject ];
 			width: [ :anObject | self width rtValue: anObject ];
 			color: [ :association |
 				self colorPalette level: (self levelFor: association value) ];
 			yourself.
 	^ sb
-	
+
 
 ]
 
@@ -148,7 +148,7 @@ RTStackBarPlot >> example01 [
 { #category : #examples }
 RTStackBarPlot >> example02 [
 
-	
+
 | b |
 b := RTStackBarPlot new.
 b interaction popupText; draggable.
@@ -164,7 +164,7 @@ b barWidth: 150 height: 20.
 
 { #category : #examples }
 RTStackBarPlot >> example03 [
-		
+
 	| b |
 	b := RTStackBarPlot new.
 	b interaction popupText; draggable.
@@ -172,8 +172,8 @@ RTStackBarPlot >> example03 [
 	b add: #(37	33	0	0 0) title: 'DN1'.
 	b add: #(24	26	17	3 0) title: 'DN2'.
 	b add: #(25	29	15	1 0) title: 'DN3'.
-	b add: #(30	33	6	1 0) title: 'DN4'.	
-					
+	b add: #(30	33	6	1 0) title: 'DN4'.
+
 	b addLegend: #('strongly agree' 'agree' 'neutral' 'disagree' 'strongly disagree').
 	b barWidth: 150 height: 20.
 
@@ -184,7 +184,7 @@ RTStackBarPlot >> example03 [
 
 { #category : #examples }
 RTStackBarPlot >> example04 [
-		
+
 	| b |
 	b := RTStackBarPlot new.
 	b interaction popupText; draggable.
@@ -192,8 +192,8 @@ RTStackBarPlot >> example04 [
 	b add: #(37	33	0	0 0) title: 'DN1'.
 	b add: #(24	26	17	3 0) title: 'DN2'.
 	b add: #(25	29	15	1 0) title: 'DN3'.
-	b add: #(30	33	6	1 0) title: 'DN4'.	
-					
+	b add: #(30	33	6	1 0) title: 'DN4'.
+
 	b addLegend: #('strongly agree' 'agree' 'neutral' 'disagree' 'strongly disagree').
 	b barWidth: 150 height: 20.
 
@@ -203,21 +203,21 @@ RTStackBarPlot >> example04 [
 
 { #category : #examples }
 RTStackBarPlot >> example05 [
-		
-	| b |		
+
+	| b |
 	b := RTStackBarPlot new.
 	b interaction popupText.
 	b colorPalette colors: (Array with: Color blue with: Color lightBlue ).
 	b add: #(37	33	0	0 0) title: 'DN1'.
 	b add: #(24	26	17	3 0) title: 'DN2'.
 	b add: #(25	29	15	1 0) title: 'DN3'.
-	b add: #(30	33	6	1 0) title: 'DN4'.	
-					
+	b add: #(30	33	6	1 0) title: 'DN4'.
+
 	b addLegend: #('strongly agree' 'agree' 'neutral' 'disagree' 'strongly disagree').
 	b barWidth: 260 height: 20.
 
 	b addLabelToBars: [ :assoc | (assoc key  / b totalSum * 100) asInteger asString, '%' ] if: [:assoc | assoc key > 5 ] color: Color white.
-	
+
 	^ b
 ]
 
@@ -239,7 +239,7 @@ RTStackBarPlot >> initialize [
 	self horizontal.
 	colorPalette := RTMultiLinearColorForIdentity new.
 	self barWidth: self defaultBarWidth height: self defaultBarHeight.
-	
+
 	labelConditionalBlock := true.
 	labelColor := Color black
 ]
@@ -250,10 +250,10 @@ RTStackBarPlot >> isVertical [
 ]
 
 { #category : #'private - utility' }
-RTStackBarPlot >> levelFor: value [ 
+RTStackBarPlot >> levelFor: value [
 	| temp |
 	temp := self numberOfValuesPerRow -1.
-	^ temp <= 0 
+	^ temp <= 0
 		ifTrue: [ 1 ]
 		ifFalse: [ (value-1) / temp]
 ]
@@ -261,7 +261,7 @@ RTStackBarPlot >> levelFor: value [
 { #category : #accessing }
 RTStackBarPlot >> normalizer [
 	normalizer ifNil: [ normalizer := RTMetricNormalizer new ].
-	^ normalizer 
+	^ normalizer
 ]
 
 { #category : #accessing }
@@ -278,15 +278,15 @@ RTStackBarPlot >> offsetBetweenBarAndTitle [
 RTStackBarPlot >> renderIn: aView [
 	| elements lines lbl maxSum|
 	numberOfValuesPerRow := values first numberOfValues.
-	maxSum := (values collect: #totalSum) max. 
+	maxSum := (values collect: #totalSum) max.
 	lines := RTGroup new.
 	values
-		do: [ :tupple | 
+		do: [ :tupple |
 			elements := tupple values asGroup collectWithIndex: [ :aValue :index | self elementOn: aValue -> index ].
 			aView addAll: elements.
 			lines add: elements ].
-	lines doWithIndex: [ :l :i | 
-		self isVertical ifTrue: [ 
+	lines doWithIndex: [ :l :i |
+		self isVertical ifTrue: [
 			self normalizer
 				elements: l;
 				normalizeHeight: [ :m | m key * maxSum / (values at: i) totalSum ]
@@ -294,7 +294,7 @@ RTStackBarPlot >> renderIn: aView [
 					max: heightBlock
 					minValue: 0
 					maxValue: maxSum
-			 ] ifFalse: [ 
+			 ] ifFalse: [
 			self normalizer
 				elements: l;
 				normalizeWidth: [ :m | m key * maxSum / (values at: i) totalSum ]
@@ -304,19 +304,19 @@ RTStackBarPlot >> renderIn: aView [
 					maxValue: maxSum
 			 ] ].
 	lines
-		do: [ :aLineOfElements | 
-			(self isVertical 
+		do: [ :aLineOfElements |
+			(self isVertical
 				ifTrue: [ RTVerticalLineLayout  ]
 				ifFalse: [ RTHorizontalLineLayout ]) new
 				gapSize: 0;
 				on: aLineOfElements ].
-	(self isVertical 
+	(self isVertical
 		ifTrue: [ RTHorizontalLineLayout ]
 		ifFalse: [ RTVerticalLineLayout  ]) on: lines.
-	
+
 	self addLabelToBarIfNecessary.
 	values with: lines do: [ :barRow :line | | const fix |
-		barRow title ifNotNil: [ 
+		barRow title ifNotNil: [
 			lbl := (RTLabel new text: barRow title) element.
 			aView add: lbl.
 			fix := line first.
@@ -325,11 +325,11 @@ RTStackBarPlot >> renderIn: aView [
 				lbl rotateByDegrees: -30 ].
 			const := RTConstraint movable: lbl fix: fix.
 			const outer.
-			self isVertical 
+			self isVertical
 				ifTrue: [ const verticalPadding: self offsetBetweenBarAndTitle; bottom ]
 				ifFalse: [ const horizontalPadding: self offsetBetweenBarAndTitle; left ].
 			const move] ].
-	
+
 	self addLegendIfNecessary
 ]
 

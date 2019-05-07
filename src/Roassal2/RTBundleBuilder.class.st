@@ -1,5 +1,5 @@
 "
-You can use this builder to represent a hierarchy of an object(like Collection and all subclasses). 
+You can use this builder to represent a hierarchy of an object(like Collection and all subclasses).
 
 This builder uses cluster layout.
 
@@ -89,8 +89,8 @@ RTBundleBuilder >> createSliderIfNecessary: aView [
 	sliderShape ifNil: [ ^ self ].
 	bedges := aView edges select: [ :e | e shape = bezier ].
 	slider := RTSlider new.
-	slider shape shape: sliderShape. 
-	slider move: #below; view: aView; callback: [:v| 
+	slider shape shape: sliderShape.
+	slider move: #below; view: aView; callback: [:v|
 		bezier tension: v.
 		bedges do: [ :e | e trachelShape points: (bezier getListOfPointsForTrachel: e); resetPath.].
 	].
@@ -100,7 +100,7 @@ RTBundleBuilder >> createSliderIfNecessary: aView [
 
 { #category : #hooks }
 RTBundleBuilder >> createView [
-	^ super createView @ (RTRotableView new 
+	^ super createView @ (RTRotableView new
 		elements: [ elements ];
 		center: [ center ];
 		yourself ).
@@ -117,7 +117,7 @@ RTBundleBuilder >> defaultInteractions [
 			ifFalse: [ e attributes at: #oc put: e trachelShape color ].
 		set value: e value: c value: 2].
 	uhl := [ :e | | c |
-		(e attributes includesKey: #oc) ifTrue: [ 
+		(e attributes includesKey: #oc) ifTrue: [
 			c := e attributes at: #oc.
 			set value: e value: c value: 1 ].
 		].
@@ -130,11 +130,11 @@ RTBundleBuilder >> defaultInteractions [
 			red := ed select: [ :e | e from model = el model ].
 			red := red, (red flatCollect: [:e | el view elementsFromModel: e to model ]).
 			red do: [ :e | hl value: e value: Color green ].
-			
+
 			blue := ed select: [ :e | e to model = el model ].
 			blue := blue, (blue flatCollect: [:e |el view elementsFromModel: e from model]).
 			blue do: [ :e | hl value: e value: Color red ].
-			
+
 			el attributes at: #ed put: red, blue.
 			evt signalUpdate ];
 		when: TRMouseLeave do: [ :evt | | el |
@@ -148,7 +148,7 @@ RTBundleBuilder >> defaultInteractions [
 RTBundleBuilder >> defaultSliderShape [
 	| c |
 	c := Color blue.
-	sliderShape := RTCompositeShape new 
+	sliderShape := RTCompositeShape new
 		add: (RTEllipse new size: 30; color: Color blue; borderWidth: 0.01; borderColor: Color black);
 		add: (RTEllipse new width: 24; height: 19.5;
 			color: c) translateBy: 0@ -3.9;
@@ -200,7 +200,7 @@ RTBundleBuilder >> initialize [
 	bezier
 		follow:  [ :m | self parentOf: m view: view ];
 		tension: 0.5.
-	self edgeBuilderDo: [:ebuilder| 
+	self edgeBuilderDo: [:ebuilder|
 		ebuilder connectToAll: connectBezierBlock. ].
 ]
 
@@ -235,9 +235,9 @@ RTBundleBuilder >> renderIn: aView [
 	self createBezierIfNecessary: aView.
 	view edges pushBack.
 	center := elements encompassingRectangle center.
-	(elements select: [ :e | (childrenBlock rtValue: e model) isEmpty ]) 
+	(elements select: [ :e | (childrenBlock rtValue: e model) isEmpty ])
 		do: [ :e | self createLabelFor: e view: aView ].
-	
+
 	self createSliderIfNecessary: aView.
 
 ]
@@ -255,7 +255,7 @@ RTBundleBuilder >> sliderShape: aShape [
 { #category : #'rendering-utility' }
 RTBundleBuilder >> useBezierlineWith: ablock [
 	connectBezierBlock := ablock
-	
+
 ]
 
 { #category : #'public - configuration' }

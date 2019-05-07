@@ -23,7 +23,7 @@ Add horizontal lines for some values
 	b addDecorator: p.
 
 	b build.
-	^ b view 
+	^ b view
 -=-=-=-=-=
 "
 Class {
@@ -33,12 +33,12 @@ Class {
 }
 
 { #category : #drawing }
-RTHorizontalLineDecorator >> render [	
+RTHorizontalLineDecorator >> render [
 	| from to |
 	values do: [ :aValue |
 		from := builder getPixelPositionOf: builder minX @ aValue.
 		to := builder getPixelPositionOf: builder maxX @ aValue.
 		self lineFrom: from to: to ]
-		
-	
+
+
 ]

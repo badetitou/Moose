@@ -6,14 +6,14 @@ Class {
 
 { #category : #accessing }
 RTViewFolderScript >> description [
-	^ 
-'Let you select a directory and see its content. 
+	^
+'Let you select a directory and see its content.
 A color is given to each file based on its extension.'
 ]
 
 { #category : #hooks }
 RTViewFolderScript >> execute [
-	
+
 	| fr allChildren b lb |
 	fr := UIManager default chooseDirectory.
 	fr ifNil: [ ^ self ].
@@ -25,7 +25,7 @@ RTViewFolderScript >> execute [
 	b shape box
 		withTextAbove: #basename.
 	b nodes: fr children forEach: [ :fileRef |
-		b shape box 
+		b shape box
 			size: [ :f | (f size + 1) log * 3 ].
 		b nodes: fileRef allChildren.
 		b edges connectFrom: #parent.
@@ -38,7 +38,7 @@ RTViewFolderScript >> execute [
 		distinctColorUsing: #extension.
 
 	b build.
-	
+
 	lb := RTLegendBuilder new.
 	lb view: b view.
 	lb addText: 'Visualization of the folder named ', fr basename.
@@ -46,9 +46,9 @@ RTViewFolderScript >> execute [
 	lb addText: 'Colored boxes are files.'.
 	lb addText: 'Each color indicate a file extension'.
 	lb build.
-	
+
 	b view inspect.
-	
+
 ]
 
 { #category : #hooks }

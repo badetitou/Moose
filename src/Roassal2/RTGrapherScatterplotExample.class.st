@@ -6,7 +6,7 @@ Class {
 
 { #category : #sources }
 RTGrapherScatterplotExample >> exampleAgeOfRoassalAndTrachel [
- 
+
 | methodsRoassal methodsTrachel greatestAge b ds |
 methodsRoassal := RTObject withAllSubclasses flatCollect: #rtmethods.
 methodsTrachel := TRObject withAllSubclasses flatCollect: #rtmethods.
@@ -159,13 +159,13 @@ RTGrapherScatterplotExample >> exampleDateOnXAxis [
 	ds points: methods.
 	ds y: #numberOfLinesOfCode.
 	ds x: [ :m | m date julianDayNumber - oldestMethod date julianDayNumber ].
-	b add: ds. 
+	b add: ds.
 
-	b axisY 
+	b axisY
 		noDecimal;
 		title: 'LOC'.
-	
-	b axisX 
+
+	b axisX
 		title: '';
 		labelRotation: -30;
 		labelConversion: [ :v | (Date julianDayNumber: v + oldestMethod date julianDayNumber) ].
@@ -279,8 +279,8 @@ RvoB0Q+IftIPiH5A9JN+QPQDop/0A6IfEP2kHxD9gOgn/YDoJ/2A6AdEP+kHRD8g+kk/IPoB
 RTGrapherScatterplotExample >> exampleSeismDepthAndMag [
 	<noTest>
 	|tab ds b |
-	tab := RTTabTable new 
-		input: (TRPlatform current downloadContent: 
+	tab := RTTabTable new
+		input: (TRPlatform current downloadContent:
 	 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_month.csv')
 		usingDelimiter: $,.
 	tab removeFirstRow.

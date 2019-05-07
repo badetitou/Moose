@@ -55,7 +55,7 @@ RTScaleLinear >> rescale [
 	uninterpolate := clamp
 		ifTrue: [ RTUninterpolateClamp ]
 		ifFalse: [ RTUninterpolateNumber ].
-	output := linear new domain: domain; range: range; 
+	output := linear new domain: domain; range: range;
 		uninterpolate: uninterpolate; interpolate: interpolate.
 	output rescale.
 	input := linear new domain: range; range: domain;

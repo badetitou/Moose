@@ -20,7 +20,7 @@ RTShorterDistanceWithOffsetAttachPointTest >> setUp [
 	box1 := (RTBox new size: 50) elementOn: 1. box1 @ RTDraggable @ RTPopup. view add: box1.
 	box2 := (RTBox new size: 50) elementOn: 2. box2 @ RTDraggable @ RTPopup. view add: box2.
 	box1 translateTo: (10@100). box2 translateTo: (200@100).
-		
+
 	line := RTLine new.
 	line attachPoint: RTShorterDistanceWithOffsetAttachPoint new.
 	view add: (line edgeFrom: box1 to: box2).

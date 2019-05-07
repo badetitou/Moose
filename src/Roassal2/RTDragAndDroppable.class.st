@@ -11,8 +11,8 @@ Class {
 
 { #category : #initialization }
 RTDragAndDroppable >> blinkElement: element [
-	element when: TRMouseDragging do: [ :evt | 
-		RTBlink on: element. 
+	element when: TRMouseDragging do: [ :evt |
+		RTBlink on: element.
 		elementBeingDragged := element ]
 
 ]
@@ -40,7 +40,7 @@ RTDragAndDroppable >> initialize [
 RTDragAndDroppable >> initializeElement: element [
 	self blinkElement: element.
 	self prepareElementForDND: element
-	
+
 ]
 
 { #category : #accessing }
@@ -51,10 +51,10 @@ RTDragAndDroppable >> numberOfHosts [
 
 { #category : #initialization }
 RTDragAndDroppable >> prepareElementForDND: anElement [
-	anElement when: TRMouseDragEnd do: [ :evt | 
+	anElement when: TRMouseDragEnd do: [ :evt |
 		| receivingElement underShape |
 		underShape := anElement view canvas shapeForPositionInPixels: evt position.
-		underShape class == TRCanvas ifFalse: [ 
+		underShape class == TRCanvas ifFalse: [
 			receivingElement := underShape element.
 
 			(hosts includes: receivingElement)

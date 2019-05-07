@@ -16,7 +16,7 @@ RTScrollBarBuilderExamples >> doubleScrollBar [
 	| b b2 b3 |
 
 	b := RTMondrian new.
-		b shape rectangle 
+		b shape rectangle
 				withBorder;
 				width: [ :cls | cls numberOfVariables * 5];
 				height: #numberOfMethods;
@@ -56,7 +56,7 @@ RTScrollBarBuilderExamples >> example1 [
 	"
 	| b b2 |
 	b := RTMondrian new.
-	b shape rectangle 
+	b shape rectangle
 				withBorder;
 				width: [ :cls | cls numberOfVariables * 5];
 				height: #numberOfMethods;
@@ -81,7 +81,7 @@ RTScrollBarBuilderExamples >> example3 [
 	"
 	| b b2 |
 	b := RTMondrian new.
-	b shape rectangle 
+	b shape rectangle
 				withBorder;
 				width: [ :cls | cls numberOfVariables * 5];
 				height: #numberOfMethods;
@@ -104,7 +104,7 @@ RTScrollBarBuilderExamples >> example3 [
 
 { #category : #initialization }
 RTScrollBarBuilderExamples >> initialize [
-	super initialize 
+	super initialize
 ]
 
 { #category : #examples }
@@ -114,7 +114,7 @@ RTScrollBarBuilderExamples >> scrollsWithInteraction [
 	"
 	| b |
 	b := RTMondrian new.
-	b shape rectangle 
+	b shape rectangle
 				withBorder;
 				width: [ :cls | cls numberOfVariables * 5];
 				height: #numberOfMethods;

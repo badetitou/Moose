@@ -69,7 +69,7 @@ RTMultipleDataTest >> testRendering01 [
 
 	self assert: elements first position x asInteger equals: 33.
 	self assert: elements second position x asInteger equals: 66.
-	
+
 	self assert: elements third position x asInteger equals: 100.
 	self assert: elements fourth position x asInteger equals: 133.
 
@@ -89,8 +89,8 @@ RTMultipleDataTest >> testSelectElementsForAddingBarTitle01 [
 	d barChartWithBarTitle: 'hello' rotation: -45 color: Color gray.
 	b add: d.
 	b build.
-	
+
 	self assert: d elements size equals: 15.
 	self assert: d selectElementsForAddingBarTitle first equals: (d elements at: 2).
-	
+
 ]

@@ -104,7 +104,7 @@ RTAxisConfigurationTest >> testMaxValueInScript01 [
 	b add: ds.
 	axeConfig := b axisX.
 	b build.
-	
+
 
 	self assert: axeConfig maxValue equals: 3
 ]
@@ -134,7 +134,7 @@ RTAxisConfigurationTest >> testMinValueIfNotSet02 [
 RTAxisConfigurationTest >> testNoRotation [
 	config rotateLabels.
 	config doNotRotateLabels.
-	self deny: config areLabelRotated 
+	self deny: config areLabelRotated
 ]
 
 { #category : #tests }
@@ -142,7 +142,7 @@ RTAxisConfigurationTest >> testNumberOfTicksAndLabel [
 
 	self assert: config numberOfTicks equals: 4.
 	self assert: config numberOfLabels equals: 4.
-	
+
 	config numberOfLabels: 5.
 	self assert: config numberOfTicks equals: 5.
 	self assert: config numberOfLabels equals: 5.
@@ -167,23 +167,23 @@ RTAxisConfigurationTest >> testNumberOfTicksAndLabels02Default [
 RTAxisConfigurationTest >> testNumberOfTicksAndLabels03 [
 
 	self assert: config numberOfLabels equals: 4.
-	
+
 	config numberOfTicks: 3.
 	"Cannot have more labels than ticks"
 	self assert: config numberOfLabels equals: 3.
-	
+
 ]
 
 { #category : #tests }
 RTAxisConfigurationTest >> testNumberOfTicksAndLabels04 [
-	
+
 	config numberOfTicks: 3.
 	self assert: config numberOfLabels equals: 3.
-	
+
 	config numberOfLabels: 2.
 	self assert: config numberOfTicks equals: 3.
 	self assert: config numberOfLabels equals: 2.
-	
+
 	config numberOfLabels: 5.
 	self assert: config numberOfTicks equals: 5.
 	self assert: config numberOfLabels equals: 5.
@@ -200,7 +200,7 @@ RTAxisConfigurationTest >> testPlain [
 { #category : #tests }
 RTAxisConfigurationTest >> testRotation [
 	config rotateLabels.
-	self assert: config areLabelRotated 
+	self assert: config areLabelRotated
 ]
 
 { #category : #tests }

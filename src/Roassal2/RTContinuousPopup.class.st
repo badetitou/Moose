@@ -26,10 +26,10 @@ RTContinuousPopup >> blockValidArea: aBlock [
 RTContinuousPopup >> createAndShowPopupFor: element event: event [
 	| popupPosition popup idealPosition g |
 	self removeLastPopup.
-	
+
 	popup := self getNewPopupFor: event.
-	
-	
+
+
 	"The following is useful when testing"
 	event position isNil
 		ifTrue: [ idealPosition := element position ]
@@ -37,14 +37,14 @@ RTContinuousPopup >> createAndShowPopupFor: element event: event [
 			- ((popup width/2)@0) ].
 	popupPosition := self closestPositionOf: popup from: idealPosition inView: element view.
 
-	popup translateTopLeftTo: popupPosition.	
-	pointers ifNotNil: [ 
+	popup translateTopLeftTo: popupPosition.
+	pointers ifNotNil: [
 		g := RTGroup new.
 		pointers value: g value: event.
-		g do: [:x | 
+		g do: [:x |
 			element view add: x.
 			popup add: x ]. ].
-	
+
 	self lastPopup: popup.
 
 ]
@@ -54,7 +54,7 @@ RTContinuousPopup >> getNewPopupFor: evt [
 	"the super of this method recibes an element i recibe an event of roassal"
 	| popupGroup |
 	popupGroup := self createPopupFor: evt.
-	popupGroup do: [ :e | 
+	popupGroup do: [ :e |
 		view add: e.
 		e trachelShape setAsFixed. ].
 	evt signalUpdate.
@@ -65,10 +65,10 @@ RTContinuousPopup >> getNewPopupFor: evt [
 RTContinuousPopup >> initializeElement: element [
 	| close |
 	view := element view.
-	close := [ :evt | 
+	close := [ :evt |
 		self removeLastPopup.
 		evt signalUpdate ].
-	element 
+	element
 		when: TRMouseClick do: close;
 		when: TRMouseLeave do: close;
 		when: TRMouseDragging do: close;
@@ -88,7 +88,7 @@ RTContinuousPopup >> pointers [
 RTContinuousPopup >> pointers: aBlockOfTwoArgs [
 	"example
 	self pointers: [:anEmptyRTGroup :aMouseMoveEvent | elementsThatShowsThatPointOrPoints]"
-	pointers := aBlockOfTwoArgs 
+	pointers := aBlockOfTwoArgs
 ]
 
 { #category : #accessing }

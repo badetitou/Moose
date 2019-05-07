@@ -42,10 +42,10 @@ RTPopupTest >> test [
 	el + RTBox.
 	el @ RTPopup.
 
-	view add: el.	
+	view add: el.
 
 	self assert: el view == view.
-	
+
 	self assert: view numberOfElements = 1.
 	el announce: TRMouseEnter.
 	self assert: view numberOfElements = 3.
@@ -62,12 +62,12 @@ RTPopupTest >> testBackgroundColor [
 	e @ (RTPopup new backgroundColor: Color red).
 	v add: e.
 	self assert: v numberOfElements equals: 1.
-	
+
 	e announce: TRMouseEnter new.
 	self assert: v numberOfElements equals: 3.
 	self assert: v canvas shapes size equals: 1.
 	self assert: v canvas fixedShapes size equals: 2.
-	
+
 	background := v canvas fixedShapes first.
 	self assert: background class equals: TRBoxShape.
 ]
@@ -99,7 +99,7 @@ RTPopupTest >> testNamedBackgroundGroup [
 		@
 			(RTPopup new
 				namedBackground: Color black
-				group: [ :group :element | 
+				group: [ :group :element |
 					group
 						add:
 							(RTLabel new
@@ -120,11 +120,11 @@ RTPopupTest >> testPopup [
 
 	v addAll: es.
 
-	es @ (RTPopup new 
+	es @ (RTPopup new
 		named: #yourself
 		background: Color blue
-		group: [ :group :el |  
-	 
+		group: [ :group :el |
+
 			group addAll: (RTEllipse elementsOn: (1 to: el model)).
 			RTWeightedCircleLayout new
 				initialRadius: 50;
@@ -132,7 +132,7 @@ RTPopupTest >> testPopup [
 			]).
 
 	RTHorizontalLineLayout on: es.
-	
+
 	es first announce: TRMouseEnter new
 ]
 
@@ -141,19 +141,19 @@ RTPopupTest >> testPopupView [
 	| b |
 	b := RTMondrian new.
 	b interaction
-		popupView: [ :group :el | 
+		popupView: [ :group :el |
 			group addAll: (RTBox elementsOn: (1 to: 5)).
 			RTGridLayout on: group ].
 	b node: 42.
 	b build.
-	
+
 	"No garbage collector happens"
 	self assert: b view numberOfElements equals: 1.
 	b view elements anyOne announce: TRMouseEnter.
 	self assert: b view numberOfElements equals: 7.
 	b view elements anyOne announce: TRMouseLeave.
 	self assert: b view numberOfElements equals: 1.
-	
+
 	"We use the garbage collector"
 	b view elements anyOne announce: TRMouseEnter.
 	Smalltalk garbageCollect.
@@ -166,19 +166,19 @@ RTPopupTest >> testPopupView02 [
 	| b |
 	b := RTMondrian new.
 	"b interaction
-		popupView: [ :group :el | 
+		popupView: [ :group :el |
 			group addAll: (RTBox elementsOn: (1 to: 5)).
 			RTGridLayout on: group ]."
 	b node: 42.
 	b build.
-	
+
 	"No garbage collector happens"
 	self assert: b view numberOfElements equals: 1.
 	b view elements anyOne announce: TRMouseEnter.
 	self assert: b view numberOfElements equals: 3.
 	b view elements anyOne announce: TRMouseLeave.
 	self assert: b view numberOfElements equals: 1.
-	
+
 	"We use the garbage collector"
 	b view elements anyOne announce: TRMouseEnter.
 	Smalltalk garbageCollect.
@@ -195,7 +195,7 @@ RTPopupTest >> testSimpleText [
 
 	v elements @ (RTPopup new simpleText: [ :nb | 'hello ', nb asString ]).
 	RTGridLayout on: v elements.
-	
+
 	v elements do: [ :el | el announce: TRMouseEnter new ].
 	self assert: v elements size equals: 101.
 
@@ -210,12 +210,12 @@ RTPopupTest >> testTextColor [
 	e @ (RTPopup new textColor: Color red).
 	v add: e.
 	self assert: v numberOfElements equals: 1.
-	
+
 	e announce: TRMouseEnter new.
 	self assert: v numberOfElements equals: 3.
 	self assert: v canvas shapes size equals: 1.
 	self assert: v canvas fixedShapes size equals: 2.
-	
+
 	label := v canvas fixedShapes last.
 	self assert: label class equals: TRLabelShape.
 	self assert: label color equals: Color red.
@@ -235,7 +235,7 @@ RTPopupTest >> testTextHeight [
 	e := RTBox elementOn: 'Hello'.
 	e @ (RTPopup new textHeight: 30).
 	v add: e.
-	
+
 	e announce: TRMouseEnter new.
 
 
@@ -267,7 +267,7 @@ RTPopupTest >> testWithMultiLine [
 
 	p := RTPopup new.
 	p createAndShowPopupFor: e event: TRMouseEnter new.
-	
+
 	self assert: v numberOfElements = 3.
 	self assert: v canvas numberOfShapes = 1.
 	self assert: v canvas numberOfFixedShapes = 5.
@@ -287,7 +287,7 @@ RTPopupTest >> testWithMultiLine02 [
 	v add: e.
 	e @ RTPopup.
 	RTPopup resetLastPopup.
-	
+
 	"Entering"
 	e announcer announce: TRMouseEnter new.
 	self assert: v numberOfElements equals: 3.
@@ -300,8 +300,8 @@ RTPopupTest >> testWithMultiLine02 [
 	self assert: v canvas numberOfShapes equals: 1.
 	self assert: v canvas numberOfFixedShapes equals: 0.
 
-	
-	
+
+
 ]
 
 { #category : #'multi lines' }
@@ -317,7 +317,7 @@ RTPopupTest >> testWithMultiLine03 [
 	v add: e.
 	e @ RTPopup.
 	RTPopup resetLastPopup.
-	
+
 	"Entering"
 	p := RTPopup new.
 	p createAndShowPopupFor: e event: TRMouseEnter new.
@@ -332,8 +332,8 @@ RTPopupTest >> testWithMultiLine03 [
 	self assert: v canvas numberOfShapes equals: 1.
 	self assert: v canvas numberOfFixedShapes equals: 0.
 
-	
-	
+
+
 ]
 
 { #category : #'multi lines' }
@@ -348,7 +348,7 @@ RTPopupTest >> testWithMultiLine04 [
 
 	v add: e.
 	e @ RTPopup.
-	
+
 	"Entering"
 	p := RTPopup new.
 	RTPopup resetLastPopup.
@@ -369,8 +369,8 @@ RTPopupTest >> testWithMultiLine04 [
 	self assert: v canvas numberOfShapes equals: 1.
 	self assert: v canvas numberOfFixedShapes equals: 0.
 
-	
-	
+
+
 ]
 
 { #category : #tests }
@@ -402,7 +402,7 @@ RTPopupTest >> testWithSymbol [
 
 	p := RTPopup new.
 	p createAndShowPopupFor: e event: TRMouseEnter new.
-	
+
 	self assert: v numberOfElements = 3.
 	self assert: v canvas numberOfShapes = 1.
 	self assert: v canvas numberOfFixedShapes = 2.

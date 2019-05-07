@@ -55,7 +55,7 @@ RTShapedObject >> + aRTShape [
 
 { #category : #adding }
 RTShapedObject >> addShape: aRTShape [
-	(shape class == RTNoShape)  
+	(shape class == RTNoShape)
 		ifTrue: [	shape := aRTShape instance ]
 		ifFalse: [ shape := RTCompositeShape with: shape with: aRTShape ].
 	trachelShape := shape trachelShapeFor: self
@@ -73,7 +73,7 @@ RTShapedObject >> color [
 ]
 
 { #category : #'accessing trachel' }
-RTShapedObject >> color: aColor [ 
+RTShapedObject >> color: aColor [
 	^ trachelShape color: aColor
 ]
 
@@ -87,7 +87,7 @@ RTShapedObject >> initialize [
 
 { #category : #testing }
 RTShapedObject >> isFixed [
-	"True if the element is added in the trachel canvas as a fixed shape. 
+	"True if the element is added in the trachel canvas as a fixed shape.
 	If this is the case, then it will remain fixed when drag and dropping the view"
 	^ isFixed
 ]
@@ -118,10 +118,10 @@ RTShapedObject >> pushFront [
 { #category : #rendering }
 RTShapedObject >> renderOn: trachelCanvas [
 	trachelShape isNil ifTrue: [ self error: 'Cannot add an element without a shape. Add a shape to myself, using + or addShape:' . ^ self ].
-		
+
 	"Trachel shape use the same announcer than myself"
 	trachelShape announcer: self announcer.
-	
+
 	"Each trachel shape knows the element. Note that this is not a static dependency between Trachel and Roassal since in Trachel, this element could be any object"
 	trachelShape element: self.
 
@@ -133,14 +133,14 @@ RTShapedObject >> renderOn: trachelCanvas [
 ]
 
 { #category : #transformations }
-RTShapedObject >> scaleBy: aPoint [ 
+RTShapedObject >> scaleBy: aPoint [
 	trachelShape scaleBy: aPoint
 ]
 
 { #category : #actions }
 RTShapedObject >> setAsFixed [
 	"I will remain fixed when drag and dropping the view"
-	isFixed := true 
+	isFixed := true
 ]
 
 { #category : #actions }

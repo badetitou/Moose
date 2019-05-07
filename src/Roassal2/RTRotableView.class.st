@@ -3,7 +3,7 @@ I am an interaction that makes a view rotable using the left button and draggabl
 
 Here is an example
 
-[[[ 
+[[[
 	| b v |
 	v := RTView new.
 	v @ RTRotableView.
@@ -12,7 +12,7 @@ Here is an example
 	b nodes: (1 to: 300).
 	b edges connectFrom: [ :value | value // 2 ].
 	b layout cluster.
-	b.			
+	b.
 ]]]
 "
 Class {
@@ -72,12 +72,12 @@ RTRotableView >> initializeElement: element [
 	view canvas when: TRMouseLeftDragStart do: [ :e |
 		draggingView := false.
 		startPoint := (e positionFromCamera - center value). ].
-	view canvas when: TRMouseDragging do: [ :e | 
+	view canvas when: TRMouseDragging do: [ :e |
 		draggingView
 			ifTrue: [ self dragViewWithEvent: e]
 			ifFalse: [ self updateTargetElements: e ]  ].
 	view canvas when: TRMouseDragEnd do: [ draggingView := false ].
-	
+
 ]
 
 { #category : #action }

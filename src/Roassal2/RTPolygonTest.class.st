@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #tests }
-RTPolygonTest >> testBasic [ 
+RTPolygonTest >> testBasic [
 	RTView new add: RTPolygon element.
 ]
 

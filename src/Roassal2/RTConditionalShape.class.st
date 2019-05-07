@@ -16,9 +16,9 @@ v := RTView new.
 v @ RTDraggableView.
 shape := RTCompositeShape new.
 shape add: RTLabel new.
-shape add: (RTConditionalShape new 
-    condition: [ : m | m hasComment 
-        ifTrue: [ RTEllipse new color: (Color blue alpha: 0.3); size: 30 ] 
+shape add: (RTConditionalShape new
+    condition: [ : m | m hasComment
+        ifTrue: [ RTEllipse new color: (Color blue alpha: 0.3); size: 30 ]
         ifFalse: [ RTBox new color: (Color red alpha: 0.3); size: 20 ] ]).
 shape vertical.
 es := shape elementsOn: RTShape withAllSubclasses.
@@ -62,7 +62,7 @@ RTConditionalShape >> trachelShapeClass [
 { #category : #public }
 RTConditionalShape >> trachelShapeFor: anElement [
 	| rtShape trachelShape |
-	
+
 	rtShape := self condition value: anElement model.
 	trachelShape :=  rtShape trachelShapeClass new.
 	rtShape updateFor: anElement trachelShape: trachelShape.

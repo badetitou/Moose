@@ -21,7 +21,7 @@ Class {
 { #category : #adding }
 RTAnnounceableObject >> @ anInteractionClassOrInstance [
 	"Add an interaction to the node"
-	
+
 	self addInteraction: anInteractionClassOrInstance
 ]
 
@@ -52,7 +52,7 @@ RTAnnounceableObject >> announcer: anAnnouncer [
 
 { #category : #attributes }
 RTAnnounceableObject >> attributeAt: aKey [
-	"Obtain an attribute to the element. For example: 
+	"Obtain an attribute to the element. For example:
 		RTElement new attributeAt: #magic put: 42; attributeAt: #magic
 		RTEdge new attributeAt: #magic put: 42; attributeAt: #magic
 	"
@@ -60,20 +60,20 @@ RTAnnounceableObject >> attributeAt: aKey [
 ]
 
 { #category : #attributes }
-RTAnnounceableObject >> attributeAt: aKey ifAbsent: aBlockClosure [ 
-	
-	^ self attributes at: aKey ifAbsent: aBlockClosure 
+RTAnnounceableObject >> attributeAt: aKey ifAbsent: aBlockClosure [
+
+	^ self attributes at: aKey ifAbsent: aBlockClosure
 ]
 
 { #category : #attributes }
-RTAnnounceableObject >> attributeAt: aKey ifAbsentPut: aBlockClosure [ 
-	
-	^ self attributes at: aKey ifAbsentPut: aBlockClosure 
+RTAnnounceableObject >> attributeAt: aKey ifAbsentPut: aBlockClosure [
+
+	^ self attributes at: aKey ifAbsentPut: aBlockClosure
 ]
 
 { #category : #attributes }
 RTAnnounceableObject >> attributeAt: aKey put: value [
-	"Set an attribute to the element. For example: 
+	"Set an attribute to the element. For example:
 		RTElement new attributeAt: #magic put: 42; yourself
 		RTEdge new attributeAt: #magic put: 42; yourself
 	"
@@ -100,16 +100,16 @@ RTAnnounceableObject >> getInteractionsForClass: anInteractionClass [
 ]
 
 { #category : #attributes }
-RTAnnounceableObject >> hasAttribute: aKey [ 
+RTAnnounceableObject >> hasAttribute: aKey [
 	"Return true if attributes includes aKey"
-	
+
 	^ attributes notNil and: [ attributes includesKey: aKey ]
 ]
 
 { #category : #attributes }
-RTAnnounceableObject >> hasAttributes [ 
+RTAnnounceableObject >> hasAttributes [
 	"Return true if at least one attributes is present"
-	
+
 	^ attributes notNil and: [ attributes notEmpty ]
 ]
 
@@ -117,15 +117,15 @@ RTAnnounceableObject >> hasAttributes [
 RTAnnounceableObject >> hasInteraction: anInteractionClass [
 	"Return true or false if the receiver has an interaction. Note that the argument has to be an interaction class. And not an event"
 	self announcer subscriptions ifNil: [ ^ false ].
-	
+
 	^ self announcer subscriptions handleSubscriberClass: anInteractionClass
 ]
 
 { #category : #attributes }
-RTAnnounceableObject >> hasNotAttribute: aKey [ 
+RTAnnounceableObject >> hasNotAttribute: aKey [
 	"Return false if attributes includes aKey"
-	
-	^ (self hasAttribute: aKey) not 
+
+	^ (self hasAttribute: aKey) not
 ]
 
 { #category : #testing }

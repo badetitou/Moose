@@ -40,7 +40,7 @@ RTAbstractCircleLayout class >> isAbstract [
 { #category : #hook }
 RTAbstractCircleLayout >> computeIncrementalAngleFor: elements [
 	"Return the value _in radian_ of the incremental angle"
-	
+
 	^ initialIncrementalAngle = 0
 		ifTrue: [ 2 * Float pi / elements size ]
 		ifFalse: [ initialIncrementalAngle ]
@@ -49,7 +49,7 @@ RTAbstractCircleLayout >> computeIncrementalAngleFor: elements [
 { #category : #hook }
 RTAbstractCircleLayout >> computeRadiusFor: elements [
 	"Return the radius of the circle. If none has been set (i.e., initialRadius = 0), then it is computed as the scale factor times the number of elements"
-	^ initialRadius = 0 
+	^ initialRadius = 0
 		ifTrue: [ elements size * self scaleFactor ]
 		ifFalse: [ initialRadius ]
 ]
@@ -67,7 +67,7 @@ RTAbstractCircleLayout >> initialAngle: aFloat [
 ]
 
 { #category : #accessing }
-RTAbstractCircleLayout >> initialAngleInDegree [ 
+RTAbstractCircleLayout >> initialAngleInDegree [
 	"Return the initial angle in degree"
 	^ self initialAngle * 180 / Float pi
 ]
@@ -109,16 +109,16 @@ RTAbstractCircleLayout >> initialRadius: aNumber [
 { #category : #'initialize-release' }
 RTAbstractCircleLayout >> initialize [
 	"Initialize a newly created instance. This method must answer the receiver."
-	
+
 	super initialize.
 	self scaleBy: 11.
-	
+
 	"Represent the initial angle to place the elements"
 	initialAngle := 0.
-	
+
 	"Distance of the circle. If it is 0 when entering doExecute, then it is computed"
 	initialRadius := 0.
-	
+
 	"0 means that it is computed, and not set by the user"
 	initialIncrementalAngle := 0.
 ]
@@ -130,7 +130,7 @@ RTAbstractCircleLayout >> radius: aNumber [
 
 { #category : #accessing }
 RTAbstractCircleLayout >> scaleBy: aNumber [
-	
+
 	factor := aNumber
 ]
 

@@ -23,7 +23,7 @@ When embedded within the RTInteractionBuilder (and thus by Mondrian):
 b := RTMondrian new.
 
 b interaction snapToGrid gridSize: 10.
-b shape rectangle size: 25. 
+b shape rectangle size: 25.
 b shape color: Color transparent.
 b shape borderColor: Color black.
 b nodes: (1 to: 9).
@@ -73,7 +73,7 @@ RTDraggableSnapToGrid >> gridSize: anInteger [
 RTDraggableSnapToGrid >> gridSizeFor: anElement [
 	anElement view
 		ifNotNil:
-			[ :v | 
+			[ :v |
 			(v hasAttribute: #RTGridView)
 				ifTrue: [ ^ (v attributeAt: #RTGridView) gridSize ] ].
 	^ gridSize
@@ -103,7 +103,7 @@ RTDraggableSnapToGrid >> initializeElementForCenter: element [
 	element
 		when: TRMouseDragging
 		do:
-			[ :event | 
+			[ :event |
 			| d t |
 			t := RTGroup withAll: groupToDrag.
 			(t includes: element)
@@ -127,7 +127,7 @@ RTDraggableSnapToGrid >> initializeElementForTopLeft: element [
 	element
 		when: TRMouseDragging
 		do:
-			[ :event | 
+			[ :event |
 			| d t |
 			t := RTGroup withAll: groupToDrag.
 			(t includes: element)

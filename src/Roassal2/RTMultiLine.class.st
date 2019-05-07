@@ -1,5 +1,5 @@
 "
-A RTMultiLine represents 
+A RTMultiLine represents
 
 Instance Variables
 	blockProducingPath:		<Block>   a two arg block that produces the path. The block has to return the collection of points
@@ -20,7 +20,7 @@ Class {
 { #category : #accessing }
 RTMultiLine >> block: aTwoArgBlock [
 
-	blockProducingPath := aTwoArgBlock 
+	blockProducingPath := aTwoArgBlock
 ]
 
 { #category : #initialization }
@@ -41,7 +41,7 @@ RTMultiLine >> orthoHorizontalBalanceTo: balance [
 	 1 = level of toPoint"
 
 	self
-		block: [ :fromPoint :toPoint | 
+		block: [ :fromPoint :toPoint |
 			| midx |
 			midx := toPoint x * balance + (fromPoint x * (1 - balance)).
 			Array
@@ -63,7 +63,7 @@ RTMultiLine >> orthoVerticalBalanceTo: balance [
 	 1 = level of toPoint"
 
 	self
-		block: [ :fromPoint :toPoint | 
+		block: [ :fromPoint :toPoint |
 			| midy |
 			midy := toPoint y * balance + (fromPoint y * (1 - balance)).
 			Array
@@ -86,7 +86,7 @@ RTMultiLine >> trachelShapeFor: anEdge [
 	fromPoint := attachPoint startingPointOf: anEdge.
 	toPoint := attachPoint endingPointOf: anEdge.
 	path := blockProducingPath value: fromPoint value: toPoint.
-	
+
 	multiShape := TRCompositeShape new.
 	2 to: path size do: [ :i |
 		shape := TRLineShape new.
@@ -107,7 +107,7 @@ RTMultiLine >> updateFor: anEdge trachelShape: trachelShape [
 	fromPoint := attachPoint startingPointOf: anEdge.
 	toPoint := attachPoint endingPointOf: anEdge.
 	path := blockProducingPath value: fromPoint value: toPoint.
-	
+
 	2 to: path size do: [ :i |
 		shape := trachelShape shapes at: i - 1.
 		shape width: (self widthFor: anEdge).

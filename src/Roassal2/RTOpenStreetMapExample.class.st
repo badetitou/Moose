@@ -1,5 +1,5 @@
 "
-RTOpenStreeMapExample new installTitle: 'VerySimple' 
+RTOpenStreeMapExample new installTitle: 'VerySimple'
 		code:
 		'
 	| v |
@@ -11,14 +11,14 @@ RTOpenStreeMapExample new installTitle: 'VerySimple'
 	v add: e.
 
 	paris := 48.8567 @ 2.3508.
-	
+
 	v @ RTDraggableView.
-	
+
 	v canvas camera translateTo: (map latLonToRoassal: paris).
 	v canvas camera noInitializationWhenOpen.
 self halt.
 	^ v'
-	
+
 "
 Class {
 	#name : #RTOpenStreetMapExample,
@@ -29,7 +29,7 @@ Class {
 { #category : #sources }
 RTOpenStreetMapExample >> example [
 	<gtExample>
-	<noTest>	
+	<noTest>
 	"This example center the view on lat 0, lon 0."
 	"
 	RTOpenStreetMapExample new example
@@ -52,7 +52,7 @@ RTOpenStreetMapExample >> example [
 { #category : #sources }
 RTOpenStreetMapExample >> exampleCitySelection [
 	<gtExample>
-	<noTest>	
+	<noTest>
 	| v map e movingCamera mb |
 	v := RTView new.
 	map := RTOSM new.
@@ -63,12 +63,12 @@ RTOpenStreetMapExample >> exampleCitySelection [
 	v @ RTDraggableView @ RTZoomableView.
 
 	movingCamera := [ :locationLatLong |
-		v canvas camera 
+		v canvas camera
 			translateTo: (map latLonToRoassal: locationLatLong);
-			scale: 1.5. 
-		
+			scale: 1.5.
+
 		v signalUpdate ].
-	 
+
 	mb := RTMenuBuilder new.
 	mb view: v.
 	mb menu: 'Paris' callback: [ movingCamera value: 48.8567 @ 2.3508 ].
@@ -102,7 +102,7 @@ Uc3FNJ/bLqAZfwHUaAlcKtt76AAAAABJRU5ErkJggg=='
 RTOpenStreetMapExample >> exampleDili [
 	<gtExample>
 	<noTest>
-	
+
 	"This example puts a name on Dili and let the background be moved around."
 
 	"RTOpenStreetMapExample new exampleDili"
@@ -134,7 +134,7 @@ RTOpenStreetMapExample >> exampleGraphOnLondon [
 
 	"Place to set the data and center the camera"
 	london := 51.507222@ -0.1275.
-	    
+
 	"Some arbitrary data"
 	data := ((1 to: 500) collect: [ :i | 50 atRandom - 25 ]) cumsum.
 
@@ -147,9 +147,9 @@ RTOpenStreetMapExample >> exampleGraphOnLondon [
 	d points: data.
 
 	b add: d.
-	b axisY 
+	b axisY
 		labelFontHeight: 6;
-		color: Color red; 
+		color: Color red;
 	    title: 'Sale'.
 
 	b axisX color: Color red; noTick; title: 'country'.
@@ -573,16 +573,16 @@ RTOpenStreetMapExample >> exampleGraphs [
 	paris := 48.8567 @ 2.3508.
 	newyork := 40.7127 @ -74.0059.
 	london := 51.507222@ -0.1275.
-	
+
 	data := Array with: (Array with: paris with: #(10 5 10 3 10 6 8)) with:
 					(Array with: london with: #(5 3 3 -5 )) with:
 					(Array with: newyork with: #(5 -2 10 15 -10)).
-	
+
 	data do: [ :tupple |
 			| grapher dataSet |
 			grapher := RTGrapher new.
 			grapher extent: 150 @ 100.
-			
+
 			dataSet := RTData new.
 			dataSet points: tupple second.
 			dataSet barShape width: 10; color: Color red.
@@ -596,7 +596,7 @@ RTOpenStreetMapExample >> exampleGraphs [
 			v addAll: allGraphElements.
 			allGraphElements translateTo: (map latLonToRoassal: tupple first)
 	].
-	
+
 	v canvas camera translateTo: (map latLonToRoassal: paris).
 	v canvas camera noInitializationWhenOpen.
 	v canvas camera scale: 0.3.
@@ -945,7 +945,7 @@ Pj08lIeg/CmMz46P5Z379+XjvT39noLi1/8fw4NScWx7ApQAAAAASUVORK5CYII='
 RTOpenStreetMapExample >> exampleOpenStreetMap [
 	<gtExample>
 	<noTest>
-	
+
 	"This example uses fome OpenStreetMap data and represent part of the map as graphical entities on top of the map background."
 
 	"We need a ratio here, otherwise Roassal centers incorrectly the view and has precision issues. This ratio of 10 means we are at: 100m at equator for 1.0 in Roassal coordinates."
@@ -960,7 +960,7 @@ RTOpenStreetMapExample >> exampleOpenStreetMap [
 	nodes := (((response at: 'elements') select: [ :el | (el at: 'type') = 'node' ])
 		collect: [ :el | (el at: 'id') -> (map latLonToRoassal: (el at: 'lat') @ (el at: 'lon')) ]) asDictionary.
 	((response at: 'elements') select: [ :el | (el at: 'type') = 'way' ])
-		do: [ :way | 
+		do: [ :way |
 			| shape |
 			shape := RTPolygon new.
 			shape
@@ -990,7 +990,7 @@ RTOpenStreetMapExample >> exampleParis [
 	v add: e.
 
 	paris := 48.8567 @ 2.3508.
-	
+
 	v canvas camera translateTo: (map latLonToRoassal: paris).
 	v canvas camera noInitializationWhenOpen.
 	v canvas camera scale: 20.
@@ -1525,8 +1525,8 @@ MxKB86hwek4j1wUQ52enlG8QJ4jsYfChXF1t7v9fq+gRZvLBtEwAAAAASUVORK5CYII='
 
 { #category : #sources }
 RTOpenStreetMapExample >> exampleSeismOnEarth [
-	<gtExample> 
-	<noTest>	
+	<gtExample>
+	<noTest>
 	"This example reuse the seism data of Roassal 2. But we need to zoom out a lot to see any earthquake spot."
 
 	"RTOpenStreetMapExample new exampleSeismOnEarth"
@@ -1541,7 +1541,7 @@ RTOpenStreetMapExample >> exampleSeismOnEarth [
 	e := map element.
 	v add: e.
 	tab values
-		do: [ :row | 
+		do: [ :row |
 			v
 				add:
 					(((RTEllipse new
@@ -1560,7 +1560,7 @@ RTOpenStreetMapExample >> exampleSeismOnEarth [
 { #category : #sources }
 RTOpenStreetMapExample >> exampleSeismOnEarthLive [
 	<gtExample>
-	<noTest>	
+	<noTest>
 	"This example directly queries the usgs earthquake data. But we need to zoom out a lot to see any earthquake spot."
 
 	"RTOpenStreetMapExample new exampleSeismOnEarthLive"
@@ -1577,7 +1577,7 @@ RTOpenStreetMapExample >> exampleSeismOnEarthLive [
 	e := map element.
 	v add: e.
 	tab values
-		do: [ :row | 
+		do: [ :row |
 			v
 				add:
 					(((RTEllipse new
@@ -1635,7 +1635,7 @@ RTOpenStreetMapExample >> exampleSeisms [
 	e := map element.
 	v add: e.
 	tab values
-		do: [ :row | 
+		do: [ :row |
 			v
 				add:
 					(((RTEllipse new
@@ -1647,7 +1647,7 @@ RTOpenStreetMapExample >> exampleSeisms [
 	v canvas camera scale: 0.02; noInitializationWhenOpen.
 	v @ RTDraggableView @ RTZoomableView.
 	RTEmptyViewContext setOnView: v.
-	
+
 	^ v
 ]
 
@@ -1776,7 +1776,7 @@ uu3hFcTAb7l3NigWDojrcVoZ/Xv/HzmYxsv71YswAAAAAElFTkSuQmCC'
 RTOpenStreetMapExample >> exampleVerySimple [
 	<gtExample>
 	<noTest>
-	
+
 	| v map e paris |
 	v := RTView new.
 	map := RTOSM new.
@@ -1785,7 +1785,7 @@ RTOpenStreetMapExample >> exampleVerySimple [
 	v add: e.
 
 	paris := 48.8567 @ 2.3508.
-	
+
 	v canvas camera translateTo: (map latLonToRoassal: paris).
 	v canvas camera noInitializationWhenOpen.
 	v canvas camera scale: 20.

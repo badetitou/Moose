@@ -1,7 +1,7 @@
 "
-RTSVGExample new installTitle: 'Animated' 
+RTSVGExample new installTitle: 'Animated'
 		code:
-		' 
+		'
 	| view randInt rand |
 	rand := Random new.
 	randInt := [ :n | (rand next * n) asInteger ].
@@ -31,7 +31,7 @@ Class {
 RTSVGExample >> animated [
 	<gtExample>
 	<iconSelectorBase64: #animatedIcon>
- 
+
 	| view randInt rand |
 	rand := Random new.
 	randInt := [ :n | (rand next * n) asInteger ].
@@ -49,7 +49,7 @@ RTSVGExample >> animated [
 		view addAnimation: (RTRotationMove angle: 100 during: (randInt value: 90) + 10 on: elem).
 	].
 	^ view
-	
+
 ]
 
 { #category : #icons }
@@ -109,7 +109,7 @@ oA/kfmoUAPAWJvYeVmHCyBCbBNMHMoXq5ia3CCNdo5r0H22jD8RPahvyzx9Vpg9khok+EPpA
 RTSVGExample >> diamond [
 	<gtExample>
 	<iconSelectorBase64: #diamondIcon>
-	
+
 	| v s elements |
 	v := RTView new.
 	v @ RTDraggableView.
@@ -128,7 +128,7 @@ RTSVGExample >> diamond [
 
 	RTGridLayout on: elements.
 
-	^ v	
+	^ v
 ]
 
 { #category : #icons }
@@ -193,12 +193,12 @@ gOgPSOwDAhm94DvC3NuqVatAgiu8BOQ/+vultFsIHOIAAAAASUVORK5CYII='
 RTSVGExample >> fibonacciSpiral [
  	<gtExample>
 	<iconSelectorBase64: #fibonacciSpiralIcon>
-	
+
 	| view elem |
 	view := RTView new.
 	elem := (RTSVGPath new
-		path: (RTSVGPath 
-			goldenSpiral: 10 
+		path: (RTSVGPath
+			goldenSpiral: 10
 			start: 0@0
 			side: 100
 			direction: 1@ 1
@@ -210,8 +210,8 @@ RTSVGExample >> fibonacciSpiral [
 	view add: elem.
 
 	elem := (RTSVGPath new
-		path: (RTSVGPath 
-			goldenSpiral: 10 
+		path: (RTSVGPath
+			goldenSpiral: 10
 			start: 0@0
 			side: 100
 			direction: -1@ 1
@@ -223,8 +223,8 @@ RTSVGExample >> fibonacciSpiral [
 	view add: elem.
 
 	elem := (RTSVGPath new
-		path: (RTSVGPath 
-			goldenSpiral: 10 
+		path: (RTSVGPath
+			goldenSpiral: 10
 			start: 0@0
 			side: 100
 			direction: -1@ -1
@@ -236,8 +236,8 @@ RTSVGExample >> fibonacciSpiral [
 	view add: elem.
 
 	elem := (RTSVGPath new
-		path: (RTSVGPath 
-			goldenSpiral: 10 
+		path: (RTSVGPath
+			goldenSpiral: 10
 			start: 0@0
 			side: 100
 			direction: 1@ -1
@@ -248,13 +248,13 @@ RTSVGExample >> fibonacciSpiral [
 	elem @ RTDraggable.
 	view add: elem.
 
-	view elements do: [ :e| 
+	view elements do: [ :e|
 		view addAnimation: (RTRotationMove angle: 300 during: 20 on: e)
 		 ].
 
 	^ view
-	
-	
+
+
 ]
 
 { #category : #icons }
@@ -330,7 +330,7 @@ HxBAs4ueZTTJAAAAAElFTkSuQmCC'
 RTSVGExample >> icon1 [
 	<gtExample>
 	<iconSelectorBase64: #icon1Icon>
-	
+
 	"
 	self new icon
 	"
@@ -371,7 +371,7 @@ fBA+CL+H+wX6dsn/L7VWKgAAAABJRU5ErkJggg=='
 RTSVGExample >> icon2 [
 	<gtExample>
 	<iconSelectorBase64: #icon2Icon>
-	
+
 	"
 	self new icon2
 	"
@@ -470,7 +470,7 @@ TkSuQmCC'
 RTSVGExample >> icon4 [
 	<gtExample>
 	<iconSelectorBase64: #icon4Icon>
-	
+
 	"
 	self new icon4
 	"
@@ -574,7 +574,7 @@ RU5ErkJggg=='
 { #category : #basic }
 RTSVGExample >> icons [
 	<gtExample>
-	
+
 	"
 	self new icons
 	"
@@ -602,7 +602,7 @@ RTSVGExample >> label [
 RTSVGExample >> rabbit [
 	<gtExample>
 	<iconSelectorBase64: #rabbitIcon>
-	
+
 	| v s elements |
 	v := RTView new.
 v @ RTDraggableView.
@@ -644,7 +644,7 @@ v addAll: elements.
 
 RTGridLayout on: elements.
 
-^ v	
+^ v
 ]
 
 { #category : #icons }
@@ -724,7 +724,7 @@ g8UTxgAAAABJRU5ErkJggg=='
 { #category : #basic }
 RTSVGExample >> rotatingIcons [
 	<gtExample>
-	
+
 	"
 	self new rotatingIcons
 	"
@@ -751,7 +751,7 @@ RTSVGExample >> rotatingIcons [
 RTSVGExample >> simpleBezier [
 	<gtExample>
 	<iconSelectorBase64: #simpleBezierIcon>
-	
+
 	"
 	self new simpleBezier
 	"
@@ -787,7 +787,7 @@ YII='
 { #category : #basic }
 RTSVGExample >> simpleExample [
 	<gtExample>
-	
+
 	"
 	self new simpleExample
 	"
@@ -805,7 +805,7 @@ RTSVGExample >> simpleExample [
 RTSVGExample >> southAmerica [
 	<gtExample>
 	<iconSelectorBase64: #southAmericaIcon>
-	
+
 	"
 	self new southAmerica
 	"
@@ -828,7 +828,7 @@ RTSVGExample >> southAmerica [
 RTSVGExample >> southAmerica2 [
 	<gtExample>
 	<iconSelectorBase64: #southAmericaIcon>
-	
+
 	"
 	self new southAmerica2
 	"
@@ -836,7 +836,7 @@ RTSVGExample >> southAmerica2 [
 	cn := RTNColorLinearNormalizer inContext: (RTSVGPath southAmerica collect: #size)
 		lowColor: (Color r:0.3 g:0.8 b:0.3)
 		highColor: (Color r:0.8 g:0.3 b:0.3).
-		
+
 	view := RTView new.
 	RTSVGPath southAmerica do: [ :country |
 		|elem|
@@ -907,7 +907,7 @@ wR/8IPhB8Ac/CH4Q/MEPgh8Ef/CD4AfBH/wg+CMv/wPUXzVRy2qRJgAAAABJRU5ErkJggg=='
 RTSVGExample >> theWorld [
 "	<gtExample>
 	<iconSelectorBase64: #theWorldIcon>"
-	
+
 	"
 	self new theWorld
 	"
@@ -1065,7 +1065,7 @@ wv0g3F+4H4T7Qbi/cD8I94Nwf+F+EO4v3A+yysr/AeXGPG2h70mRAAAAAElFTkSuQmCC'
 RTSVGExample >> veryBasic [
  	<gtExample>
 	<iconSelectorBase64: #veryBasicIcon>
-	
+
 	| view element |
 	view := RTView new.
 	element := (RTSVGPath new
@@ -1074,7 +1074,7 @@ RTSVGExample >> veryBasic [
 	element @ RTDraggable.
 	view add: element.
 	^ view
-	
+
 ]
 
 { #category : #icons }

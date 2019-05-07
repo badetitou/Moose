@@ -1,5 +1,5 @@
 "
-RTSpectrographExample new installTitle: 'RoassalVisualization' 
+RTSpectrographExample new installTitle: 'RoassalVisualization'
 		code:
 		'| b now |
 	now := DateAndTime now.
@@ -8,14 +8,14 @@ RTSpectrographExample new installTitle: 'RoassalVisualization'
 
 	b highlight: [ :cls :livingDay | cls inheritsFrom: TRObject ] color: Color lightGreen.
 	b highlight: [ :cls :livingDay | cls gotMethodOnDay: livingDay ].
-	
+
 	b popupText: [ :cls :age | cls name, ''  '', age printString , '' days old'' ].
 	b lineBlock: [ :cls | 0 to: cls livingInDays ].
-	
+
 	b open.
 	self halt.
 	b view canvas'
-	
+
 "
 Class {
 	#name : #RTSpectrographExample,
@@ -59,7 +59,7 @@ Qfj5A7cfNxrUTXl/AAAAAElFTkSuQmCC'
 
 { #category : #sources }
 RTSpectrographExample >> exampleRoassalVisualization [
-	<gtExample> 
+	<gtExample>
 	<noTest>
 	| b |
 	(TRPlatform current dialogConfirm: 'This example takes a long time to load, execute?')
@@ -69,10 +69,10 @@ RTSpectrographExample >> exampleRoassalVisualization [
 
 	b highlight: [ :cls :livingDay | cls inheritsFrom: TRObject ] color: Color lightGreen.
 	b highlight: [ :cls :livingDay | cls gotMethodOnDay: livingDay ].
-	
+
 	b popupText: [ :cls :age | cls name, '  ', age printString , ' days old' ].
 	b lineBlock: [ :cls | 0 to: cls livingInDays ].
-	
+
 	b build.
 	^ b view
 ]

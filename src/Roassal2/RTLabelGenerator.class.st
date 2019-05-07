@@ -27,14 +27,14 @@ RTLabelGenerator >> coverageMin: dmin max: dmax lmin: lmin lmax: lmax [
 	b := dmin - lmin.
 	c := 0.1 * (dmax - dmin).
 	^ 1 - ( 0.5 * (((a * a) + (b * b))/ (c * c)) )
-	
+
 ]
 
 { #category : #private }
 RTLabelGenerator >> coverageMin: dmin max: dmax span: span [
 	| range r half|
 	range := dmax - dmin.
-	(span > range) ifTrue: [ 
+	(span > range) ifTrue: [
 		half := (span - range)/2.
 		r := 0.1*range.
 		^ 1 - (half * half / (r * r) )].
@@ -50,7 +50,7 @@ RTLabelGenerator >> density: k m: m dmin: dmin dmax: dmax lmin: lmin lmax: lmax 
 	 * lmin	label range minimum
 	 * lmax	label range maximum
 	 * ^	density
-	  
+
 	 k-1 number of intervals between labels
 	 m-1 number of intervals between desired number of labels
 	 r   label interval length/label range
@@ -69,8 +69,8 @@ RTLabelGenerator >> densityMax: k m: m [
 
 { #category : #private }
 RTLabelGenerator >> epsilon [
-	" Compute the machine epsilon for the float type, the largest positive 
- 	floating-point value that, when added to 1, results in a value equal to 1 due to 
+	" Compute the machine epsilon for the float type, the largest positive
+ 	floating-point value that, when added to 1, results in a value equal to 1 due to
  	roundoff."
 	| temp |
 	epsilon ifNotNil: [ ^ epsilon ].
@@ -78,7 +78,7 @@ RTLabelGenerator >> epsilon [
 	[ (1 + temp) > 1 ] whileTrue: [ temp := temp / 2 ].
 	epsilon := temp.
 	^ epsilon.
-	
+
 ]
 
 { #category : #private }
@@ -110,18 +110,18 @@ RTLabelGenerator >> searchMin: dmin max: dmax desired: desiredNumberOfTicks [
 	best := RTGrapherLabel new.
 	bestScore := -2.
 	desiredNumberOfTicks <= 0 ifTrue: [ self error: 'The minimun value of desiredNumberOfTicks is 1' ].
-	
+
 	"In case of a particular situation"
-	(dmin = 0 and: [ dmax = 0 ]) ifTrue: [ 
+	(dmin = 0 and: [ dmax = 0 ]) ifTrue: [
 		best
 			min: 0;
 			max: 1;
 			step: 1;
 			score: bestScore.
 		^ best ].
-	
+
 	[ :break |
-		[ true ] whileTrue: [ 
+		[ true ] whileTrue: [
 			n := nice next.
 			sm := self simplicityMax.
 			((self w: sm c: 1 d: 1 l: 1) < bestScore)
@@ -130,26 +130,26 @@ RTLabelGenerator >> searchMin: dmin max: dmax desired: desiredNumberOfTicks [
 			[ :break2 |
 				[ true ] whileTrue: [ | z |
 					dm := [ self densityMax: k m: desiredNumberOfTicks ] on: ZeroDivide do: [ :ex | self error: 'Please increase the value of desiredNumberOfTicks/labels' ].
-					((self w: sm c: 1 d: dm l: 1) < bestScore) 
+					((self w: sm c: 1 d: dm l: 1) < bestScore)
 						ifTrue: [ break2 value ].
 					delta := (dmax - dmin)/(k+1)/ n j/ (nice qat: n i).
 					z := (nice logB: delta) ceiling.
 					[ :break3|
-						[ true ] whileTrue: [ 
+						[ true ] whileTrue: [
 							[ :continue | | minStart maxStart step |
 								step := n j * (nice qat: n i) * (nice base raisedTo: z).
 								cm := self coverageMin: dmin max: dmax span: step * (k-1).
-								((self w: sm c: cm d: dm l: 1) < bestScore) 
+								((self w: sm c: cm d: dm l: 1) < bestScore)
 									ifTrue: [ break3 value ].
 								minStart := ((dmax / step) floor - (k-1)) * n j.
 								maxStart := (dmin / step) ceiling * n j.
-								(minStart > maxStart) ifTrue: [ 
+								(minStart > maxStart) ifTrue: [
 									z := z +1.
 									continue value. ].
-						
+
 								(minStart to: maxStart) do: [ :start |
 									| lmin lmax lstep c s d l score |
-									lmin := start * step / n j. 
+									lmin := start * step / n j.
 									lmax := lmin + (step * (k -1)).
 									lstep := step.
 									c := self coverageMin: dmin max: dmax lmin: lmin lmax: lmax.
@@ -157,9 +157,9 @@ RTLabelGenerator >> searchMin: dmin max: dmax desired: desiredNumberOfTicks [
 									d := self density: k m: desiredNumberOfTicks dmin: dmin dmax: dmax lmin: lmin lmax: lmax.
 									l := self legibility: lmin max: lmax step: lstep.
 									score := self w: s c: c d: d l: l.
-							
-									((score > bestScore) and: 
-									[ loose not or: [ (lmin <= dmin) and: 
+
+									((score > bestScore) and:
+									[ loose not or: [ (lmin <= dmin) and:
 														  [ lmax >= dmax ] ] ]) ifTrue: [
 										best
 											min: lmin;
@@ -172,15 +172,15 @@ RTLabelGenerator >> searchMin: dmin max: dmax desired: desiredNumberOfTicks [
 								z := z +1.
 							] valueWithExit.
 						].
-					] valueWithExit. 
+					] valueWithExit.
 					k := k +1.
 				].
 			] valueWithExit.
 		 ]
 	] valueWithExit.
-	
+
 	nice reset.
-	
+
 	^ best.
 ]
 
@@ -188,7 +188,7 @@ RTLabelGenerator >> searchMin: dmin max: dmax desired: desiredNumberOfTicks [
 RTLabelGenerator >> setLooseFlag: aBool [
 	"Configuration to 'loose' labelings.
 	The extreme labels can be placement both inside(setLooseFlag: false) and outside (setLooseFlag: true) of the range of the data.
-	
+
 	Example
 	.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=
 	lg setLooseFlag: true.
@@ -205,10 +205,10 @@ RTLabelGenerator >> setLooseFlag: aBool [
 
 { #category : #private }
 RTLabelGenerator >> simplicity: min max: max step: step [
-	(nice qvar size > 1) ifTrue: [ 
+	(nice qvar size > 1) ifTrue: [
 		^ 1 - (n i/ (nice qvar size - 1)) - n j + (self vMin: min max: max step: step) ].
 	^ 1 - n j + (self vMin: min max: max step: step)
-		
+
 ]
 
 { #category : #private }
@@ -219,7 +219,7 @@ RTLabelGenerator >> simplicityMax [
 
 { #category : #private }
 RTLabelGenerator >> vMin: min max: max step: step [
-	^ ((self flooredMod: min n: step) < (self epsilon) 
+	^ ((self flooredMod: min n: step) < (self epsilon)
 	and: [ min <= 0 and: [ max >= 0 ] ]) ifTrue: [ 1 ] ifFalse: [ 0 ]
 ]
 

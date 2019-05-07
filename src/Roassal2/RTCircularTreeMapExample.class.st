@@ -1,25 +1,25 @@
 "
-RTCircularTreeMapExample new installTitle: 'FileSystem' 
+RTCircularTreeMapExample new installTitle: 'FileSystem'
 		code:
 		'
 
 | b color |
 b := RTCircularTreeMapBuilder new.
-color := RTScale linear 
+color := RTScale linear
 	domain: { 0. 12000.};
 	range: { Color gray. Color red }.
 b shape
 	color: Color transparent;
 	borderColor: Color black;
 	if: [ :f | f isFile ] color: [ :f | color scale: f size sqrt ].
-b 
-	leafWeight: [:f | f size sqrt ]; 
+b
+	leafWeight: [:f | f size sqrt ];
 	explore: FileSystem disk workingDirectory
 	nesting: #directories
 	leaves: #files.
 b build.
 ^ b view'
-	
+
 "
 Class {
 	#name : #RTCircularTreeMapExample,
@@ -40,7 +40,7 @@ RTCircularTreeMapExample >> example01 [
 	mt := TRPlatform current morphClass.
 	b explore: mt
 		using: #subclasses.
-	
+
 	b build.
 	^ b view
 ]
@@ -129,7 +129,7 @@ RTCircularTreeMapExample >> example02 [
 		weight: [:n | n].
 	b explore: 1
 		using: [:n | n< 3 ifTrue: [Array with: n+1 with: n+2] ifFalse: [ #() ] ].
-	
+
 	b build.
 	^ b view
 ]
@@ -175,14 +175,14 @@ aQEYAAAAAElFTkSuQmCC'
 { #category : #sources }
 RTCircularTreeMapExample >> example03 [
 
-	
+
 	| b  |
 	b := RTCircularTreeMapBuilder new.
-	
+
 	b shape
 		color: Color transparent;
 		borderColor: Color black;
-		if: [ :cls | cls subclasses isEmpty ] fillColor: [ :cls| 
+		if: [ :cls | cls subclasses isEmpty ] fillColor: [ :cls|
 			(Smalltalk includesKey: (cls name, 'Test') asSymbol) ifTrue: [ Color green ]
 			ifFalse: [ Color purple ] ].
 	b
@@ -190,7 +190,7 @@ RTCircularTreeMapExample >> example03 [
 		weight: [ :cls | cls withAllSubclasses size].
 	b explore: RTObject
 		using: #subclasses.
-	
+
 	b build.
 	^ b view
 ]
@@ -386,7 +386,7 @@ b
 	baseradius: 200;
 	weight: [ :cls | cls withAllSubclasses size].
 
-b explore: Collection 
+b explore: Collection
 	using: #subclasses.
 
 b build.
@@ -487,7 +487,7 @@ b
 	baseradius: 200;
 	weight: [ :cls | cls withAllSubclasses size].
 
-b explore: Collection 
+b explore: Collection
 	using: #subclasses.
 
 b build.

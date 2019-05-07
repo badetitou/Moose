@@ -22,7 +22,7 @@ RTZoomableView class >> min: aMin max: aMax [
 RTZoomableView >> initializeElement: aView [
 	aView canvas
 		when: TRMouseWheelEvent
-		do: [ :e | 
+		do: [ :e |
 			self processEvent: e ]
 ]
 
@@ -57,15 +57,15 @@ RTZoomableView >> processEvent: evt [
 	| scale dist |
 	dist := evt position - evt canvas camera position.
 	scale := evt canvas camera scale.
-			
-	evt isUp ifTrue: [  
-		scale * 1.25 <= self maxZoom ifTrue: [ 
+
+	evt isUp ifTrue: [
+		scale * 1.25 <= self maxZoom ifTrue: [
 			scale := scale * 1.25.
 			dist := dist * 0.2 ]
 		ifFalse: [ ^ self ].
 		].
 	evt isDown ifTrue:  [
-		scale * 0.8 >= self minZoom ifTrue: [ 
+		scale * 0.8 >= self minZoom ifTrue: [
 			scale := scale * 0.8.
 			dist := dist * -0.25 ]
 		ifFalse: [ ^ self ]

@@ -25,7 +25,7 @@ RTEdgeTest >> testAddingEdgeAndGroup [
 	| v g |
 	v := RTView new.
 	g := RTGroup new.
-	
+
 	g
 		add: el1;
 		add: el2;
@@ -59,7 +59,7 @@ RTEdgeTest >> testBasic [
 { #category : #tests }
 RTEdgeTest >> testBezierColorAndWidth [
 	| v shape l els |
-	
+
 	v := RTView new.
 	shape := RTEllipse new size: 10; color: (Color red alpha: 0.3).
 	els := (shape elementsOn: (1 to: 4)).
@@ -74,7 +74,7 @@ RTEdgeTest >> testBezierColorAndWidth [
 	v add: l.
 	l shape width: 5.
 	l shape color: Color green.
-	
+
 	self assert: l trachelShape width = 1.
 	l updateShape.
 	self assert: l trachelShape width = 5.
@@ -92,16 +92,16 @@ RTEdgeTest >> testBuildingFromAssociations [
 	RTEdgeBuilder new
 		view: view;
 		useAssociations: (Array with: 1 -> 2).
-	
+
 	self assert: view numberOfElements = 2.
 	self assert: view numberOfEdges = 1.
 	edge := view edges last.
 	self assert: edge from == view elements first.
 	self assert: edge to == view elements second.
-	
+
 	self assert: edge trachelShape class == TRLineShape.
-	
-	
+
+
 ]
 
 { #category : #'tests - building' }
@@ -169,7 +169,7 @@ RTEdgeTest >> testMoveBehindItsExtremities [
 	view := RTView new.
 	view add: el1; add: el2; add: edge.
 	edge moveBehindItsExtremities.
-	self assert: view canvas shapes = 
+	self assert: view canvas shapes =
 		(Array with: edge trachelShape with: el1 trachelShape with: el2 trachelShape)
 ]
 
@@ -188,14 +188,14 @@ RTEdgeTest >> testMoveBehindItsExtremities2 [
 	v add: edge.
 	self assert: (edge trachelShape shapes allSatisfy: [ :t | t canvas notNil ]).
 
-	e1 translateTo: 50 @ 50. 
+	e1 translateTo: 50 @ 50.
 	edge moveBehindItsExtremities.
 
 	self assert: (edge trachelShape shapes allSatisfy: [ :t | t canvas notNil ]).
 	self assert: edge trachelShape canvas notNil.
 	self assert: edge trachelShape canvas == v canvas.
-	
-	
+
+
 ]
 
 { #category : #tests }
@@ -218,12 +218,12 @@ RTEdgeTest >> testReconnectingEdge [
 	e3 := RTBox element.
 	e4 := RTBox element.
 	l := RTLine edgeFrom: e1 to: e2.
-	
+
 	self assert: e2 incomingEdges size = 1.
 	self assert: e1 outgoingEdges size = 1.
 	self assert: e3 connectedEdges size = 0.
 	self assert: e4 connectedEdges size = 0.
-	
+
 	l to: e3.
 	self assert: e2 incomingEdges size = 0.
 	self assert: e3 incomingEdges size = 1.
@@ -244,7 +244,7 @@ RTEdgeTest >> testRemoveEdgeWithSameExtremities [
 	l := RTLine edgeFrom: e to: e.
 	v add: e.
 	v add: l.
-	
+
 	e remove.
 
 
@@ -274,17 +274,17 @@ RTEdgeTest >> testRemovingEdge [
 	e2 := RTBox element.
 	l := RTLine edgeFrom: e1 to: e2.
 	v add: e1; add: e2; add: l.
-	
+
 	self assert: v numberOfEdges = 1.
 	self assert: e2 incomingEdges size = 1.
 	self assert: e1 outgoingEdges size = 1.
-	
+
 	l remove.
-	
+
 	self assert: v numberOfEdges = 0.
 	self assert: e2 incomingEdges size = 0.
 	self assert: e1 outgoingEdges size = 0.
-	
+
 ]
 
 { #category : #tests }
@@ -295,7 +295,7 @@ RTEdgeTest >> testShouldBeUsedInLayout [
 
 { #category : #tests }
 RTEdgeTest >> testShouldBeUsedInLayout02 [
- 
+
 	self deny: (RTEdge new notUseInLayout; isUsedInLayout)
 ]
 
@@ -318,7 +318,7 @@ RTEdgeTest >> testTranslatingNode [
 	old := edge trachelShape from.
 	self assert: edge trachelShape from = el1 position.
 	self assert: edge trachelShape to = el2 position.
-	
+
 	el1 translateBy: 10 @ 5.
 	self assert: edge trachelShape from = (old + (10 @ 5)).
 	self assert: edge trachelShape from = el1 position.

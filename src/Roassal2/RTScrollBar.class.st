@@ -9,7 +9,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 RTScrollBar >> addScrollToview: aView [
-	
+
 	"add a scroll bar to the view"
 	| b|
 	b := RTScrollBarBuilder new.

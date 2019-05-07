@@ -20,7 +20,7 @@ Class {
 { #category : #initialization }
 RTTextTokenizer >> defaultWordSeparators [
 	^ String
-		streamContents: [ :stream | 
+		streamContents: [ :stream |
 			stream
 				nextPutAll: Character separators;
 				nextPutAll: '()[]{}.;' ]
@@ -40,7 +40,7 @@ RTTextTokenizer >> normalizeString: aString [
 			eachChar = Character tab
 				ifTrue: [ aStream nextPutAll: '       ' ]
 				ifFalse: [ aStream nextPut: eachChar ]
-			 ]		
+			 ]
 	]
 ]
 
@@ -49,14 +49,14 @@ RTTextTokenizer >> tokenize: aString [
 	| lines |
 	lines := RTTextLines new.
 	aString
-		lineIndicesDo: [ :startLine :endLine :endLineWithEOL | 
+		lineIndicesDo: [ :startLine :endLine :endLineWithEOL |
 			| line lineString wordStrings startWord endWord |
 			lineString := aString copyFrom: startLine to: endLine.
 			line := RTTextLine new.
 			wordStrings := self tokenizeLine: lineString.
 			startWord := 0.
 			wordStrings
-				do: [ :wordString | 
+				do: [ :wordString |
 					| normalizedString interval |
 					endWord := startWord + wordString size.
 					normalizedString := self normalizeString: wordString.

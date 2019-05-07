@@ -1,5 +1,5 @@
 "
-Define alignment of elements. 
+Define alignment of elements.
 
 For example, inspect the following:
 -=-=-=
@@ -34,12 +34,12 @@ RTAlignment >> alignFromBottomUsing: anElement [
 { #category : #public }
 RTAlignment >> alignFromCenterUsing: anElement [
 	| topX newX topY newY |
-	
+
 	topX := anElement encompassingRectangle center x.
-	topY := anElement encompassingRectangle center y.	
+	topY := anElement encompassingRectangle center y.
 	elements do: [ :s |
 		newX := topX + (s encompassingRectangle width / 2).
-		newY := topY + (s encompassingRectangle height / 2).		
+		newY := topY + (s encompassingRectangle height / 2).
 		s translateTo: newX @ newY
 	]
 ]
@@ -77,15 +77,15 @@ RTAlignment >> alignFromTopUsing: anElement [
 { #category : #public }
 RTAlignment >> bottom [
 	self hasElement ifFalse: [ ^ self ].
-	self alignFromBottomUsing: self bottomMostElement 
+	self alignFromBottomUsing: self bottomMostElement
 ]
 
 { #category : #'accessing - computed' }
 RTAlignment >> bottomMostElement [
 	fixedElement ifNotNil: [ ^ fixedElement ].
-	^ elements inject: elements first into: [ :maxS :s | 
+	^ elements inject: elements first into: [ :maxS :s |
 			maxS encompassingRectangle top <= s encompassingRectangle top
-					ifTrue: [ s ] ifFalse: [ maxS ] ] 
+					ifTrue: [ s ] ifFalse: [ maxS ] ]
 ]
 
 { #category : #public }
@@ -98,7 +98,7 @@ RTAlignment >> center [
 RTAlignment >> centerMostElement [
 
 	fixedElement ifNotNil: [ ^ fixedElement ].
-	^ elements inject: elements first into: [ :maxS :s | 
+	^ elements inject: elements first into: [ :maxS :s |
 			maxS encompassingRectangle center <= s encompassingRectangle center
 					ifTrue: [ s ] ifFalse: [ maxS ] ]
 ]
@@ -112,41 +112,41 @@ RTAlignment >> hasElement [
 { #category : #public }
 RTAlignment >> left [
 	self hasElement ifFalse: [ ^ self ].
-	self alignFromLeftUsing: self leftMostElement 
+	self alignFromLeftUsing: self leftMostElement
 ]
 
 { #category : #'accessing - computed' }
 RTAlignment >> leftMostElement [
 	fixedElement ifNotNil: [ ^ fixedElement ].
-	^ elements inject: elements first into: [ :maxS :s | 
+	^ elements inject: elements first into: [ :maxS :s |
 			maxS encompassingRectangle left >= s encompassingRectangle left
-					ifTrue: [ s ] ifFalse: [ maxS ] ] 
+					ifTrue: [ s ] ifFalse: [ maxS ] ]
 ]
 
 { #category : #public }
 RTAlignment >> right [
 	self hasElement ifFalse: [ ^ self ].
-	self alignFromRightUsing: self rightMostElement 
+	self alignFromRightUsing: self rightMostElement
 ]
 
 { #category : #'accessing - computed' }
 RTAlignment >> rightMostElement [
 	fixedElement ifNotNil: [ ^ fixedElement ].
-	^ elements inject: elements first into: [ :maxS :s | 
+	^ elements inject: elements first into: [ :maxS :s |
 			maxS encompassingRectangle right <= s encompassingRectangle right
-					ifTrue: [ s ] ifFalse: [ maxS ] ] 
+					ifTrue: [ s ] ifFalse: [ maxS ] ]
 ]
 
 { #category : #public }
 RTAlignment >> top [
 	self hasElement ifFalse: [ ^ self ].
-	self alignFromTopUsing: self topMostElement 
+	self alignFromTopUsing: self topMostElement
 ]
 
 { #category : #'accessing - computed' }
 RTAlignment >> topMostElement [
 	fixedElement ifNotNil: [ ^ fixedElement ].
-	^ elements inject: elements first into: [ :maxS :s | 
+	^ elements inject: elements first into: [ :maxS :s |
 			maxS encompassingRectangle top >= s encompassingRectangle top
-					ifTrue: [ s ] ifFalse: [ maxS ] ] 
+					ifTrue: [ s ] ifFalse: [ maxS ] ]
 ]

@@ -15,7 +15,7 @@ Class {
 { #category : #adding }
 RTSVGPathEntity >> addOn: stream using: aSVGVisitor [
 	aSVGVisitor names at: self element put: self id.
-	
+
 	self openDef: stream.
 	self addPath: stream.
 	self startStyle: stream.
@@ -26,7 +26,7 @@ RTSVGPathEntity >> addOn: stream using: aSVGVisitor [
 	self closeTag: stream.
 	self startTransform: stream.
 	self addTranslation: self center into: stream.
-	self addScale: self scale into: stream. 
+	self addScale: self scale into: stream.
 	self closeTag: stream.
 	self startClass: stream.
 	self addContainedInteractions: aSVGVisitor.
@@ -52,7 +52,7 @@ RTSVGPathEntity >> center: anObject [
 ]
 
 { #category : #accessing }
-RTSVGPathEntity >> element: anElement path: aPath center: aPoint scale: anInteger fillColor: aColor borderColor: anotherColor width: anotherInteger [ 
+RTSVGPathEntity >> element: anElement path: aPath center: aPoint scale: anInteger fillColor: aColor borderColor: anotherColor width: anotherInteger [
 	self element: anElement.
 	self path: aPath.
 	self center: aPoint.

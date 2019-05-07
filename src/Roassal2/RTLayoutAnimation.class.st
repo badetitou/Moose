@@ -42,5 +42,5 @@ RTLayoutAnimation >> layout: anObject [
 { #category : #refreshing }
 RTLayoutAnimation >> refresh [
 	layout on: elements.
-	
+
 ]

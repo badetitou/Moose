@@ -63,7 +63,7 @@ RTPNGExporter >> exportToFile [
 	viewExtent := self viewExtent.
 	surface := self createSurface.
 	surface
-		drawDuring: [ :cs | 
+		drawDuring: [ :cs |
 			"Probably not necessary since we have just created a surface"
 			surface clear;
 				fillRectangle: (0@0 corner: viewExtent) withSolidColor: view canvas color.
@@ -74,7 +74,7 @@ RTPNGExporter >> exportToFile [
 			trachelCanvas shapes do: [ :trachelShape | trachelShape drawOn: cs ].
 			cs pathTransform loadIdentity scaleBy: 1.001.
 			"trachelCanvas fixedShapes do: [ :trachelShape | trachelShape drawOn: cs ]" ].
-	
+
 	surface writeToPng: self fileName
 ]
 
@@ -91,13 +91,13 @@ RTPNGExporter >> fileName: aFilenameAsString [
 { #category : #initialization }
 RTPNGExporter >> getIFrameDefFromView: aView label: aLabelAsString directory: aDirectory [
 	"This method is useful when invoked from within Pillar"
-	
+
 	| pngFileName writeStream |
 	pngFileName := (aDirectory / aLabelAsString, 'png') pathString.
 	writeStream := pngFileName asFileReference writeStream.
 	RTPNGExporter new builder: aView; fileName: pngFileName; exportToFile.
-	^ '<img src="', pngFileName, '" 
-		name="', aLabelAsString, '" ></img>' 
+	^ '<img src="', pngFileName, '"
+		name="', aLabelAsString, '" ></img>'
 ]
 
 { #category : #initialization }
@@ -109,7 +109,7 @@ RTPNGExporter >> initialize [
 
 { #category : #initialization }
 RTPNGExporter >> insert: aView named: aName inPillarStream: aStream [
-	self insert: aView named: aName inPillarStream: aStream directory: self defaultDirectory 
+	self insert: aView named: aName inPillarStream: aStream directory: self defaultDirectory
 ]
 
 { #category : #initialization }

@@ -12,7 +12,7 @@ RTUsefulScript class >> menuCommandOn: aBuilder [
 		order: 10;
 		parent: #Roassal) icon: RTIcon smallRoassal)
 		with: [ self allSubclasses
-						do: [ :cls | 
+						do: [ :cls |
 							(aBuilder item:
 							self menuConfigurationEntryTitle , cls new label)
 								order: 10;

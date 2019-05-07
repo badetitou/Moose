@@ -2,7 +2,7 @@
 RTGradualDSM build a Dependency Structural Matrix for a collection of objects and an arbitrary score function. The score is used to give a color to the cell.
 
 For example, inspect the following:
-[[[ 
+[[[
 	dsm := RTGradualDSM new.
 
 	values := { 1->#(2 3 1 5 6) . 2 -> #(1 2 1 1 1 1 4) . 3 -> #(1 2 5 3 2) . 4 -> #(2 5 1) . 5 -> #() . 6 -> #(4) } asDictionary.
@@ -26,12 +26,12 @@ RTGradualDSM class >> example01 [
 	| dsm values |
 	dsm := RTGradualDSM new.
 
-	values := (Array 
-		with: (1->#(2 3 1 5 6)) 
+	values := (Array
+		with: (1->#(2 3 1 5 6))
 		with: (2 -> #(1 2 1 1 1 1 4))
-		with: (3 -> #(1 2 5 3 2)) 
-		with: (4 -> #(2 5 1)) 
-		with: (5 -> #()) 
+		with: (3 -> #(1 2 5 3 2))
+		with: (4 -> #(2 5 1))
+		with: (5 -> #())
 		with: (6 -> #(4)) ) asDictionary.
 	dsm objects: (1 to: 6).
 	dsm score: [ :assoc | (values at: assoc key) occurrencesOf: assoc value ].
@@ -63,11 +63,11 @@ RTGradualDSM class >> example03AuthorshipByTime [
 	intervalDays := 100.
 	oldAge := (classes collect: #ageInDaysRounded) max.
 	youngAge := (classes collect: #ageInDaysRounded) min.
-	
+
 	diff := oldAge - youngAge.
-	
+
 	c := RTComposer new.
-	youngAge to: oldAge by: intervalDays do: [ :t |  
+	youngAge to: oldAge by: intervalDays do: [ :t |
 		classesToAuthors := (classes collect: [ :cls | cls -> (((cls methods select: [ :m | (t to: t + intervalDays) rangeIncludes: m ageInDaysRounded ]) collect: #author) asSet sortedAs: #yourself) ]) asDictionary.
 		authors := (classesToAuthors values flatCollect: #yourself) asSet sortedAs: #yourself.
 		authorsToClasses := (authors collect: [ :anAuthor | anAuthor -> (classesToAuthors associations select: [ :as | as value includes: anAuthor ] thenCollect: #key) ]) asDictionary.
@@ -81,7 +81,7 @@ RTGradualDSM class >> example03AuthorshipByTime [
 		c group: t asString asSymbol.
 	].
 	c layout: (RTGridLayout new gapSize: 30).
-	youngAge to: oldAge by: intervalDays do: [ :t |  
+	youngAge to: oldAge by: intervalDays do: [ :t |
 		c nameGroup: t asString asSymbol as: 'Time ', t asString ].
 	^ c view
 ]
@@ -94,9 +94,9 @@ RTGradualDSM >> initialize [
 
 { #category : #hooks }
 RTGradualDSM >> renderIn: aView [
-	super renderIn: aView.	
-	
-	1 to: objectsX size do: [:j | 
+	super renderIn: aView.
+
+	1 to: objectsX size do: [:j |
 		RTMetricNormalizer new
 			elements: ((self columnAt: j) select: [:e | selectElement rtValue: e]);
 			normalizeColor: score using: (Array with: Color veryVeryLightGray with: (Color colorFrom: '#4d79ff') );
@@ -119,7 +119,7 @@ RTGradualDSM >> score: oneArgBlock [
 
 { #category : #accessing }
 RTGradualDSM >> selectElement [
-	 ^ selectElement 
+	 ^ selectElement
 ]
 
 { #category : #accessing }

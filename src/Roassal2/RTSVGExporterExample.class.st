@@ -9,9 +9,9 @@ Class {
 
 { #category : #simple }
 RTSVGExporterExample >> exampleDependencyAnalyzerBuilder [
-	
+
 	"self new exampleDependencyAnalyzerBuilder"
-	| b |	
+	| b |
 	b := RTMondrian new.
 	b nodes: Collection withAllSubclasses.
 	b edges connectFrom: #superclass.

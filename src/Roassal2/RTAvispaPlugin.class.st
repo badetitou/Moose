@@ -6,7 +6,7 @@ Class {
 
 { #category : #hooks }
 RTAvispaPlugin >> description [
-	^ 'Avispa is a tool to analyze Software Process Models, written with EPF Composer. 
+	^ 'Avispa is a tool to analyze Software Process Models, written with EPF Composer.
 You need run the Moose platform in order to use this pluggin.'
 ]
 
@@ -14,7 +14,7 @@ You need run the Moose platform in order to use this pluggin.'
 RTAvispaPlugin >> execute [
 	"Make sure the problem with the font is solved."
 	RTFixFontProblemPlugin new execute.
-	
+
 	"Load Avispa"
 	Gofer new
 		smalltalkhubUser: 'abergel' project: 'Avispa';
@@ -26,7 +26,7 @@ RTAvispaPlugin >> execute [
 { #category : #testing }
 RTAvispaPlugin >> isLoaded [
 	^ RPackageOrganizer default includesPackageNamed: 'ProcessModel'
- 
+
 ]
 
 { #category : #hooks }

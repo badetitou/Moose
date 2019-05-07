@@ -23,13 +23,13 @@ RTSmallMultipleSingleScript >> buildMatrix [
 	and values is an array containing the connections"
 	objectsY := dic associations groupedBy: [ :ass | ass key key ].
 	objectsX := dic associations groupedBy: [ :ass | ass key value ].
-	
+
 	b objectsY: ((objectsY associations sortedAs: sortX) asArray collect: #key).
 	b objectsX: ((objectsX associations sortedAs: sortY) asArray collect: #key).
-	
+
 	b score: [ :assoc | scale rtValue: (dic at: assoc ifAbsent: [ 0 ]) ].
 	b build.
-	view signalUpdate 
+	view signalUpdate
 ]
 
 { #category : #hooks }
@@ -38,10 +38,10 @@ RTSmallMultipleSingleScript >> buildMenu [
 	| mb |
 	mb := RTMenuBuilder new.
 	mb view: view.
-	
+
 	mb menu: 'scale' submenu: 'linear' background: Color red trans
 			callback: [ scale := #yourself. self clearView. self buildMatrix ].
-			
+
 	mb menu: 'scale' submenu: 'sqrt' background: Color red trans
 			callback: [ scale := #sqrt. self clearView. self buildMatrix ].
 
@@ -62,7 +62,7 @@ RTSmallMultipleSingleScript >> buildMenu [
 			callback: [ sortX := [ :assoc | (assoc value collect: [ :as | as value value ]) sum ]. self clearView. self buildMatrix ].
 	mb menu: 'sorting' submenu: 'Y-sum weight' background: Color red trans
 			callback: [ sortY := [ :assoc | (assoc value collect: [ :as | as value value ]) sum ]. self clearView. self buildMatrix ].
-		
+
 	mb build.
 ]
 
@@ -80,11 +80,11 @@ RTSmallMultipleSingleScript >> clearView [
 
 { #category : #accessing }
 RTSmallMultipleSingleScript >> description [
-	^ 
+	^
 'Visualize a TSV file (like a CSV file but with tabulation instead of comma) as a matrix.
 The file should have 4 columns: time<TAB>n1<TAB>n2<TAB>weight.
 time is an integer value. It could represent a time period.
-n1 and n2 are string values. 
+n1 and n2 are string values.
 weight is a float value.'
 ]
 
@@ -123,12 +123,12 @@ RTSmallMultipleSingleScript >> loadData [
 	dc := Dictionary new.
 	tab := RTTabTable openTSVfile.
 	tab ifNil: [ ^ self ].
-	
+
 	tab values do: [ :line|
 		| a |
 		a := line third -> line second.
 		dc at: a ifAbsentPut: [ 0 ].
 		dc at: a put: (dc at: a) + 1 ].
-	
+
 	^ dc
 ]

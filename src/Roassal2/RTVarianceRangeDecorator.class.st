@@ -28,9 +28,9 @@ RTVarianceRangeDecorator >> color: aColor [
 { #category : #drawing }
 RTVarianceRangeDecorator >> pathToString: path [
 	^ String
-		streamContents: [ :s | 
+		streamContents: [ :s |
 			path
-				do: [ :each | 
+				do: [ :each |
 					s nextPutAll: each key.
 					each value
 						ifNotNil: [ s nextPutAll: ''.
@@ -48,7 +48,7 @@ RTVarianceRangeDecorator >> render [
 	k := builder getPixelPositionOf: xData first @ (avgData first + deviationData first).
 	path add: #M -> k.
 	(2 to: deviationData size)
-		do: [ :i | 
+		do: [ :i |
 			| p |
 			p := (avgData at: i) + (deviationData at: i).
 			k := builder getPixelPositionOf: (xData at: i) @ p.
@@ -56,7 +56,7 @@ RTVarianceRangeDecorator >> render [
 	k := builder getPixelPositionOf: xData last @ (avgData last - deviationData last).
 	path add: #L -> k.
 	(1 to: deviationData size - 1)
-		reverseDo: [ :i | 
+		reverseDo: [ :i |
 			| p |
 			p := (avgData at: i) - (deviationData at: i).
 			k := builder getPixelPositionOf: (xData at: i) @ p.

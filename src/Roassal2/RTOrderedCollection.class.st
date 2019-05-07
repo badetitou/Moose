@@ -12,15 +12,15 @@ Class {
 }
 
 { #category : #adding }
-RTOrderedCollection >> addAllLast: aCollection [ 
-	"Add each element of aCollection at the end of the receiver. 
+RTOrderedCollection >> addAllLast: aCollection [
+	"Add each element of aCollection at the end of the receiver.
 	Answer aCollection."
 
 	| es |
 	aCollection do: [:each | super addLast: each].
 
 	aCollection do: [ :obj | addCallback rtValue: obj ].
-	
+
 	es := self shape elementsOn: aCollection.
 	self interaction setUpElements: es.
 	self layout setUpElements: es.
@@ -65,7 +65,7 @@ RTOrderedCollection >> shape [
 
 { #category : #callbacks }
 RTOrderedCollection >> updateView [
-	
+
 	viewToUpdate ifNotNil: [ viewToUpdate signalUpdate ]
 ]
 

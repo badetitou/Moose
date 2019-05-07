@@ -15,17 +15,17 @@ Class {
 { #category : #public }
 RTBounds >> findStart: circle [
 	| high low probe |
-	
+
 	high := circles size +1.
 	low := 1.
-	[ (high - low) > 1 ] whileTrue: [ 
+	[ (high - low) > 1 ] whileTrue: [
 		probe := ((high + low )/2) floor.
-		(RTCircleTree doIntersect: circle with: (circles at: probe)) 
+		(RTCircleTree doIntersect: circle with: (circles at: probe))
 			ifTrue: [ high := probe ]
 			ifFalse: [ low := probe ]
 	 ].
 	^ indeces at: low.
-	
+
 ]
 
 { #category : #comparing }
@@ -38,11 +38,11 @@ RTBounds >> max: max [
 { #category : #public }
 RTBounds >> push: circle index: index [
 	| new |
-	new := circles size > 0 
-		ifTrue: [ RTCircleTree combine: (circles at: circles size) with: circle ] 
+	new := circles size > 0
+		ifTrue: [ RTCircleTree combine: (circles at: circles size) with: circle ]
 		ifFalse: [ circle ].
 	circles add: new.
 	indeces add: index.
-	
+
 	^ new.
 ]

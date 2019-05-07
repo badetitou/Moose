@@ -13,11 +13,11 @@ RTKiviatBuilderTest >> testBasic [
 	b addMetric: #numberOfLinesOfCode.
 	b addMetric: #numberOfMethods.
 	b addMetric: #numberOfVariables.
-	
+
 	b activateAxisTitle.
-	
+
 	b build.
-	
+
 	b recordElement: (b view elements detect: [ :e | e shape class == RTEllipse ]).
-	
+
 ]

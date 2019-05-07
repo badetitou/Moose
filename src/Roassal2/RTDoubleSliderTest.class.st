@@ -10,7 +10,7 @@ Class {
 { #category : #tests }
 RTDoubleSliderTest >> testCallback [
 	| slider block t |
-	
+
 	slider := RTDoubleSlider new.
 	slider build.
 	t := 0.
@@ -29,7 +29,7 @@ RTDoubleSliderTest >> testCallback [
 { #category : #tests }
 RTDoubleSliderTest >> testLabelled [
 	| slider |
-	
+
 	slider := RTDoubleSlider new.
 	self assert: slider isLabelled equals: false.
 	slider labeled.
@@ -39,18 +39,18 @@ RTDoubleSliderTest >> testLabelled [
 { #category : #tests }
 RTDoubleSliderTest >> testMax [
 	| slider |
-	
+
 	slider := RTDoubleSlider new.
 	self assert: slider max equals: 1.0.
 	slider max: 0.7.
 	self assert: slider max equals: 0.7.
-	
+
 ]
 
 { #category : #tests }
 RTDoubleSliderTest >> testMin [
 	| slider |
-	
+
 	slider := RTDoubleSlider new.
 	self assert: slider min equals: 0.0.
 	slider min: 0.7.
@@ -60,7 +60,7 @@ RTDoubleSliderTest >> testMin [
 { #category : #tests }
 RTDoubleSliderTest >> testUseIntegerLabel [
 	| slider |
-	
+
 	slider := RTDoubleSlider new.
 	self assert: slider usingIntegerLabel equals: false.
 	slider useIntegerLabel.

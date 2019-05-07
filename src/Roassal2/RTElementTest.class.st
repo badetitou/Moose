@@ -14,7 +14,7 @@ RTElementTest >> testAddingABoxAndEllipse [
 	el2 := (RTEllipse new extent: 40 @ 20; color: Color blue) element.
 	el2 translateTo: 150 @ 40.
 	view add: el1; add: el2.
-	
+
 	self assert: el1 position = (50 @ 40).
 	self assert: el1 encompassingRectangle = ((30@30) corner: (70@50))
 ]
@@ -26,13 +26,13 @@ RTElementTest >> testAddingAndRemoving [
 	view := RTView new.
 	tr := view canvas.
 	e := RTBox element.
-	
+
 	self assert: e view isNil.
 	self assert: tr numberOfShapes = 0.
 	view add: e.
 	self assert: e view == view.
 	self assert: tr numberOfShapes = 1.
-	
+
 	e remove.
 	self assert: view numberOfElements = 0.
 	self assert: tr numberOfShapes = 0.
@@ -59,7 +59,7 @@ RTElementTest >> testAttributes [
 	el attributes at: #oldColor put: Color black.
 	self assert: el hasAttributes.
 	self deny: (el hasNotAttribute: #oldColor).
-	
+
 
 ]
 
@@ -75,7 +75,7 @@ RTElementTest >> testCompositeShape [
 	s := RTCompositeShape new.
 	s add: RTBox new.
 	e := s element.
-	
+
 	e update
 ]
 
@@ -87,7 +87,7 @@ RTElementTest >> testConnectedEdges01 [
 	e2 := RTBox element.
 	self deny: (e1 isConnectedTo: e2).
 	self deny: (e2 isConnectedTo: e1).
-	
+
 	l := RTLine edgeFrom: e1 to: e2.
 	self assert: (e1 isConnectedTo: e2).
 	self assert: (e2 isConnectedTo: e1).
@@ -123,11 +123,11 @@ RTElementTest >> testDraggingCircle [
 	el := shape element.
 	view add: el.
 	view setUpCanvas.
-	
+
 	self assert: el position = (0 @ 0).
 	el translateBy: 100 @ 50.
 	self assert: el position = (100 @ 50).
-	
+
 	self assert: el trachelShape encompassingRectangle = ((80@30) corner: (120@70))
 ]
 
@@ -149,8 +149,8 @@ RTElementTest >> testGrowing [
 	el @ RTDraggable.
 	el translateTo: 100 @ 130.
 	view add: el.
-	
-	
+
+
 ]
 
 { #category : #interaction }
@@ -160,9 +160,9 @@ RTElementTest >> testHighlighting [
 	view := RTView new.
 	view add: el.
 	view setUpCanvas.
-	
+
 	self assert: el trachelShape color = RTBox new defaultColor.
-	
+
 	el trachelShape color: Color red.
 	self assert: el trachelShape color = Color red.
 ]
@@ -180,9 +180,9 @@ RTElementTest >> testIsConnected02 [
 	| e1 e2 l |
 	e1 := RTBox element.
 	e2 := RTBox element.
-	
+
 	l := RTLine edgeFrom: e1 to: e2.
-	
+
 	self assert: e1 isConnected.
 	self assert: e2 isConnected.
 	self deny: e1 isNotConnected.
@@ -193,7 +193,7 @@ RTElementTest >> testIsConnected02 [
 RTElementTest >> testIsConnected03 [
 	| e1 l |
 	e1 := RTBox element.
-	l := RTLine edgeFrom: e1 to: e1.	
+	l := RTLine edgeFrom: e1 to: e1.
 	self assert: e1 isConnected.
 	self deny: e1 isNotConnected.
 
@@ -221,7 +221,7 @@ RTElementTest >> testNestedElements2 [
 			nested := RTBox elementsOn: (1 to: 5).
 			group addAll: nested
 		].
-	
+
 	self assert: e nestedElements equals: nested
 ]
 
@@ -232,7 +232,7 @@ RTElementTest >> testNestedElements3 [
 	v := RTView new.
 	v @ RTDraggableView.
 
-	classShape := RTCompositeShape new. 
+	classShape := RTCompositeShape new.
 	classShape add: (RTLabel new).
 	classShape add: (RTBox new color: Color lightGreen).
 	classShape add: (RTBox new color: Color lightRed).
@@ -254,7 +254,7 @@ RTElementTest >> testNestedElements3 [
 			group addAll: (RTBox elementsOn: model rtmethods).
 			added addAll: group
 		].
-	
+
 	self assert: es first nestedElements equals: added
 ]
 
@@ -262,7 +262,7 @@ RTElementTest >> testNestedElements3 [
 RTElementTest >> testPlatformPopup [
 	| v el   |
 	v := RTView new.
-	
+
 	RTPlatformPopup removeLastPopup.
 	el := (RTBox new size: 20) element.
 	el @ (RTPlatformPopup).
@@ -273,7 +273,7 @@ RTElementTest >> testPlatformPopup [
 	el announce: (TRMouseEnter new position: 0 @ 0; shape: el trachelShape).
 	self assert: v numberOfElements equals: 1.
 	self assert: RTPlatformPopup lastPopup notNil.
-	
+
 ]
 
 { #category : #popup }
@@ -282,20 +282,20 @@ RTElementTest >> testPopupAndGroup [
 	v := RTView new.
 	el := (RTBox new size: 20) element.
 
-	p := [ :g :e |  
+	p := [ :g :e |
 		es := (RTBox new size: 15; color: (Color red alpha: 0.5)) elementsOn: (1 to: 10).
 		RTGridLayout on: es.
 		g addAll: es ].
 
 	el @ (RTPopup new group: p).
 	v add: el.
-	
+
 	self assert: v numberOfElements equals: 1.
 	el announce: (TRMouseEnter new position: 0 @ 0; shape: el trachelShape).
 	self assert: v numberOfElements equals: 11.
 
 	self assert: v canvas fixedShapes first position asIntegerPoint = (22@22)
-	
+
 ]
 
 { #category : #position }
@@ -304,7 +304,7 @@ RTElementTest >> testPosition [
 	| el |
 	el := RTBox element.
 	el translateTo: 1.1234 @ 1.1234.
-	self assert: el position = (1.1234 @ 1.1234). 
+	self assert: el position = (1.1234 @ 1.1234).
 ]
 
 { #category : #tests }
@@ -317,7 +317,7 @@ RTElementTest >> testRemoveWithEdges [
 	l1 := RTLine edgeFrom: e1 to: e2.
 	l2 := RTLine edgeFrom: e2 to: e1.
 	view add: l1; add: l2; add: e1; add: e2.
-	
+
 	e1 remove.
 	e2 remove.
 ]
@@ -341,7 +341,7 @@ RTElementTest >> testRemovingWithNested [
 	b build.
 	self assert: b view numberOfElements equals: 2.
 	(b view elementFromModel: 1) removeWithNestedElements.
-	self assert: b view numberOfElements equals: 0.	
+	self assert: b view numberOfElements equals: 0.
 ]
 
 { #category : #tests }
@@ -351,7 +351,7 @@ RTElementTest >> testRendering [
 	view := RTView new.
 	el := RTBox element.
 	view add: el.
-	
+
 	self assert: el trachelShape notNil.
 	self assert: el trachelShape class == TRBoxShape
 ]
@@ -376,7 +376,7 @@ RTElementTest >> testResizingAndDragging [
 	box := RTBox element.
 	view add: box.
 	view setUpCanvas.
-	
+
 	self assert: box extent = (5 @ 5).
 	box trachelShape extent: 10 @ 10.
 	self assert: box extent = (10 @ 10).
@@ -398,7 +398,7 @@ RTElementTest >> testSharedAnnouncer [
 	e := RTBox element.
 	self assert: e announcer ~~ e trachelShape announcer.
 	a := e announcer.
-	
+
 	v := RTView new.
 	v add: e.
 	self assert: e announcer == e trachelShape announcer.
@@ -411,13 +411,13 @@ RTElementTest >> testSharedAnnouncerAndComposedShapes [
 	| e s1 s2 v |
 	s1 := RTBox new.
 	s2 := RTEllipse new.
-	
+
 	e := (s1 + s2) element.
 	v := RTView new.
 	v add: e.
 	self assert: e announcer == e trachelShape shapes first announcer.
 	self assert: e announcer == e trachelShape shapes second announcer.
-	
+
 ]
 
 { #category : #tests }
@@ -425,7 +425,7 @@ RTElementTest >> testSize [
 	| box el |
 	box := RTBox new width: 10; height: 8.
 	el := box element.
-	
+
 	self assert: el position = (0 @ 0).
 	self assert: el height = 8.
 	self assert: el width = 10
@@ -436,7 +436,7 @@ RTElementTest >> testSizeAndModel [
 	| box el |
 	box := RTBox new width: [ :e | e + 2 ]; height: [ :e | e + 3 ].
 	el := box elementOn: 5.
-	
+
 	self assert: el position = (0 @ 0).
 	self assert: el height = 8.
 	self assert: el width = 7
@@ -449,7 +449,7 @@ RTElementTest >> testTrachelShape [
 	e := RTBox element.
 	self assert: e trachelShape ~~ e.
 	self assert: e trachelShape class equals: TRBoxShape.
-	
+
 	self assert: e trachelShape trachelShape equals: e trachelShape.
 	self assert: e trachelShape trachelShape trachelShape equals: e trachelShape.
 ]
@@ -489,9 +489,9 @@ RTElementTest >> testUpdateEdges [
 	l := RTLine edgeFrom: e1 to: e2.
 	v := RTView new.
 	v add: e1; add: e2; add: l.
-	
+
 	e2 translateTo: 50 @ 50.
-	
+
 	self assert: l trachelShape from equals: 0 @ 0.
 	self assert: l trachelShape to equals: 50 @ 50.
 
@@ -534,7 +534,7 @@ RTElementTest >> testWidthAndHeight2 [
 	view := RTView new.
 	outter := RTBox element.
 	inners := (RTBox new color: Color green) elementsOn: (1 to: 3).
-	
+
 	RTHorizontalLineLayout on: inners.
 	RTNest new on: outter nest: inners.
 

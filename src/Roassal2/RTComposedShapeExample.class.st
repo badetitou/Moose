@@ -1,10 +1,10 @@
 "
-RTComposedShapeExample new installTitle: 'Flags' 
+RTComposedShapeExample new installTitle: 'Flags'
 		code:
 		'
 
 v canvas'
-	
+
 "
 Class {
 	#name : #RTComposedShapeExample,
@@ -36,7 +36,7 @@ RTComposedShapeExample >> exampleEdgesFromComposedShape [
 		for: es
 		inShape: #second
 		add:
-			[ :group :model | 
+			[ :group :model |
 			group
 				addAll:
 					((RTBox new color: Color blue) elementsOn: model rtmethods).
@@ -127,7 +127,7 @@ flags := Dictionary new.
 flags at: 'France' put: (Array with: Color blue with: Color white with: Color red).
 flags at: 'Belgium' put: (Array with: Color black with: Color yellow with: Color red).
 flags at: 'Romania' put: (Array with: Color blue with: Color yellow with: Color red).
-flags at: 'Italia' put: (Array with: Color green with: Color white with: Color red).	
+flags at: 'Italia' put: (Array with: Color green with: Color white with: Color red).
 
 els := shape elementsOn: flags values.
 els @ RTDraggable.
@@ -190,17 +190,17 @@ RTComposedShapeExample >> exampleInnerShapes [
 	shape add: RTLabel new.
 	shape add: (RTBox new color: (Color blue alpha: 0.3)).
 	shape vertical.
-	
+
 	es := shape elementsOn: RTShape withAllSubclasses.
 	v addAll: es.
 
-	es do: [ :e | 
+	es do: [ :e |
 		methodElements := RTBox new elementsOn: e model rtmethods.
 		RTGridLayout on: methodElements.
 		v addAll: methodElements.
 		RTNest new
-			on: e 
-			inShape: #second 
+			on: e
+			inShape: #second
 			nest: methodElements.
 	].
 
@@ -276,11 +276,11 @@ es := RTLabel elementsOn: (1 to: 10).
 
 v addAll: es.
 
-es @ (RTPopup new 
+es @ (RTPopup new
 	named: #yourself
 	background: Color blue
-	group: [ :group :el |  
- 
+	group: [ :group :el |
+
 		group addAll: (RTEllipse elementsOn: (1 to: el model)).
 		RTWeightedCircleLayout new
 			initialRadius: 50;
@@ -313,7 +313,7 @@ RTComposedShapeExample >> exampleNesting1 [
 	v addAll: es.
 	RTNest new
 		for: es
-		add: [ :group :model | 
+		add: [ :group :model |
 			group
 				addAll: ((RTBox new color: Color blue) elementsOn: model rtmethods).
 			RTGridLayout on: group ].
@@ -352,7 +352,7 @@ v addAll: es.
 RTNest new
 	for: es
 	inShape: #second
-	add: [ :group :model | 
+	add: [ :group :model |
 		group addAll: ((RTBox new color: Color blue) elementsOn: model rtmethods).
 		RTGridLayout on: group.
 	].
@@ -436,20 +436,20 @@ RTComposedShapeExample >> exampleRelayout [
 	s add: b3.
 	s horizontal.
 	s setAutomaticRelayout.
-	
+
 	e := s elementOn: 'click to expand'.
 	view := RTView new.
 	view add: e.
-	
+
 	e @ RTDraggable.
 	e @ RTPopup.
-	
+
 	e when: TRMouseClick do: [ :ev |
 		e trachelShape shapes second extent: 45 @ 45.
 		e trachelShape shapes third text: 'hello'.
 		view signalUpdate.
 	].
-	^ view 
+	^ view
 ]
 
 { #category : #icons }

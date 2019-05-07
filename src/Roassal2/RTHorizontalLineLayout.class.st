@@ -9,7 +9,7 @@ Class {
 
 { #category : #hook }
 RTHorizontalLineLayout >> deltaFor: aNodeFigure [
-	
+
 	| delta |
 	delta := 0.
 	self alignment == #bottom ifTrue: [delta := aNodeFigure height].
@@ -18,24 +18,24 @@ RTHorizontalLineLayout >> deltaFor: aNodeFigure [
 ]
 
 { #category : #hook }
-RTHorizontalLineLayout >> doCenter: elements [ 
+RTHorizontalLineLayout >> doCenter: elements [
 
  	| midTallest step |
 	midTallest := 0.
-	midTallest := elements nodes 
+	midTallest := elements nodes
 		inject: 0
 		into: [ :m :el | m max: (el bounds height )].
 	midTallest := midTallest / 2.
-	elements nodes do: [ :node | 
+	elements nodes do: [ :node |
 		step := 0 @ (midTallest - (node bounds height / 2)) asInteger.
 		node bounds origin: (node bounds origin + step).
 		node bounds corner: (node bounds corner + step).
-	] 
+	]
 
 ]
 
 { #category : #hook }
-RTHorizontalLineLayout >> doStretchHorizontal: aCollectionOfElements [ 
+RTHorizontalLineLayout >> doStretchHorizontal: aCollectionOfElements [
 
  	| parent parentBounds addedWidth parentBoundsWidth runningIndex newWidth |
 
@@ -50,18 +50,18 @@ RTHorizontalLineLayout >> doStretchHorizontal: aCollectionOfElements [
 
 	parentBoundsWidth := parentBounds width.
 "	parentBoundsWidth := parentBoundsWidth - ((aCollectionOfElements size - 1) * horizontalGap) - (2 * horizontalOutGap)."
-	
-	
+
+
 	runningIndex := 0.
 	parentBounds width > addedWidth
-		ifTrue: [ aCollectionOfElements do: [ :element | 
+		ifTrue: [ aCollectionOfElements do: [ :element |
 						newWidth := (element width * parentBoundsWidth / addedWidth) asInteger.
 						element width: newWidth.
 						runningIndex := runningIndex + newWidth + horizontalGap ] ]
 ]
 
 { #category : #hook }
-RTHorizontalLineLayout >> doStretchVertical: aCollectionOfElements [ 
+RTHorizontalLineLayout >> doStretchVertical: aCollectionOfElements [
 
  	| parent parentBounds |
 	aCollectionOfElements isEmpty ifTrue: [ ^ self "nothing to do" ].
@@ -69,31 +69,31 @@ RTHorizontalLineLayout >> doStretchVertical: aCollectionOfElements [
 	parent isView ifTrue: [ ^ self "ROView does not have bounds" ].
 	parentBounds := parent bounds.
 
-	aCollectionOfElements do: [ :element | 
+	aCollectionOfElements do: [ :element |
 		element height: (parentBounds height) ]
 ]
 
 { #category : #'initialize-release' }
 RTHorizontalLineLayout >> initialize [
-	
+
 	super initialize.
 	self alignTop
 ]
 
 { #category : #hook }
 RTHorizontalLineLayout >> movePointer: pointer accordingToFigure: element [
-	
+
 	^ (pointer x + element width + self horizontalGap) @ pointer y
 ]
 
 { #category : #hook }
-RTHorizontalLineLayout >> positionOriginalPointer: elements [ 
+RTHorizontalLineLayout >> positionOriginalPointer: elements [
 	| maxHeight delta |
 	delta := 0.
-	self alignment == #bottom ifTrue: 
+	self alignment == #bottom ifTrue:
 		[ maxHeight := elements maxValue: #height.
 		delta := maxHeight ].
-	self alignment == #center ifTrue: 
+	self alignment == #center ifTrue:
 		[ maxHeight := elements maxValue: #height.
 		delta := maxHeight / 2.0 ].
 	^ (0) @ ((0) + delta)

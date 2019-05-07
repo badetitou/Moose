@@ -69,11 +69,11 @@ RTBezierLine >> applyTension: points [
 	n := points size - 1.
 	p1 := points first.
 	dp := points last - p1.
-	2 to: n do: [ :i| 
+	2 to: n do: [ :i|
 		p := points at: i.
 		t := (i-1) / n.
 		points at: i put: ((tension * p) + ((1-tension) *(p1+(t * dp) )) ) ].
-	
+
 	^ points
 ]
 
@@ -84,9 +84,9 @@ RTBezierLine >> centerOfElements: aOneArgBlockOrValues [
 	b := [ :edge |
 		| center intermediaryElement elements |
 		elements := aOneArgBlockOrValues rtValue: edge.
-		(elements isNil or: [ elements isEmpty ]) 
+		(elements isNil or: [ elements isEmpty ])
 			ifTrue: [ #() ]
-			ifFalse: [ 
+			ifFalse: [
 				center := (RTGroup withAll: elements) center.
 				intermediaryElement := RTBox element.
 				intermediaryElement translateTo: center.
@@ -100,7 +100,7 @@ RTBezierLine >> centerOfObjects: aOneArgBlockOrValues inView: view [
 	"Set one control point, at the center of the elements provided as argument"
 	^ self centerOfElements: [ :edge |
 		aOneArgBlockOrValues isClosure
-			ifTrue:  [ view elementsFromModels: (aOneArgBlockOrValues 
+			ifTrue:  [ view elementsFromModels: (aOneArgBlockOrValues
 															value: edge from model value: edge to model) ]
 			ifFalse: [ view elementsFromModels: aOneArgBlockOrValues ] ]
 ]
@@ -126,7 +126,7 @@ RTBezierLine >> follow [
 { #category : #accessing }
 RTBezierLine >> follow: aBlockOrASymbol [
 	"Make the bezier follow the path specified as the argument"
-	
+
 	follow := aBlockOrASymbol
 ]
 
@@ -144,28 +144,28 @@ RTBezierLine >> getControllingElementsFromFollowFor: anEdge using: followBlock [
 	elements := OrderedCollection new.
 	clean := [ elements ifNotEmpty: [ elements removeFirst ].
 		elements ifNotEmpty: [ elements removeLast ]. ].
-	lca ifNil: [ 
-		elements := (self getFollowersOf: start using: followBlock), 
+	lca ifNil: [
+		elements := (self getFollowersOf: start using: followBlock),
 			(self getFollowersOf: end using: followBlock) reverse allButFirst.
 		clean value.
 		^ elements.
 		 ].
-	
+
 	elements add: start.
 	block := [ :m | start view elementFromModel: (followBlock rtValue: m)  ].
-	
-	[ start == lca ] whileFalse: [ 
+
+	[ start == lca ] whileFalse: [
 		start := block value: start model.
 		elements add: start.
 	 ].
 	k := elements size.
-	[ end == lca ] whileFalse: [ 
+	[ end == lca ] whileFalse: [
 		elements add: end afterIndex: k.
 		end := block value: end model.
 	 ].
 	clean value.
 	^ elements.
-	
+
 ]
 
 { #category : #'control points' }
@@ -175,7 +175,7 @@ RTBezierLine >> getFollowersOf: aNode using: followBlock [
 	view := aNode view.
 	t := aNode.
 	[ t notNil ]
-		whileTrue: [ 
+		whileTrue: [
 			answer add: t.
 			model := followBlock rtValue: t model.
 			model ifNil: [ ^ answer ].
@@ -187,21 +187,21 @@ RTBezierLine >> getFollowersOf: aNode using: followBlock [
 RTBezierLine >> getListOfPointsForTrachel: anEdge [
 	| listOfPoints realControllingElements |
 	listOfPoints := OrderedCollection new.
-	
+
 	"We add the first point of the edge"
 	listOfPoints add: (attachPoint startingPointOf: anEdge).
-	
+
 	"Set the controlling elements from a follow block, if any"
-	follow ifNotNil: 
+	follow ifNotNil:
 		[ self setControllingElementsFromFollowFor: anEdge ].
-	
+
 	realControllingElements := controllingElements rtValue: anEdge.
 	realControllingElements ~= #() ifTrue: [ | cElements |
 		cElements := realControllingElements collect: [ :o | o isPoint
 			ifTrue: [ o ]
 			ifFalse: [ o position] ].
-		cElements isNotEmpty ifTrue: [ 
-			
+		cElements isNotEmpty ifTrue: [
+
 			(cElements first = anEdge from position and: [ cElements size  > 1 ])
 				ifTrue: [ cElements := cElements allButFirst ].
 			(cElements last = anEdge to position and: [ cElements size  > 1 ])
@@ -221,14 +221,14 @@ RTBezierLine >> horizontal [
 		center := (RTGroup with: edge from with: edge to) center.
 		intermediaryElement1 := RTBox element.
 		intermediaryElement1 translateTo: (center x @ edge from position y).
-		
+
 		intermediaryElement2 := RTBox element.
 		intermediaryElement2 translateTo: (center x @ edge to position y).
 
 		Array with: intermediaryElement1 with: intermediaryElement2
 	].
 	self controllingElements:  b
-	
+
 
 ]
 
@@ -250,8 +250,8 @@ RTBezierLine >> leastCommonAncestor: anEdge using: followBlock [
 	sharedNode := nil.
 	a := aNodes removeLast.
 	b := bNodes removeLast.
-	
-	[ a == b ] whileTrue: [ 
+
+	[ a == b ] whileTrue: [
 		sharedNode := a.
 		sharedNode ifNil: [ ^ nil ].
 		a := aNodes ifEmpty: [ nil ] ifNotEmpty: [aNodes removeLast].
@@ -266,9 +266,9 @@ RTBezierLine >> midPointInCenterOfElements: aOneArgBlockOrValues [
 	b := [ :edge |
 		| center intermediaryElement elements |
 		elements := aOneArgBlockOrValues rtValue: edge.
-		(elements isNil or: [ elements isEmpty ]) 
+		(elements isNil or: [ elements isEmpty ])
 			ifTrue: [ #() ]
-			ifFalse: [ 
+			ifFalse: [
 				center := (RTGroup withAll: elements) center.
 				intermediaryElement := RTBox element.
 				intermediaryElement translateTo: (edge from position + center) / 2.
@@ -282,7 +282,7 @@ RTBezierLine >> midPointInCenterOfObjects: aOneArgBlockOrValues inView: view [
 	"Set one control point, between the starting point and the center of all the objects provided as argument"
 	^ self midPointInCenterOfElements: [ :edge |
 		aOneArgBlockOrValues isClosure
-			ifTrue:  [ view elementsFromModels: (aOneArgBlockOrValues 
+			ifTrue:  [ view elementsFromModels: (aOneArgBlockOrValues
 															value: edge from model value: edge to model) ]
 			ifFalse: [ view elementsFromModels: aOneArgBlockOrValues ] ]
 ]
@@ -311,14 +311,14 @@ RTBezierLine >> trachelShapeFor: anEdge [
 "	shape width: (self widthFor: anEdge).
 	shape points: (self getListOfPointsForTrachel: anEdge).
 	shape strokePaint: (self colorFor: anEdge)."
-	realControllingElements := controllingElements rtValue: anEdge. 
+	realControllingElements := controllingElements rtValue: anEdge.
 	realControllingElements do: [ :e | e addConnectedEdge: anEdge ].
 	^ trachelShape
 ]
 
 { #category : #rendering }
 RTBezierLine >> updateFor: edge trachelShape: trachelShape [
-	trachelShape resetPath. 
+	trachelShape resetPath.
 	trachelShape strokePaint: (self colorFor: edge).
 	trachelShape width: (self widthFor: edge).
 	trachelShape points: (self getListOfPointsForTrachel: edge).
@@ -333,13 +333,13 @@ RTBezierLine >> vertical [
 		center := (RTGroup with: edge from with: edge to) center.
 		intermediaryElement1 := RTBox element.
 		intermediaryElement1 translateTo: (edge from position x @ center y).
-		
+
 		intermediaryElement2 := RTBox element.
 		intermediaryElement2 translateTo: (edge to position x @ center y).
 
 		Array with: intermediaryElement1 with: intermediaryElement2
 	].
 	self controllingElements:  b
-	
+
 
 ]

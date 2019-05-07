@@ -54,17 +54,17 @@ Class {
 
 { #category : #'as yet unclassified' }
 RTAxisAdaptedBuilder >> axisOrigin [
-	
+
 	^ (minX - self margin)@(minY - self margin)
-	
-	
+
+
 ]
 
 { #category : #'private-axis' }
 RTAxisAdaptedBuilder >> axisXFrom: anOriginPoint to: aPoint [
 	| config |
 	(self xAxisConfiguration fromPoint) ifNil: [ self xAxisDefaultConfigurationOrigin: anOriginPoint toPoint: aPoint].
-	
+
 	config := self xAxisConfiguration.
 	RTAxisRenderer new builder: self; config: config; axisFrom: anOriginPoint to: aPoint.
 ]
@@ -73,7 +73,7 @@ RTAxisAdaptedBuilder >> axisXFrom: anOriginPoint to: aPoint [
 RTAxisAdaptedBuilder >> axisYFrom: anOriginPoint to: aPoint [
 	| config |
 	(self yAxisConfiguration fromPoint) ifNil: [ self yAxisDefaultConfigurationOrigin: anOriginPoint toPoint: aPoint].
-	
+
 	config := self yAxisConfiguration.
 	RTAxisRenderer new builder: self; config: config; axisFrom: anOriginPoint to: aPoint.
 ]
@@ -86,7 +86,7 @@ RTAxisAdaptedBuilder >> configureView: aView [
 { #category : #'as yet unclassified' }
 RTAxisAdaptedBuilder >> createAxis [
 	| origin xAxisPoint yAxisPoint |
-		
+
 	origin := self axisOrigin.
 	xAxisPoint := self xAxisPoint: (origin y).
 	yAxisPoint := self yAxisPoint: (origin x).
@@ -153,16 +153,16 @@ RTAxisAdaptedBuilder >> objects: anRTElementsCollection [
 RTAxisAdaptedBuilder >> renderIn: aView [
 
 	self assert: (objects isNotNil).
-	
+
 	self createAxis.
 ]
 
 { #category : #'as yet unclassified' }
 RTAxisAdaptedBuilder >> setObjectsLimits [
-	
+
 	minX := (objects collect: [:o | (o position x) - (o width /2 )]) min.
 	maxX := (objects collect: [:o | (o position x) + (o width /2 )]) max.
-	
+
 	minY := (objects collect: [:o | (o position y) - (o height /2 )]) min.
 	maxY := (objects collect: [:o | (o position y) + (o height /2 )]) max.
 ]
@@ -170,13 +170,13 @@ RTAxisAdaptedBuilder >> setObjectsLimits [
 { #category : #accessing }
 RTAxisAdaptedBuilder >> xAxisConfiguration [
 	^ xAxisConfiguration
-	
+
 ]
 
 { #category : #accessing }
 RTAxisAdaptedBuilder >> xAxisConfiguration: anAxisConfiguration [
 	xAxisConfiguration := anAxisConfiguration
-	
+
 ]
 
 { #category : #'as yet unclassified' }
@@ -185,7 +185,7 @@ RTAxisAdaptedBuilder >> xAxisDefaultConfigurationOrigin: aPoint toPoint: another
 	xAxisConfiguration toPoint: anotherPoint.
 	xAxisConfiguration maxValue: anotherPoint x.
 	xAxisConfiguration minValue: aPoint x.
-	
+
 ]
 
 { #category : #'as yet unclassified' }
@@ -196,13 +196,13 @@ RTAxisAdaptedBuilder >> xAxisPoint: aFixedY [
 { #category : #accessing }
 RTAxisAdaptedBuilder >> yAxisConfiguration [
 	^ yAxisConfiguration
-	
+
 ]
 
 { #category : #accessing }
 RTAxisAdaptedBuilder >> yAxisConfiguration: anAxisConfiguration [
 	yAxisConfiguration := anAxisConfiguration
-	
+
 ]
 
 { #category : #'as yet unclassified' }
@@ -211,7 +211,7 @@ RTAxisAdaptedBuilder >> yAxisDefaultConfigurationOrigin: aPoint toPoint: another
 	yAxisConfiguration toPoint: anotherPoint.
 	yAxisConfiguration maxValue: anotherPoint y.
 	yAxisConfiguration minValue: aPoint y.
-	
+
 ]
 
 { #category : #'as yet unclassified' }

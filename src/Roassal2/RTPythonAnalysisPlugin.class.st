@@ -12,9 +12,9 @@ RTPythonAnalysisPlugin >> description [
 { #category : #hooks }
 RTPythonAnalysisPlugin >> execute [
 	self inform: 'This is obsolete. You need to load DataStudio'
-"	Gofer new 
+"	Gofer new
 		smalltalkhubUser: 'ObjectProfile' project: 'Roassal2';
-		package: 'Roassal2-Plugins-PythonAnalyzer'; 
+		package: 'Roassal2-Plugins-PythonAnalyzer';
 		load."
 ]
 

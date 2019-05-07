@@ -51,7 +51,7 @@ RTActiveAnimation >> intervalInMilliseconds: numberOfMillisecondsToWaitBeforeRef
 ]
 
 { #category : #refreshing }
-RTActiveAnimation >> refresh [ 
+RTActiveAnimation >> refresh [
 	(Time now asMilliSeconds - lastRefresh asMilliSeconds) > intervalInMilliseconds
 		ifTrue: [ blockToExecute value. lastRefresh := Time now. ].
 	view ifNotNil: [ view canvas signalUpdate ].

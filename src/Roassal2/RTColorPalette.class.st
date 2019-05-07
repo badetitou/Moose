@@ -4,9 +4,9 @@ Each ColorPalette is a set of beautiful color schemes in a context for a specifi
 Each palette contains several color schemes. Each scheme can be selected in different numbers of colors: 3 or 5 or 11 (depends on each scheme).
 
 We have three palettes:
-- Qualitative: helps to distinguish different classes of data. 
+- Qualitative: helps to distinguish different classes of data.
 - Sequential: useful for showing graduable data with a very light ""low color"" increasing darkness to ""high color"".
-- Diverging: it contains color scales with diverging colors on the extremes and transition colors from one extreme to the other. 
+- Diverging: it contains color scales with diverging colors on the extremes and transition colors from one extreme to the other.
 
 More detailed information is on it class comments.
 
@@ -31,7 +31,7 @@ RTColorPalette class >> diverging [
 { #category : #info }
 RTColorPalette class >> info [
 
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #default }
@@ -47,7 +47,7 @@ RTColorPalette class >> initializePalette [
 { #category : #public }
 RTColorPalette class >> palette [
 
-	^ palette ifNil: [ 
+	^ palette ifNil: [
 			self initializePalette.
 			palette.
 		 ]
@@ -62,8 +62,8 @@ RTColorPalette class >> paletteFor: aColorScheme [
 { #category : #info }
 RTColorPalette class >> paletteName [
 	|clsName|
-	clsName := self asString. 
-	^ clsName copyFrom: 5 to: clsName size. 
+	clsName := self asString.
+	^ clsName copyFrom: 5 to: clsName size.
 ]
 
 { #category : #palettes }
@@ -103,53 +103,53 @@ RTColorPalette >> addTitleTo: groups on: view [
 	label := (RTLabel new text: (self class paletteName)) element.
 	label translateBy: 0 @label height negated.
 	view add: label.
-	
+
 	"Adding info"
 	label @ (RTPopup new group: [:infoGroup :el |
 			| background elements|
 			elements := OrderedCollection new.
 			background := (RTBox new color: (Color white alpha: 0.7)) element.
-			
+
 			"add name of subpalette on the left of palette"
-			(';' split: self class info) do: [ :line | 
+			(';' split: self class info) do: [ :line |
 				elements add: (RTLabel new text: line) element.
 			 ].
 			RTVerticalLineLayout on: elements.
 			RTNest new centerOn: background elements: elements.
-			
+
 			infoGroup add: background .
 			infoGroup addAll: elements.
 		]).
-		
+
 
 ]
 
 { #category : #public }
-RTColorPalette >> colors: nbOfColors [ 
-	
+RTColorPalette >> colors: nbOfColors [
+
 	|palette scheme|
 	palette := self palette.
 	scheme := palette keys atRandom.
-	
+
 	^ self colors: nbOfColors scheme: scheme.
-	
+
 ]
 
 { #category : #public }
-RTColorPalette >> colors: nbOfColors scheme: aString [ 
+RTColorPalette >> colors: nbOfColors scheme: aString [
 	|palette scheme|
 	palette := self palette.
-	
+
 	"ERROR: number of colors is not an integer."
-	nbOfColors isInteger ifFalse: [ 
+	nbOfColors isInteger ifFalse: [
 		^ self error: 'Please, provide a correct number of colors' ].
-	
+
 	"ERROR: scheme not found"
-	scheme := palette at: aString ifAbsent: [ 
+	scheme := palette at: aString ifAbsent: [
 		^ self error: 'Scheme not found. Try with: ',(', ' join: palette keys)].
-	
+
 	"Convert to list of colors and return"
-	^ self convertSchemeToColors:  (scheme at: nbOfColors ifAbsent: [ 
+	^ self convertSchemeToColors:  (scheme at: nbOfColors ifAbsent: [
 			self error: 'Please, choice a number between: ', (',' join: scheme keys).
 		 ])
 ]
@@ -159,7 +159,7 @@ RTColorPalette >> colorsPerScheme [
 	"It returns a list of schemes and the numbers of colors it contains"
 	|table palette|
 	table := OrderedCollection new.
-	palette := self palette. 
+	palette := self palette.
 	palette keysAndValuesDo: [ :k :v | table add:  k -> ((palette at: k) keys) ].
 	table asDictionary inspect.
 ]
@@ -167,7 +167,7 @@ RTColorPalette >> colorsPerScheme [
 { #category : #'private - processing' }
 RTColorPalette >> convertSchemeToColors: aCollectionOfRGB256triplets [
 
-	^  aCollectionOfRGB256triplets collect: [:triplet | Color fromRgb256Triplet: triplet ] 
+	^  aCollectionOfRGB256triplets collect: [:triplet | Color fromRgb256Triplet: triplet ]
 ]
 
 { #category : #'showing palette' }
@@ -175,7 +175,7 @@ RTColorPalette >> drawSubPallete: rawColors named: subPaletteName on: view [
 	| colors group label |
 	group := RTGroup new.
 	colors := rawColors collect: [ :t | Color fromRgb256Triplet: t ].
-	
+
 	colors do: [ :c | |el|
 			el := (RTElement on: c) + (RTBox new size: 20; color: c).
 			el @ RTPopup.
@@ -183,41 +183,41 @@ RTColorPalette >> drawSubPallete: rawColors named: subPaletteName on: view [
 			group add: el.
 			view add: el.
 		 ].
-	
-	label := (RTLabel new text: subPaletteName) element.	
+
+	label := (RTLabel new text: subPaletteName) element.
 	label @ RTHighlightable.
-	label when: TRMouseClick do: [:evt | 
-		Smalltalk tools workspaceTool 
-			openContents: 'RTColorPalette ',(self class paletteName asLowercase),' colors: anInteger scheme:','''',subPaletteName,'''' ].	
+	label when: TRMouseClick do: [:evt |
+		Smalltalk tools workspaceTool
+			openContents: 'RTColorPalette ',(self class paletteName asLowercase),' colors: anInteger scheme:','''',subPaletteName,'''' ].
 	view add: label.
-	TRConstraint stick: label trachelShape onTheLeftOf: group first trachelShape. 
-	
+	TRConstraint stick: label trachelShape onTheLeftOf: group first trachelShape.
+
 	RTHorizontalLineLayout on: group.
 	^ group.
-	
+
 ]
 
 { #category : #accessing }
 RTColorPalette >> palette [
 
 	^ self class palette.
-	
-	
+
+
 ]
 
 { #category : #public }
-RTColorPalette >> scheme: aString [ 
+RTColorPalette >> scheme: aString [
 	|palette scheme nbOfColors |
 	palette := self palette.
-	
+
 	"ERROR: scheme not found"
-	scheme := palette at: aString ifAbsent: [ 
+	scheme := palette at: aString ifAbsent: [
 		^ self error: 'Scheme not found. Try with: ',(', ' join: palette keys)].
-	
+
 	nbOfColors := scheme keys max.
-	
+
 	"Convert to list of colors and return"
-	^ self convertSchemeToColors:  (scheme at: nbOfColors ifAbsent: [ 
+	^ self convertSchemeToColors:  (scheme at: nbOfColors ifAbsent: [
 			self error: 'Please, choice a number between: ', (',' join: scheme keys).
 		 ])
 ]
@@ -233,22 +233,22 @@ RTColorPalette >> show [
 
 { #category : #'showing palette' }
 RTColorPalette >> viewOn: view [
-	
+
 	| palette groups nbOfColors |
 	palette := self class palette.
 	groups := RTGroup new.
 	nbOfColors := 10.
-	
+
 	"Draw palettes"
 	palette keysAndValuesDo: [ :subPaletteName :subPalletes |
-			groups add: (self drawSubPallete: (subPalletes at: (subPalletes keys max)) 
-									named: subPaletteName 
+			groups add: (self drawSubPallete: (subPalletes at: (subPalletes keys max))
+									named: subPaletteName
 									on: view).
-		 ].	
+		 ].
 
 	RTVerticalLineLayout on: groups.
 	groups do: [ :aGroup | view addAll: aGroup ].
-	
+
 	"add title and info"
 	self addTitleTo: groups on: view.
 ]

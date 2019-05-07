@@ -18,13 +18,13 @@ RTPieBuilder >> emphasize: object by: anIntegerOrASymbolOrABlock [
 	| element trachelShape delta v |
 	element := elements elementFromModel: object.
 	trachelShape := element trachelShape.
-	
+
 	v := (anIntegerOrASymbolOrABlock rtValue: object).
-	delta := (trachelShape position + (v @ 0)) 
+	delta := (trachelShape position + (v @ 0))
 						rotateBy: ((trachelShape betaAngle - trachelShape alphaAngle) / 2 + trachelShape alphaAngle) * 3.1415 / 180
 						about: trachelShape position.
 	trachelShape translateTo: delta.
-	
+
 ]
 
 { #category : #'public - shapes' }
@@ -43,7 +43,7 @@ RTPieBuilder >> initialize [
 
 { #category : #initialization }
 RTPieBuilder >> initializeShapeBuilder [
-	self shape arc  
+	self shape arc
 		outerAngle: [ :e | self outerAngleOf: e ]
 			innerAngle: [ :e | self innerAngleOf: e ];
 		innerRadius: 0;
@@ -64,11 +64,11 @@ RTPieBuilder >> label: aBlock withObject: anObject [
 	| element trachelShape labelPosition lbl off |
 	element := elements elementFromModel: anObject.
 	trachelShape := element trachelShape.
-	
-	off := (trachelShape class == TRArcShape) 
-				ifTrue: [ trachelShape externalRadius + 30 ] 
+
+	off := (trachelShape class == TRArcShape)
+				ifTrue: [ trachelShape externalRadius + 30 ]
 				ifFalse: [ 0 ].
-	labelPosition := (trachelShape position + (off @ 0)) 
+	labelPosition := (trachelShape position + (off @ 0))
 						rotateBy: ((trachelShape betaAngle - trachelShape alphaAngle) / 2 + trachelShape alphaAngle) * 3.1415 / 180
 						about: trachelShape position.
 
@@ -86,7 +86,7 @@ RTPieBuilder >> labeled [
 
 { #category : #obsolete }
 RTPieBuilder >> labeled: aBlockLabel [
-	"Make each pie having a label that respect the aBlockLabel"	
+	"Make each pie having a label that respect the aBlockLabel"
 	self labeledIf: true withBlock: aBlockLabel
 ]
 

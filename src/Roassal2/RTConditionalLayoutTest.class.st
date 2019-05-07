@@ -15,7 +15,7 @@ RTConditionalLayoutTest >> testBasic [
 				color: [ :value | value odd ifTrue: [ Color red ] ifFalse: [ Color blue ] ])
 				elementsOn: (1 to: 4).
 	v addAll: es.
-	
+
 	l := RTConditionalLayout new
 				condition: [ :element | element model odd ];
 				thenLayout: RTVerticalLineLayout new;

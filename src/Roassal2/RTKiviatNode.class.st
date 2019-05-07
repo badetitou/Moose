@@ -1,5 +1,5 @@
 "
-A RTKiviatNode represent a polygon in the view, it represent one objects that is studied. It is composed by as many kiviatElement as the umber of metrics, connected by edges. 
+A RTKiviatNode represent a polygon in the view, it represent one objects that is studied. It is composed by as many kiviatElement as the umber of metrics, connected by edges.
 
 Instance Variables
 	arrayValues:		<Object>

@@ -10,7 +10,7 @@ Class {
 
 { #category : #hooks }
 RTColoredTextLegendItem >> execute [
-	^ RTGroup new add: 
+	^ RTGroup new add:
 			((self newLabelShape: text) elementOn: model); yourself
 ]
 

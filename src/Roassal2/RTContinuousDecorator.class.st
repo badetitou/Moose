@@ -26,8 +26,8 @@ RTContinuousDecorator >> buildLegendFor: x in: group [
 	group removeAll.
 	builder datasets reverse do: [ :ds | | xx |
 		xx := ds getValuesX.
-		(x between: xx first and: xx last)  
-			ifTrue: [ 
+		(x between: xx first and: xx last)
+			ifTrue: [
 				g := RTGroup new.
 				g add: ((self iconAt: ds) elementOn: ds->x).
 				g add: (legendLabel elementOn: ds->x).
@@ -36,21 +36,21 @@ RTContinuousDecorator >> buildLegendFor: x in: group [
 		 ].
 	RTVerticalLineLayout on: temp.
 	"hack because remove last popup does not work with rtgroup"
-	temp do: [ :m | 
+	temp do: [ :m |
 		m isCollection
 			ifTrue: [ group addAll: m ]
 			ifFalse: [ group add: m ] ].
-	
+
 ]
 
 { #category : #public }
 RTContinuousDecorator >> buildPointerFor: x in: g [
-	self datasets do: [ :ds | | e xx | 
+	self datasets do: [ :ds | | e xx |
 		xx := ds getValuesX.
-		(x between: xx first and: xx last)  
-			ifTrue: [ 
+		(x between: xx first and: xx last)
+			ifTrue: [
 				e := (self iconAt: ds) elementOn: ds->x.
-				e translateTo: (builder getPixelPositionOf: (self 
+				e translateTo: (builder getPixelPositionOf: (self
 					calculatePointFor: ds and: x)).
 				g add: e ].
 		].
@@ -68,10 +68,10 @@ RTContinuousDecorator >> calculatePointFor: aData and: x [
 
 { #category : #public }
 RTContinuousDecorator >> defaultsForPopup: popup [
-	popup 
+	popup
 		blockValidArea: [ :pos | self isPointOverTheBuilder: pos ];
 		alphaPopupBackground: 0.7.
-		
+
 ]
 
 { #category : #accessing }
@@ -102,25 +102,25 @@ RTContinuousDecorator >> initialize [
 	icons := Dictionary new.
 	"you can change the way to get a position of the element"
 	self pointFor: [ :ds :x | | elsx elsy i e1 e2 res |
-		elsx := ds getValuesX. 
+		elsx := ds getValuesX.
 		elsy := ds getValuesY.
 		i := elsx indexOf: x.
-		
-		i isZero ifTrue: [ 
+
+		i isZero ifTrue: [
 			res := elsx first @ elsy first.
-			1 to: elsx size -1 do: [ :k | 
+			1 to: elsx size -1 do: [ :k |
 				e1 := elsx at: k.
 				e2 := elsx at: k +1.
-				(x between: e1 and: e2) ifTrue: [ 
+				(x between: e1 and: e2) ifTrue: [
 					res := x < ((e1 + e2) / 2)
 						ifTrue: [ e1 @ (elsy at: k) ]
-						ifFalse: [ e2 @ (elsy at: k + 1) ] 
+						ifFalse: [ e2 @ (elsy at: k + 1) ]
 					 ]
 				].
 			res
 			]
 			ifFalse: [ (elsx at: i) @ (elsy at: i) ] ].
-	
+
 
 
 
@@ -143,7 +143,7 @@ RTContinuousDecorator >> popupDo: aBlock [
 
 { #category : #hooks }
 RTContinuousDecorator >> render [
-	
+
 	| popup |
 	popup := RTContinuousPopup new.
 	popupDo value: popup.
@@ -153,20 +153,20 @@ RTContinuousDecorator >> render [
 { #category : #public }
 RTContinuousDecorator >> title: aBlock [
 	self titleWith: (RTLabel new text: aBlock).
-	
+
 ]
 
 { #category : #public }
 RTContinuousDecorator >> titleWith: labelShape [
 	self popupDo: [ :popup |
 		self defaultsForPopup: popup.
-		
+
 		popup background: Color white group: [ :group  :evt | | x |
 			x := self xFor: evt.
 			labelShape
 				ifNotNil: [ group add: (labelShape elementOn: x) ].
 			self buildLegendFor: x in: group ].
-		
+
 		popup pointers: [ :g :evt | | x |
 			x := self xFor: evt.
 			self buildPointerFor: x in: g.
@@ -175,7 +175,7 @@ RTContinuousDecorator >> titleWith: labelShape [
 ]
 
 { #category : #public }
-RTContinuousDecorator >> xFor: evt [ 
+RTContinuousDecorator >> xFor: evt [
 	^ (builder getPositionFromPixelPosition: evt position) x
 
 

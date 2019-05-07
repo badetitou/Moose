@@ -30,9 +30,9 @@ RTSVGInteraction class >> on: anExporter targets: aRTShape [
 RTSVGInteraction class >> on: anExporter targets: aRTShape generator: generator [
 	| interaction |
 	anExporter view elements
-		do: [ :e | 
+		do: [ :e |
 			e trachelShape class = aRTShape
-				ifTrue: [ 
+				ifTrue: [
 					interaction := generator value: e.
 					anExporter interactions at: e ifAbsent: [ anExporter interactions at: e put: OrderedCollection new ].
 					(anExporter interactions at: e) add: interaction ] ]
@@ -40,7 +40,7 @@ RTSVGInteraction class >> on: anExporter targets: aRTShape generator: generator 
 
 { #category : #adding }
 RTSVGInteraction >> addEventHandlers: aStream id: aString element: aRTElement center: aPoint [
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #adding }

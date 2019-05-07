@@ -11,7 +11,7 @@ Class {
 RTAMItemTest >> setUp [
 	super setUp.
 	item := RTAMItem new.
-	
+
 ]
 
 { #category : #tests }

@@ -1,5 +1,5 @@
 "
-Create a simple namecloud 
+Create a simple namecloud
 "
 Class {
 	#name : #RTNameCloud,
@@ -20,7 +20,7 @@ Class {
 RTNameCloud >> addObjects: objects description: aBlockOrSymbol [
 	objects do: [ :o |
 		self addString: (aBlockOrSymbol rtValue: o) object: o ]
-	 
+
 ]
 
 { #category : #adding }
@@ -42,7 +42,7 @@ RTNameCloud >> addStrings: collectionOfStrings [
 RTNameCloud >> addWord: aWordAsString [
 	| w |
 	w := self prepareWord: aWordAsString.
-	(self isValidWord: w) ifTrue: 
+	(self isValidWord: w) ifTrue:
 		[ tableFrequency at: w ifAbsentPut: [ 0 ].
 		  tableFrequency at: w put: (tableFrequency at: w) + 1 ].
 	^ w
@@ -53,10 +53,10 @@ RTNameCloud >> addWord: aWordAsString object: object [
 	"object is an object for which its description contains aWordAsString"
 	| w |
 	w := self addWord: aWordAsString.
-	
+
 	"If the word is not valid, then we do nothing"
 	(self isValidWord: w) ifFalse: [ ^ self ].
-	
+
 	tableObjects at: w ifAbsentPut: [ Set new ].
 	(tableObjects at: w) add: object
 ]
@@ -102,7 +102,7 @@ RTNameCloud >> example01 [
 	self new example01
 	"
 
-	^ RTNameCloud new 
+	^ RTNameCloud new
 		addString: 'open
 
 		| v shape |
@@ -132,9 +132,9 @@ RTNameCloud >> example03 [
 	"
 	<noTest>
 	| b |
-	b := RTNameCloud new. 
+	b := RTNameCloud new.
 	b dictionary: (RTSourceCodeDictionary new).
-	RTObject withAllSubclasses do: [ :c | 
+	RTObject withAllSubclasses do: [ :c |
 		b addObjects: c rtmethods description: #sourceCode ].
 	^ b
 ]
@@ -228,8 +228,8 @@ RTNameCloud >> renderIn: aView [
 	| shape es |
 	shape := RTLabel new
 		height: [ :assoc | | temp |
-			temp := assoc value isNumber 
-				ifTrue: [ assoc value ] 
+			temp := assoc value isNumber
+				ifTrue: [ assoc value ]
 				ifFalse: [ assoc value size ].
 			(temp - self minFrequency) * maxHeight / (self maxFrequency - self minFrequency max: 1) + minHeight ];
 		text: #key.
@@ -246,7 +246,7 @@ RTNameCloud >> renderIn: aView [
 
 { #category : #accessing }
 RTNameCloud >> sortedAssociations [
-	^ self tableObjects 
+	^ self tableObjects
 		ifEmpty: [ tableFrequency associations reverseSortedAs: #value ]
 		ifNotEmpty: [ self tableObjects associations reverseSortedAs: [ :assoc | assoc value size ] ].
 ]

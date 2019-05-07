@@ -34,7 +34,7 @@ RTHighlightableTest >> testArrowedLine [
 				edgeColor: Color blue;
 				yourself).
 	RTOptimizedForceBasedLayout new on: es.
-	
+
 	trachelShape := v edges anyOne trachelShape.
 	previousColor := trachelShape color.
 	head := trachelShape shapes second.
@@ -48,7 +48,7 @@ RTHighlightableTest >> testArrowedLine [
 	self assert: head color equals: previousColor.
 	self assert: line color equals: previousColor.
 
-	
+
 ]
 
 { #category : #tests }
@@ -65,7 +65,7 @@ RTHighlightableTest >> testBasic [
 	"The Roassal shape remains the same"
 	self assert: (box shape colorFor: box) = Color green.
 	self assert: box trachelShape color = RTHighlightable highlightedColor.
-	
+
 	box announce: TRMouseLeave.
 	self assert: (box shape colorFor: box) = Color green.
 	self assert: box trachelShape color = Color green.
@@ -86,7 +86,7 @@ RTHighlightableTest >> testBasicWithSVGShape [
 	"The Roassal shape remains the same"
 	self assert: (box shape colorFor: box) = Color green.
 	self assert: box trachelShape color = RTHighlightable highlightedColor.
-	
+
 	box announce: TRMouseLeave.
 	self assert: (box shape colorFor: box) = Color green.
 	self assert: box trachelShape color = Color green.
@@ -107,14 +107,14 @@ RTHighlightableTest >> testHighlightAllSibblings [
 	e1 := (RTBox new color: Color gray) elementOn: 1.
 	e2 := (RTEllipse new color: Color gray) elementOn: 1.
 	e3 := (RTBox new color: Color gray) elementOn: 2.
-	
+
 	v add: e1; add: e2; add: e3.
-	
+
 	e1 @ RTHighlightable allSibblings.
 	self assert: e1 trachelShape color == Color gray.
 	self assert: e2 trachelShape color == Color gray.
 	self assert: e3 trachelShape color == Color gray.
-	
+
 	e1 announce: TRMouseEnter.
 	self assert: e1 trachelShape color ~~ Color gray.
 	self assert: e2 trachelShape color ~~ Color gray.
@@ -129,14 +129,14 @@ RTHighlightableTest >> testHighlightAllSibblings02 [
 	e1 := (RTBox new color: Color gray) element.
 	e2 := (RTEllipse new color: Color gray) element.
 	e3 := (RTBox new color: Color gray) element.
-	
+
 	v add: e1; add: e2; add: e3.
-	
+
 	e1 @ RTHighlightable allSibblings.
 	self assert: e1 trachelShape color == Color gray.
 	self assert: e2 trachelShape color == Color gray.
 	self assert: e3 trachelShape color == Color gray.
-	
+
 	e1 announce: TRMouseEnter.
 	self assert: e1 trachelShape color == Color gray.
 	self assert: e2 trachelShape color == Color gray.
@@ -150,20 +150,20 @@ RTHighlightableTest >> testHighlightMultipleObjects [
 	elements := RTBox elementsOn: (Array with: 1 with: 2 with: 2).
 	view := RTView new.
 	view addAll: elements.
-	
-	originalColor := elements first color. 
-	
+
+	originalColor := elements first color.
+
 	"Not necessary, but useful when debugging the test"
 	RTHorizontalLineLayout on: elements.
 
 	elements @ (RTHighlightable highlight: [ :v | Array with: v + 1 ]).
 	self assert: (elements allSatisfy: [ :e | e trachelShape color = originalColor ]).
-	
+
 	elements first announce: TRMouseEnter new.
 	self assert: (elements first trachelShape color = originalColor ).
 	self assert: (elements second trachelShape color = RTHighlightable highlightedColor).
 	self assert: (elements third trachelShape color = RTHighlightable highlightedColor).
-	
+
 	elements first announce: TRMouseLeave new.
 	self assert: (elements allSatisfy: [ :e | e trachelShape color = originalColor ]).
 ]
@@ -173,7 +173,7 @@ RTHighlightableTest >> testMultipleElements [
 	| box1 box2 |
 	box1 := (RTBox new color: Color green) element.
 	box2 := (RTBox new color: Color red) element.
-	
+
 	box1 @ (RTHighlightable highlightElements: [ :e | Array with: box2 ]).
 	box1 announce: TRMouseEnter.
 
@@ -181,7 +181,7 @@ RTHighlightableTest >> testMultipleElements [
 	self assert: (box1 shape colorFor: box1) = Color green.
 	self assert: box1 trachelShape color = Color green.
 	self assert: box2 trachelShape color = RTHighlightable highlightedColor.
-	
+
 	box1 announce: TRMouseLeave.
 	self assert: box1 trachelShape color = Color green.
 	self assert: box2 trachelShape color = Color red
@@ -192,15 +192,15 @@ RTHighlightableTest >> testMultipleElementsDoHighlight [
 	| box1 box2 h |
 	box1 := (RTBox new color: Color green) elementOn: 1.
 	box2 := (RTBox new color: Color red) elementOn: 2.
-	
+
 	h := RTHighlightable new highlightElements: [ :e | Array with: box2 ].
 	h doHighlight: box1.
-	
+
 	"The Roassal shape remains the same"
 	self assert: (box1 shape colorFor: box1) = Color green.
 	self assert: box1 trachelShape color = Color green.
 	self assert: box2 trachelShape color = RTHighlightable highlightedColor.
-	
+
 	h doUnhighlight: box1.
 	self assert: box1 trachelShape color = Color green.
 	self assert: box2 trachelShape color = Color red

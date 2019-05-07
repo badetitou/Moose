@@ -11,12 +11,12 @@ RTSoftwareHeritagePlugin >> description [
 
 { #category : #hooks }
 RTSoftwareHeritagePlugin >> execute [
-	Gofer new 
+	Gofer new
 		smalltalkhubUser: 'SvenVanCaekenberghe' project: 'Neo';
 		package: 'ConfigurationOfNeoJSON'; load.
 	(Smalltalk at: #ConfigurationOfNeoJSON) loadBleedingEdge.
-	
-	Gofer new 
+
+	Gofer new
 		smalltalkhubUser: 'azazael' project: 'BeyondRoassal';
 		package: 'softwareheritage'; load.
 ]

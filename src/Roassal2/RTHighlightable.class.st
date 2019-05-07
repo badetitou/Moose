@@ -67,7 +67,7 @@ RTHighlightable >> doHighlightElement: anElement [
 	self recordElement: anElement.
 	anElement trachelShape color: (self highlightColorFor: anElement).
 	anElement view ifNotNil: [ anElement view signalUpdate ].
-	
+
 	"Highlight edges if necessary"
 	self shouldHighlightEdges ifTrue: [ (getConnectedEdgesBlock rtValue: anElement) do: [ :anEdge | self doHighlightEdge: anEdge ] ]
 ]
@@ -94,7 +94,7 @@ RTHighlightable >> doUnhighlightElement: anElementOrEdge [
 	anElementOrEdge trachelShape color: (anElementOrEdge attributes at: #originalColor).
 	anElementOrEdge attributes removeKey: #originalColor.
 	anElementOrEdge view ifNotNil: [ anElementOrEdge view signalUpdate ].
-	
+
 	"Highlight edges if necessary"
 	anElementOrEdge isEdge ifTrue: [ ^ self ].
 	self shouldHighlightEdges ifTrue: [ (getConnectedEdgesBlock rtValue: anElementOrEdge) do: [ :anEdge | self doUnhighlightEdge: anEdge ] ]
@@ -115,7 +115,7 @@ RTHighlightable >> edgeColor: aColorOrOneArgBlock [
 { #category : #'public - configuration' }
 RTHighlightable >> focusOnIncomingAndOutgoingElements [
 	"Recursively highlights elements reaching out incoming edges
-	
+
 	Here is an example:
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 v := RTView new.
@@ -126,8 +126,8 @@ v addAll: es.
 
 RTEdgeBuilder new
     view: v;
-    shape: (RTArrowedLine new 
-        head: (RTFilledNarrowArrow asHead size: 4; width: 0.5); 
+    shape: (RTArrowedLine new
+        head: (RTFilledNarrowArrow asHead size: 4; width: 0.5);
         width: 0.5;
         attachPoint: (RTBorderAttachPoint new offset: 9);
         yourself);
@@ -135,9 +135,9 @@ RTEdgeBuilder new
     connectFrom: [ :vv | vv - 1 ].
 
 es do: [ :anElement |
-	anElement @ (RTHighlightable new focusOnIncomingAndOutgoingElements; 
-		edgeColor: [ :edge | (edge from == anElement) 
-									ifTrue: [ Color blue ] 
+	anElement @ (RTHighlightable new focusOnIncomingAndOutgoingElements;
+		edgeColor: [ :edge | (edge from == anElement)
+									ifTrue: [ Color blue ]
 									ifFalse: [ Color green ] ]; yourself) ].
 
 
@@ -146,7 +146,7 @@ RTOptimizedForceBasedLayout new on: es.
 v
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 	"
-	
+
 	getConnectedEdgesBlock := [ :anElement | anElement outgoingEdges , anElement incomingEdges ].
 	self getConnectedElementBlock: [ :e | (getConnectedEdgesBlock rtValue: e) collect: #from ].
 
@@ -187,7 +187,7 @@ RTHighlightable >> getConnectedElementBlock [
 
 { #category : #'public - configuration' }
 RTHighlightable >> getConnectedElementBlock: aBlockOrSymbol [
-	"Set the way connected elements must be obtained. The argument takes one argument, which is the 
+	"Set the way connected elements must be obtained. The argument takes one argument, which is the
 	element from which connected element should be considered."
 	getConnectedElementBlock := aBlockOrSymbol
 ]
@@ -225,7 +225,7 @@ RTHighlightable >> highlightedColor: aColorOrABlock [
 RTHighlightable >> initialize [
 	super initialize.
 	color := self class highlightedColor.
-	
+
 	"Per default, edges should not be highlighted"
 	edgeColor := nil.
 	self focusOnOutgoingElements.

@@ -15,7 +15,7 @@ Class {
 RTSVGBitmap >> addForm: stream [
 	stream
 		nextPutAll: ' xlink:href="data:image/png;base64,',form,'" '
-	
+
 ]
 
 { #category : #adding }

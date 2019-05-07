@@ -35,6 +35,6 @@ RTDecorationItem >> tooltip [
 ]
 
 { #category : #accessing }
-RTDecorationItem >> tooltip: aString [ 
+RTDecorationItem >> tooltip: aString [
 	tooltip := aString
 ]

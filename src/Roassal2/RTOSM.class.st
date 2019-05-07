@@ -2,7 +2,7 @@
 A RTOSM represent a shape linked to OpenStreetMap background tiles.
 
 Its outside boundaries and position are independent of the RTView camera. However, its inside is dependent on the RTView camera parameters.
-	
+
 A ratio can be added, to change the base scale factor which is 1.0 in Roassal is equal to 1km in the mercator projection at equator. A ratio of 10 will mean 1.0 in Roassal is equal to 100m in the mercator projection at equator.
 "
 Class {
@@ -2934,21 +2934,21 @@ RTOSM class >> downloadCityCoordinatesFor: aCityName [
 		url: 'http://api.geonames.org/searchJSON';
 		queryAt: 'q'
 		put: (aCityName copyWithoutAll:
-							' 	
+							'
 ');		queryAt: 'maxRows'
 		put: '1';
 		queryAt: 'username'
 		put: 'demo';
 		contentReader: [ :entity | TRPlatform current jsonReaderClass fromString: entity contents ];
 		get) at: 'geonames') first )
-		in: [ :city | 
+		in: [ :city |
 			^ (city at: 'lat')	asNumber@ (city at: 'lng') asNumber ]
 ]
 
 { #category : #resources }
 RTOSM class >> downloadCountries [
 	"Retrieving some data from FreeBase."
-	
+
 	"self downloadCountries"
 
 	^ TRPlatform current httpClientRequestClass new
@@ -2987,7 +2987,7 @@ RTOSM class >> downloadCountryCoordinates: aCountryName [
   }]
 }]'
 						copyWithoutAll:
-							' 	
+							'
 ');
 		contentReader: [ :entity | TRPlatform current jsonReaderClass fromString: entity contents ];
 		get.

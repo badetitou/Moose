@@ -103,7 +103,7 @@ RTLegendBuilder >> addObject: anObject text: aTextOrASymbolOrBlock [
 RTLegendBuilder >> addRectanglePolymetricWidth: widthDescription height: heightDescription box: boxDescription [
 	"Associate a color with a text"
 
-	items add: (RTPolymorphicBoxLegendItem new 
+	items add: (RTPolymorphicBoxLegendItem new
 						widthDescription: widthDescription;
 						heightDescription: heightDescription;
 						boxDescription: boxDescription;
@@ -136,8 +136,8 @@ RTLegendBuilder >> backgroundTransparencyOnDemand [
 
 { #category : #'public - positioning' }
 RTLegendBuilder >> below [
-	self positionDo: [ :p | 
-		p 
+	self positionDo: [ :p |
+		p
 			outer;
 			verticalPadding: offset;
 			bottom;
@@ -178,7 +178,7 @@ RTLegendBuilder >> initialize [
 	super initialize.
 	"Thisi group variable should be removed"
 	group := RTGroup new.
-	
+
 	offset := self defaultOffset.
 	self below.
 	self nestDo: [ :n :e :g | n on: e nest: g ].
@@ -188,7 +188,7 @@ RTLegendBuilder >> initialize [
 	gapSize := 10.
 	items := OrderedCollection new.
 	boxShape := RTShapeBuilder new.
-	boxShape box; 
+	boxShape box;
 		borderColor: Color lightGray;
 		fillColor: Color transparent.
 	isFixed := false
@@ -214,7 +214,7 @@ RTLegendBuilder >> legendElement [
 { #category : #'public - positioning' }
 RTLegendBuilder >> nestDo: aBlockThreeArg [
 	"read documentation of RTNest to position elements in the legend"
-	nestBlock := aBlockThreeArg 
+	nestBlock := aBlockThreeArg
 ]
 
 { #category : #'private - utility' }
@@ -230,7 +230,7 @@ RTLegendBuilder >> offset [
 
 { #category : #initialization }
 RTLegendBuilder >> offset: aDistanceInPixel [
-	offset := aDistanceInPixel 
+	offset := aDistanceInPixel
 ]
 
 { #category : #accessing }
@@ -248,7 +248,7 @@ RTLegendBuilder >> onDemand: text [
 
 { #category : #'public - positioning' }
 RTLegendBuilder >> positionDo: aBlockOneArg [
-	position := aBlockOneArg 
+	position := aBlockOneArg
 ]
 
 { #category : #hooks }
@@ -263,16 +263,16 @@ RTLegendBuilder >> renderIn: aView [
 	aView add: legendElement.
 	myGroup do: [ :g | aView addAll: g ].
 	nestBlock value: RTNest new value: legendElement value: myGroup.
-	
+
 	position value: (RTConstraint
 		movable: legendElement
 		fix: (RTGroup withAll: elementsInTheViewWithoutTheLegend)).
-	
+
 	isFixed
 		ifTrue: [ | els |
 			els := aView elements
 				copyWithoutAll: elementsInTheViewWithoutTheLegend.
-				
+
 			"We need to consider the edges as well"
 			els := els, (els flatCollect: #outgoingEdges).
 			els do: [ :e | e trachelShape setAsFixed ].
@@ -295,7 +295,7 @@ RTLegendBuilder >> renderOnDemandIn: aView [
 			(RTPopup new
 				alphaPopupBackground: self backgroundTransparencyOnDemand;
 				background: Color white
-					group: [ :gg :el | 
+					group: [ :gg :el |
 					myGroup := self group.
 					gg addAll: (myGroup flatCollect: #yourself) ])
 ]
@@ -303,7 +303,7 @@ RTLegendBuilder >> renderOnDemandIn: aView [
 { #category : #'public - positioning' }
 RTLegendBuilder >> right [
 	self positionDo: [ :p |
-		p 
+		p
 			outer;
 			right;
 			middle;
@@ -337,8 +337,8 @@ RTLegendBuilder >> textSize: aSizeAsInteger [
 
 { #category : #'public - positioning' }
 RTLegendBuilder >> top [
-	self positionDo: [ :p | 
-		p 
+	self positionDo: [ :p |
+		p
 			outer;
 			verticalPadding: offset;
 			top;

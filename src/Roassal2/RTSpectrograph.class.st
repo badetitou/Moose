@@ -63,7 +63,7 @@ RTSpectrograph >> objects: anObject [
 
 { #category : #accessing }
 RTSpectrograph >> pointSize: anObject [
-	shapeBuilder current size: pointSize 
+	shapeBuilder current size: pointSize
 ]
 
 { #category : #'as yet unclassified' }
@@ -78,10 +78,10 @@ RTSpectrograph >> renderIn: aView [
 	| rowsOfElements es interaction |
 	interaction := RTPopup new.
 	rowsOfElements := OrderedCollection new.
-	
-	objects do: [ :o | 	
+
+	objects do: [ :o |
 		es := shapeBuilder elementsOn: ((lineBlock rtValue: o) collect: [ :computedObject | (Array with: o with: computedObject ) ]).
-		
+
 		RTVerticalLineLayout new gapSize: 0; on: es.
 		rowsOfElements add: es.
 		aView addAll: es.
@@ -89,8 +89,8 @@ RTSpectrograph >> renderIn: aView [
 	].
 	RTHorizontalLineLayout new alignBottom; gapSize: 0; on: rowsOfElements.
 	self setTitleIfNecessary
-	
-	
+
+
 ]
 
 { #category : #util }

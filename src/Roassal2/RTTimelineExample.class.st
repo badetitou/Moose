@@ -1,9 +1,9 @@
 "
-RTTimelineExample new installTitle: 'SimpleGantt2' 
+RTTimelineExample new installTitle: 'SimpleGantt2'
 		code:
 		'
 | b s data |
-data := #(     #(WP1 0 4)      #(WP2 4 8)     #(WP3 8 12)         #(WP4 3 4)     #(WP4 7 9)     #(WP4 10 12)   
+data := #(     #(WP1 0 4)      #(WP2 4 8)     #(WP3 8 12)         #(WP4 3 4)     #(WP4 7 9)     #(WP4 10 12)
 
   ).
 b := RTTimeline new.
@@ -39,7 +39,7 @@ RTTimelineExample >> exampleClassAges [
 	s start: [ :cls |  cls computeYoungestMethod ageInDays ].
 	s end: [ :cls | cls computeOldestMethod ageInDays ].
 	b add: s.
-	
+
 b build.
 ^ b view
 ]
@@ -111,7 +111,7 @@ RTTimelineExample >> exampleColorPerEntry [
 	normalizer := RTMultiLinearColorForIdentity new objects: data.
 
 	b := RTTimeline new.
-	
+
 	s := RTTimelineSet new.
 	s objects: data.
 	s shape color: normalizer.
@@ -119,16 +119,16 @@ RTTimelineExample >> exampleColorPerEntry [
 	s start: #second.
 	s end: #third.
 	b add: s.
-	
-	b axisX 
+
+	b axisX
 		numberOfLabels: 5;
 		labelRotation: -45;
-		labelConversion: [ :v | Date year: 2015 day: v ]. 
+		labelConversion: [ :v | Date year: 2015 day: v ].
 
 	d := RTVerticalTickLineDecorator new.
 	d shape line color: Color white.
 	b addDecorator: d.
-	
+
 b build.
 ^ b view
 ]
@@ -179,7 +179,7 @@ RTTimelineExample >> exampleColorPerTimeLine [
 	normalizer := RTMultiLinearColorForIdentity new objects: #(c1 c2 c3 c4 c5); command: #first.
 
 	b := RTTimeline new.
-	
+
 	s := RTTimelineSet new.
 	s objects: data.
 	s shape color: normalizer.
@@ -187,16 +187,16 @@ RTTimelineExample >> exampleColorPerTimeLine [
 	s start: #second.
 	s end: #third.
 	b add: s.
-	
-	b axisX 
+
+	b axisX
 		numberOfLabels: 5;
 		labelRotation: -45;
-		labelConversion: [ :v | Date year: 2015 day: v ]. 
+		labelConversion: [ :v | Date year: 2015 day: v ].
 
 	d := RTVerticalTickLineDecorator new.
 	d shape line color: Color white.
 	b addDecorator: d.
-	
+
 b build.
 ^ b view
 ]
@@ -246,19 +246,19 @@ RTTimelineExample >> exampleGantt01 [
 	data := #(#(c1 0 5) #(c1 6 8) #(c2 0 5) #(c2 8 10) #(c3 0 10) #(c4 5 10) #(c5 5 8)).
 
 	b := RTTimeline new.
-	
+
 	s := RTTimelineSet new.
 	s objects: data.
 	s lineIdentifier: #first.
 	s start: #second.
 	s end: #third.
 	b add: s.
-	
-	b axisX 
+
+	b axisX
 		numberOfLabels: 5;
 		labelRotation: -45;
-		labelConversion: [ :v | Date year: 2015 day: v ]. 
-	
+		labelConversion: [ :v | Date year: 2015 day: v ].
+
 	b build.
 	^ b view
 ]
@@ -295,7 +295,7 @@ RTTimelineExample >> exampleLabelledAndColored [
 data := #(     #(WP1 1 3)      #(WP2 3 6)     #(WP3 6 9)         #(WP4 9 12)     #(WP5 1 12)    ).
 b := RTTimeline new.
 s := RTTimelineSet new.
-s shape box 
+s shape box
 	color: Color blue trans;
 	withText: #first;
 	withTextColor: Color white.
@@ -340,7 +340,7 @@ RTTimelineExample >> exampleNestedTimeLine [
 	data := #(#(c1 0 5 1) #(c1 3 8 2) #(c2 0 9 1) #(c2 3 5 2) #(c2 6 8 2)).
 
 	b := RTTimeline new.
-	
+
 	s := RTSubTimelineSet new.
 	s objects: data.
 	s lineIdentifier: #first.
@@ -348,12 +348,12 @@ RTTimelineExample >> exampleNestedTimeLine [
 	s end: #third.
 	s level: #fourth.
 	b add: s.
-	
-	b axisX 
+
+	b axisX
 		numberOfLabels: 5;
 		labelRotation: -45;
-		labelConversion: [ :v | Date year: 2015 day: v ]. 
-	^ b 
+		labelConversion: [ :v | Date year: 2015 day: v ].
+	^ b
 ]
 
 { #category : #icons }
@@ -382,23 +382,23 @@ RTTimelineExample >> exampleSimpleGantt [
 	data := #(#(WP1 0 5) #(WP2 5 8) #(WP3 7 10)).
 
 	b := RTTimeline new.
-	
+
 	s := RTTimelineSet new.
 	s objects: data.
 	s lineIdentifier: #first.
 	s start: #second.
 	s end: #third.
 	b add: s.
-	
-	b axisX 
+
+	b axisX
 		numberOfLabels: 5;
 		labelRotation: -45;
-		labelConversion: [ :v | Date year: 2015 day: v ]. 
+		labelConversion: [ :v | Date year: 2015 day: v ].
 
 	d := RTVerticalTickLineDecorator new.
 	d shape line color: Color white.
 	b addDecorator: d.
-	
+
 b build.
 ^ b view
 ]
@@ -407,7 +407,7 @@ b build.
 RTTimelineExample >> exampleSimpleGantt2 [
 
 | b s data |
-data := #(     #(WP1 0 4)      #(WP2 4 8)     #(WP3 8 12)         #(WP4 3 4)     #(WP4 7 9)     #(WP4 10 12)   
+data := #(     #(WP1 0 4)      #(WP2 4 8)     #(WP3 8 12)         #(WP4 3 4)     #(WP4 7 9)     #(WP4 10 12)
 
   ).
 b := RTTimeline new.
@@ -485,18 +485,18 @@ RTTimelineExample >> exampleThresholdLines [
 	data := #(#(c1 0 5) #(c1 6 8) #(c2 0 5) #(c2 8 10) #(c3 0 10) #(c4 5 10) #(c5 5 8)).
 
 	b := RTTimeline new.
-	
+
 	s := RTTimelineSet new.
 	s objects: data.
 	s lineIdentifier: #first.
 	s start: #second.
 	s end: #third.
 	b add: s.
-	
-	b axisX 
+
+	b axisX
 		numberOfLabels: 5;
 		labelRotation: -45;
-		labelConversion: [ :v | Date year: 2015 day: v ]. 
+		labelConversion: [ :v | Date year: 2015 day: v ].
 
 	p := RTHorizontalTimelineDecorator new.
 	p addLineAboveIdentifier: #c3.

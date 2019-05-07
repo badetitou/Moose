@@ -13,17 +13,17 @@ Class {
 
 { #category : #utils }
 RTSugiyamaLayout class >> sortBlock [
-	
+
 	^ RTSortBlock new
 ]
 
 { #category : #private }
 RTSugiyamaLayout >> addDummyNodes [
-	
+
 	| layer layerNr |
 	connections := RTIdentityMatrix new.
 	self edgesDo:
-			[:edge | 
+			[:edge |
 			| a b span fromNode toNode |
 			"edge hints removeAll."
 			a := layerNrs at: edge from.
@@ -57,29 +57,29 @@ RTSugiyamaLayout >> addDummyNodes [
 ]
 
 { #category : #private }
-RTSugiyamaLayout >> assignLabels: aNodeCollection [ 
+RTSugiyamaLayout >> assignLabels: aNodeCollection [
 	"Initialize label dictionary"
 	| label vertices parentLabels |
 	labels := IdentityDictionary new.
 	label := 1.	"Assign labels to the roots"
-	(self rootNodesFor: aNodeCollection) do: 
-		[ :node | 
-		labels 
+	(self rootNodesFor: aNodeCollection) do:
+		[ :node |
+		labels
 			at: node
 			put: label.
 		label := label + 1 ].	"Assign labels to the rest"
-	[ labels keys size < aNodeCollection size ] whileTrue: 
+	[ labels keys size < aNodeCollection size ] whileTrue:
 		[ vertices := SortedCollection sortBlock: self sortBlock.
-		aNodeCollection do: 
-			[ :node | 
-			(labels includesKey: node) ifFalse: 
-				[ parentLabels := ((self parentsFor: node) collect: 
-					[ :pn | 
-					labels 
+		aNodeCollection do:
+			[ :node |
+			(labels includesKey: node) ifFalse:
+				[ parentLabels := ((self parentsFor: node) collect:
+					[ :pn |
+					labels
 						at: pn
 						ifAbsent: [ self maxFloat ] ]) asSortedCollection.
 				parentLabels last ~= self maxFloat ifTrue: [ vertices add: node -> parentLabels ] ] ].
-		labels 
+		labels
 			at: vertices first key
 			put: label.
 		label := label + 1 ]
@@ -87,7 +87,7 @@ RTSugiyamaLayout >> assignLabels: aNodeCollection [
 
 { #category : #private }
 RTSugiyamaLayout >> buildLayers: g [
-	
+
 	| w layerNr u vertices vertex layer done |
 	w := self maxFloat.
 	u := OrderedCollection new.
@@ -120,7 +120,7 @@ RTSugiyamaLayout >> buildLayers: g [
 { #category : #private }
 RTSugiyamaLayout >> cl: layer u: u v: v [
 	"Calculates cuv. Di Battista, chapter 9.2.2, page 283"
-	
+
 	| partnersOfU partnersOfV c partnersOfUIndex partnersOfVIndex layerNr |
 	layerNr := layerNrs at: u.	":= layerNrs at: v"
 	partnersOfU := (connections at: u)
@@ -142,7 +142,7 @@ RTSugiyamaLayout >> defaultAttachPoint [
 ]
 
 { #category : #hook }
-RTSugiyamaLayout >> doExecute: aNodeCollection [ 
+RTSugiyamaLayout >> doExecute: aNodeCollection [
 	"Coffman-Graham-Layering. Di Battista Book, page 275, chapter, 9.2.1"
 	self assignLabels: aNodeCollection.
 	self buildLayers: aNodeCollection copy.
@@ -153,7 +153,7 @@ RTSugiyamaLayout >> doExecute: aNodeCollection [
 
 { #category : #private }
 RTSugiyamaLayout >> layoutAt: aPoint [
-	
+
 	| treeWidth layerKeys layer layerWidth horizontalPosition verticalPosition layerHeight |
 	treeWidth := layers values
 		inject: self maxFloat negated
@@ -163,7 +163,7 @@ RTSugiyamaLayout >> layoutAt: aPoint [
 	layerKeys := layers keys asSortedCollection reverse.
 	layerKeys
 		do:
-			[:aKey | 
+			[:aKey |
 			layer := layers at: aKey.
 			layerWidth := (layer sum: #width)
 				+ ((layer size - 1) * self horizontalGap).
@@ -171,9 +171,9 @@ RTSugiyamaLayout >> layoutAt: aPoint [
 			horizontalPosition := treeWidth / 2.0 + aPoint x - (layerWidth / 2.0).
 			layer
 				do:
-					[:node | 
+					[:node |
 					translator translateTopLeftOf: node to:  horizontalPosition @ verticalPosition.
-					
+
 					horizontalPosition := horizontalPosition + node width
 						+ self horizontalGap ].
 			verticalPosition := verticalPosition + layerHeight + self verticalGap ]
@@ -187,12 +187,12 @@ RTSugiyamaLayout >> maxFloat [
 { #category : #private }
 RTSugiyamaLayout >> reduceCrossing [
 	"Crossing reduction"
-	
+
 	| layer2 u v c1 c2 layer1 done |
 	2
 		to: layers keys size
 		do:
-			[:index | 
+			[:index |
 			layer1 := layers at: index - 1.
 			layer2 := layers at: index.
 			done := false.
@@ -202,7 +202,7 @@ RTSugiyamaLayout >> reduceCrossing [
 					2
 						to: layer2 size
 						do:
-							[:i | 
+							[:i |
 							u := layer2 at: i - 1.
 							v := layer2 at: i.
 							c1 := self cl: layer1 u: u v: v.
@@ -215,7 +215,7 @@ RTSugiyamaLayout >> reduceCrossing [
 
 { #category : #private }
 RTSugiyamaLayout >> sortBlock [
-	
+
 	sortBlock isNil ifTrue: [ sortBlock := self class sortBlock ].
 	^sortBlock
 ]

@@ -12,12 +12,12 @@ RTPieBuilderTest >> testExample [
 	b interaction popup.
 	b objects: (Array with: Dictionary with: Collection with: Set with: OrderedCollection ).
 	es := b slice: #numberOfMethods.
-	b normalizer distinctColor.	
+	b normalizer distinctColor.
 	b labeled.
 	b emphasize: Set by: 20.
 	b emphasize: Dictionary by: 20.
 	b build.
-	
+
 	self assert: es size equals: 4
 ]
 
@@ -48,7 +48,7 @@ RTPieBuilderTest >> testExample02 [
 	b interaction popup.
 	b objects: data.
 	b slice: #yourself.
-	b normalizer distinctColor.	
+	b normalizer distinctColor.
 	b labeled.
 	b build.
 	c group: #pie.

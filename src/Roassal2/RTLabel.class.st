@@ -45,7 +45,7 @@ RTLabel class >> defaultColor [
 RTLabel class >> defaultFontName [
 	"Return the default font name in Roassal"
 	^ TRLabelShape defaultFamilyFontName
- 
+
 ]
 
 { #category : #public }
@@ -117,13 +117,13 @@ RTLabel >> initialize [
 { #category : #accessing }
 RTLabel >> rawFont [
 	"Return the raw font used by the label. If not explictely set, then it returns null"
-	^ rawFont 
+	^ rawFont
 ]
 
 { #category : #accessing }
 RTLabel >> rawFont: aRawFont [
 	"Set the raw font. In such a case, the lookup does not happen. For example:
-	
+
 -=-=-=-=
 v := RTView new.
 
@@ -179,13 +179,13 @@ RTLabel >> trachelShapeForMultiLine: anElement [
 	| lines s lbl txt aColor fontSize |
 	aColor := self colorFor: anElement.
 	fontSize := self heightFor: anElement.
-	
+
 	txt := self textFor: anElement.
 	txt := txt copyReplaceAll: String tab with: '    '.
 	lines := txt lines.
-	 
+
 	s := TRCompositeShape new.
-	lines doWithIndex: [ :l :index | 
+	lines doWithIndex: [ :l :index |
 		lbl := TRLabelShape new text: l.
 		lbl color: aColor.
 		lbl fontSize: fontSize.
@@ -193,13 +193,13 @@ RTLabel >> trachelShapeForMultiLine: anElement [
 	].
 	s verticalAndLeft.
 "	s := TRCompositeShape new.
-	lines reverse do: [ :l | 
+	lines reverse do: [ :l |
 		lbl := TRLabelShape new text: l.
 		lbl color: aColor.
 		lbl fontSize: fontSize.
-		
+
 		s shape1: lbl offset: lbl width / 2 @ 0.
- 		
+
 		n := TRCompositeShape new.
 		n shape2: s offset: 0 @ 20.
 		s := n ]."
@@ -211,7 +211,7 @@ RTLabel >> trachelShapeForMultiLine: anElement [
 
 { #category : #'trachel shape production' }
 RTLabel >> trachelShapeForOneLine: anElement [
-	|  shape |	
+	|  shape |
 	shape := TRLabelShape new.
 	shape text: (self textFor: anElement);
 				color: (self colorFor: anElement);
@@ -220,23 +220,23 @@ RTLabel >> trachelShapeForOneLine: anElement [
 		shape
 				fontSize: (self heightFor: anElement);
 				fontName: (self fontNameFor: anElement) ].
-	rawFont ifNotNil: [ 
+	rawFont ifNotNil: [
 		shape font: rawFont
 		 ].
 	^ shape
 ]
 
 { #category : #rendering }
-RTLabel >> updateFor: anElement trachelShape: trachelShape [	
+RTLabel >> updateFor: anElement trachelShape: trachelShape [
 	| c s txt   |
 	trachelShape isNil ifTrue: [ ^ self ].
 	s := nil.
 	c := self colorFor: anElement.
-	trachelShape 
+	trachelShape
 		color: c;
 		position: anElement position.
 	txt := self textFor: anElement.
-	trachelShape 
+	trachelShape
 		text: txt on: anElement position;
 		rotateByDegrees: (self rotationFor: anElement);
 		scaleBy: (self scaleFor: anElement)

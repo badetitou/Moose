@@ -2,7 +2,7 @@
 A RTView is xxxxxxxxx.
 
 Roassal structures a visualization in terms of views, elements, shapes, interactions, and animations.
-A ''view'' is a container of graphical elements and represents a layer that may be combined with other views. 
+A ''view'' is a container of graphical elements and represents a layer that may be combined with other views.
 
 Instance Variables
 	edges:		<Object>
@@ -40,9 +40,9 @@ RTView >> add: anElementOrAnEdge [
 	"An element or an edge may be provided here"
 	"The elements or edges variables grow respectively"
 	self assert: [ anElementOrAnEdge ~= nil ] description: 'Nil cannot be added to a view'.
-	
+
 	anElementOrAnEdge addedIn: self.
-	anElementOrAnEdge renderOn: trCanvas 
+	anElementOrAnEdge renderOn: trCanvas
 
 ]
 
@@ -73,7 +73,7 @@ RTView >> addElement: anElement [
 
 { #category : #menu }
 RTView >> addFindMenu [
-	
+
 	self addMenu: 'Find' callback: [ |element|
 		element := TRPlatform current dialogChooseFrom: (self elements collect: #model) values: self elements.
 		element notNil
@@ -90,7 +90,7 @@ RTView >> addFromView: aView [
 { #category : #menu }
 RTView >> addLayoutMenu [
 	"Simply add some useful menu
-	
+
 	:: Void -> RTView
 	var b : RTMenuBuilder
 	var translator : RTSmoothLayoutTranslator
@@ -169,7 +169,7 @@ RTView >> cleanAll [
 	self clean.
 	self resetAnnouncer.
 	self canvas clean
-	
+
 ]
 
 { #category : #'accessing-computed' }
@@ -298,19 +298,19 @@ RTView >> pushFrontEdges [
 
 { #category : #'adding - removing' }
 RTView >> removeAllEdges [
-	"Remove all the edges"	 
-	edges := OrderedCollection new. 
-	self canvas resetLineShapes. 
+	"Remove all the edges"
+	edges := OrderedCollection new.
+	self canvas resetLineShapes.
 	self elements do: #removeConnectedEdges
 
 ]
 
 { #category : #'adding - removing' }
 RTView >> removeAllElements [
-	"Remove all the elements found in the view. 
+	"Remove all the elements found in the view.
 	CAUTION: this does not trigger a remove event per elements"
 	self initializeContent.
-	self canvas resetShapes. 
+	self canvas resetShapes.
 
 ]
 
@@ -331,15 +331,15 @@ RTView >> removeEdges: someEdges [
 	"
 	:: Collection -> RTView
 	"
-	
+
 	someEdges do: #remove
 
 	"In case we are trying to remove everything, as it may happen with the cachetor"
-"	(someEdges asArray = edges asArray) ifTrue: [ 
-		edges := OrderedCollection new. 
-		self canvas resetLineShapes. 
+"	(someEdges asArray = edges asArray) ifTrue: [
+		edges := OrderedCollection new.
+		self canvas resetLineShapes.
 		^ self ].
-"	
+"
 "	edges := edges copyWithoutAll: someEdges.
 	self canvas removeShapes: (someEdges collect: #trachelShape).
 "
@@ -360,12 +360,12 @@ RTView >> removeElements: someElements [
 	someElements do: #remove
 
 	"In case we are trying to remove everything, as it may happen with the cachetor"
-"	(someElements asArray = elements asArray) ifTrue: [ 
+"	(someElements asArray = elements asArray) ifTrue: [
 		self initializeContent.
-		self canvas resetShapes. 
+		self canvas resetShapes.
 		^ self ].
-"	
-	
+"
+
 "	elements := elements copyWithoutAll: someElements.
 	self canvas removeShapes: (someElements collect: #trachelShape).
 "
@@ -405,13 +405,13 @@ RTView >> setDefaultMenu [
 	b menu: 'In' callback: [ RTZoomInMove on: self ].
 	b menu: 'Out' callback: [ RTZoomOutMove on: self ].
 	b menu: 'Center' callback: [ self canvas focusOnCenterScaled. self signalUpdate ].
-	b menu: 'Export' submenu: 'HTML' background: Color blue trans 
+	b menu: 'Export' submenu: 'HTML' background: Color blue trans
 		callback: [ RTHTML5Exporter interactiveExport: self ].
-	b menu: 'Export' submenu: 'SVG' 
+	b menu: 'Export' submenu: 'SVG'
 		callback: [ RTSVGExporter interactiveExportViewAsSVG: self ].
-	b menu: 'Export' submenu: 'PNG' 
+	b menu: 'Export' submenu: 'PNG'
 		callback: [ RTPNGExporter new builder: self; fileName: 'roassal.png'; exportToFile ].
-	
+
 	(Smalltalk allClasses anySatisfy: [ :c | c name == #RTPDFExporter ])
 		ifTrue: [ b menu: 'Export' submenu: 'PDF' callback: [ (Smalltalk at: #RTPDFExporter) exportView: self ]. ].
 	b render
@@ -448,7 +448,7 @@ RTView >> trachelShape [
 { #category : #'accessing-computed' }
 RTView >> view [
 	"This method is meant to be used polymorphically with builders.
-	Thus, regardless of whether we get a raw view or a builder, we 
+	Thus, regardless of whether we get a raw view or a builder, we
 	can uniformly obtain the view"
 	^ self
 ]

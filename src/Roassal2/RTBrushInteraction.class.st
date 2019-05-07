@@ -25,9 +25,9 @@ RTBrushInteraction >> brush: aGroup [
 	others := self domainElements.
 	others ifNil: [ others := aGroup view elements ].
 	others := others select: [ :e | (aGroup includes: e) not ].
-	others do: [:e | RTBlink highlight: e 
+	others do: [:e | RTBlink highlight: e
 		color: (self unhighlightColor rtValue: e) ].
-	aGroup do: [:e | RTBlink highlight: e 
+	aGroup do: [:e | RTBlink highlight: e
 		color: (self highlightColor rtValue: e) ].
 ]
 
@@ -65,9 +65,9 @@ RTBrushInteraction >> elementsToBrush: aBlock [
 { #category : #util }
 RTBrushInteraction >> getElementsWith: s [
 	| g r |
-	g := RTGroup new. 
+	g := RTGroup new.
 	r := s encompassingRectangle.
-	view elements do: [ :e | 
+	view elements do: [ :e |
 		((e ~= s) and: [ e trachelShape encompassingRectangle intersects: r ])
 			ifTrue: [ g add: e. ] ].
 	^ g
@@ -75,7 +75,7 @@ RTBrushInteraction >> getElementsWith: s [
 
 { #category : #accessing }
 RTBrushInteraction >> groups: aCollection [
-	groups := aCollection 
+	groups := aCollection
 ]
 
 { #category : #accessing }
@@ -99,11 +99,11 @@ RTBrushInteraction >> initialize [
 RTBrushInteraction >> initializeElement: aView [
 	| b |
 	super initializeElement: aView.
-	b := [ :evt | 
+	b := [ :evt |
 		super removeShape.
 		self removeSelection: view elements ].
-	
-	self when: RTSelectionStart do: b. 
+
+	self when: RTSelectionStart do: b.
 	aView when: TRMouseClick do: b.
 ]
 
@@ -115,7 +115,7 @@ RTBrushInteraction >> removeSelection: aGroup [
 
 { #category : #removing }
 RTBrushInteraction >> removeShape [
-	
+
 ]
 
 { #category : #accessing }

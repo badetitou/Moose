@@ -15,28 +15,28 @@ Class {
 
 { #category : #'instance creation' }
 RTScale class >> category10 [
-	^ self ordinal 
+	^ self ordinal
 		range: RTColorInterpolator category10;
 		yourself
 ]
 
 { #category : #'instance creation' }
 RTScale class >> category20 [
-	^ self ordinal 
+	^ self ordinal
 		range: RTColorInterpolator category20;
 		yourself
 ]
 
 { #category : #'instance creation' }
 RTScale class >> category20b [
-	^ self ordinal 
+	^ self ordinal
 		range: RTColorInterpolator category20b;
 		yourself
 ]
 
 { #category : #'instance creation' }
 RTScale class >> category20c [
-	^ self ordinal 
+	^ self ordinal
 		range: RTColorInterpolator category20c;
 		yourself
 ]
@@ -65,7 +65,7 @@ RTScale class >> pow [
 { #category : #'instance creation' }
 RTScale class >> sqrt [
 	^ self pow
-		exponent: 0.5; 
+		exponent: 0.5;
 		yourself
 ]
 
@@ -91,7 +91,7 @@ RTScale >> interpolate: anObject [
 
 { #category : #transformations }
 RTScale >> invert: anObject [
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #accessing }
@@ -106,12 +106,12 @@ RTScale >> range: anObject [
 
 { #category : #hooks }
 RTScale >> rescale [
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #accessing }
 RTScale >> scale: anObject [
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #accessing }

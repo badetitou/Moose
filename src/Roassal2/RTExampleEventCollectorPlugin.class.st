@@ -6,17 +6,17 @@ Class {
 
 { #category : #hooks }
 RTExampleEventCollectorPlugin >> description [
-	^ 
+	^
 'Knowing which examples users are browsing is important for us, the developpers.
 This plugin loads an event collector.'
 ]
 
 { #category : #hooks }
 RTExampleEventCollectorPlugin >> execute [
-	(Smalltalk globals includesKey: #GTEventCollector) ifFalse: [ 
+	(Smalltalk globals includesKey: #GTEventCollector) ifFalse: [
 		UIManager default abort: 'Plugin cannot be loaded. GTEventCollector not found'.
 		^ self ].
-	Gofer new 
+	Gofer new
 		smalltalkhubUser: 'ObjectProfile' project: 'Roassal2';
 		package: 'Roassal2EventCollector'; load.
 ]
@@ -29,7 +29,7 @@ RTExampleEventCollectorPlugin >> isEnabled [
 { #category : #hooks }
 RTExampleEventCollectorPlugin >> isLoaded [
 	^ RPackageOrganizer default includesPackageNamed: 'Roassal2EventCollector'
- 
+
 ]
 
 { #category : #hooks }

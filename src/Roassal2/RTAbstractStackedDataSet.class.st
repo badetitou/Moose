@@ -17,7 +17,7 @@ RTAbstractStackedDataSet >> barChartWithBarCenteredTitle: aBlockOrSymbol [
 RTAbstractStackedDataSet >> barChartWithBarCenteredTitle: aBlockOrSymbol color: aColor [
 	"Draw a bar chart with title"
 	self barShape.
-	elementActions add: [ :elements | 
+	elementActions add: [ :elements |
 		| lbl |
 		elements do: [ :e |
 			lbl := (RTLabel new text: aBlockOrSymbol; color: aColor) elementOn: e model.
@@ -25,7 +25,7 @@ RTAbstractStackedDataSet >> barChartWithBarCenteredTitle: aBlockOrSymbol color: 
 			"lbl translateBy: (lbl width / -2 @ 0) + (5 @ 0)."
 			elements anyOne view add: lbl.
 		] ].
-	 
+
 ]
 
 { #category : #public }
@@ -45,7 +45,7 @@ RTAbstractStackedDataSet >> barChartWithBarTitle: aBlockOrSymbol rotation: rotat
 RTAbstractStackedDataSet >> barChartWithBarTitle: aBlockOrSymbol rotation: rotationInDegree color: aColor [
 	"Draw an histogram with title"
 	self barShape.
-	elementActions add: [ :elements | 
+	elementActions add: [ :elements |
 		| lbl |
 		elements do: [ :e |
 			lbl := (RTLabel new text: aBlockOrSymbol; color: aColor) elementOn: e model.
@@ -54,7 +54,7 @@ RTAbstractStackedDataSet >> barChartWithBarTitle: aBlockOrSymbol rotation: rotat
 			lbl translateBy: (lbl width / -2 @ 0) + (5 @ 0).
 			elements anyOne view add: lbl.
 		] ].
-	 
+
 ]
 
 { #category : #hooks }
@@ -71,7 +71,7 @@ RTAbstractStackedDataSet >> computeMinAndMaxForX [
 
 	(minX < 0 and: [maxX < 0]) ifTrue: [ maxX := 0 ].
 	(minX > 0 and: [maxX > 0]) ifTrue: [ minX := 0 ].
-	
+
 
 ]
 
@@ -85,7 +85,7 @@ RTAbstractStackedDataSet >> histogramWithBarTitle: aBlockOrSymbol [
 	"Draw an histogram with title"
 	"THIS IS AN OBSOLETE METHOD. Rewrite your code to use RTData and barShape.
 For example:
-	
+
 b := RTGrapher new.
 ds := RTData new.
 ds points: #(1 4 2 3 5 6).
@@ -106,7 +106,7 @@ RTAbstractStackedDataSet >> histogramWithBarTitle: aBlockOrSymbol rotation: rota
 RTAbstractStackedDataSet >> histogramWithBarTitle: aBlockOrSymbol rotation: rotationInDegree color: aColor [
 	"Draw an histogram with title"
 	self barShape.
-	elementActions add: [ :elements | 
+	elementActions add: [ :elements |
 		| lbl |
 		elements do: [ :e |
 			lbl := (RTLabel new text: aBlockOrSymbol; color: aColor) elementOn: e model.
@@ -115,14 +115,14 @@ RTAbstractStackedDataSet >> histogramWithBarTitle: aBlockOrSymbol rotation: rota
 			lbl translateBy: (lbl width / -2 @ 0) + (5 @ 0).
 			elements anyOne view add: lbl.
 		] ].
-	 
+
 ]
 
 { #category : #hooks }
 RTAbstractStackedDataSet >> renderBarChartIn: aView [
 	| centralDot elements positiveElements negativeElements |
 	centralDot := self centralDot.
-	
+
 	elements := histogramBuilder elementsOn: points.
 	builder view addAll: elements.
 	interaction setUpElements: elements.
@@ -146,16 +146,16 @@ RTAbstractStackedDataSet >> renderBarChartIn: aView [
 					max: builder extent y + centralDot position y
 					minValue: 0
 					maxValue: maxY ].
-	RTAlignment new elements:  positiveElements; alignFromBottomUsing: centralDot. 
-		
+	RTAlignment new elements:  positiveElements; alignFromBottomUsing: centralDot.
+
 	"We treat the element with a negative value"
 	negativeElements := elements copyWithoutAll: positiveElements.
 	negativeElements
-		ifNotEmpty: [ 
+		ifNotEmpty: [
 			RTMetricNormalizer new
 				elements: negativeElements;
 				normalizeHeight: [ :model | y rtValue: model ]
-					min: "builder extent y -"  centralDot position y negated 
+					min: "builder extent y -"  centralDot position y negated
 					max: 0
 					minValue: minY
 					maxValue: 0.

@@ -41,7 +41,7 @@ RTAbstractDSM >> addLabelsLeft [
 	es := self columnAt: 1.
 	es
 		do:
-			[ :e | 
+			[ :e |
 			theModel := e model key.
 			lbl := self labelShapeY elementOn: theModel.
 			yinteraction setUpElement: lbl.
@@ -62,7 +62,7 @@ RTAbstractDSM >> addLabelsTop [
 	deltaY := Float fmax.
 	es
 		do:
-			[ :e | 
+			[ :e |
 			theModel := e model value.
 			lbl := self labelShapeX elementOn: theModel.
 			labels add: lbl.
@@ -77,7 +77,7 @@ RTAbstractDSM >> addLabelsTop [
 				top;
 				move.
 			deltaY := deltaY min: lbl position y ].
-	labels do: [ :l | 
+	labels do: [ :l |
 		l translateTo: l position x @ deltaY ].
 ]
 
@@ -110,10 +110,10 @@ RTAbstractDSM >> createElements [
 	elements := RTGroup new.
 	objectsY copy
 		doWithIndex:
-			[ :anObject1 :index1 | 
+			[ :anObject1 :index1 |
 			objectsX copy
 				doWithIndex:
-					[ :anObject2 :index2 | 
+					[ :anObject2 :index2 |
 					e := self elementOn: (self createObjectBlock value: anObject1 -> anObject2).
 					e attributeAt: #matrixIndex put: index2 @ index1.
 					elements add: e ] ].
@@ -182,7 +182,7 @@ RTAbstractDSM >> highlightElements [
 { #category : #highlighting }
 RTAbstractDSM >> highlightElements: someElements [
 	(someElements select: [ :e | selectElement rtValue: e ]) do: [ :e | | shape |
-		shape := e trachelShape class = TRCompositeShape 
+		shape := e trachelShape class = TRCompositeShape
 			ifTrue: [ e trachelShape firstShape ]
 			ifFalse: [ e trachelShape ].
 		shape color: (shape color alpha: self transparencyWhenHighlighted) ].
@@ -203,12 +203,12 @@ RTAbstractDSM >> initialize [
 	self createObjectBlock: [ :assoc| assoc ].
 	self selectElement: [ :e | true ].
 	self interaction popup.
-	self interaction 
-		when: TRMouseEnter do: [ :evt | 
+	self interaction
+		when: TRMouseEnter do: [ :evt |
 			self highlightElements.
 			self unhighlightColumn: (evt element attributeAt: #matrixIndex) x.
 			self unhighlightRow: (evt element attributeAt: #matrixIndex) y.
-		];when: TRMouseLeave do: [ :evt | 
+		];when: TRMouseLeave do: [ :evt |
 			self unhighlightElements. ].
 	xinteraction := RTInteractionBuilder new.
 	yinteraction := RTInteractionBuilder new.
@@ -398,9 +398,9 @@ RTAbstractDSM >> unhighlightElements [
 { #category : #highlighting }
 RTAbstractDSM >> unhighlightElements: someElements [
 	(someElements select: [ :e | selectElement rtValue: e ]) do: [ :e | | shape |
-		shape := e trachelShape class = TRCompositeShape 
+		shape := e trachelShape class = TRCompositeShape
 			ifTrue: [ e trachelShape firstShape ]
-			ifFalse: [ e trachelShape ]. 
+			ifFalse: [ e trachelShape ].
 		shape color: (shape color alpha: self transparencyWhenNonHighlighted ) ].
 ]
 

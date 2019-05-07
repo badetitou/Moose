@@ -16,12 +16,12 @@ RTAbstractMenuEntry class >> menuConfigurationSymbol [
 
 { #category : #public }
 RTAbstractMenuEntry >> configurationMessage [
-	^ self subclassResponsibility 
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
 RTAbstractMenuEntry >> description [
-	^ self subclassResponsibility 
+	^ self subclassResponsibility
 ]
 
 { #category : #hooks }
@@ -33,7 +33,7 @@ RTAbstractMenuEntry >> execute [
 { #category : #testing }
 RTAbstractMenuEntry >> isEnabled [
 	^ true
-	
+
 ]
 
 { #category : #hooks }
@@ -71,7 +71,7 @@ RTAbstractMenuEntry >> loadPeterFileDialogIfNecessary [
 { #category : #public }
 RTAbstractMenuEntry >> run [
 	| answer |
-	self description notEmpty ifTrue: [ 
+	self description notEmpty ifTrue: [
 		answer := UIManager default
 			confirm: self description
 			label:
@@ -80,5 +80,5 @@ RTAbstractMenuEntry >> run [
 		answer
 			ifTrue: [ self execute ]
 	] ifFalse: [ self execute ]
-	
+
 ]

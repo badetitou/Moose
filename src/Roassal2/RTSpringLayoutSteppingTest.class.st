@@ -21,14 +21,14 @@ RTSpringLayoutSteppingTest >> testBasic [
 	| l |
 	l := RTForceLayoutStepping new.
 	self deny: l hasCompleted.
-	
+
 ]
 
 { #category : #tests }
 RTSpringLayoutSteppingTest >> testBasic2 [
 
 	RTForceLayoutStepping new refresh
-	
+
 ]
 
 { #category : #tests }
@@ -39,11 +39,11 @@ RTSpringLayoutSteppingTest >> testBasic3 [
 	self assert: l nodes isEmpty.
 
 	v := RTView new.
-	v addAll: (RTBox elementsOn: (1 to: 2)).	
-		
+	v addAll: (RTBox elementsOn: (1 to: 2)).
+
 	l view: v.
 	l layout: RTForceBasedLayout new.
 	self assert: l nodes size = 2
-	
-	
+
+
 ]

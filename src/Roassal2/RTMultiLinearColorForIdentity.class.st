@@ -1,5 +1,5 @@
 "
-RTMultiLinearColorForIdentity associates to each objects a distinct color. 
+RTMultiLinearColorForIdentity associates to each objects a distinct color.
 
 Consider the following example:
 [[[
@@ -7,7 +7,7 @@ classes := Collection withAllSubclasses.
 packages := (classes collect: #package) asSet asArray.
 v := RTView new.
 v @ RTDraggableView.
-normalizer := RTMultiLinearColorForIdentity new 
+normalizer := RTMultiLinearColorForIdentity new
 					objects: packages;
 					command: #package.
 s := RTBox new size: 15; color: normalizer.
@@ -37,10 +37,10 @@ Class {
 { #category : #public }
 RTMultiLinearColorForIdentity >> colorOf: anObject [
 	"Public method. It return the color of an Object"
-	
+
 	| index temp |
 	index := objects indexOf: anObject.
-	
+
 	"If the object is not part of the range of objects to consider, then we use a default color"
 	index = 0 ifTrue: [ ^ self defaultColor ].
 	temp := objects size -1.

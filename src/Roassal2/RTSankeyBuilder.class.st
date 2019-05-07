@@ -34,10 +34,10 @@ RTSankeyBuilder >> centerOf: el [
 RTSankeyBuilder >> computeEdges [
 	links ifNil: [ ^  self ].
 	elements do: [ :e |
-		e attributes 
+		e attributes
 			at: #sourceLinks put: OrderedCollection new;
 			at: #targetLinks put: OrderedCollection new ].
-	
+
 	edges := links collect: [ :l | | e1 e2 edge|
 		e1 := elements elementFromModel: (linkFrom value: l).
 		e2 := elements elementFromModel: (linkTo value: l).
@@ -49,16 +49,16 @@ RTSankeyBuilder >> computeEdges [
 		view add: edge.
 		edge ].
 	edges do: #pushBack.
-	
+
 ]
 
 { #category : #private }
 RTSankeyBuilder >> computeEdgesDepths [
 	elements do: [ :el |
 		"(el model at: #name) = 'Thermal generation' ifTrue: [ self halt. ]."
-		(el attributes at: #sourceLinks) sort: [:a :b | 
+		(el attributes at: #sourceLinks) sort: [:a :b |
 			(a to attributes at: #y) < (b from attributes at: #y) ].
-		(el attributes at: #targetLinks) sort:  [ :a :b | 
+		(el attributes at: #targetLinks) sort:  [ :a :b |
 			(a from attributes at: #y) < (b to attributes at: #y) ].
 		 ].
 	elements do: [ :el | | sy ty|
@@ -78,9 +78,9 @@ RTSankeyBuilder >> computeElementBreadths [
 	| remainingElements nextElements x kx |
 	x := 0.
 	remainingElements := elements.
-	[remainingElements size isZero not] whileTrue: [ 
+	[remainingElements size isZero not] whileTrue: [
 		nextElements := OrderedCollection new.
-		remainingElements do: [ :el| 
+		remainingElements do: [ :el|
 			el attributes at: #x put: x.
 			(el attributes at: #sourceLinks) do: [:ed |
 				nextElements add: ed to. ] ].
@@ -90,19 +90,19 @@ RTSankeyBuilder >> computeElementBreadths [
 	"move sinks right and scale"
 	kx := extent x/ (x -1).
 	elements do:[ :el| | temp |
-		(el attributes at: #sourceLinks) size isZero ifTrue: [ 
+		(el attributes at: #sourceLinks) size isZero ifTrue: [
 			el attributes at: #x put: x -1 ].
 		temp := el attributes at: #x.
 		el attributes at: #x put: (temp * kx) asFloat.
 		 ].
-	
+
 ]
 
 { #category : #private }
 RTSankeyBuilder >> computeElementDepths [
 	| elementsByBreadth alpha |
 	elementsByBreadth := elements groupedBy: [ :e | e attributes at: #x ].
-	elementsByBreadth := elementsByBreadth keysSortedSafely 
+	elementsByBreadth := elementsByBreadth keysSortedSafely
 		collect: [:k | elementsByBreadth at: k ].
 	elementsByBreadth ifEmpty: [ ^ self ].
 	elementsByBreadth last do: [ :e |
@@ -115,8 +115,8 @@ RTSankeyBuilder >> computeElementDepths [
 		self resolveCollisions: elementsByBreadth.
 		self relaxLeftToRight: alpha elements: elementsByBreadth.
 		self resolveCollisions: elementsByBreadth.]
-	
-	
+
+
 ]
 
 { #category : #private }
@@ -132,7 +132,7 @@ RTSankeyBuilder >> computeElementsValues [
 
 { #category : #private }
 RTSankeyBuilder >> computeSankey [
-	
+
 	self computeEdges;
 		computeElementsValues;
 		computeElementBreadths;
@@ -159,11 +159,11 @@ RTSankeyBuilder >> defaultLine [
 		Array with: x@y1 with: x @ y2 ].
 	bezier widthElement: [ :e |
 		(e attributes at: #dy ifAbsent: [1]) max: 1 ];
-		controllingElements: [ :e | 
+		controllingElements: [ :e |
 			(e attributes includesKey: #dy)
 				ifTrue: [ points value: e ]
 				ifFalse: [ Array with: 0@0 with: 0@0 ] ].
-	
+
 ]
 
 { #category : #accessing }
@@ -188,11 +188,11 @@ RTSankeyBuilder >> initialize [
 	interactionEdge := RTInteractionBuilder new.
 	lineShape := RTShapeBuilder new.
 	self defaultLine.
-	
+
 	labelShape := RTShapeBuilder new.
 	labelShape withText: ''.
 	labelInteraction := RTInteractionBuilder new.
-	
+
 	self shape rectangle width: 10.
 	self extent: 400@300.
 	self nodePadding: 0.
@@ -204,11 +204,11 @@ RTSankeyBuilder >> initializeElementsDepth: elementsByBreadth [
 	| value ky |
 	value := [ :e | e attributes at: #value ].
 	ky := elementsByBreadth inject: Float fmax into: [ :min :arr|
-		min min: ((extent y - ((arr size - 1) * nodePadding ))/ 
+		min min: ((extent y - ((arr size - 1) * nodePadding ))/
 		(arr inject: 0 into: [ :sum :e| (value value: e)+ sum])) ].
-	elementsByBreadth do: [ :arr| 
-		arr doWithIndex: [ :e :i| 
-			e attributes 
+	elementsByBreadth do: [ :arr|
+		arr doWithIndex: [ :e :i|
+			e attributes
 				at: #y put: i - 1;
 				at: #dy put: (value value: e)*ky ].
 		].
@@ -227,7 +227,7 @@ RTSankeyBuilder >> iterations: aNumber [
 
 { #category : #accessing }
 RTSankeyBuilder >> labelInteraction [
-	^ labelInteraction 
+	^ labelInteraction
 ]
 
 { #category : #accessing }
@@ -284,7 +284,7 @@ RTSankeyBuilder >> relaxLeftToRight: alpha elements: elementsByBreadth [
 	elementsByBreadth do: [ :nodes|
 		nodes do: [ :node |
 			tl := node attributes at: #targetLinks.
-			tl ifNotEmpty: [ 
+			tl ifNotEmpty: [
 				y := (tl sum: weightedSource)/ (tl sum: value).
 				node attributes at: #y put: (node attributes at: #y)+ ((y - (self centerOf: node))*alpha) ] ] ]
 ]
@@ -294,11 +294,11 @@ RTSankeyBuilder >> relaxRightToLeft: alpha elements: elementsByBreadth [
 	| sl y weightedTarget value |
 	value := [ :e | e attributes at: #value ].
 	weightedTarget := [ :ed | (self centerOf: ed to) * (value value: ed) ].
-	
-	elementsByBreadth reversed do: [ :nodes | 
-		nodes do: [ :node | 
+
+	elementsByBreadth reversed do: [ :nodes |
+		nodes do: [ :node |
 			sl := node attributes at: #sourceLinks.
-			sl ifNotEmpty: [ 
+			sl ifNotEmpty: [
 				y := (sl sum: weightedTarget)/ (sl sum: value).
 				node attributes at: #y put: (node attributes at: #y) + ((y - (self centerOf: node)) * alpha) ] ].
 	 ].
@@ -319,11 +319,11 @@ RTSankeyBuilder >> renderIn: aView [
 RTSankeyBuilder >> resolveCollisions: elementsByBreadth [
 	| nodes node dy y0 y i |
 	y := [ :e | e attributes at: #y ].
-	
+
 	elementsByBreadth do: [ :els |
 		y0 := 0.
 		nodes := els sorted: [ :a :b | (y value: a) < (y value: b) ].
-		
+
 		nodes do: [ :n |
 			node := n.
 			dy :=  y0 - (y value: node).
@@ -331,7 +331,7 @@ RTSankeyBuilder >> resolveCollisions: elementsByBreadth [
 			y0 := (y value: node) + nodePadding + (node attributes at: #dy).  ].
 		"If bottommost node goes outside the bounds push it back up"
 		dy := y0 - nodePadding - extent y.
-		dy > 0 ifTrue: [ 
+		dy > 0 ifTrue: [
 			y0 := node attributes at: #y put: (y value: node) - dy.
 			i := nodes size - 1.
 			[ i >= 1  ] whileTrue: [
@@ -340,25 +340,25 @@ RTSankeyBuilder >> resolveCollisions: elementsByBreadth [
 				dy > 0 ifTrue: [ node attributes at: #y put: (y value: node) - dy ].
 				y0 := y value: node.
 				i := i -1 ] ] ].
-	
+
 ]
 
 { #category : #public }
 RTSankeyBuilder >> updateNodes [
 	| att dy x y side |
 	elements doWithIndex: [ :e :i | | le |
-		le := lelements at: i. 
+		le := lelements at: i.
 		att := e attributes.
 		dy := att at: #dy.
 		x := att at: #x.
 		y := att at: #y.
-		
+
 		e translateTo: x @ (y+(dy/2)).
 		e trachelShape height: dy.
-		side := (att includesKey: #last) 
-			ifTrue: [ #left ] 
+		side := (att includesKey: #last)
+			ifTrue: [ #left ]
 			ifFalse: [ #right ].
-		RTConstraint new 
+		RTConstraint new
 			fix: e;
 			movable: le;
 			outer;

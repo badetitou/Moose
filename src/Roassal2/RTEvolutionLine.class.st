@@ -27,20 +27,20 @@ RTEvolutionLine >> afterBlock: ablockWith1arg [
 RTEvolutionLine >> gtEvolutionGraphIn: composite [
 	<gtInspectorPresentationOrder: -10>
 	| b ds |
-	^ composite roassal2 
+	^ composite roassal2
 		title: 'Plot';
-		initializeView: [ 
+		initializeView: [
 			b := RTGrapher new.
 			b extent: 300@ 200.
-			
+
 			ds := RTData new.
 			ds points: self timeline.
 			ds x: [ :assoc | self timeline indexOf: assoc ].
 			ds y: [ :assoc | assoc value ].
 			ds connectUsing: (RTLine new color: Color blue).
 			b add: ds.
-			
-			b axisX 
+
+			b axisX
 				labelRotation: -30;
 				labelConversion: [ :n | n isZero
 					ifTrue: ['']
@@ -55,7 +55,7 @@ RTEvolutionLine >> gtEvolutionGraphIn: composite [
 { #category : #ui }
 RTEvolutionLine >> gtRelativeEvolutionGraphIn: composite [
 	<gtInspectorPresentationOrder: -20>
-	^ composite roassal2 
+	^ composite roassal2
 		title: 'Relative Plot';
 		initializeView: [ self roassalView ]
 ]
@@ -67,7 +67,7 @@ RTEvolutionLine >> key [
 
 { #category : #printing }
 RTEvolutionLine >> printOn: stream [
-	stream print: xvalue; nextPutAll: '->'; print: yvalue 
+	stream print: xvalue; nextPutAll: '->'; print: yvalue
 ]
 
 { #category : #ui }
@@ -79,7 +79,7 @@ RTEvolutionLine >> roassalView [
 			yourself ].
 	b := RTGrapher new.
 	x := self timeline size < 20
-		ifTrue: [ 400 ] 
+		ifTrue: [ 400 ]
 		ifFalse: [ self timeline size / 5 * 100 ].
 	b extent: x @ 300.
 	temp := self timeline collect: #value.
@@ -93,7 +93,7 @@ RTEvolutionLine >> roassalView [
 	b add: ds.
 	b axisX
 		labelRotation: -30;
-		labelConversion: [ :n | 
+		labelConversion: [ :n |
 			n isZero
 				ifTrue: [ '' ]
 				ifFalse: [ (self timeline at: n) key ] ];
@@ -105,7 +105,7 @@ RTEvolutionLine >> roassalView [
 		labelConversion: [ :aValue | aValue + min round: round ];
 		title: self value value.
 	self afterBlock ifNotNil: [ self afterBlock value: b.  ].
-	
+
 	b view @ RTZoomableBoxView.
 	^ b
 ]

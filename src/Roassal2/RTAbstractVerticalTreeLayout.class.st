@@ -37,7 +37,7 @@ RTAbstractVerticalTreeLayout >> inverseAttachPoint [
 	| a |
 	a := RTShorterVerticalDistanceAttachPoint new.
 	edges
-		do: [ :edge | 
+		do: [ :edge |
 			edge shape attachPoint: a.
 			edge updateFromTo ]
 
@@ -58,7 +58,7 @@ RTAbstractVerticalTreeLayout >> layout: aNodeCollection atPoint: aPoint atLayer:
 	y := aPoint y.
 	alreadyLayoutedNodes addAll: aNodeCollection.
 	self atLayer: aNumber add: aNodeCollection.
-	aNodeCollection do: [ :each | 
+	aNodeCollection do: [ :each |
 		childrenPosition := y + each height + self verticalGap.
 		treeSize := each width
 			max: (self layout: (self computeChildrenFor: each) atPoint: x @ childrenPosition atLayer: aNumber + 1).
@@ -74,7 +74,7 @@ RTAbstractVerticalTreeLayout >> rearrangeByLayers: aGraph [
 	| cursor layerDepthSize |
 	cursor := self topGap.
 	nodesByLayer do: [:eachSetOfNodes |
-		layerDepthSize := eachSetOfNodes inject: 0 into: [ :max :eachNode | 
+		layerDepthSize := eachSetOfNodes inject: 0 into: [ :max :eachNode |
 			translator translateTopLeftOf: eachNode to: (eachNode position x @ cursor).
 			max max: eachNode height ].
 		cursor := cursor + layerDepthSize + self verticalGap ]

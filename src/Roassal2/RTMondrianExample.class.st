@@ -1,5 +1,5 @@
 "
-RTMondrianExample new installTitle: 'ClusterLayout' 
+RTMondrianExample new installTitle: 'ClusterLayout'
 		code:
 		'
 | b |
@@ -15,11 +15,11 @@ b normalizer
 	objects: RTObject withAllSubclasses;
 	normalizeSize: #numberOfMethods min: 5 max: 30 using: [:value | (value + 1) ln ];
 	normalizeColor: #numberOfMethods using: {Color gray . Color blue. Color red } using: [ :value | (value + 1) ln ].
-	
+
 b layout cluster.
 b build.
 ^ b'
-	
+
 "
 Class {
 	#name : #RTMondrianExample,
@@ -41,8 +41,8 @@ b shape circle size: 15;
 b nodes: (1 to: 100).
 b edges
 	moveBehind;
-	connectToAll: [ :v | 
-		v \\ 20 ~~ 0 
+	connectToAll: [ :v |
+		v \\ 20 ~~ 0
 			ifTrue: [ Array with: v + 1 with: v + 20 ]
 			ifFalse: [ Array with: v + 20 ]
 		 ].
@@ -132,7 +132,7 @@ c5sY+gfEv/gHxL/4B8Q/IP7FPyD+AfEv/gHxD4h/aUb+Ac60UX9EAJ28AAAAAElFTkSuQmCC'
 
 { #category : #sources }
 RTMondrianExample >> exampleBezier [
-	<gtExample> 
+	<gtExample>
 	<noTest>
 | classes b |
 (TRPlatform current dialogConfirm: 'This example takes a long time to load, execute?')
@@ -146,7 +146,7 @@ b edges connectFrom: #superclass.
 
 b shape bezierLineFollowing: #superclass;
 	color: (Color blue alpha: 0.2).
-b edges 
+b edges
 	notUseInLayout;
 	connectToAll: #dependentClasses.
 b normalizer
@@ -672,7 +672,7 @@ SUVORK5CYII='
 
 { #category : #sources }
 RTMondrianExample >> exampleClassDependencies [
-<gtExample> 
+<gtExample>
 <noTest>
 | b |
 (TRPlatform current dialogConfirm: 'This example takes a long time to load, execute?')
@@ -690,7 +690,7 @@ b normalizer
 	normalizeSize: #numberOfMethods using: #sqrt;
 	normalizeColor: [ :c | c withAllSuperclasses indexOf: RTObject ] using: (Array with: Color red with: Color gray);
 	alphaColor: 0.4.
-	
+
 b layout forceWithCharge: -400.
 b build.
 ^ b
@@ -903,7 +903,7 @@ RTMondrianExample >> exampleClasses [
 
 	| b |
 	b := RTMondrian new.
-	b shape rectangle 
+	b shape rectangle
 				withBorder;
 				width: #numberOfVariables;
 				height: #numberOfMethods;
@@ -951,7 +951,7 @@ b normalizer
 	objects: RTObject withAllSubclasses;
 	normalizeSize: #numberOfMethods min: 5 max: 30 using: [:value | (value + 1) ln ];
 	normalizeColor: #numberOfMethods using: (Array with: Color gray with: Color blue with: Color red) using: [ :value | (value + 1) ln ].
-	
+
 b layout cluster.
 b build.
 ^ b
@@ -959,7 +959,7 @@ b build.
 
 { #category : #sources }
 RTMondrianExample >> exampleClusterLayout02 [
-<gtExample> 
+<gtExample>
 <noTest>
 | b |
 (TRPlatform current dialogConfirm: 'This example takes a long time to load, execute?')
@@ -1311,7 +1311,7 @@ jR5UpCbnuExjR7be8EoEiDXh6dGl/3EsWSTyv+jJ9V7/Zm7NAAAAAElFTkSuQmCC'
 
 { #category : #sources }
 RTMondrianExample >> exampleColorInGraph [
-<gtExample> 
+<gtExample>
 <noTest>
 | b |
 (TRPlatform current dialogConfirm: 'This example takes a long time to load, execute?')
@@ -1322,7 +1322,7 @@ b shape circle.
 b nodes: ((RTObject withAllSubclasses, TRObject withAllSubclasses)).
 
 b shape line color: (Color gray alpha: 0.2).
-b edges 
+b edges
 	moveBehind;
 	connectToAll: #dependentClasses.
 b layout forceWithCharge: -80.
@@ -1330,7 +1330,7 @@ b layout forceWithCharge: -80.
 b normalizer
 	normalizeSize: [ :c | c dependentClasses size ]
 		min: 5 max: 25 using: #log;
-	normalizeColor: [ :c | c dependentClasses size ] 
+	normalizeColor: [ :c | c dependentClasses size ]
 		using: (Array with: Color green with: Color  red ) using: #log;
 	alphaColor: 0.4.
 ^ b
@@ -1535,7 +1535,7 @@ b nodes: RTObject withAllSubclasses.
 
 b normalizer
 	normalizeColor: #numberOfLinesOfCode using: (RTColorPalette sequential colors: 9 scheme: 'PuBu') using: #ln.
-	
+
 b layout grid.
 b build.
 ^ b
@@ -1552,7 +1552,7 @@ b nodes: RTObject withAllSubclasses.
 
 b normalizer
 	normalizeColor: #numberOfLinesOfCode using: (RTColorPalette diverging colors: 11 scheme: 'PRGn') using: #ln.
-	
+
 b layout grid.
 b build.
 ^ b
@@ -1722,7 +1722,7 @@ b nodes: RTObject withAllSubclasses.
 
 b normalizer
 	normalizeColor: #numberOfLinesOfCode using: (RTColorPalette sequential colors: 9 scheme: 'YlOrRd') using: #ln.
-	
+
 b layout grid.
 b build.
 ^ b
@@ -2000,7 +2000,7 @@ RTMondrianExample >> exampleColoredNodes [
 
 	| b |
 	b := RTMondrian new.
-	b shape rectangle 
+	b shape rectangle
 				width: [ :cls | cls numberOfVariables * 5];
 				height: #numberOfMethods;
 				if: [:cls | '*Layout*' match: cls name ] color: Color red;
@@ -2056,7 +2056,7 @@ b shape rectangle
 b nodes: Collection withAllSubclasses forEach: [ :cls |
 	b nodes: cls rtmethods.
 	b edges connectToAll: #dependentMethods.
-	b layout 
+	b layout
 		ifElement: #isConnected then: RTTreeLayout new;
 		else: RTGridLayout new.
  ].
@@ -2135,7 +2135,7 @@ RTMondrianExample >> exampleForce [
 
 { #category : #sources }
 RTMondrianExample >> exampleForceAndNested [
-	<gtExample> 
+	<gtExample>
 	<noTest>
 	| b |
 	(TRPlatform current dialogConfirm: 'This example takes a long time to load, execute?')
@@ -2151,7 +2151,7 @@ RTMondrianExample >> exampleForceAndNested [
 	b edges connectFrom: #superclass.
 	b layout tree.
 	b build.
-	
+
 	^ b view
 ]
 
@@ -2268,10 +2268,10 @@ b shape ellipse size: 20;
 	if: [ :value | values includes: value ]  fillColor: Color red.
 b nodes: (1 to: 300).
 "b shape line color: Color white."
-b edges 
+b edges
 	moveBehind;
-	connectToAll: [ :value | 
-	(value \\ 30 = 0) 
+	connectToAll: [ :value |
+	(value \\ 30 = 0)
 		ifTrue: [ Array with: (value + 30) ]
 		ifFalse: [ Array with: (value + 1) with: (value + 30) ]
 	 ].
@@ -2280,11 +2280,11 @@ b build.
 
 ff := RTForceBasedLayout new.
 ff initialLayout: (RTGridLayout new lineItemsCount: 30).
-RTForceLayoutStepping new 
-	view: b view; 
+RTForceLayoutStepping new
+	view: b view;
 	layout: ff;
 	inView: b view.
-^ b view 
+^ b view
 ]
 
 { #category : #icons }
@@ -2381,7 +2381,7 @@ RTMondrianExample >> exampleInnerAndPopup [
 	| b |
 	b := RTMondrian new.
 	b shape rectangle withTextAbove.
-	b nodes: RTShape withAllSubclasses forEach: [:cls | 
+	b nodes: RTShape withAllSubclasses forEach: [:cls |
 		b shape rectangle color: Color red; size: #numberOfLinesOfCode.
 		b nodes: cls rtmethods. b layout grid ].
 	b layout flow.
@@ -2521,34 +2521,34 @@ RTMondrianExample >> exampleLegendInPopup [
 	b interaction noInteractions.
 
 	b interaction popup group: [ :group :el |
-	
-		| background elements cls legend1 legend2 | 
+
+		| background elements cls legend1 legend2 |
 		elements := RTGroup new.
 		background := (RTBox new color: (Color green alpha: 0.8)) element.
-		
-		el model timesRepeat: [ 
+
+		el model timesRepeat: [
 				cls := RTEllipse.
 				50 atRandom > 25
 					ifTrue: [ cls := RTBox ].
 				elements add: (cls new size: 10; color: (Color purple alpha: 0.5)) element
 				].
 		RTGridLayout on: elements.
-		
-		
+
+
 		"Legend Good"
 		legend1 := RTGroup new.
 		legend1 add: (RTBox new size: 10; color: (Color purple alpha: 0.5)) element.
 		legend1 add: (RTLabel elementOn: '= Good').
 		RTHorizontalLineLayout on: legend1.
-		
+
 		"Legend Bad"
 		legend2 := RTGroup new.
 		legend2 add: (RTEllipse new size: 10; color: (Color purple alpha: 0.5)) element.
 		legend2 add: (RTLabel elementOn: '= Bad').
 		RTHorizontalLineLayout on: legend2.
-		
-		RTVerticalLineLayout new gapSize: 0; on: (Array with: legend1 with: legend2 with: elements). 
-		
+
+		RTVerticalLineLayout new gapSize: 0; on: (Array with: legend1 with: legend2 with: elements).
+
 			RTNest new centerOn: background elements: (Array with: legend1 with: legend2 with: elements).
 
 		group add: background.
@@ -2559,7 +2559,7 @@ RTMondrianExample >> exampleLegendInPopup [
 	b shape rectangle size: #yourself.
 	b nodes: (1 to:50).
 	b layout grid.
-	
+
 	^ b view
 ]
 
@@ -2592,10 +2592,10 @@ RTMondrianExample >> exampleNestingAndPopup [
 	b interaction noInteractions.
 
 	b interaction popup group: [ :group :el |
-		| background elements | 
+		| background elements |
 		elements := OrderedCollection new.
 		background := (RTBox new color: (Color green alpha: 0.5)) element.
-		el model timesRepeat: [ 
+		el model timesRepeat: [
 				elements add: (RTBox new size: 10; color: (Color purple alpha: 0.5)) element.
 				].
 		RTGridLayout on: elements.
@@ -2606,7 +2606,7 @@ RTMondrianExample >> exampleNestingAndPopup [
 	b shape rectangle size: #yourself.
 	b nodes: (1 to:50).
 	b layout grid.
-	
+
 	b build.
 	^ b view
 ]
@@ -2633,7 +2633,7 @@ RTMondrianExample >> exampleNestingAndTitle [
 	| b |
 	b := RTMondrian new.
 	b shape rectangle withTextAbove.
-	b nodes: RTShape withAllSubclasses forEach: [:cls | 
+	b nodes: RTShape withAllSubclasses forEach: [:cls |
 		b shape rectangle color: Color white; size: #numberOfLinesOfCode.
 		b nodes: cls rtmethods. b layout grid ].
 	b flowLayout.
@@ -2735,7 +2735,7 @@ b normalizer
 	objects: RTObject withAllSubclasses;
 	normalizeSize: #numberOfMethods min: 5 max: 30 using: [:value | (value + 1) ln ];
 	normalizeColor: #numberOfMethods using: (Array with: Color gray with: Color blue with: Color red ) using: [ :value | (value + 1) ln ].
-	
+
 b layout flow.
 b build.
 ^ b
@@ -2830,10 +2830,10 @@ b := RTMondrian new.
 b nodes: (1 to: 300).
 b edges connectFrom: [ :value | value // 2 ].
 
-b shape 
+b shape
 	bezierLineFollowing: [ :value | value // 2 ];
 	color: Color blue trans.
-b edges 
+b edges
 	notUseInLayout;
 	connectTo: [ :value | (value / 10) asInteger + (value \\ 10) ].
 
@@ -3112,7 +3112,7 @@ b normalizer
 	objects: classes;
 	normalizeSize: #numberOfMethods min: 5 max: 30;
 	normalizeColor: #numberOfLinesOfCode using: (Array with: Color green with: Color red ) using: #sqrt.
-	
+
 
 b layout
 		for: [ :c | c includesBehavior: RTLayout ] use: RTForceBasedLayout new;
@@ -3249,11 +3249,11 @@ nbOfNodes := 40.
 nbOfRandomEdges := 40.
 
 nodes := 1 to: nbOfNodes.
-edges := (1 to: nbOfRandomEdges) 
+edges := (1 to: nbOfRandomEdges)
 				collect: [ :notUsed | nodes atRandom -> nodes atRandom ].
 
 "
-In case you do not wish random data. You can set it manually. 
+In case you do not wish random data. You can set it manually.
 nodes := #(1 2 3 4 5).
 edges := { 1 -> 2 . 1 -> 4 . 4 -> 3 }.
 "
@@ -3602,7 +3602,7 @@ RTMondrianExample >> exampleSimpleNesting [
 
 	| b |
 	b := RTMondrian new.
-	
+
 	b nodes: (1 to: 20) forEach: [ :each |
 		b nodes: (1 to: (each)).
 		b layout grid.
@@ -3724,11 +3724,11 @@ RTMondrianExample >> exampleStyledLabels [
 
 | b |
 b := RTMondrian new.
-b shape styledLabel 
+b shape styledLabel
 	height: 80;
 	bold.
 b node: 'Hello'.
-b shape styledLabel 
+b shape styledLabel
 	height: 80;
 	italic.
 b node: 'World'.
@@ -3772,7 +3772,7 @@ RTMondrianExample >> exampleSystemComplexity [
 
 	| b |
 	b := RTMondrian new.
-	b shape rectangle 
+	b shape rectangle
 				withBorder;
 				width: [ :cls | cls numberOfVariables * 5];
 				height: #numberOfMethods;
@@ -3795,12 +3795,12 @@ b shape rectangle
 
 b nodes: RTObject withAllSubclasses.
 
-b edges 
+b edges
 	connectToAll: #subclasses.
 
 b normalizer
 	normalizeColor: #numberOfLinesOfCode using: (Array with: Color green with: Color red) using: #ln.
-	
+
 b layout tree.
 b build.
 ^ b
@@ -3919,7 +3919,7 @@ b edges
 	objects: TRShape withAllSubclasses, RTShape withAllSubclasses;
 	notUseInLayout;
 	connectToAll: #dependentClasses.
-	
+
 b layout tree.
 ^ b
 ]
@@ -3971,7 +3971,7 @@ RTMondrianExample >> examplenestedTree [
 
 	| b |
 	b := RTMondrian new.
-	
+
 	b nodes: (1 to: 100 by: 10) forEach: [ :each |
 		b nodes: (1 to: each).
 		b edges connectFrom: [ :v | v // 2 ].
@@ -3979,7 +3979,7 @@ RTMondrianExample >> examplenestedTree [
 	].
 	b layout grid.
 	b build.
-	^ b view 
+	^ b view
 ]
 
 { #category : #icons }

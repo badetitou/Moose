@@ -28,7 +28,7 @@ RTObjectBrowser >> addInteractions: b [
 	b interaction menu
 		item: 'Inspect' action: [:e | e model inspect];
 		item: 'Browse class' action: [ :e | e model class browse ];
-		item: 'Close ' action: [:e | 
+		item: 'Close ' action: [:e |
 			obj := self objects at: e model.
 			(self objects at: e model) do: #remove.
 			self objects removeKey: e model.
@@ -61,16 +61,16 @@ RTObjectBrowser >> addNewObject: anObject [
 { #category : #'adding item' }
 RTObjectBrowser >> addObject: anObject [
 	| bool |
-	
+
 	bool := false.
 	anObject ifNil: [ ^ bool ].
 	(self contains: anObject) ifFalse: [
 		self addNewObject: anObject.
 		bool := true ].
-	
+
 	self selectObject: anObject.
 	^ bool.
-	
+
 ]
 
 { #category : #testing }
@@ -82,14 +82,14 @@ RTObjectBrowser >> contains: anObject [
 RTObjectBrowser >> createElementsFor: anObject [
 	| b vars edges |
 	b := RTMondrian new.
-	b shape box color: Color veryLightGray; 
+	b shape box color: Color veryLightGray;
 		withTextAbove: [ anObject class name ].
 	self addInteractions: b.
-	
-	b node: anObject forIt: [ 
+
+	b node: anObject forIt: [
 		b shape label text: #key;
 			if: [ :assoc | assoc value isNil ] color: Color red.
-		b interaction 
+		b interaction
 			noInteractions;
 			highlight;
 			when: TRMouseClick do: [ :evt |
@@ -97,13 +97,13 @@ RTObjectBrowser >> createElementsFor: anObject [
 			popupText: [:ass | ass value asString ].
 		vars := anObject class allInstVarNames collect: [ :n |
 			n -> (anObject instVarNamed: n)].
-		
+
 		b nodes: vars.
 		b layout verticalLine ].
 	b build.
-	edges := vars 
+	edges := vars
 		select: [ :v | self objects includesKey: v value ]
-		thenCollect: [ :v | self 
+		thenCollect: [ :v | self
 			edgeFrom: (b view elementFromModel: v)
 			to: (self objects at: v value) first ].
 	^ b view elements->edges.
@@ -116,8 +116,8 @@ RTObjectBrowser >> createView [
 
 { #category : #private }
 RTObjectBrowser >> edgeFrom: e1 to: e2 [
-	^ RTArrowedLine new 
-		withShorterDistanceAttachPoint; 
+	^ RTArrowedLine new
+		withShorterDistanceAttachPoint;
 		color: Color blue;
 		edgeFrom: e1 to: e2
 ]
@@ -145,9 +145,9 @@ RTObjectBrowser >> openNewObject: evt [
 	obj ifNil: [ ^ self ].
 	self addObject: obj.
 	temp := (self objects at: obj) first.
-	(view edges select: [ :e | 
-		e from = evt element and: [ e to = temp ] ]) ifEmpty: [ 
-		view add: (self edgeFrom: evt element to: (self objects at: obj) first) ] 
+	(view edges select: [ :e |
+		e from = evt element and: [ e to = temp ] ]) ifEmpty: [
+		view add: (self edgeFrom: evt element to: (self objects at: obj) first) ]
 ]
 
 { #category : #private }
@@ -159,17 +159,17 @@ RTObjectBrowser >> positionFor: anElement [
 	res := rect corners at: last.
 	last := last + 1.
 	^ res.
-	
+
 ]
 
 { #category : #hooks }
 RTObjectBrowser >> renderIn: aView [
 	view := aView.
-	target ifNotNil: [ 
+	target ifNotNil: [
 		self addNewObject: target].
 ]
 
 { #category : #acctions }
 RTObjectBrowser >> selectObject: anObject [
-	
+
 ]

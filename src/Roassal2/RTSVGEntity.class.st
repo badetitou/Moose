@@ -31,10 +31,10 @@ RTSVGEntity >> addAnchorOn: stream [
 	list isEmpty ifTrue: [ ^ self ].
 	hasAnchor := true.
 	interaction := list first.
-	stream 
+	stream
 		nextPutAll: '<a xmlns="http://www.w3.org/2000/svg" target="_blank" ';
 		nextPutAll: interaction href.
-	 
+
 ]
 
 { #category : #interactions }
@@ -52,7 +52,7 @@ RTSVGEntity >> addExternalInteractions: aSVGVisitor [
 	| ide |
 	ide := 'pop' , self id.
 	aSVGVisitor addExternalInteractions: ide element: self element.
-	
+
 ]
 
 { #category : #style }
@@ -62,7 +62,7 @@ RTSVGEntity >> addFillColor: stream [
 			stream
 				nextPutAll: 'fill:none; '
 			  ]
-		ifFalse: [  
+		ifFalse: [
 			stream
 				nextPutAll:
 					('fill:rgb(<1p>,<2p>,<3p>); '
@@ -91,7 +91,7 @@ RTSVGEntity >> addScale: scale into: stream [
 	| s |
 	s := scale.
 	s isPoint ifFalse: [ s := s @ s ].
-	stream 
+	stream
 		nextPutAll: 'scale(';
 		nextPutAll: s x asString;
 		nextPutAll: ',';
@@ -154,9 +154,9 @@ RTSVGEntity >> addWidth: x height: y into: stream [
 { #category : #'adding-anchor' }
 RTSVGEntity >> closeAnchorOn: stream [
 	hasAnchor ifFalse: [ ^ self ].
-	stream 
+	stream
 		nextPutAll: '</a>'.
-	 
+
 ]
 
 { #category : #adding }
@@ -170,8 +170,8 @@ RTSVGEntity >> closeDefWithContent: stream [
 ]
 
 { #category : #adding }
-RTSVGEntity >> closeFullDef: stream [ 
-	stream 
+RTSVGEntity >> closeFullDef: stream [
+	stream
 		nextPutAll: '</',self type,'>';
 		nextPutAll: String cr
 ]

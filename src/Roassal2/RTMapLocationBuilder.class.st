@@ -15,7 +15,7 @@ RTMapLocationBuilder >> addPoint: geoPoint value: aValue [
 	el translateTo: (self translateGeoPositionToPixels: geoPoint).
 	el @ RTPopup.
 	view add: el.
-	
+
 	"We keep track of the added elements"
 	addedElements add: el
 ]
@@ -39,12 +39,12 @@ RTMapLocationBuilder >> example01 [
 	paris := 48.8567 @ 2.3508.
 	london := 51.507222 @ -0.1275.
 	santiago := -33.45 @ -70.666667.
-	
+
 	b := RTMapLocationBuilder new.
-	b shape circle 
+	b shape circle
 		size: #yourself;
 		color: (Color red alpha: 0.4).
-	b addPoint: paris value: 10. 
+	b addPoint: paris value: 10.
 	b addPoint: london value: 15.
 	b addPoint: santiago value: 20.
 	^ b
@@ -81,7 +81,7 @@ RTMapLocationBuilder >> example03Normalizer [
 
 	b := RTMapLocationBuilder new.
 	b shape circle.
-	b addPoint: paris value: 10. 
+	b addPoint: paris value: 10.
 	b addPoint: london value: 15.
 	b addPoint: santiago value: 20.
 	b addPoint: newYork value: 30.
@@ -104,7 +104,7 @@ RTMapLocationBuilder >> metricNormalizerClass [
 RTMapLocationBuilder >> normalizer [
 	"
 	:: Void->RTMetricNormalizer
-	
+
 	This metric normalizer assumes that elements have been already created. Which may not be the case...
 	"
 	^ super normalizer elements: addedElements; yourself
@@ -114,7 +114,7 @@ RTMapLocationBuilder >> normalizer [
 RTMapLocationBuilder >> renderAllCountriesIn: aView [
 	| el shape |
 	RTSVGPath countries
-		do: [ :name | 
+		do: [ :name |
 			shape := RTSVGPath new path: (RTSVGPath perform: name).
 			shape borderColor: Color lightGray.
 			el := shape elementOn: name asString.
@@ -362,7 +362,7 @@ RTMapLocationBuilder >> seismData [
 { #category : #examples }
 RTMapLocationBuilder >> seismData2 [
 
-"Cut and pasted from 
+"Cut and pasted from
 http://earthquake.usgs.gov/earthquakes/feed/v0.1/
 http://earthquake.usgs.gov/earthquakes/feed/v0.1/summary/2.5_month.csv"
 ^ 'DateTime,Latitude,Longitude,Depth,Magnitude,MagType,NbStations,Gap,Distance,RMS,Source,EventID,Version
@@ -1467,14 +1467,14 @@ http://earthquake.usgs.gov/earthquakes/feed/v0.1/summary/2.5_month.csv"
 { #category : #utility }
 RTMapLocationBuilder >> translateGeoPositionToPixels: point [
 	"From https://github.com/thebyrd/world-news"
-	
+
 	| longitud latitud xFactor xoffset yFactor yoffset |
 	latitud := point x.
 	longitud := point y.
-	
+
 	xFactor := 2.6938.
 	xoffset := 465.4.
-	
+
 	yFactor := -2.6938.
 	yoffset := 227.066.
 	^ ((longitud * xFactor) + xoffset) @ ((latitud * yFactor) + yoffset)

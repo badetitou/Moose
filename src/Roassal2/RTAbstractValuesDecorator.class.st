@@ -18,7 +18,7 @@ b addDecorator: deco.
 
 b axisX noTick; noLabel.
 b axisY noTick; noLabel.
-b 
+b
 "
 Class {
 	#name : #RTAbstractValuesDecorator,
@@ -45,7 +45,7 @@ RTAbstractValuesDecorator >> labelConversion [
 { #category : #accessing }
 RTAbstractValuesDecorator >> labelConversion: aBlockOrASymbol [
 	"Before creating the label, the value to be displayed may be converted using the provided block. Consider the following example:
--=-=-=-=-=-=-=-=	
+-=-=-=-=-=-=-=-=
 b := RTGrapher new.
 
 ds := RTDataSet new.
@@ -63,8 +63,8 @@ b addDecorator: deco.
 
 b axisX noTick; noLabel.
 b axisY noTick; noLabel.
-b 
--=-=-=-=-=-=-=-=	
+b
+-=-=-=-=-=-=-=-=
 	"
 	labelConversion := aBlockOrASymbol
 ]

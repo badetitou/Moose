@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 RTXMLViewerScript >> description [
-	^ 
+	^
 'Let you select a XML file and visualize it. This script open a playground on which you can easily customize the script.'
 ]
 
@@ -27,7 +27,7 @@ doc nodesDo: [ :n | allChildren add: n ].
 
 
 b := RTMondrian new.
-b shape circle 
+b shape circle
 	size: 15;
 	color: Color blue trans;
 	if: [ :n | n class == PPXmlText and: [ n data lines includes: ''        Type: OUTPUT'' ]] fillColor: Color red;
@@ -36,7 +36,7 @@ b shape circle
 	if: [ :n | n class == PPXmlText and: [ n data lines includes: ''        Type: INNER'' ]] fillColor: Color orange.
 b nodes: allChildren.
 b layout radial.
-b edges 
+b edges
 	moveBehind;
 	connectFrom: #parent.
 b '

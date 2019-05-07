@@ -49,7 +49,7 @@ RTAbstractVerticalValuesDecorator >> render [
 	offset := -30 @ 0.
 	tickSize := 5.
 	values
-		do: [ :aValue | 
+		do: [ :aValue |
 			position := builder getPixelPositionOf: 0 @ aValue.
 			self label: (labelConversion rtValue: aValue) asString on: position + offset color: self labelColor.
 			self shape line color: self labelColor.

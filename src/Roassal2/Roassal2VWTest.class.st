@@ -10,7 +10,7 @@ Class {
 { #category : #helpers }
 Roassal2VWTest >> hasArraySelector: met [
 	^ self hasRBArray: met ast.
-	
+
 ]
 
 { #category : #helpers }
@@ -20,7 +20,7 @@ Roassal2VWTest >> hasRBArray: node [
 		(self hasRBArray: child) ifTrue: [ ^ true ].
 		 ].
 	^ false.
-	
+
 ]
 
 { #category : #helpers }
@@ -38,7 +38,7 @@ Roassal2VWTest >> testNoArray [
 	t := Roassal2VW new.
 	ex := t exporter.
 	ex ifNil: [ ^ self ].
-	ex methods do: [ :met | 
+	ex methods do: [ :met |
 		self deny: (ex hasArray: met)
 			description: 'Remove brackets {} from: ',met methodClass name,'>>#', met selector.
 	 ] displayingProgress: [:met | 'Processing method: ', met selector ].

@@ -25,7 +25,7 @@ RTEventForwarder >> eventClass: trEventClass [
 { #category : #initialization }
 RTEventForwarder >> initialize [
 	super initialize.
-	eventClass := TREvent. 
+	eventClass := TREvent.
 	toObject := [ :element | element view ]
 ]
 
@@ -33,7 +33,7 @@ RTEventForwarder >> initialize [
 RTEventForwarder >> initializeElement: element [
 	element
 		when: eventClass
-		do: [ :e | 
+		do: [ :e |
 			(toObject rtValue: element) announce: e ]
 ]
 

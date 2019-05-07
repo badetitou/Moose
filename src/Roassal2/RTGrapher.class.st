@@ -2,8 +2,8 @@
 RTGrapher describes a chart. Data set may be added and axis may be configured. Consider the following example:
 
 b := RTGrapher new.
-ds := RTDataSet new. 
-ds dotShape color: Color red. 
+ds := RTDataSet new.
+ds dotShape color: Color red.
 ds points: #(5 1 20 8).
 b add: ds.
 b build.
@@ -27,7 +27,7 @@ RTGrapher >> add: aDataSet [
 	"Essential method. Add a dataset into the grapher. Only non-empty set are considered"
 	self assert: [ (aDataSet isKindOf: RTAbstractData) or: [ aDataSet isKindOf: RTAbstractDataSet ]] description: 'Wrong argument'.
 	aDataSet numberOfPoints = 0 ifTrue: [ ^ self ].
-	
+
 	datasets add: aDataSet.
 	aDataSet addedInBuilder: self
 ]
@@ -70,7 +70,7 @@ RTGrapher >> checkIfDataSetHaveBeenAdded [
 { #category : #'public - bar chart' }
 RTGrapher >> configureForBarCharts [
 	"Public method
-	
+
 	Configure the grapher to have bar within the X-axis limits
 	Here is an example:
 -=-=-=-=-=-=-=-=
@@ -132,7 +132,7 @@ RTGrapher >> hasDataSet [
 RTGrapher >> homogenizeMinAndMax [
 	| tminX tmaxX tminY tmaxY block r |
 	generator setLooseFlag: true.
-	block := [ :axis :lmin :lmax | 
+	block := [ :axis :lmin :lmax |
 		| result nticks |
 		nticks := axis numberOfTicks isZero
 			ifTrue: [ 2 ]
@@ -144,23 +144,23 @@ RTGrapher >> homogenizeMinAndMax [
 			ifFalse: [ axis numberOfLabels: result numberOfTicks ].
 		result ].
 	shouldUseNiceLabelsForX
-		ifTrue: [ 
+		ifTrue: [
 			r := block value: self getAxisX value: self minX value: self maxX.
 			self minX: (tminX := r min).
 			self maxX: (tmaxX := r max) ]
-		ifFalse: [ 
+		ifFalse: [
 			tminX := self minX.
 			tmaxX := self maxX ].
 	shouldUseNiceLabelsForY
-		ifTrue: [ 
+		ifTrue: [
 			r := block value: self getAxisY value: self minY value: self maxY.
 			self minY: (tminY := r min).
 			self maxY: (tmaxY := r max) ]
-		ifFalse: [ 
+		ifFalse: [
 			tminY := self minY.
 			tmaxY := self maxY ].
 	datasets
-		do: [ :ds | 
+		do: [ :ds |
 			ds minX: tminX.
 			ds minY: tminY.
 			ds maxX: tmaxX.
@@ -172,10 +172,10 @@ RTGrapher >> inferLegendInteractions [
 	datasets
 		select:
 			[ :each | each interaction hasInteractionOfType: RTDataHighlightInteraction ]
-		thenDo: [ :each | 
+		thenDo: [ :each |
 			(self legend legendElement attributeAt: #nestedElements)
 				select: [ :grp | grp size > 1 and: [ grp second model = each ] ]
-				thenDo: [ :grp | 
+				thenDo: [ :grp |
 					| int |
 					int := each interaction
 						interactionOfType: RTDataHighlightInteraction.
@@ -184,10 +184,10 @@ RTGrapher >> inferLegendInteractions [
 	datasets
 		select:
 			[ :each | each interaction hasInteractionOfType: RTDataToggleInteraction ]
-		thenDo: [ :each | 
+		thenDo: [ :each |
 			(self legend legendElement attributeAt: #nestedElements)
 				select: [ :grp | grp size > 1 and: [ grp second model = each ] ]
-				thenDo: [ :grp | 
+				thenDo: [ :grp |
 					| int |
 					int := each interaction
 						interactionOfType: RTDataToggleInteraction.
@@ -198,10 +198,10 @@ RTGrapher >> inferLegendInteractions [
 { #category : #initialization }
 RTGrapher >> initialize [
 	super initialize.
-	
+
 	"Collection of data sets"
 	datasets := OrderedCollection new.
-	
+
 	generator := RTLabelGenerator nice: RTNiceStepSizeGenerator new.
 	self shouldUseNiceLabels: true
 ]
@@ -209,7 +209,7 @@ RTGrapher >> initialize [
 { #category : #accessing }
 RTGrapher >> legend [
 	"Turn on the legend for the graph. In addition, the returned value can be used to complete the legend. Consider the following code:
-	
+
 -=-=-=-=
 g := RTGrapher new.
 d := RTData new.
@@ -248,7 +248,7 @@ RTGrapher >> legend: aLegendBuilder [
 
 { #category : #accessing }
 RTGrapher >> maxX [
-	^ self hasDataSet 
+	^ self hasDataSet
 		ifTrue: [ maxX max: self maxXFromDataSets ]
 		ifFalse: [ maxX ]
 ]
@@ -260,9 +260,9 @@ RTGrapher >> maxXFromDataSets [
 
 { #category : #accessing }
 RTGrapher >> maxY [
-	^ self hasDataSet 
+	^ self hasDataSet
 		ifTrue: [ maxY max: self maxYFromDataSets ]
-		ifFalse: [ maxY ] 
+		ifFalse: [ maxY ]
 ]
 
 { #category : #'data sets' }
@@ -272,7 +272,7 @@ RTGrapher >> maxYFromDataSets [
 
 { #category : #accessing }
 RTGrapher >> minX [
-	^ self hasDataSet 
+	^ self hasDataSet
 		ifTrue: [ minX min: self minXFromDataSets ]
 		ifFalse: [ minX ]
 ]
@@ -284,9 +284,9 @@ RTGrapher >> minXFromDataSets [
 
 { #category : #accessing }
 RTGrapher >> minY [
-	^ self hasDataSet 
+	^ self hasDataSet
 		ifTrue: [ minY min: self minYFromDataSets ]
-		ifFalse: [ minY ] 
+		ifFalse: [ minY ]
 ]
 
 { #category : #'data sets' }
@@ -349,8 +349,8 @@ RTGrapher >> resetLegend [
 { #category : #accessing }
 RTGrapher >> shouldUseNiceLabels: aBoolean [
 	"
-	Use an algorithm to determine the best values for the ticks. 
-	
+	Use an algorithm to determine the best values for the ticks.
+
 
 -=-=-=-=-=-=-=-=-=-=-=-=
 g := RTGrapher new.

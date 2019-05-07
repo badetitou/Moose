@@ -12,7 +12,7 @@ RTFlowLayout on: es.
 RTMetricNormalizer new
 	elements: es;
 	normalizeColor: #numberOfLinesOfCode.
-	
+
 es when: TRMouseClick do: [ :event | RTBlink new color: Color blue; on: event element ].
 v
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -73,34 +73,34 @@ RTBlink class >> highlight: element color: aColor [
 
 { #category : #public }
 RTBlink class >> highlightElements: elements [
-	^ elements do: [ :el | self highlight: el ] 
- 
+	^ elements do: [ :el | self highlight: el ]
+
 ]
 
 { #category : #public }
 RTBlink class >> highlightElements: elements color: aColor [
-	^ elements do: [ :el | self highlight: el color: aColor ] 
- 
+	^ elements do: [ :el | self highlight: el color: aColor ]
+
 ]
 
 { #category : #public }
 RTBlink class >> highlightIncomingEdgesOf: element [
 	"Blink all the edges that leave the node element"
-	element view elementsAsEdge 
+	element view elementsAsEdge
 		do: [ :edg | (edg to == element) ifTrue: [ self highlight: edg ] ].
 ]
 
 { #category : #public }
 RTBlink class >> highlightOutgoingEdgesOf: element [
 	"Blink all the edges that leave the node element"
-	element view elementsAsEdge 
+	element view elementsAsEdge
 		do: [ :edg | (edg from == element) ifTrue: [ self highlight: edg ] ].
 ]
 
 { #category : #public }
 RTBlink class >> incomingEdgesOf: element [
 	"Blink all the edges that leave the node element"
-	element view edges 
+	element view edges
 		do: [ :edg | (edg from == element) ifTrue: [ RTBlink on: edg ] ].
 ]
 
@@ -131,7 +131,7 @@ RTBlink class >> on: element in: view [
 { #category : #public }
 RTBlink class >> outgoingEdgesOf: element [
 	"Blink all the edges that leave the node element"
-	element view edges 
+	element view edges
 		do: [ :edg | (edg to == element) ifTrue: [ RTBlink on: edg ] ].
 ]
 
@@ -140,7 +140,7 @@ RTBlink class >> set: element color: aColor [
 	| shape |
 	shape := element shape.
 	(element attributes includesKey: #oldColor)
-		ifFalse: 
+		ifFalse:
 			[ element attributes at: #oldColor put: element trachelShape color.
 				element trachelShape
 					 color: aColor;
@@ -153,20 +153,20 @@ RTBlink class >> unhighlight: element [
 	(self isHighlighted: element) ifFalse: [ ^ self ].
 	shape := element trachelShape.
 	shape color: (element attributes at: #oldColor).
-	element attributes removeKey: #oldColor. 
+	element attributes removeKey: #oldColor.
 	element trachelShape signalUpdate
 ]
 
 { #category : #public }
 RTBlink class >> unhighlightElements: elements [
-	^ elements do: [ :el | self unhighlight: el ] 
- 
+	^ elements do: [ :el | self unhighlight: el ]
+
 ]
 
 { #category : #public }
 RTBlink class >> unhighlightOutgoingEdgesOf: element [
 	"Blink all the edges that leave the node element"
-	element view elementsAsEdge 
+	element view elementsAsEdge
 		do: [ :edg | (edg from == element) ifTrue: [ self unhighlight: edg ] ].
 ]
 

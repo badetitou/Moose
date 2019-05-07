@@ -1,5 +1,5 @@
 "
-RTMapLocationExample new installTitle: 'SeismOnEarth' 
+RTMapLocationExample new installTitle: 'SeismOnEarth'
 		code:
 		'
 | b tab |
@@ -14,7 +14,7 @@ color: (Color red alpha: 0.3).
 tab values do: [ :row | b addPoint: row second @ row third value: row fifth ].
 b open.
 b view canvas'
-	
+
 "
 Class {
 	#name : #RTMapLocationExample,
@@ -24,7 +24,7 @@ Class {
 
 { #category : #sources }
 RTMapLocationExample >> exampleAirports [
-	<gtExample> 
+	<gtExample>
 	<noTest>
 	| tab b ask |
 	ask := TRPlatform current dialogConfirm: 'This script takes about 1 minutes to execute. Do you want to continue?'.

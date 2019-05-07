@@ -36,7 +36,7 @@ RTNestingBehavior >> centerOn: backElement elements: elements [
 		- perform a layout if one is set"
 
 	self centerOnTrachelShape: backElement trachelShape elements: elements
-	
+
 ]
 
 { #category : #utility }
@@ -51,10 +51,10 @@ RTNestingBehavior >> centerOnTrachelShape: trachelShape elements: elements [
 
 	trachelShape extent: (encompassingRectangle width + (padding * 2)) @ (encompassingRectangle height + (padding * 2)).
 
-	off := trachelShape encompassingRectangle center - encompassingRectangle center. 
+	off := trachelShape encompassingRectangle center - encompassingRectangle center.
 	off := off asIntegerPoint.
 	elements do: [ :e | e translateBy: off ].
-	
+
 ]
 
 { #category : #utility }
@@ -68,7 +68,7 @@ RTNestingBehavior >> makeElements: elements draggableBy: backElement [
 RTNestingBehavior >> makeElements: elements draggableByTrachelShape: trachelShape [
 	| callback |
 	callback := TRTranslationCallback block: [ :shape :step | elements do: [ :e | e translateBy: step ] ].
-	trachelShape addCallback: callback 
+	trachelShape addCallback: callback
 ]
 
 { #category : #hooks }
@@ -84,12 +84,12 @@ RTNestingBehavior >> resize: backElement bounds: encompassingRectangle [
 	"it translates backElement, but does not trigger events."
 	| newRec padding |
 	padding := 5.
-	newRec := (encompassingRectangle topLeft - (padding @ padding)) extent: 
-					((encompassingRectangle width + (padding * 2)) @ 
+	newRec := (encompassingRectangle topLeft - (padding @ padding)) extent:
+					((encompassingRectangle width + (padding * 2)) @
 					 (encompassingRectangle height + (padding * 2))).
 
 	backElement
-		extent: (encompassingRectangle width + (padding * 2)) @ (encompassingRectangle height + (padding * 2)).	
+		extent: (encompassingRectangle width + (padding * 2)) @ (encompassingRectangle height + (padding * 2)).
 	backElement translateTo: encompassingRectangle center
 ]
 

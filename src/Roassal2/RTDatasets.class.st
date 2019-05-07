@@ -1,5 +1,5 @@
 "
-This class contains many data sets. 
+This class contains many data sets.
 "
 Class {
 	#name : #RTDatasets,
@@ -201,11 +201,11 @@ RTDatasets class >> listOfRDatasets [
 RTDatasets class >> load: aDataSet from: aPackage [
 	"Return a RTTabTable corresponding to a dataset name and a dataset package.
 	The list of packages and dataset available is given by executing the expression: self listOfRDatasets
-	
+
 	For example:
 	RTRDatasets load:'Titanic' from:'datasets'
 	Return the list of survival of the titatic disaster.
-	
+
 	RTRDatasets load: 'Yogurt' from: 'Ecdat'
 	Note that the returned table probably needs some column conversions.
 	"
@@ -224,7 +224,7 @@ RTDatasets class >> loadRDatasets [
 		input: 'http://vincentarelbundock.github.com/Rdatasets/datasets.csv' asUrl retrieveContents
 		usingDelimiter: $,.
 	rDataSets removeFirstRow.
-	
+
 	"Apparently, this is not necessary"
 	"rDataSets convertColumns: #(1 2 3 4) to:[:aString| aString allButFirst allButLast ]"
 ]

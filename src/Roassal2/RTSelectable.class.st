@@ -14,7 +14,7 @@ Class {
 RTSelectable >> evaluateCallback: selectedElements [
 
 	selectionCallback value: selectedElements
-	
+
 ]
 
 { #category : #actions }
@@ -37,9 +37,9 @@ RTSelectable >> isViewBeenPreparedForDeselection: aView [
 { #category : #actions }
 RTSelectable >> prepareViewBeenForDeselection: aView [
 	"Make the view react when one click on the view. Element should be unselected"
-	(self isViewBeenPreparedForDeselection: aView) 
+	(self isViewBeenPreparedForDeselection: aView)
 		ifFalse: [
-			aView when: TRMouseClick do: [ :evt | 
+			aView when: TRMouseClick do: [ :evt |
 				aView elements do: [ :e | (self isSelected: e) ifTrue: [ self unselectNoCallback: e ] ].
 				self evaluateCallback: RTGroup new.
 				aView signalUpdate ] ]
@@ -65,7 +65,7 @@ RTSelectable >> selectionCallback [
 
 { #category : #accessing }
 RTSelectable >> selectionCallback: aOneArgBlock [
-	"aOneArgBlock will be evaluated at each selection. 
+	"aOneArgBlock will be evaluated at each selection.
 	The collection of selected elements is provided to the block"
 	selectionCallback := aOneArgBlock
 ]

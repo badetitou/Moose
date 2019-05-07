@@ -24,14 +24,14 @@ RTCache >> addEvents: bitmap [
 { #category : #private }
 RTCache >> cacheElements: someElements [
 	^ self cacheElements: someElements edges: #().
-	
+
 ]
 
 { #category : #private }
 RTCache >> cacheElements: someElements edges: someEdges [
 	"This method is assuming all the elements belong to the same view"
 	| view newElement elements edges |
-	
+
 	elements := someElements asGroup.
 	edges := someEdges asGroup.
 	view := someElements anyOne view.
@@ -74,14 +74,14 @@ RTCache >> eventOfClass: anEventClass from: aMorphicEvent [
 { #category : #private }
 RTCache >> getFormElements: someElements [
 	"Return a form contains the graphical representation of the elements"
-	
+
 	| extent surface formCanvas |
 	extent := someElements extent asIntegerPoint.
 	surface := TRPlatform current surfaceClass extent: extent.
 	formCanvas := TRPlatform current formCanvasClass extent: extent.
 	formCanvas fillRectangle: ((0 @ 0) extent: extent) color: Color transparent.
 	surface
-		drawDuring: [ :cs | 
+		drawDuring: [ :cs |
 			"Probably not necessary since we have just created a surface"
 			cs pathTransform
 				translateBy: (someElements encompassingRectangle topLeft) negated asFloatPoint
@@ -116,8 +116,8 @@ RTCache >> processMouseDrag: evt [
 { #category : #private }
 RTCache >> processMouseMove: evt [
 	| currentElement trEvent |
-	shapeBeingPointed 
-		ifNil: [ 
+	shapeBeingPointed
+		ifNil: [
 			trEvent := self eventOfClass: TRMouseEnter from: evt.
 			shapeBeingPointed := trEvent shape.
 			trEvent shape announce: trEvent.
@@ -142,8 +142,8 @@ RTCache >> shapeForEvent: evt [
 RTCache >> shapeWithAction: eventClass forPositionInPixels: position [
 	| pos |
 	pos := canvas camera fromPixelToSpace: position.
-	trachelShapes reverseDo: [ :s| 
-		((s includesPoint: pos) 
+	trachelShapes reverseDo: [ :s|
+		((s includesPoint: pos)
 			and: [ s announcer handleEventClass: eventClass ]) ifTrue: [ ^ s ] ].
 	^ canvas
 ]
@@ -152,8 +152,8 @@ RTCache >> shapeWithAction: eventClass forPositionInPixels: position [
 RTCache >> shapeWithActionForPositionInPixels: position [
 	| pos |
 	pos := canvas camera fromPixelToSpace: position.
-	trachelShapes reverseDo: [ :s| 
-		((s includesPoint: pos) 
+	trachelShapes reverseDo: [ :s|
+		((s includesPoint: pos)
 			and: [ s hasEventCallback ]) ifTrue: [ ^ s ] ].
 	^ canvas
 ]

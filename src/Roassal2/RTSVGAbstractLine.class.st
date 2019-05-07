@@ -14,7 +14,7 @@ Class {
 
 { #category : #adding }
 RTSVGAbstractLine >> addMarker: stream [
-	stream 
+	stream
 		nextPutAll: 'marker-end = "url(#marker' , (self getDecorationId: self decoration) , ')" '
 ]
 
@@ -37,7 +37,7 @@ RTSVGAbstractLine >> getDecorationId: aLineDecorationShape [
 	s := aLineDecorationShape strokePaint.
 	lw := aLineDecorationShape width.
 	^(t asString, w asString, ((c red * 256) + (s red * 256)) rounded asString, ((c green * 256) + (s green * 256)) rounded asString, ((c blue * 256) + (s blue * 256)) rounded asString, lw asString)
-	
+
 ]
 
 { #category : #accessing }

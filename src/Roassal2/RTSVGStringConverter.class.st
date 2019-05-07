@@ -15,7 +15,7 @@ RTSVGStringConverter >> convertString: aString [
 	| array |
 	array := (1 to: aString size) collect: [ :n | convertions at: (aString at: n) ifAbsent: [ aString at: n ] ].
 	^ array inject: '' into: [ :acc :e | acc, (e asString) ].
-	
+
 ]
 
 { #category : #initialization }
@@ -27,7 +27,7 @@ RTSVGStringConverter >> initialize [
 
 { #category : #initialization }
 RTSVGStringConverter >> initializeValues [
-	convertions 
+	convertions
 		at: $™ put: '&#8482;';
 		at: $\ put: '&#92;';
 		at: $€ put: '&euro;';
@@ -138,6 +138,6 @@ RTSVGStringConverter >> initializeValues [
 		at: $⁷ put: '&#8311;';
 		at: $⁸ put: '&#8312;';
 		at: $⁹ put: '&#8313;';
-		
+
 		at: Character cr put: ''.
 ]

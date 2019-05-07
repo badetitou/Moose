@@ -22,20 +22,20 @@ Class {
 { #category : #accessing }
 RTMultiColoredLine >> block: aTwoArgBlock [
 	"The argument is a two arg block. The two arguments are the two points one has to draw the line. The block has to return a collection of point.
-	
+
 	The arg follows [ :fromPoint :toPoint | Array with: ... with: ... with: ... ]"
-	path := aTwoArgBlock 
+	path := aTwoArgBlock
 ]
 
 { #category : #rendering }
 RTMultiColoredLine >> colorShape [
-	self block: [ :fromPoint :toPoint | 
+	self block: [ :fromPoint :toPoint |
 		| tab |
-		
+
 		tab := Array with: fromPoint.
-		
+
 		(fromPoint = toPoint) ifFalse: [
-	
+
 			1 to: (colorArray size - 1) do: [ :i |
 				tab := tab copyWith: ( (i * (toPoint x - fromPoint x)/(colorArray size)) + (fromPoint x)) @ ( ((i* (fromPoint dist: toPoint)/(colorArray size)) / (fromPoint dist: toPoint) * (toPoint y - fromPoint y)) + (fromPoint y)).
 			]
@@ -47,7 +47,7 @@ RTMultiColoredLine >> colorShape [
 { #category : #accessing }
 RTMultiColoredLine >> colors [
 	"Return the colors used by the line"
-	^ colorArray 
+	^ colorArray
 ]
 
 { #category : #accessing }
@@ -89,7 +89,7 @@ RTMultiColoredLine >> trachelShapeFor: anEdge [
 	fromPoint := attachPoint startingPointOf: anEdge.
 	toPoint := attachPoint endingPointOf: anEdge.
 	p := path value: fromPoint value: toPoint.
-	
+
 	multiShape := TRCompositeShape new.
 	2 to: p size do: [ :i |
 		shape := TRLineShape new.
@@ -107,12 +107,12 @@ RTMultiColoredLine >> updateFor: anEdge trachelShape: trachelShape [
 	fromPoint := attachPoint startingPointOf: anEdge.
 	toPoint := attachPoint endingPointOf: anEdge.
 	p := path value: fromPoint value: toPoint.
-	(trachelShape shapes size < p size) ifTrue: [ 
+	(trachelShape shapes size < p size) ifTrue: [
 		trachelShape shapes size to: p size do: [ :i | | s |
 			s := TRLineShape new.
 			s addedIn: trachelShape canvas.
 			trachelShape addShape: s. ].
-		trachelShape 
+		trachelShape
 			propagateElement;
 			positionShapesAfterBeingAdded.
 		 ].

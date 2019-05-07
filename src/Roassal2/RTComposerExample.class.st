@@ -1,5 +1,5 @@
 "
-RTComposerExample new installTitle: 'ClassAnalysis' 
+RTComposerExample new installTitle: 'ClassAnalysis'
 		code:
 		'
 | classesToAnalyze c b b2 b3 b4 es |
@@ -10,7 +10,7 @@ c gap: 35.
 ""-------""
 b := RTGraphBuilder new.
 b view: c view.
-b nodes 
+b nodes
 	if: [ :cls | cls numberOfMethods > 10 ];
 	color: Color red.
 b edges connectFrom: #superclass; useInLayout.
@@ -47,7 +47,7 @@ b3 view: c view.
 b3 interaction popup.
 b3 objects: classesToAnalyze.
 es := b3 slice: #numberOfLinesOfCode.
-b3 globalRule 
+b3 globalRule
 		elements: es;
 		distinctColor.
 b3 build.
@@ -63,7 +63,7 @@ b4 shape ellipse size: 15; color: (Color red alpha: 0.3).
 b4 points: classesToAnalyze.
 b4 x: #numberOfMethods; y: #numberOfVariables min: 0 max: 10.
 b4 size: #numberOfLinesOfCode min: 4 max: 20 using: #sqrt.
-	
+
 b4 axisXWithNumberOfTicks: 3.
 b4 axisYWithNumberOfTicks: 4.
 b4 highlightIf: [ :cls | (cls numberOfLinesOfCode > 2000) or: [ cls numberOfVariables > 10 ] ] using: #name.
@@ -81,7 +81,7 @@ c nameGroup: #stat as: ''#methods''.
 c nameGroup: #plot as: ''NOM x NOA x LOC''.
 c open.
 c view canvas'
-	
+
 "
 Class {
 	#name : #RTComposerExample,
@@ -134,7 +134,7 @@ b3 view: c view.
 b3 interaction popup.
 b3 objects: classesToAnalyze.
 es := b3 slice: #numberOfLinesOfCode.
-b3 normalizer 
+b3 normalizer
 		elements: es;
 		distinctColor.
 b3 build.
@@ -215,7 +215,7 @@ b3 view: c view.
 b3 interaction popup.
 b3 objects: classesToAnalyze.
 es := b3 slice: #numberOfLinesOfCode.
-b3 normalizer 
+b3 normalizer
 		elements: es;
 		distinctColor.
 b3 build.
@@ -446,22 +446,22 @@ f732U85mxQ8AAAAASUVORK5CYII='
 { #category : #sources }
 RTComposerExample >> exampleWorldPopulation [
 
-	
+
 	| composer v b countries cn grapher ds |
 	composer := RTComposer new.
 	v := composer view.
-	
+
 	"========"
-	b := RTMapBuilder new.	
-	b view: v.		
-		
+	b := RTMapBuilder new.
+	b view: v.
+
 	countries := RTMapBuilder countriesPopulation select: [ :c | RTSVGPath countries includes: (c at: 1) ].
-	
+
 	cn := RTNColorLinearNormalizer
 		inContext: (countries collect: [:c | c at: 2])
 		lowColor: (Color r:0.8 g:0.8 b:1)
 		highColor: (Color r:0 g:0 b:0.3).
-	
+
 	b countries: countries named: [ :c | c at: 1 ].
 	b color: [ :dic | cn rtValue: (dic at: 2) ].
 	b withPopup: [ :c | (c at: 1) asString, ': ',(((c at: 2) / 1000000 asFloat round: 3) asString, ' Million') ].
@@ -482,10 +482,10 @@ RTComposerExample >> exampleWorldPopulation [
 	grapher axisY noDecimal; labelConversion: [ :aValue | (aValue / 1000000) round: 2]; title: 'Millions'.
 	grapher build.
 	composer group: #graph.
-	
+
 	"========"
 	composer move: #graph above: #worldMap.
-	
+
 	composer nameGroup: #worldMap as: 'Human distribution across the globe'.
 	composer nameGroup: #graph as: 'Chart'.
 	^ v

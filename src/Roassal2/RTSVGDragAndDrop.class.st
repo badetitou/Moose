@@ -38,7 +38,7 @@ RTSVGDragAndDrop >> addFunctions: aStream [
 		function Grab(evt)
 		{
   		if (!evt.target.classList.contains("dragdrop"))
-      			return; 
+      			return;
    		var targetElement = evt.target;
    		if ( BackDrop != targetElement )
    		{
@@ -69,39 +69,39 @@ RTSVGDragAndDrop >> addFunctions: aStream [
             var bb = Wrapper.getBBox();
             var centerX = bb.x + (bb.width / 2);
             var centerY = bb.y + (bb.height / 2);
-            for(var i = 0; i < lines.length; i++) 
+            for(var i = 0; i < lines.length; i++)
             {
               var p1 = lines[i].id.substring(4,lines[i].id.indexOf("_"));
               var p2 = lines[i].id.substring(lines[i].id.indexOf("_")+1);
-              if (p1 == "" + idNum) 
+              if (p1 == "" + idNum)
               {
                 lines[i].setAttributeNS(null, ''x1'', centerX);
                 lines[i].setAttributeNS(null, ''y1'', centerY);
               }
-              else if (p2 == "" + idNum) 
+              else if (p2 == "" + idNum)
               {
                 lines[i].setAttributeNS(null, ''x2'', centerX);
                 lines[i].setAttributeNS(null, ''y2'', centerY);
               }
             }
-            for(var j =0; j < beziers.length; j++) 
+            for(var j =0; j < beziers.length; j++)
             {
               var p1 = beziers[j].id.substring(6,beziers[j].id.indexOf("_"));
               var p2 = beziers[j].id.substring(beziers[j].id.indexOf("_")+1);
               var split = beziers[j].getAttribute(''d'').split(" ");
-              if (p1 == "" + idNum) 
+              if (p1 == "" + idNum)
               {
                 split.shift();
                 beziers[j].setAttributeNS(null, ''d'', "M"+centerX+","+centerY+" "+split.join(" "));
               }
-              else if (p2 == "" + idNum) 
+              else if (p2 == "" + idNum)
               {
                 var pref = "";
                 if (split[split.length-1].charAt(0) == ''L'')
                   pref = "L";
                 split.pop();
                 beziers[j].setAttributeNS(null, ''d'', split.join(" ")+" "+pref+centerX+","+centerY);
-              }                            
+              }
             }
    		}
 		};
@@ -121,7 +121,7 @@ RTSVGDragAndDrop >> addFunctions: aStream [
 		function GetTrueCoords(evt)
 		{
 		if (SVGRoot == null)
-			return; 		
+			return;
    		var newScale = SVGRoot.currentScale;
    		var translation = SVGRoot.currentTranslate;
    		TrueCoords.x = (evt.clientX - translation.x)/newScale;

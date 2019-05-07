@@ -11,7 +11,7 @@ Class {
 RTHowToContribute class >> menuCommandOn: aBuilder [
 	<worldMenu>
 	(aBuilder item: ('Make ', self projectName, ' Better') asSymbol)
-			order: 0.002; 
+			order: 0.002;
 			parent: #Roassal;
 			label: 'Make ', self projectName, ' Better';
 			help: 'How to contribute to ', self projectName;
@@ -25,7 +25,7 @@ RTHowToContribute >> addAnimationTo: v [
 	v when: TRMouseClick do: [ :event | v clean ].
 	v
 		when: TRMouseMove
-		do: [ :event | 
+		do: [ :event |
 			e := (RTEllipse new
 				color: "(Color blue alpha: 0.2)" (RTPalette c1 atRandom alpha: 0.2);
 				size: 20 atRandom + 5) element.
@@ -49,7 +49,7 @@ RTHowToContribute >> open [
 	v add: (RTBitmap new form: self picAsForm) element.
 	labels := RTLabel
 		elementsOn:
-			#('You can help us making Roassal better by:' 
+			#('You can help us making Roassal better by:'
 			'  - Sharing your cool visualizations'
 			'  - Submitting bug fixes'
 			'  - Saying hello on Slack'
@@ -60,8 +60,8 @@ RTHowToContribute >> open [
 		add:
 			((RTLabel new color: Color veryVeryDarkGray)
 				elementOn: 'http://AgileVisualization.com').
-				
-				
+
+
 	"labels
 		addAll:
 			(RTLabel

@@ -18,14 +18,14 @@ RTNetworkLatencyPlugin >> execute [
 		load.
 	(Smalltalk at: #ConfigurationOfNetworkLatency)
 		loadDefault.
-		
+
 	(Smalltalk at: #NLVisualise) new open
 ]
 
 { #category : #testing }
 RTNetworkLatencyPlugin >> isLoaded [
 	^ RPackageOrganizer default includesPackageNamed: 'ConfigurationOfNetworkLatency'
- 
+
 ]
 
 { #category : #hooks }

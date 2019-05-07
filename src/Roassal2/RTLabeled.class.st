@@ -1,7 +1,7 @@
 "
 A RTLabeled  adds a label above an element. The label may be particularized using #text: in the default string representation is not sufficient. Consider:
 
-E.g., 
+E.g.,
 v := RTView new.
 e := (RTEllipse new size: 30) elementOn: 42.
 v add: e.
@@ -68,13 +68,13 @@ RTLabeled >> initialize [
 	self top.
 	color := Color gray.
 	lowColor := Color veryVeryLightGray.
-	
-	highlightable := false. 
+
+	highlightable := false.
 	offsetOnEdge := 0.5.
 
 	fontSize := TRLabelShape defaultFontSize.
 
-	canvas := [ :el | 
+	canvas := [ :el |
 		el view ifNil: [ self error: 'You are trying to use RTLabelled on an element before adding the element to the view. Two solutions: (i) specify the view to the RTLabelled (using #view:) or (ii) use RTLabelled after having added the element' ].
 		el view canvas ]
 ]
@@ -83,7 +83,7 @@ RTLabeled >> initialize [
 RTLabeled >> initializeElement: element [
 	| s t |
 	"We first get a reference to the canvas, and then we add the shape in it"
-	"We are using the variable canvas to let the user specificy the canvas (or the view) before 
+	"We are using the variable canvas to let the user specificy the canvas (or the view) before
 	adding the element into it"
 	"Make sure that if we remove the element, the trachel shape is also removed"
 	"Not really nice. Maybe a different solution could be to have a double dispatch"

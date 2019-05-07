@@ -71,7 +71,7 @@ CD8QfvED4QfCr1rqFwbGcUaeNWcPAAAAAElFTkSuQmCC'
 RTAxisAdaptedBuilderExample >> boxesFlowLayout [
 	<gtExample>
 	<iconSelectorBase64: #boxesFlowLayoutIcon>
-	
+
 	"RTAxisAdaptedBuilderExample new boxesFlowLayout"
 	| view coll n  b |
 	view := RTView new.
@@ -144,7 +144,7 @@ RTAxisAdaptedBuilderExample >> withColorPalette [
 RTAxisAdaptedBuilderExample >> withComposer [
 	<gtExample>
 	<iconSelectorBase64: #withComposerIcon>
-	
+
 	"RTAxisAdaptedBuilderExample new withComposer"
 	| c b |
 	c := RTComposerExample new exampleClassAnalysis2.
@@ -225,7 +225,7 @@ AABJRU5ErkJggg=='
 RTAxisAdaptedBuilderExample >> withMondrian1 [
 	<gtExample>
 	<iconSelectorBase64: #withMondrian1Icon>
-	
+
 	"RTAxisAdaptedBuilderExample new withMondrian1"
 	| c b |
 	c := RTMondrianExample new exampleNormalization .
@@ -235,7 +235,7 @@ RTAxisAdaptedBuilderExample >> withMondrian1 [
 	b margin: 20.
 	b objects:  c view elements.
 	b build.
-	^ b view. 
+	^ b view.
 ]
 
 { #category : #icons }

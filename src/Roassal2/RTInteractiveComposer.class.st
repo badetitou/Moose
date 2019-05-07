@@ -47,12 +47,12 @@ RTInteractiveComposer >> prepareForInteraction: aViewOrBuilder [
 	| view |
 	aViewOrBuilder build.
 	view := aViewOrBuilder view.
-	 
+
 	view elements when: TRMouseClick do: [ :evt |
 		| w |
-		
+
 		w := self openOn: evt element model.
-		(nextWindow notNil and: [ w notNil ]) ifTrue: [ 
+		(nextWindow notNil and: [ w notNil ]) ifTrue: [
 			w position: nextWindow position.
 			w extent: nextWindow extent.
 			nextWindow delete.

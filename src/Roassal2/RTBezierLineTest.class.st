@@ -16,7 +16,7 @@ RTBezierLineTest >> testBasic [
 
 	edge := (RTBezierLine new controllingElements: v elements) edgeFrom: els first to: els last.
 	v add: edge.
-	
+
 	self assert: (els first connectedEdges includes: edge).
 	self assert: (els second connectedEdges includes: edge).
 	self assert: (els third connectedEdges includes: edge).
@@ -26,21 +26,21 @@ RTBezierLineTest >> testBasic [
 { #category : #tests }
 RTBezierLineTest >> testControllingElementsAndBlock [
 	| es shape1 edge1 shape2 edge2 v |
-	
+
 	es := RTBox elementsOn: (1 to: 5).
 	v := RTView new.
 	v addAll: es.
-	
+
 	shape1 := RTBezierLine new.
-	shape1 controllingElements: [ :edge | 
-		Array 
+	shape1 controllingElements: [ :edge |
+		Array
 			with: (v elementFromModel: 2)
 			with: (v elementFromModel: 3) ].
 	edge1 := shape1 edgeFrom: es first to: es fourth.
-	
+
 	shape2 := RTBezierLine new.
-	shape2 controllingElements: [ :edge | 
-		Array 
+	shape2 controllingElements: [ :edge |
+		Array
 			with: (v elementFromModel: 3)
 			with: (v elementFromModel: 4) ].
 	edge2 := shape2 edgeFrom: es first to: es last.
@@ -50,15 +50,15 @@ RTBezierLineTest >> testControllingElementsAndBlock [
 { #category : #tests }
 RTBezierLineTest >> testControllingElementsAndBlock02 [
 	| es shape1 edge1 shape2 edge2 |
-	
+
 	es := RTBox elementsOn: (1 to: 5).
 	shape1 := RTBezierLine new.
-	shape1 centerOfElements: [ :edge | 
+	shape1 centerOfElements: [ :edge |
 		es copyFrom: edge from model + 1 to: edge to model - 1 ].
 	edge1 := shape1 edgeFrom: es first to: es fourth.
-	
+
 	shape2 := RTBezierLine new.
-	shape2 centerOfElements: [ :edge | 
+	shape2 centerOfElements: [ :edge |
 		es copyFrom: edge from model + 1 to: edge to model - 1 ].
 	edge2 := shape2 edgeFrom: es first to: es last.
 
@@ -74,7 +74,7 @@ RTBezierLineTest >> testControllingElementsAndBlock03 [
 	shape1 := RTBezierLine new.
 	shape1 centerOfObjects: #(2 3) inView: v.
 	edge1 := shape1 edgeFrom: es first to: es fourth.
-	
+
 	shape2 := RTBezierLine new.
 	shape1 centerOfObjects: #(3 4) inView: v.
 	edge2 := shape2 edgeFrom: es first to: es last.
@@ -92,15 +92,15 @@ RTBezierLineTest >> testControllingElementsAndBlock04 [
 	shape1 := RTBezierLine new.
 	shape1 centerOfObjects: [ :f :t | f + 1 to: t -1 ] inView: v.
 	edge1 := shape1 edgeFrom: es first to: es fourth.
-	
+
 	shape2 := RTBezierLine new.
 	shape2 centerOfObjects: [ :f :t | f + 1 to: t -1 ] inView: v.
 	edge2 := shape2 edgeFrom: es first to: es last.
 
 	v add: edge1; add: edge2.
-	
+
 	RTHorizontalLineLayout on: es.
-	
+
 "	v open."
 	self assert: edge1 trachelShape  numberOfPoints = 3.
 	self assert: edge2 trachelShape  numberOfPoints = 3
@@ -110,15 +110,15 @@ RTBezierLineTest >> testControllingElementsAndBlock04 [
 RTBezierLineTest >> testFollow [
 	| v e bezier startNode endNode edge |
 	v := RTView new.
-	e := RTBox elementsOn: (Collection withAllSubclasses). 
+	e := RTBox elementsOn: (Collection withAllSubclasses).
 	v addAll: e.
-	bezier := RTBezierLine new 
+	bezier := RTBezierLine new
 					color: Color blue;
 					follow: #superclass.
-	
+
 	startNode := v elementFromModel: OrderedCollection.
 	self assert: (bezier getFollowersOf: startNode using: #superclass) size = 3.
-	
+
 	endNode := v elementFromModel: Bag.
 	edge := bezier edgeFrom: startNode to: endNode.
 	self assert: ((bezier getControllingElementsFromFollowFor: edge using: #superclass) collect: #model) asArray = (Array with: SequenceableCollection with: Collection).
@@ -136,7 +136,7 @@ RTBezierLineTest >> testFromTo [
 	e2 @ RTDraggable.
 	l := RTBezierLine new controllingElements: (Array with: e3); edgeFrom: e1 to: e2.
 	v add: e1; add: e2; add: l.
-	
+
 	self assert: l from == e1.
 	self assert: l to == e2.
 ]
@@ -146,7 +146,7 @@ RTBezierLineTest >> testFromToAndControllingElements [
 
 	| e1 e2 l |
 	e1 := RTBox element.
-	e2 := RTBox element.	
+	e2 := RTBox element.
 	l := RTBezierLine edgeFrom: e1 to: e2.
 	self assert: l shape controllingElements isEmpty
 ]
@@ -161,10 +161,10 @@ RTBezierLineTest >> testHorizontal [
 	e2 := shape element.
 	e2 translateBy: 50 @ 25.
 	v add: e1; add: e2.
-	
+
 	e := RTBezierLine horizontal edgeFrom: e1 to: e2.
 	v add: e.
-	
+
 ]
 
 { #category : #'vertical horizontal' }
@@ -176,10 +176,10 @@ RTBezierLineTest >> testHorizontal02 [
 	e1 := shape element.
 	e2 := shape element.
 	v add: e1; add: e2.
-	
+
 	e := RTBezierLine horizontal edgeFrom: e1 to: e2.
 	v add: e.
-	
+
 ]
 
 { #category : #tests }
@@ -212,10 +212,10 @@ RTBezierLineTest >> testVertical [
 	e2 := shape element.
 	e2 translateBy: 50 @ 25.
 	v add: e1; add: e2.
-	
+
 	e := RTBezierLine vertical edgeFrom: e1 to: e2.
 	v add: e.
-	
+
 ]
 
 { #category : #'vertical horizontal' }
@@ -227,8 +227,8 @@ RTBezierLineTest >> testVertical02 [
 	e1 := shape element.
 	e2 := shape element.
 	v add: e1; add: e2.
-	
+
 	e := RTBezierLine horizontal edgeFrom: e1 to: e2.
 	v add: e.
-	
+
 ]

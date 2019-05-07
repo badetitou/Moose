@@ -99,7 +99,7 @@ RTText >> wrap: aText to: maxWidth [
 	line := OrderedCollection new.
 	lines add: line.
 	words
-		do: [ :word | 
+		do: [ :word |
 			ww := font widthOfString: word.
 			lineWidth = 0
 				ifTrue: [ line add: word.

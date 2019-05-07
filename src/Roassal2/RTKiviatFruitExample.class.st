@@ -37,7 +37,7 @@ RTKiviatFruitExample >> name [
 { #category : #accessing }
 RTKiviatFruitExample >> name: aString [
 	name := aString
-	
+
 ]
 
 { #category : #printing }

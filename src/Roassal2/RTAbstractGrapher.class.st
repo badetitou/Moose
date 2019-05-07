@@ -47,7 +47,7 @@ RTAbstractGrapher >> axisXFrom: aPoint to: anotherPoint [
 	axisConfigurationX toPoint: anotherPoint.
 	axisConfigurationX hasMaxValueBeenManuallySet
 		ifFalse: [ axisConfigurationX maxValue: self maxX ].
-	axisConfigurationX hasMinValueBeenManuallySet 
+	axisConfigurationX hasMinValueBeenManuallySet
 		ifFalse: [ axisConfigurationX minValue: self minX ].
 	axisConfigurationX axisFrom: aPoint to: anotherPoint
 
@@ -104,10 +104,10 @@ RTAbstractGrapher >> decorators [
 
 { #category : #utility }
 RTAbstractGrapher >> defineAxesIfNecessary [
-	
+
 	self isXAxisDefined ifFalse: [ self axisX ].
 	self isYAxisDefined ifFalse: [ self axisY ].
-	
+
 ]
 
 { #category : #'public - accessing' }
@@ -128,7 +128,7 @@ RTAbstractGrapher >> getAxisX [
 
 { #category : #'private - accessing' }
 RTAbstractGrapher >> getAxisY [
-	^ axisConfigurationY 
+	^ axisConfigurationY
 ]
 
 { #category : #'private - accessing' }
@@ -140,7 +140,7 @@ RTAbstractGrapher >> getPixelPositionOf: aPoint [
 		getValue: aPoint x min: 0 max: self extent x minValue: minX maxValue: maxX.
 	anY := RTMetricNormalizer new
 		getValue: aPoint y min: 0 max: self extent y negated minValue: minY maxValue: maxY.
-			
+
 	^ anX @ anY
 ]
 
@@ -153,7 +153,7 @@ RTAbstractGrapher >> getPositionFromPixelPosition: aPoint [
 		getValue: aPoint x min: minX max: maxX minValue: 0 maxValue: self extent x.
 	anY := RTMetricNormalizer new
 		getValue: aPoint y min: minY max: maxY negated minValue: 0 maxValue: self extent y.
-			
+
 	^ anX @ anY negated
 ]
 
@@ -171,7 +171,7 @@ RTAbstractGrapher >> initialize [
 	maxX := 0.
 	maxY := 0.
 	self withOrigin.
-	
+
 	"Collection of decorators"
 	decorators := OrderedCollection new
 ]
@@ -205,10 +205,10 @@ RTAbstractGrapher >> maxX: aNumber [
 	b add: ds.
 	b maxX: 10.
 	b
-	
-	Note that the provided argument should be greater than 0. This is because the 0 @ 0 point is always in the graph. 
 
-	If you want to excluse the 0 @ 0 from the produced graph, we suggest you to read Section 6 (Translating the Y axis), in 
+	Note that the provided argument should be greater than 0. This is because the 0 @ 0 point is always in the graph.
+
+	If you want to excluse the 0 @ 0 from the produced graph, we suggest you to read Section 6 (Translating the Y axis), in
 	https://dl.dropboxusercontent.com/u/31543901/AgileVisualization/Grapher/0203-Grapher.html
 	"
 	maxX := aNumber
@@ -231,10 +231,10 @@ RTAbstractGrapher >> maxY: aNumber [
 	b add: ds.
 	b maxY: 10.
 	b
-	
-	Note that the provided argument should be greater than 0. This is because the 0 @ 0 point is always in the graph. 
 
-	If you want to excluse the 0 @ 0 from the produced graph, we suggest you to read Section 6 (Translating the Y axis), in 
+	Note that the provided argument should be greater than 0. This is because the 0 @ 0 point is always in the graph.
+
+	If you want to excluse the 0 @ 0 from the produced graph, we suggest you to read Section 6 (Translating the Y axis), in
 	https://dl.dropboxusercontent.com/u/31543901/AgileVisualization/Grapher/0203-Grapher.html
 	"
 	maxY := aNumber
@@ -257,10 +257,10 @@ RTAbstractGrapher >> minX: aNumber [
 	b add: ds.
 	b minX: -10.
 	b
-	
-	Note that the provided argument should be lesser than 0. This is because the 0 @ 0 point is always in the graph. 
 
-	If you want to excluse the 0 @ 0 from the produced graph, we suggest you to read Section 6 (Translating the Y axis), in 
+	Note that the provided argument should be lesser than 0. This is because the 0 @ 0 point is always in the graph.
+
+	If you want to excluse the 0 @ 0 from the produced graph, we suggest you to read Section 6 (Translating the Y axis), in
 	https://dl.dropboxusercontent.com/u/31543901/AgileVisualization/Grapher/0203-Grapher.html
 	"
 	minX := aNumber
@@ -283,10 +283,10 @@ RTAbstractGrapher >> minY: aNumber [
 	b add: ds.
 	b minY: -10.
 	b
-	
-	Note that the provided argument should be lesser than 0. This is because the 0 @ 0 point is always in the graph. 
 
-	If you want to excluse the 0 @ 0 from the produced graph, we suggest you to read Section 6 (Translating the Y axis), in 
+	Note that the provided argument should be lesser than 0. This is because the 0 @ 0 point is always in the graph.
+
+	If you want to excluse the 0 @ 0 from the produced graph, we suggest you to read Section 6 (Translating the Y axis), in
 	https://dl.dropboxusercontent.com/u/31543901/AgileVisualization/Grapher/0203-Grapher.html
 	"
 	minY := aNumber
@@ -328,7 +328,7 @@ RTAbstractGrapher >> withOrigin [
 { #category : #public }
 RTAbstractGrapher >> withoutOrigin [
 	"If you have points far away from 0@0 it may be better to let the axes meet at a more closer place than 0@0."
-	
+
 	"
 	Here is an example:
 g := RTGrapher new.

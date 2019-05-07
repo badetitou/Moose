@@ -41,5 +41,5 @@ RTInteractionTest >> testMouseHoverZoom [
 	self assert: element extent equals: 60 @ 60.
 	element testCaseAnnounce: TRMouseLeave.
 	self assert: element extent equals: 30 @ 30.
-	
+
 ]

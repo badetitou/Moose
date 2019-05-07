@@ -27,17 +27,17 @@ RTAddElementAnimation >> element: anElement during: seconds [
 	rect := element encompassingRectangle.
 	side := (rect extent x max: rect extent y) * 1.5.
 	shapes := shape elementsOn: (1 to: numberOfShapes).
-	
+
 	anElement view addAll: shapes.
 	center := rect center.
-	shapes do: [ :e | 
+	shapes do: [ :e |
 		e extent: 0@0.
 		e pushBack].
 	animatedValue := TRVIAnimatedValue new
 		evaluator: [ :t | t ];
 		timer: (TRVITimer new cycleLength: seconds);
 		yourself.
-	
+
 	self after: [ shapes do: #remove ].
 ]
 
@@ -62,16 +62,16 @@ RTAddElementAnimation >> numberOfShapes: aNumber [
 RTAddElementAnimation >> refresh [
 	| t f a |
 	t := animatedValue value.
-	shapes doWithIndex: [ :e :i | 
+	shapes doWithIndex: [ :e :i |
 		e translateTo: center.
 		f := i * 0.5 / shapes size.
-		(t - f) > 0 ifTrue: [ 
+		(t - f) > 0 ifTrue: [
 			a := side interpolateTo: 0 at: (t - f).
-			
+
 			e extent: a @ a  ]
 		 ].
 	element signalUpdate.
-	
+
 ]
 
 { #category : #accessing }

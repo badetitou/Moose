@@ -29,7 +29,7 @@ RTDecoration >> displayDecoration: anElement [
 ]
 
 { #category : #actions }
-RTDecoration >> hideDecoration: anElement [ 
+RTDecoration >> hideDecoration: anElement [
 	| decorations callback |
 	decorations := anElement attributeAt: #decoration ifAbsent: [ ^ self ].
 	decorations do: #remove.
@@ -45,29 +45,29 @@ RTDecoration >> initialize [
 ]
 
 { #category : #hooks }
-RTDecoration >> initializeElement: aRTElement [ 
-	aRTElement 
-		when: TRMouseEnter 
-		do: [ :anEvent | 
+RTDecoration >> initializeElement: aRTElement [
+	aRTElement
+		when: TRMouseEnter
+		do: [ :anEvent |
 			self displayDecoration: aRTElement.
 			anEvent signalUpdate ].
-	
-	aRTElement 
-		when: TRMouseLeave 
+
+	aRTElement
+		when: TRMouseLeave
 		do: [ :anEvent |
 			self hideDecoration: aRTElement.
 			anEvent signalUpdate ]
 ]
 
 { #category : #public }
-RTDecoration >> shape: aRTShape action: anOneArgBlock [ 
-	self shape: aRTShape tooltip: nil action: anOneArgBlock 
+RTDecoration >> shape: aRTShape action: anOneArgBlock [
+	self shape: aRTShape tooltip: nil action: anOneArgBlock
 ]
 
 { #category : #public }
-RTDecoration >> shape: aRTShape tooltip: tooltipString action: anOneArgBlock [ 
-	items add: (RTDecorationItem new 
-									shape: aRTShape; 
+RTDecoration >> shape: aRTShape tooltip: tooltipString action: anOneArgBlock [
+	items add: (RTDecorationItem new
+									shape: aRTShape;
 									tooltip: tooltipString;
 									action: anOneArgBlock;
 									yourself)

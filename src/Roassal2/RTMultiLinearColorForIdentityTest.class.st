@@ -11,29 +11,29 @@ Class {
 RTMultiLinearColorForIdentityTest >> testBasic [
 
 	| n s e |
-	n := RTMultiLinearColorForIdentity new 
-				command: #first; 
+	n := RTMultiLinearColorForIdentity new
+				command: #first;
 				objects: #(#c1 #c2 #c3 #c4 #c5);
 				yourself.
 	s := RTBox new color: n.
 	e := s elementsOn: #(#(c1) #(c2) #(c3) #(c4) #(c5)).
 	RTView new add: e.
-	
+
 ]
 
 { #category : #tests }
 RTMultiLinearColorForIdentityTest >> testColorOfObject [
 
 	| n s elements |
-	n := RTMultiLinearColorForIdentity new 
-				command: #first; 
+	n := RTMultiLinearColorForIdentity new
+				command: #first;
 				objects: #(#c1 #c2 #c3 #c4 #c5);
 				yourself.
 	s := RTBox new color: n.
 	elements := s elementsOn: #(#(c1) #(c2) #(c3) #(c4) #(c5)).
 	RTGridLayout on: elements.
 	RTView new add: elements.
-	
+
 	self assert: (n colorOf: #c1) equals: (elements first trachelShape color).
 	self assert: (n colorOf: #c5) equals: (elements last trachelShape color).
 ]
@@ -43,7 +43,7 @@ RTMultiLinearColorForIdentityTest >> testDefaultColor [
 
 	| v wordsToHighlight normalizer shape strings es |
 	v := RTView new.
-	
+
 	wordsToHighlight := #('all' 'me' 'you').
 	normalizer := RTMultiLinearColorForIdentity new.
 	normalizer objects: wordsToHighlight.
@@ -63,7 +63,7 @@ RTMultiLinearColorForIdentityTest >> testMultipleColors [
 
 	| v wordsToHighlight normalizer shape strings es |
 	v := RTView new.
-	
+
 	wordsToHighlight := #('red' 'yellow' 'green' ).
 	normalizer := RTMultiLinearColorForIdentity new.
 	normalizer colors: (Array with: Color red with: Color yellow with: Color green).
@@ -90,8 +90,8 @@ RTMultiLinearColorForIdentityTest >> testMultipleColors [
 	"rare cases"
 	self assert: (normalizer level: -10) equals: Color red.
 	self assert: (normalizer level: 10) equals: Color green.
-	
-	
+
+
 ]
 
 { #category : #tests }
@@ -99,7 +99,7 @@ RTMultiLinearColorForIdentityTest >> testTwoColors [
 
 	| v wordsToHighlight normalizer shape strings es |
 	v := RTView new.
-	
+
 	wordsToHighlight := #('green' 'red').
 	normalizer := RTMultiLinearColorForIdentity new.
 	normalizer colors: (Array with: Color green with: Color red).

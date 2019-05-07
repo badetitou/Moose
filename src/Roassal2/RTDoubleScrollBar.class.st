@@ -9,10 +9,10 @@ Class {
 
 { #category : #adding }
 RTDoubleScrollBar >> addScrollsToview: aView [
-	
+
 	"add two scroll bars to the view"
 	| b2 b3 |
-	
+
 	b2 := RTScrollBarBuilder new.
 	b2 view: aView.
 	b2 orientation: #vertical.

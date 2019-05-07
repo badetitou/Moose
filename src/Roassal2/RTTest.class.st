@@ -28,7 +28,7 @@ rootClasses do: [ :c |
 	c withAllSubclasses do: [ :cc | exporter addClass: cc ] ].
 exporter fileOutAsString
 
- 
+
 
 "
 ]
@@ -38,10 +38,10 @@ RTTest >> setUp [
 	super setUp.
 " The following lines are useful for debugging
 
-	'/tmp/results.txt' asFileReference writeStream 
+	'/tmp/results.txt' asFileReference writeStream
 		nextPutAll: self class name asString, '>>', testSelector asString;
 		cr.
-	
+
 	Transcript show: self class name asString, '>>'.
 	Transcript show: testSelector asString; cr"
 ]

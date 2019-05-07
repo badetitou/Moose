@@ -39,7 +39,7 @@ Class {
 
 { #category : #constants }
 RTAbstractGraphLayout class >> horizontalGap [
-	
+
 	^3.0
 ]
 
@@ -52,34 +52,34 @@ RTAbstractGraphLayout class >> isAbstract [
 RTAbstractGraphLayout class >> on: elements edges: edges [
 	"Do the layout of the elements tacking into account the provided edges"
 
-	^ self new 
+	^ self new
 		userDefinedEdges: edges;
 		applyOn: elements.
 ]
 
 { #category : #constants }
 RTAbstractGraphLayout class >> verticalGap [
-	
+
 	^20.0
 ]
 
 { #category : #private }
 RTAbstractGraphLayout >> cachedChildren [
-	
+
 	cachedChildren ifNil: [cachedChildren := IdentityDictionary new: 1000].
 	^cachedChildren
 ]
 
 { #category : #private }
 RTAbstractGraphLayout >> cachedParents [
-	
+
 	cachedParents ifNil: [cachedParents := IdentityDictionary new: 1000].
 	^cachedParents
 ]
 
 { #category : #private }
 RTAbstractGraphLayout >> cachedParentsWithHighestNestings [
-	
+
 	cachedParentsWithHighestNestings
 		ifNil: [cachedParentsWithHighestNestings := IdentityDictionary new: 1000].
 	^cachedParentsWithHighestNestings
@@ -87,14 +87,14 @@ RTAbstractGraphLayout >> cachedParentsWithHighestNestings [
 
 { #category : #private }
 RTAbstractGraphLayout >> childrenFor: aNode [
-	
+
 	^self cachedChildren
 		at: aNode
 		ifAbsentPut:
 			[| nodes |
 			nodes := OrderedCollection new.
 			self edgesDo:
-					[:edge | 
+					[:edge |
 					(edge from == aNode and: [edge to ~= aNode])
 						ifTrue:
 							[(nodes includes: edge from) ifFalse: [nodes add: edge to]]].
@@ -103,30 +103,30 @@ RTAbstractGraphLayout >> childrenFor: aNode [
 
 { #category : #private }
 RTAbstractGraphLayout >> childrenFor: aNode except: aNodeCollection [
-	
-	^(self childrenFor: aNode) 
+
+	^(self childrenFor: aNode)
 		reject: [:each | aNodeCollection includes: each]
-	
+
 	"we are explicitly not using the default Collection>>difference: behavior here because we want to preserve the order of the collection"
 ]
 
 { #category : #private }
 RTAbstractGraphLayout >> childrenWithHighestNestingLevelFor: aNode [
-	
+
 	^(self childrenFor: aNode)
 		select: [:eachChild | (self highestNestingParentFor: eachChild) == aNode]
 ]
 
 { #category : #private }
 RTAbstractGraphLayout >> clear [
-	
+
 	cachedParents := nil.
 	cachedChildren := nil.
 	cachedParentsWithHighestNestings := nil
 ]
 
 { #category : #hook }
-RTAbstractGraphLayout >> doInitialize: elements [ 
+RTAbstractGraphLayout >> doInitialize: elements [
 	super doInitialize: elements.
 	self clear.
 	self greedyCycleRemoval: elements
@@ -136,21 +136,21 @@ RTAbstractGraphLayout >> doInitialize: elements [
 RTAbstractGraphLayout >> greedyCycleRemoval: aCollection [
 	"Di Battista Greedy-Cycle-Removal algorithm. Chapter 9.4, page 297. The last part is not like in the book. The original algorithm only takes
 	 local optimas into account. This will break ordinary trees sometimes. This version also takes global optimas into account."
-	
-	| g sl sr s indeg outdeg degrees vertex | 
+
+	| g sl sr s indeg outdeg degrees vertex |
 	g := aCollection copy asOrderedCollection.
 	sl := OrderedCollection new.
 	sr := OrderedCollection new.	"While g contains a sink (aka leaf)"
 	g copy
 		do:
-			[:node | 
+			[:node |
 			(self childrenFor: node) isEmpty
 				ifTrue:
 					[sr addFirst: node.
 					g remove: node]	"self edges detect: [:edge | edge fromFigure == node] ifNone: [sr addFirst: node. g remove: node]"].	"While g contains a source (aka root)"
 	g copy
 		do:
-			[:node | 
+			[:node |
 			(self parentsFor: node) isEmpty
 				ifTrue:
 					[sl addLast: node.
@@ -158,7 +158,7 @@ RTAbstractGraphLayout >> greedyCycleRemoval: aCollection [
 	degrees := IdentityDictionary new.
 	g
 		do:
-			[:node | 
+			[:node |
 			indeg := (self parentsFor: node) size.
 			outdeg := (self childrenFor: node) size.	"indeg := self edges inject: 0 into: [:sum :edge | (edge toFigure == node) ifTrue: [sum + 1] ifFalse: [sum]].
 		outdeg := self edges inject: 0 into: [:sum :edge | (edge fromFigure == node) ifTrue: [sum + 1] ifFalse: [sum]]."
@@ -175,19 +175,19 @@ RTAbstractGraphLayout >> greedyCycleRemoval: aCollection [
 			g remove: vertex].	"Remove all leftward edges"
 	s := sl , sr.
 	self edges notNil
-		ifTrue: 
+		ifTrue:
 			[ self edges copy
 				do:
-					[:edge | 
+					[:edge |
 					(s indexOf: edge from) > (s indexOf: edge to)
-						ifTrue: [self edges remove: edge ] ] ].	
+						ifTrue: [self edges remove: edge ] ] ].
 	"Reset the cache"
 	self clear
 ]
 
 { #category : #private }
 RTAbstractGraphLayout >> highestNestingParentFor: aNodeFigure [
-	
+
 	| parents |
 	^self cachedParentsWithHighestNestings
 		at: aNodeFigure
@@ -215,16 +215,16 @@ RTAbstractGraphLayout >> horizontalGap: anInteger [
 
 { #category : #private }
 RTAbstractGraphLayout >> maximumDiameter: aCollection [
-	
+
 	^aCollection
 		inject: 0
 		into: [:max :node | max max: (node radius * 2) ]
- 
+
 ]
 
 { #category : #private }
 RTAbstractGraphLayout >> maximumRadius: aCollection [
-	
+
 	^aCollection
 		inject: 0
 		into: [:max :node | max max: node radius]
@@ -232,7 +232,7 @@ RTAbstractGraphLayout >> maximumRadius: aCollection [
 
 { #category : #private }
 RTAbstractGraphLayout >> nestingLevelFor: aNodeFigure [
-	
+
 	| parents parentsNesting |
 	parents := self parentsFor: aNodeFigure.
 	parentsNesting := parents
@@ -266,14 +266,14 @@ RTAbstractGraphLayout >> parentsFor: aNode [
 
 { #category : #private }
 RTAbstractGraphLayout >> rootNodesFor: aCollection [
-	^ aCollection select: [:node | 
+	^ aCollection select: [:node |
 		(self parentsFor: node) isEmpty ].
-	
+
 ]
 
 { #category : #private }
 RTAbstractGraphLayout >> shiftTree: aNode by: aPoint [
-	
+
 	aNode translateBy: aPoint.
 	(self childrenFor: aNode) do: [:child | self shiftTree: child by: aPoint]
 ]

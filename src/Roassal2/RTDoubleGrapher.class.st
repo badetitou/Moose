@@ -13,7 +13,7 @@ Class {
 RTDoubleGrapher >> add: aDataSet [
 	"Essential method. Add a dataset into the grapher. Only non-empty set are considered"
 	aDataSet numberOfPoints = 0 ifTrue: [ ^ self ].
-	
+
 	datasets add: aDataSet.
 	aDataSet addedInBuilder: self
 ]
@@ -22,7 +22,7 @@ RTDoubleGrapher >> add: aDataSet [
 RTDoubleGrapher >> addRight: aDataSet [
 	"Essential method. Add a dataset into the grapher. Only non-empty set are considered"
 	aDataSet numberOfPoints = 0 ifTrue: [ ^ self ].
-	
+
 	rightDataSets add: aDataSet.
 	aDataSet builder: self
 ]
@@ -79,7 +79,7 @@ RTDoubleGrapher >> hasDataSet [
 
 { #category : #'min and max' }
 RTDoubleGrapher >> homogenizeMinAndMax [
-	
+
 	minX := self minX.
 	maxX := self maxX.
 	minY := self minY.
@@ -94,18 +94,18 @@ RTDoubleGrapher >> homogenizeMinAndMax [
 { #category : #initialization }
 RTDoubleGrapher >> initialize [
 	super initialize.
-	
+
 	"Collection of data sets"
 	rightDataSets := OrderedCollection new.
-	
+
 	"Collection of data sets"
 	datasets := OrderedCollection new.
-	
+
 ]
 
 { #category : #accessing }
 RTDoubleGrapher >> maxX [
-	^ self hasDataSet 
+	^ self hasDataSet
 		ifTrue: [ maxX max: self maxXFromDataSets ]
 		ifFalse: [ maxX ]
 ]
@@ -117,9 +117,9 @@ RTDoubleGrapher >> maxXFromDataSets [
 
 { #category : #accessing }
 RTDoubleGrapher >> maxY [
-	^ self hasDataSet 
+	^ self hasDataSet
 		ifTrue: [ maxY max: self maxYFromDataSets ]
-		ifFalse: [ maxY ] 
+		ifFalse: [ maxY ]
 ]
 
 { #category : #'data sets' }
@@ -134,7 +134,7 @@ RTDoubleGrapher >> maxYRight [
 
 { #category : #accessing }
 RTDoubleGrapher >> minX [
-	^ self hasDataSet 
+	^ self hasDataSet
 		ifTrue: [ minX min: self minXFromDataSets ]
 		ifFalse: [ minX ]
 ]
@@ -146,9 +146,9 @@ RTDoubleGrapher >> minXFromDataSets [
 
 { #category : #accessing }
 RTDoubleGrapher >> minY [
-	^ self hasDataSet 
+	^ self hasDataSet
 		ifTrue: [ minY min: self minYFromDataSets ]
-		ifFalse: [ minY ] 
+		ifFalse: [ minY ]
 ]
 
 { #category : #'data sets' }
@@ -171,7 +171,7 @@ RTDoubleGrapher >> numberOfDataSets [
 RTDoubleGrapher >> renderAxis [
 	| centralPoint aPoint anotherPoint |
 	super renderAxis.
-	
+
 	centralPoint := self extent x @ self centralPoint y.
 	axisConfigurationYRight positionLabel: [ :aLabel :aTick | aLabel translateTo: aTick position + (40 @ 0) ];
 		minValue:
@@ -179,7 +179,7 @@ RTDoubleGrapher >> renderAxis [
 						ifTrue: [ 0 ]
 						ifFalse: [ self minYRight ]);
 		maxValue: self maxYRight.
-	
+
 	aPoint := centralPoint x @ 0.
 	anotherPoint := centralPoint x @ extent y negated.
 	axisConfigurationYRight fromPoint: aPoint.

@@ -26,7 +26,7 @@ b build.
 
 lb := RTLegendBuilder new.
 lb view: b view.
-colors doWithIndex: [ :c :i | 
+colors doWithIndex: [ :c :i |
 	lb addColor: c text: 'Series  ', i printString ].
 lb build.
 b view @ RTZoomableView @ RTZoomableBoxView.
@@ -85,7 +85,7 @@ RTDevVarDecorator >> points: pts [
 RTDevVarDecorator >> render [
 	| dev svg k str index offset |
 	dev := points collectWithIndex: [ :p :i | p + (deviation*i). ].
-	
+
 	svg := TRSVGPath new.
 	svg color: color.
 	offset := -0.15.
@@ -102,9 +102,9 @@ RTDevVarDecorator >> render [
 		p := dev at: index.
 		k := builder getPixelPositionOf: (index+offset)@p.
 		str := str, 'L', k x asString,' ', k y asString. ].
-	
+
 	str := str, 'Z'.
 	svg path: str.
 	builder view canvas addShape: svg.
-	
+
 ]

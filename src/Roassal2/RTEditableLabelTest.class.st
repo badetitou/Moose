@@ -16,18 +16,18 @@ RTEditableLabelTest >> testContainsShapeInstanceOf [
 	shape add: (RTBox new color: Color white; borderWidth: 2; borderColor: Color black).
 	shape add: (RTEditableLabel new height: 30).
 	self assert: (shape containsShapeInstanceOf: RTLabel).
-	self assert: (shape containsShapeInstanceOf: RTEditableLabel).	
+	self assert: (shape containsShapeInstanceOf: RTEditableLabel).
 	self assert: (shape containsShapeInstanceOf: RTBox).
 ]
 
 { #category : #tests }
 RTEditableLabelTest >> testEditableLabel [
-	| element label | 
+	| element label |
 	element := RTElement on: 708.
 	label := RTEditableLabel new.
 	self assert: (label textFor: element) = '708'.
 	label updateTextFor: element with: '1005'.
-	
+
 	self assert: (label textFor: element) = '1005'.
 	self assert: element model = 708.
 ]
@@ -57,6 +57,6 @@ RTEditableLabelTest >> testTextFor [
 	shape add: (RTBox new color: Color white; borderWidth: 2; borderColor: Color black).
 	shape add: (RTEditableLabel new height: 30).
 	e := shape elementOn: 'hello'.
-	
+
 	self assert: (shape textFor: e) equals: 'hello'
 ]

@@ -1,5 +1,5 @@
 "
-Version of Grapher that allow for dynamic data points addition. 
+Version of Grapher that allow for dynamic data points addition.
 
 Here is a small example:
 
@@ -10,9 +10,9 @@ Here is a small example:
 	b maxY: 100.
 
 	b x: #x; y: #y.
-	 
+
 	b shape circle color: (Color red alpha: 0.3).
-	b view addMenu: '+ 10' callback: [ 
+	b view addMenu: '+ 10' callback: [
 			b addAll: ((1 to: 10) collect: [ :i | (100 atRandom @ 100 atRandom) ]) ].
 	b open
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -43,7 +43,7 @@ RTDynamicGrapher >> add: anObject [
 { #category : #'public - adding' }
 RTDynamicGrapher >> addAll: someObjects [
 	^ someObjects collect: [ :o | self add: o ]
-	
+
 ]
 
 { #category : #'public - cleaning' }
@@ -71,10 +71,10 @@ RTDynamicGrapher >> example01 [
 	b minY: 0; maxY: 200.
 
 	b x: #x; y: #y.
-	 
+
 	b shape circle color: (Color red alpha: 0.3).
 	b view addMenu: '+ 1' callback: [ b add: 400 atRandom - 200 @ 200 atRandom ].
-	^ b  
+	^ b
 ]
 
 { #category : #examples }
@@ -90,13 +90,13 @@ RTDynamicGrapher >> example02 [
 	b maxY: 100.
 
 	b x: #x; y: #y.
-	 
+
 	b shape circle color: (Color red alpha: 0.3).
-	b view addMenu: '+ 10' callback: [ 
+	b view addMenu: '+ 10' callback: [
 			b addAll: ((1 to: 10) collect: [ :i | (100 atRandom @ 100 atRandom) ]) ].
-	b view addMenu: 'Clean' callback: [ 
+	b view addMenu: 'Clean' callback: [
 			b clean ].
-	^ b  
+	^ b
 ]
 
 { #category : #initialization }

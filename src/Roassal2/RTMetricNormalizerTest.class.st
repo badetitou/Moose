@@ -6,7 +6,7 @@ Class {
 
 { #category : #'test y' }
 RTMetricNormalizerTest >> testBasicNegativeRange [
-	
+
 	| es |
 	es := RTEllipse new elementsOn: (Array with: 0 @ 0 with: 50 @ 25 with: 100 @ 50).
 
@@ -18,7 +18,7 @@ RTMetricNormalizerTest >> testBasicNegativeRange [
 
 { #category : #'test y' }
 RTMetricNormalizerTest >> testBasicNegativeRange2 [
-	
+
 	| es |
 	es := RTEllipse new elementsOn: (Array with: 0 @ 0 with: 50 @ 25 with: 100 @ 50).
 
@@ -30,7 +30,7 @@ RTMetricNormalizerTest >> testBasicNegativeRange2 [
 
 { #category : #'test y' }
 RTMetricNormalizerTest >> testBasicNegativeRange3 [
-	
+
 	| es |
 	es := RTEllipse new elementsOn: (Array with: 0 @ 0 with: 50 @ 25 with: 100 @ 50).
 
@@ -42,7 +42,7 @@ RTMetricNormalizerTest >> testBasicNegativeRange3 [
 
 { #category : #'test y' }
 RTMetricNormalizerTest >> testBasicNegativeRange4 [
-	
+
 	| es |
 	es := RTEllipse new elementsOn: (Array with: 0 @ 0 with: 50 @ 25 with: 100 @ 50).
 
@@ -54,7 +54,7 @@ RTMetricNormalizerTest >> testBasicNegativeRange4 [
 
 { #category : #'test x' }
 RTMetricNormalizerTest >> testBasicNegativeRangeX [
-	
+
 	| es |
 	es := RTEllipse new elementsOn: (Array with: 0 with: 25 with: 50).
 
@@ -66,7 +66,7 @@ RTMetricNormalizerTest >> testBasicNegativeRangeX [
 
 { #category : #'test y' }
 RTMetricNormalizerTest >> testBasicPositiveRange [
-	
+
 	| es |
 	es := RTEllipse new elementsOn: (Array with: 0 @ 0 with: 50 @ 25 with: 100 @ 50).
 
@@ -78,7 +78,7 @@ RTMetricNormalizerTest >> testBasicPositiveRange [
 
 { #category : #'test size' }
 RTMetricNormalizerTest >> testBasicPositiveRangeSize [
-	
+
 	| es |
 	es := RTEllipse new elementsOn: (Array with: 0 with: 25 with: 50).
 
@@ -90,7 +90,7 @@ RTMetricNormalizerTest >> testBasicPositiveRangeSize [
 
 { #category : #'test size' }
 RTMetricNormalizerTest >> testBasicPositiveRangeWidth [
-	
+
 	| es |
 	es := RTEllipse new elementsOn: (Array with: 25 with: 50).
 
@@ -102,7 +102,7 @@ RTMetricNormalizerTest >> testBasicPositiveRangeWidth [
 
 { #category : #'test size' }
 RTMetricNormalizerTest >> testBasicPositiveRangeWidth2 [
-	
+
 	| es |
 	es := RTEllipse new elementsOn: (Array with: 25 with: 50).
 
@@ -114,7 +114,7 @@ RTMetricNormalizerTest >> testBasicPositiveRangeWidth2 [
 
 { #category : #'test x' }
 RTMetricNormalizerTest >> testBasicPositiveRangeX [
-	
+
 	| es |
 	es := RTEllipse new elementsOn: (Array with: 0 with: 25 with: 50).
 
@@ -126,7 +126,7 @@ RTMetricNormalizerTest >> testBasicPositiveRangeX [
 
 { #category : #'test x' }
 RTMetricNormalizerTest >> testBasicPositiveRangeX2 [
-	
+
 	| es |
 	es := RTEllipse new elementsOn: (Array with: 25 with: 50).
 
@@ -138,7 +138,7 @@ RTMetricNormalizerTest >> testBasicPositiveRangeX2 [
 
 { #category : #'test x' }
 RTMetricNormalizerTest >> testBasicPositiveRangeX3 [
-	
+
 	| es |
 	es := RTEllipse new elementsOn: (Array with: 25 with: 50).
 
@@ -229,7 +229,7 @@ RTMetricNormalizerTest >> testDistinctColor [
 	n
 		view: v;
 		objects: #(1 2);
-		distinctColor. 
+		distinctColor.
 
 	self assert: v numberOfElements equals: 4.
 
@@ -240,7 +240,7 @@ RTMetricNormalizerTest >> testDistinctColor [
 	es := v elementsFromModel: 1.
 	self assert: es size equals: 2.
 	self assert: (es collect: [ :e | e trachelShape color ]) asSet size equals: 1.
-	
+
 	"For elements 2"
 	es := v elementsFromModel: 2.
 	self assert: es size equals: 2.
@@ -258,13 +258,13 @@ RTMetricNormalizerTest >> testEdgesWidth01 [
 	v addAll: (RTBox elementsOn: #(1 2 3)).
 	eb := RTEdgeBuilder new.
 	eb view: v.
-	
+
 	as := OrderedCollection new.
 	as add: 1 -> 2.
 	as add: 1 -> 3.
 	as add: 3 -> 1.
 	eb useAssociations: as.
-	
+
 	rel := Dictionary new.
 	rel at: 1 put: #(2 3 3).
    rel at: 3 put: #(1 1 1).
@@ -272,18 +272,18 @@ RTMetricNormalizerTest >> testEdgesWidth01 [
 	mn := RTMetricNormalizer new.
 	mn elements: v elements.
 	mn normalizeLineWidthBasedOnOccurences: [ :aNumber | rel at: aNumber ].
-	
+
 	v edges do: #updateShape.
 	"v open delete."
-	
+
 	self assert: v numberOfEdges equals: 3.
 	trLines := v canvas shapes select: #isLineShape.
 	self assert: trLines size equals: 3.
-	
+
 	self assert: trLines first element from model equals: 1.
 	self assert: trLines first element to model equals: 2.
 	self assert: trLines first width equals: 0.5.
-	
+
 	self assert: trLines second element from model equals: 1.
 	self assert: trLines second element to model equals: 3.
 	self assert: trLines second width equals: 15.25.
@@ -304,15 +304,15 @@ RTMetricNormalizerTest >> testEdgesWidth02 [
 	v addAll: (RTBox elementsOn: #(1 2 3)).
 	eb := RTEdgeBuilder new.
 	eb view: v.
-	
+
 	as := OrderedCollection new.
 	as add: 1 -> 2.
 	as add: 1 -> 3.
 	as add: 3 -> 1.
 	eb useAssociations: as.
-	
+
 	self assert: v edges first model equals: 1->2.
-	
+
 	rel := Dictionary new.
 	rel at: 1 put: #(2 3 3).
    rel at: 3 put: #(1 1 1).
@@ -320,12 +320,12 @@ RTMetricNormalizerTest >> testEdgesWidth02 [
 	mn := RTMetricNormalizer new.
 	mn elements: v elements.
 	mn normalizeLineWidthBasedOnOccurences: [ :aNumber | rel at: aNumber ].
-	
+
 	v edges do: #updateShape.
 	"v open delete."
-	
+
 	self assert: v edges first model equals: 1->2.
-	
+
 ]
 
 { #category : #'test edges width' }
@@ -339,10 +339,10 @@ RTMetricNormalizerTest >> testLineWidthAndArrowedLine [
 		edges: edgeElements;
 		normalizeLineWidth: [ :from :to | from + to ] min: 1 max: 10.
 	b layout horizontalLine.
-	
+
 	b view edges do: #updateShape.
 
-	
+
 	self assert: edgeElements second trachelShape shapes first width equals: 10.
 	self assert: edgeElements first trachelShape shapes first width equals: 1
 ]
@@ -354,7 +354,7 @@ RTMetricNormalizerTest >> testLineWidthIsNotFraction [
 data := Collection withAllSubclasses .
 
 b := RTMondrian new.
-b shape circle.    
+b shape circle.
 b nodes: data.
 
 edgeElements := b edges connectFrom: [ :c | c superclass ].
@@ -396,5 +396,5 @@ RTMetricNormalizerTest >> testNormalizeXBugTracking [
 	"
 	es collect: #position
 	"
-	self assert: (es allSatisfy: [ :e | e position x = e position y ]) 
+	self assert: (es allSatisfy: [ :e | e position x = e position y ])
 ]

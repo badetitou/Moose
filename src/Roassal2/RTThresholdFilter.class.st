@@ -86,13 +86,13 @@ RTThresholdFilter >> getSmallestElementAreasIn: aView [
 RTThresholdFilter >> initializeElement: aView [
 
 	| filerSelector |
-	aView addMenu: 'Filter' callback: [ 
+	aView addMenu: 'Filter' callback: [
 		filerSelector := self askWhichFilterToChoose.
 		filerSelector ifNotNil: [
 			self perform: filerSelector with: aView
 		] ]
 
-	 
+
 ]
 
 { #category : #'public - filtering' }

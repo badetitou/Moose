@@ -1,10 +1,10 @@
 "
-RTAnimationExample new installTitle: 'Smooth' 
+RTAnimationExample new installTitle: 'Smooth'
 		code:
 '
 
 '
-	
+
 "
 Class {
 	#name : #RTAnimationExample,
@@ -15,12 +15,12 @@ Class {
 { #category : #sources }
 RTAnimationExample >> dustEffect: e and: v [
 	| e2 anim |
-	e2 := (RTEllipse new 
-		size: 10; 
+	e2 := (RTEllipse new
+		size: 10;
 		color: (Color random alpha: 0.5)) element.
 	v add: e2.
 	e2 translateTo: e position.
-	anim := RTAccelerationMove to: 
+	anim := RTAccelerationMove to:
 		e2 position + ((30 atRandom - 15) @ (30 atRandom - 15)) during: 3 on: e2.
 	anim after: [ anim element remove. ].
 	v addAnimation: anim
@@ -34,10 +34,10 @@ v := RTView new.
 
 anim := RTActiveAnimation new.
 anim intervalInMilliseconds: 1000.
-anim blockToExecute: [ 
+anim blockToExecute: [
 	| e |
 	e := (RTEllipse new size: 40 atRandom; color: (Color red alpha: 0.2)) element.
-	e translateTo: (500 atRandom @ 500 atRandom) - (250 @ 250). 
+	e translateTo: (500 atRandom @ 500 atRandom) - (250 @ 250).
 	v add: e.
 ].
 anim inView: v.
@@ -84,12 +84,12 @@ RTAnimationExample >> exampleCircle [
 	| view shape el |
 	view := RTView new.
 	shape := RTEllipse new color: (Color purple alpha: 0.2); size: 80.
-	100 timesRepeat: [ 
+	100 timesRepeat: [
 		el := shape element translateTo: 500 atRandom @ 500 atRandom.
 		el @ RTDraggable.
-		view add: el. 
+		view add: el.
 		view addAnimation: (RTLinearMove to: 500 atRandom @ 500 atRandom during: 2 on: el).
-	].	
+	].
 	^ view
 
 ]
@@ -305,11 +305,11 @@ JPwNXt+qEqTBc4UAAAAASUVORK5CYII='
 RTAnimationExample >> exampleHappy2014 [
 
 	| view txt x y el shape size offset |
-	txt := 
+	txt :=
 	'
 	xxxxx  xxxxx     xxx      x
 	x   x  x   x    x  x     x
-	   x   x   x   x   x    x x 
+	   x   x   x   x   x    x x
 	  x    x   x       x    xxxxx
 	 x     x   x       x      x
 	xxxxx  xxxxx       x      x
@@ -323,7 +323,7 @@ RTAnimationExample >> exampleHappy2014 [
 		y := y + 1.
 		line do: [ :c |
 			x := x + 1.
-			c = $x ifTrue: [ 
+			c = $x ifTrue: [
 				shape := (RTEllipse new size: size; color: (Color purple alpha: 0.2)).
 				el := shape element.
 				el translateTo: (800 atRandom @ 450 atRandom).
@@ -384,38 +384,38 @@ v addAll: els.
 eb := RTEdgeBuilder new.
 eb view: v.
 eb objects: (1 to: 4).
-eb useAssociations: (Array with: 1->2 with: 3->4).	
+eb useAssociations: (Array with: 1->2 with: 3->4).
 
 t := 10.
 example := RTAnimationExample new.
 effect := [ :e| example dustEffect: e and: v ].
 v addAnimation: ((RTPathAnimation on: els first path:
- ('L0,100L-110,110', (RTSVGPath 
-		goldenSpiral: 10 
+ ('L0,100L-110,110', (RTSVGPath
+		goldenSpiral: 10
 		start: 0@0
 		side: 200
 		direction: 1@ 1
 		type: true)) seconds: t) repeat; duringDo: effect).
 
 v addAnimation: ((RTPathAnimation on: els third path:
- ('L0,100L110,110', (RTSVGPath 
-		goldenSpiral: 10 
+ ('L0,100L110,110', (RTSVGPath
+		goldenSpiral: 10
 		start: 0@0
 		side: 200
 		direction: 1@ -1
 		type: true)) seconds: t) repeat; duringDo: effect).
 
 v addAnimation: ((RTPathAnimation on: els second path:
- ('L0,-100L-110,-110', (RTSVGPath 
-		goldenSpiral: 10 
+ ('L0,-100L-110,-110', (RTSVGPath
+		goldenSpiral: 10
 		start: 0@0
 		side: 200
 		direction: -1@ -1
 		type: true)) seconds: t) repeat; duringDo: effect) .
 
 v addAnimation: ((RTPathAnimation on: els fourth  path:
- ('L0,-100L110,-110', (RTSVGPath 
-		goldenSpiral: 10 
+ ('L0,-100L110,-110', (RTSVGPath
+		goldenSpiral: 10
 		start: 0@0
 		side: 200
 		direction: -1@ 1
@@ -489,7 +489,7 @@ v when: TRMouseMove do: [ :event |
 	e := (RTBox new color: (Color red alpha: 0.2); size: 20 atRandom + 5) element.
 	e translateTo: event position.
 	v add: e.
-	v addAnimation: (RTAccelerationMove to: 
+	v addAnimation: (RTAccelerationMove to:
 		event position + ((150 atRandom - 75) @ (150 atRandom - 75)) during: 5 on: e)
 ].
 ^ v
@@ -533,7 +533,7 @@ RTAnimationExample >> exampleVerySimple [
 	view := RTView new.
 	circle := (RTEllipse new size: 40; color: (Color purple alpha: 0.2)) element.
 	view add: circle.
-	view addAnimation: (RTLinearMove to: 100 @ 100 during: 2 on: circle). 
+	view addAnimation: (RTLinearMove to: 100 @ 100 during: 2 on: circle).
 
 	^ view
 

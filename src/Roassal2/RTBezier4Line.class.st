@@ -12,7 +12,7 @@ Class {
 { #category : #accessing }
 RTBezier4Line >> controllingElements: arr [
 	controlElement := arr
-	
+
 ]
 
 { #category : #private }
@@ -24,7 +24,7 @@ RTBezier4Line >> pointsFor: edge [
 	point := [ :e | e isPoint ifTrue: [ e ] ifFalse: [ e position ] ].
 	cp2 := point value: arr first.
 	cp3 := point value: arr second.
-			
+
 	^ Array with: cp1 with: cp2 with: cp3 with: cp4.
 ]
 

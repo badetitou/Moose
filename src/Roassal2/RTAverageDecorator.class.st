@@ -5,8 +5,8 @@ Consider the following example:
 
 -=-=-=-=
 b := RTGrapher new.
-ds := RTDataSet new. 
-ds dotShape color: Color red. 
+ds := RTDataSet new.
+ds dotShape color: Color red.
 ds points: #(5 1 20 8).
 b add: ds.
 b addDecorator: (RTAverageDecorator new withLabel; labelConvertion: [ :aValue | 'average = ', aValue asFloat asString ]).
@@ -27,8 +27,8 @@ RTAverageDecorator >> render [
 	from := builder getPixelPositionOf: builder minX @ average.
 	to := builder getPixelPositionOf: builder maxX @ average.
 	self lineFrom: from to: to.
-	
-	shouldHaveLabel ifTrue: [ 
+
+	shouldHaveLabel ifTrue: [
 		self label: ((labelBlock rtValue: average) asString) above: to.
 	]
 ]

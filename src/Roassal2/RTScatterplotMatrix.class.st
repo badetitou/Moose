@@ -29,7 +29,7 @@ RTScatterplotMatrix >> addBrushInteractionIfNecessary: aView [
 	| int |
 	self allowSelectableView ifFalse: [ ^ self ].
 	int := RTBrushInteraction new.
-	int elementsToBrush: [ :group | 
+	int elementsToBrush: [ :group |
 		group flatCollect: [ :e | aView elementsFromModel: e model ] ].
 	int domainElements: self allDotElements.
 	int groups: self boxes.
@@ -70,7 +70,7 @@ RTScatterplotMatrix >> boxes [
 RTScatterplotMatrix >> createAxisIfNecessary: aView [
 	self createAxisXIfNecessary: aView.
 	self createAxisYIfNecessary: aView.
-	aView edges do: #pushBack 
+	aView edges do: #pushBack
 ]
 
 { #category : #helpers }
@@ -86,12 +86,12 @@ RTScatterplotMatrix >> createAxisXIfNecessary: aView [
 		min := Float fmax.
 		max := Float fmin.
 		delta := ((boxSize*j) + (padding * j))@0.
-		
+
 		self objects do: [ :o |
 			v := (m at: m0) rtValue: o.
 			min := min min: v.
 			max := max max: v.
-			 ]. 
+			 ].
 		nticks := axe numberOfTicks.
 		nticks isZero ifTrue: [ nticks := 2 ].
 		result := generator searchMin: min max: max desired: axe numberOfTicks.
@@ -114,7 +114,7 @@ RTScatterplotMatrix >> createAxisXIfNecessary: aView [
 			axisFrom: ((scale scale: result min)@size) + delta
 			to: ((scale scale: result max)@size) + delta
 		].
-	
+
 
 
 ]
@@ -132,12 +132,12 @@ RTScatterplotMatrix >> createAxisYIfNecessary: aView [
 		min := Float fmax.
 		max := Float fmin.
 		delta := 0@((boxSize*j) + (padding * j)).
-		
+
 		self objects do: [ :o |
 			v := (m at: m0) rtValue: o.
 			min := min min: v.
 			max := max max: v.
-			 ]. 
+			 ].
 		nticks := axe numberOfTicks.
 		nticks isZero ifTrue: [ nticks := 2 ].
 		result := generator searchMin: min max: max desired: axe numberOfTicks.
@@ -160,14 +160,14 @@ RTScatterplotMatrix >> createAxisYIfNecessary: aView [
 			axisFrom: ( (boxSize/2) @(scale scale: result min)) + delta
 			to: ( (boxSize/2) @(scale scale: result max)) + delta
 		].
-	
+
 
 
 ]
 
 { #category : #hooks }
 RTScatterplotMatrix >> createView [
-	^ RTView new @ RTDraggableView @ RTZoomableView  
+	^ RTView new @ RTDraggableView @ RTZoomableView
 ]
 
 { #category : #initialization }
@@ -177,20 +177,20 @@ RTScatterplotMatrix >> initialize [
 	self scatterBoxSize: 150.
 	self shouldUseAxis: true.
 	self allowSelectableView: true.
-	
-	self shape circle 
-		size: 4; 
+
+	self shape circle
+		size: 4;
 		color: (Color colorFrom: '#020289').
 	self boxShape: (RTBox new size: self scatterBoxSize;
-		color: Color transparent; 
+		color: Color transparent;
 		borderColor: Color veryLightGray).
 	self lineShape: (RTLine new color: Color veryLightGray trans).
 	self labelShape: (RTLabel new).
-	
+
 	generator := RTLabelGenerator nice: RTNiceStepSizeGenerator new.
 	generator setLooseFlag: true.
 	metrics := Dictionary new.
-	
+
 
 ]
 
@@ -241,15 +241,15 @@ RTScatterplotMatrix >> padding: aNumber [
 
 { #category : #helpers }
 RTScatterplotMatrix >> prepareScales [
-	| domain range x y m value | 
+	| domain range x y m value |
 	xScales := Dictionary new.
 	yScales := Dictionary new.
 	m := self metrics.
-	
+
 	m keys do: [ :k |
 		value := m at: k.
-		domain := Array 
-			with: (value value: (objects minFor: value)) 
+		domain := Array
+			with: (value value: (objects minFor: value))
 			with: (value value: (objects maxFor: value)).
 		range := Array with: (padding /2)-(boxSize /2) with: (boxSize/2) - (padding/2).
 		x := RTScale linear domain: domain; range: range.
@@ -271,23 +271,23 @@ RTScatterplotMatrix >> renderMatrix: aView [
 	m := self metrics.
 	self prepareScales.
 	allDotElements := RTGroup new.
-	m keys doWithIndex: [ :metric1 :j | 
+	m keys doWithIndex: [ :metric1 :j |
 		m keys doWithIndex: [ :metric2 :k |
 			delta := ((k@j)* boxSize)+((k@j)*padding).
 			box := self boxShape elementOn: k@j.
 			box translateBy: delta.
 			self boxes add: box.
-			
+
 			k = j ifTrue: [
 				label := self labelShape elementOn: metric1.
 				RTConstraint new
 					fix: box; movable: label; inner;
 					left; top; move.
 				aView add: label  ].
-			
+
 			aView add: box.
 			elements := self shape elementsOn: self objects.
-			elements do: [ :e | 
+			elements do: [ :e |
 				x := (xScales at: metric1) scale: ((m at: metric1) rtValue: e model).
 				y := (yScales at: metric2) scale: ((m at: metric2) rtValue: e model).
 				e translateTo: (x @ y)+delta ].
@@ -311,19 +311,19 @@ RTScatterplotMatrix >> scatterBoxSize: aNumber [
 RTScatterplotMatrix >> shouldUseAxis: aBool [
 	self shouldUseAxisForX: aBool.
 	self shouldUseAxisForY: aBool.
-	
+
 ]
 
 { #category : #accesing }
 RTScatterplotMatrix >> shouldUseAxisForX: aBool [
 	shouldUseAxisForX := aBool
-	
+
 ]
 
 { #category : #accesing }
 RTScatterplotMatrix >> shouldUseAxisForY: aBool [
 	shouldUseAxisForY := aBool
-	
+
 ]
 
 { #category : #example }

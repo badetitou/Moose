@@ -24,11 +24,11 @@ RTConstrainedDraggable >> afterBlock: aBlock [
 { #category : #hooks }
 RTConstrainedDraggable >> constraintIfNecessary: anElement [
 	| rec e deltaX deltaY |
-	rec := rectangle rtValue: anElement.	
+	rec := rectangle rtValue: anElement.
 	e := anElement encompassingRectangle.
-	
+
 	(rec containsRect: e)
-		ifFalse: [ 
+		ifFalse: [
 			deltaX := 0.
 			deltaY := 0.
 			(e right > rec right) ifTrue: [ deltaX := rec right - e right ].
@@ -39,12 +39,12 @@ RTConstrainedDraggable >> constraintIfNecessary: anElement [
 
 			anElement translateBy: deltaX @ deltaY
 			].
-		
+
 	"In case the constraining rectangle is larger than the encompassing rectangle of the constrained element"
 	(rec height <= e height) ifTrue: [ anElement translateTo: anElement position x @ rec center y ].
 	(rec width <= e width) ifTrue: [ anElement translateTo: rec center x @ anElement position y].
 	after ifNotNil: [ after rtValue: anElement ].
-	
+
 
 ]
 

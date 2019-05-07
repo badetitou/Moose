@@ -52,7 +52,7 @@ RTDataToggleInteraction >> initializeElement: element [
 RTDataToggleInteraction >> initializeLegendElement [
 	legendElements
 		when: TRMouseLeftClick
-		do: [ :event | 
+		do: [ :event |
 			dataset elements anyOne view
 				ifNil: [ dataset builder view addAll: dataset elements.
 					dataset renderLinesFor: dataset elements in: dataset builder view.

@@ -22,7 +22,7 @@ RTMenuGroup class >> on: menuitems [
 RTMenuGroup >> add: menuitem [
 	| after |
 	items add: menuitem.
-	
+
 	after := menuitem after.
 	menuitem after: [ :m |
 		items do: [:item | item selected: false.
@@ -41,5 +41,5 @@ RTMenuGroup >> addAll: menuitems [
 RTMenuGroup >> initialize [
 	super initialize.
 	items := OrderedCollection new: 2.
-	
+
 ]

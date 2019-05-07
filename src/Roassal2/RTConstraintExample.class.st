@@ -1,5 +1,5 @@
 "
-RTConstraintExample new installTitle: 'AboveTopOnLabel' 
+RTConstraintExample new installTitle: 'AboveTopOnLabel'
 		code:
 		'
 | v b e |
@@ -17,7 +17,7 @@ e @ RTDraggable.
 	top;
 	stick.
 ^ v'
-	
+
 "
 Class {
 	#name : #RTConstraintExample,

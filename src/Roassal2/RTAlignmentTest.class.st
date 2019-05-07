@@ -24,7 +24,7 @@ RTAlignmentTest >> testFromBottom [
 	self assert: align bottomMostElement equals: es second.
 	align bottom.
 	self assert: (es collect: [ :e | e encompassingRectangle bottom ]) asArray equals: #(170.0 170.0 170.0 170.0 170.0 170.0 170.0 170.0 170.0 170.0)
-	"	
+	"
 	RTView new addAll: es; yourself.
 	"
 ]
@@ -40,7 +40,7 @@ RTAlignmentTest >> testFromLeft [
 	self assert: align leftMostElement equals: es second.
 	align left.
 	self assert: (es collect: [ :e | e encompassingRectangle left ]) asArray equals: #(-150.0 -150.0 -150.0 -150.0 -150.0 -150.0 -150.0 -150.0 -150.0 -150.0)
-"	
+"
 	RTView new addAll: es; inspect.
 	"
 ]
@@ -56,7 +56,7 @@ RTAlignmentTest >> testFromRight [
 	self assert: align rightMostElement equals: es second.
 	align right.
 	self assert: (es collect: [ :e | e encompassingRectangle right ]) asArray equals: #(170.0 170.0 170.0 170.0 170.0 170.0 170.0 170.0 170.0 170.0)
-"	
+"
 	RTView new addAll: es; inspect.
 	"
 ]

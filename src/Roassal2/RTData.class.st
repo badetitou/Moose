@@ -1,11 +1,11 @@
 "
-A data set for which each element has to be plotted using two functions, one against the X-axis and another against the Y-axis), is modelled using the class RTData. 
+A data set for which each element has to be plotted using two functions, one against the X-axis and another against the Y-axis), is modelled using the class RTData.
 
 -=-=-=
 ""Since no x: and y: have been specified, it simply lines up all the values""
 b := RTGrapher new.
-ds := RTData new. 
-ds dotShape color: Color red. 
+ds := RTData new.
+ds dotShape color: Color red.
 ds points: #(5 1 20 8).
 b add: ds.
 b.
@@ -13,8 +13,8 @@ b.
 
 -=-=-=
 b := RTGrapher new.
-ds := RTData new. 
-ds dotShape color: Color red. 
+ds := RTData new.
+ds dotShape color: Color red.
 ds points: #(5 1 20 8).
 ds y: [ :x | x * x ].
 b add: ds.
@@ -23,8 +23,8 @@ b.
 
 -=-=-=
 b := RTGrapher new.
-ds := RTData new. 
-ds dotShape color: Color red. 
+ds := RTData new.
+ds dotShape color: Color red.
 ds points: (1 to: 100).
 ds y: [ :x | x * x ].
 b add: ds.
@@ -34,8 +34,8 @@ b.
 -=-=-=
 ""Use objects instead of numerical values""
 b := RTGrapher new.
-ds := RTData new. 
-ds dotShape color: (Color red alpha: 0.3). 
+ds := RTData new.
+ds dotShape color: (Color red alpha: 0.3).
 ds points: Collection withAllSubclasses.
 ds y: #numberOfLinesOfCode.
 ds x: #numberOfMethods.
@@ -70,7 +70,7 @@ RTData >> adjustMinAndMaxValues [
 		ifTrue: [ minY := 0 ].
 	maxY < 0
 		ifTrue: [ maxY := 0 ].
-		
+
 	minX > 0
 		ifTrue: [ minX := 0 ].
 	maxX < 0
@@ -125,8 +125,8 @@ RTData >> executeUserDeclaredActions [
 
 { #category : #accessing }
 RTData >> getSamplingIfNecessaryOf: objects [
-	"Return a sampling of the objects if necessary. Consider: 
-	
+	"Return a sampling of the objects if necessary. Consider:
+
 	d := RTData new.
 	d samplingIfMoreThan: 100.
 	d points: (1 to: 1000).
@@ -164,7 +164,7 @@ RTData >> highlightIf: aOneArgBlock using: secondOneArgBlock [
 
 	elementActions add: [ :elems |
 		elems do: [ :element |
-		(aOneArgBlock rtValue: element model) ifTrue: [ 
+		(aOneArgBlock rtValue: element model) ifTrue: [
 			element @ (RTLabeled new text: [ :model | secondOneArgBlock rtValue: model ]; setAsHighlightable).
 		] ] ]
 ]
@@ -174,7 +174,7 @@ RTData >> histogramWithBarTitle: aBlockOrSymbol rotation: rotationInDegree color
 	"Obsolete: use #barChartWithBarTitle: instead"
 	"Draw an histogram with title"
 	self barShape.
-	elementActions add: [ :elems | 
+	elementActions add: [ :elems |
 		| lbl |
 		elems do: [ :e |
 			lbl := (RTLabel new text: aBlockOrSymbol; color: aColor) elementOn: e model.
@@ -183,7 +183,7 @@ RTData >> histogramWithBarTitle: aBlockOrSymbol rotation: rotationInDegree color
 			lbl translateBy: (lbl width / -2 @ 0) + (5 @ 0).
 			elems anyOne view add: lbl.
 		] ].
-	 
+
 ]
 
 { #category : #initialization }
@@ -200,7 +200,7 @@ RTData >> initialize [
 	self resetShapeBuilderForLine.
 	self resetInteractionBuilder.
 	shouldConnect := false.
-	shouldHaveBars := false. 
+	shouldHaveBars := false.
 ]
 
 { #category : #accessing }
@@ -223,13 +223,13 @@ RTData >> lineShape [
 RTData >> moveDotInFront [
 	"
 	Make the dots placed in front of the lines (if connected). Per default, dots are behind. Here is an example.
-	
+
 	b := RTGrapher new.
 	ds := RTData new.
 	ds dotShape color: Color red; size: 10.
 	ds points: (Collection withAllSubclasses copyFrom: 1 to: 10).
 	ds y: #numberOfMethods.
-	ds connectColor: Color blue. 
+	ds connectColor: Color blue.
 	ds moveDotInFront.
 	b add: ds.
 
@@ -245,7 +245,7 @@ RTData >> noAlignmentOffset [
 
 	"This offset is used when a stacked bar chart is used. This alignmentOffset may be removed in case the barchart has to be aligned with other data sets, such as line charts."
 	"You should use this method in case you wish you combine the chart with line or dots. For example:
-	
+
 b := RTGrapher new.
 
 d := RTData new.
@@ -303,7 +303,7 @@ RTData >> points: objects [
 RTData >> renderBarChartIn: aView [
 	| centralDot positiveElements negativeElements |
 	centralDot := self centralDot.
-	
+
 	elements := barBuilder elementsOn: self points.
 	builder view addAll: elements.
 	interaction setUpElements: elements.
@@ -332,22 +332,22 @@ RTData >> renderBarChartIn: aView [
 
 	RTAlignment new elements: positiveElements; fixedElement: centralDot; bottom.
 	"TRConstraint use: centralDot alignFromBottom: positiveElements.	"
-		
+
 	"We treat the element with a negative value"
 	negativeElements := elements copyWithoutAll: positiveElements.
 	negativeElements
-		ifNotEmpty: [ 
+		ifNotEmpty: [
 			RTMetricNormalizer new
 				elements: negativeElements;
 				normalizeElementHeight: [ :anElement | y rtValue: anElement ]
-					min: centralDot position y negated 
+					min: centralDot position y negated
 					max: 0
 					minValue: (yScale rtValue: minY)
 					maxValue: 0
 					using: yScale.
 			RTAlignment new elements: negativeElements; fixedElement: centralDot; top.
-			"TRConstraint use: centralDot alignFromTop: negativeElements "].	
-	
+			"TRConstraint use: centralDot alignFromTop: negativeElements "].
+
 	"We set the actions, if any"
 	elementActions do: [ :act | act rtValue: elements ]
 ]
@@ -380,10 +380,10 @@ RTData >> renderDotAndLinesIn: aView [
 RTData >> renderIn: aView [
 
 	"This is a bit ugly. Maybe having a class hierarchy would be better"
-	shouldHaveBars 
+	shouldHaveBars
 		ifTrue: [ self renderBarChartIn: aView ]
 		ifFalse: [ self renderDotAndLinesIn: aView ]
-	
+
 
 ]
 
@@ -395,7 +395,7 @@ RTData >> renderLinesFor: elems in: aView [
 
 	t := elems first.
 	elems allButFirst
-		do: [ :tt | 
+		do: [ :tt |
 			l := lineBuilder edgeFrom: t to: tt.
 			interaction setUpElement: l.
 			aView add: l.
@@ -412,9 +412,9 @@ RTData >> resetInteractionBuilder [
 { #category : #hooks }
 RTData >> resetShapeBuilderForBar [
 	super resetShapeBuilderForBar.
-	
+
 	"Default width that compute an appropriate width"
-	barBuilder width: [ :object | 
+	barBuilder width: [ :object |
 		(builder extent x / (self numberOfPoints * 2)) asFloat ]
 ]
 
@@ -432,9 +432,9 @@ RTData >> resetShapeBuilderForLine [
 { #category : #'public - configuration' }
 RTData >> samplingIfMoreThan: aThreshold [
 	"This method is useful in case there are many elements to be visualized.
-	If the number of objects provided to #points: is greater than aThreshold, then 
+	If the number of objects provided to #points: is greater than aThreshold, then
 	aThreshold elements are picked from the objects.
-	
+
 	This coudl be improved. For example, different strategies to do the sampling can be envisioned.
 	"
 	sampling := aThreshold
@@ -442,7 +442,7 @@ RTData >> samplingIfMoreThan: aThreshold [
 
 { #category : #hooks }
 RTData >> selectElementsForAddingBarTitle [
-	"Return the collection of principal element for each element group.  
+	"Return the collection of principal element for each element group.
 	This principal element is used to position the title label"
 	^ elements
 ]
@@ -461,14 +461,14 @@ RTData >> shouldHaveBars [
 { #category : #'public - configuration' }
 RTData >> stack [
 	"Make all the elements from left to right"
-	self xElement: [ :anElement | elements indexOf: anElement ] 
+	self xElement: [ :anElement | elements indexOf: anElement ]
 ]
 
 { #category : #accessing }
 RTData >> x: blockOrSymbol [
 	blockOrSymbol isSymbol
 		ifTrue: [ self
-				xElement: [ :anElement | 
+				xElement: [ :anElement |
 					anElement model isDictionary
 						ifTrue: [ anElement model at: blockOrSymbol ]
 						ifFalse: [ blockOrSymbol rtValue: anElement model ] ] ]
@@ -489,7 +489,7 @@ RTData >> y [
 RTData >> y: blockOrSymbol [
 	blockOrSymbol isSymbol
 		ifTrue: [ self
-				yElement: [ :anElement | 
+				yElement: [ :anElement |
 					anElement model isDictionary
 						ifTrue: [ anElement model at: blockOrSymbol ]
 						ifFalse: [ blockOrSymbol rtValue: anElement model ] ] ]

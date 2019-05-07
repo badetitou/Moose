@@ -46,7 +46,7 @@ RTSVGAbstractMarker >> addOrientation: stream [
 
 { #category : #adding }
 RTSVGAbstractMarker >> addPath: stream [
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #adding }

@@ -10,7 +10,7 @@ RTGradientColoredLineTest >> testBasic [
 	e1 := RTElement new.
 	e2 := RTElement new.
 	l := RTGradientColoredLine edgeFrom: e1 to: e2.
-	
+
 ]
 
 { #category : #tests }
@@ -18,9 +18,9 @@ RTGradientColoredLineTest >> testBasicWithInitialization [
 	| e1 e2 |
 	e1 := RTElement new.
 	e2 := RTElement new.
-	(RTGradientColoredLine new color: (Array with: Color red with: Color blue)) 
+	(RTGradientColoredLine new color: (Array with: Color red with: Color blue))
 		edgeFrom: e1 to: e2.
-	
+
 ]
 
 { #category : #tests }
@@ -31,7 +31,7 @@ RTGradientColoredLineTest >> testGradientColorShape [
 	shape := RTGradientColoredLine new.
 	shape gradientColorShape.
 	shape edgeFrom: e1 to: e2.
-	
+
 ]
 
 { #category : #tests }
@@ -45,7 +45,7 @@ RTGradientColoredLineTest >> testGradientColorShape2 [
 	shape precision: 100.
 	shape gradientColorShape.
 	shape edgeFrom: e1 to: e2.
-	
+
 ]
 
 { #category : #tests }

@@ -60,7 +60,7 @@ RTTabTableTest >> testConvertAsDateAndTime [
 	tab convertColumnAsDateAndTime: 3.
 	tab convertColumnAsDateAndTime: 4.
 	self assert: tab values size equals: 3.
-	
+
 	self assert: tab values first third year equals: 2014.
 	self assert: tab values last third year equals: 2008.
 	self assert: tab values last fourth year equals: 2009.
@@ -121,7 +121,7 @@ B	4	9'.
 	self
 		assert: tab dictionaryValues
 		equals:
-			(Array with: (OrderedDictionary with: #m1 -> 'A' with: #m2 -> '1' with: #m3 -> '2') with: 
+			(Array with: (OrderedDictionary with: #m1 -> 'A' with: #m2 -> '1' with: #m3 -> '2') with:
 			(OrderedDictionary with: #m1 -> 'B' with: #m2 -> '4' with: #m3 -> '9'))
 ]
 
@@ -149,7 +149,7 @@ RTTabTableTest >> testFiltering [
 1,2,3' usingDelimiter: $,.
 
 	self assert: tab numberOfRows equals: 3.
-	tab rejectRow: [ :row | row first = 'abc' ]. 
+	tab rejectRow: [ :row | row first = 'abc' ].
 	self assert: tab numberOfRows equals: 2.
 	tab rejectRow: [ :row | row first = 'abc' ].
 	self assert: tab numberOfRows equals: 2.
@@ -164,10 +164,10 @@ RTTabTableTest >> testFilteringPerColumn [
 
 	tab convertColumnAsInteger: 2.
 	self assert: tab numberOfRows equals: 3.
-	tab rejectInColumn: 2 row: #isZero. 
+	tab rejectInColumn: 2 row: #isZero.
 	self assert: tab numberOfRows equals: 2.
 
-	tab rejectInColumn: 2 row: #isZero. 
+	tab rejectInColumn: 2 row: #isZero.
 	self assert: tab numberOfRows equals: 2.
 
 	tab rejectRow: [ :row | row first = 'abc' ].
@@ -224,14 +224,14 @@ C	1	7	4	'.
 	tab removeFirstRow.
 	self assert: tab values first second = '1'.
 	self assert: tab values third third = '7'.
-	
-	tab convertColumns: (2 to: 4) to: [ :s | s asInteger ]. 
+
+	tab convertColumns: (2 to: 4) to: [ :s | s asInteger ].
 	self assert: tab values first second = 1.
 	self assert: tab values third third = 7.
-	
+
 	self assert: tab minimum = 1.
 	self assert: tab maximum = 7.
-	
+
 	self assert: (tab maxOfColumn: #second) = 2.
 	self assert: (tab maxOfColumn: #fourth) = 5.
 	self assert: (tab maxOfColumn: [ :row | row at: 3 ]) = 7.
@@ -240,17 +240,17 @@ C	1	7	4	'.
 { #category : #tests }
 RTTabTableTest >> testMinimumAndMaximum [
 
-	tab input: 
+	tab input:
 '5.4,1.2,0,hello world
 -56,1.2,100,bravo' usingDelimiters: ','.
 	tab convertColumnsAsFloat: #(1 2 3).
 	self assert: tab minimum equals: -56.0.
 	self assert: tab maximum equals: 100.
-	
+
 	self assert: (tab maxOfColumn: #first) equals: 5.4.
 	self assert: (tab maxOfColumn: #second) equals: 1.2.
 	self assert: (tab maxOfColumn: #third) equals: 100.0.
-	
+
 	self assert: tab firstColumn equals: #(5.4 -56).
 ]
 
@@ -301,12 +301,12 @@ x,y
 	tab := RTTabTable new input: tabString usingDelimiter: $,.
 	tab removeFirstRow.
 	tab convertColumnsAsInteger: #('x' 'y').
-	
+
 	self assert: (tab indexOfName: 'x') equals: 1.
 	self assert: (tab indexOfName: 'y') equals: 2.
-	
+
 	self assert: (tab valuesOfColumn: 'x') equals: #(4 2 1 1).
-	
+
 	self assert: (tab convertFromNameToIndexIfNecessary: 1) equals: 1.
 	self assert: (tab convertFromNameToIndexIfNecessary: 100) equals: 100.
 	self assert: (tab convertFromNameToIndexIfNecessary: 'x') equals: 1.

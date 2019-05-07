@@ -26,7 +26,7 @@ RTNumberAnimation >> during: seconds [
 { #category : #refreshing }
 RTNumberAnimation >> hasCompleted [
 	| r |
-	(r := animatedValue hasCompleted) 
+	(r := animatedValue hasCompleted)
 		ifTrue: [ self refresh ].
 	^ r
 ]

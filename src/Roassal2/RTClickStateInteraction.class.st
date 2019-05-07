@@ -7,10 +7,10 @@ Class {
 { #category : #actions }
 RTClickStateInteraction >> clickOn: element [
 	(self isSelected: element)
-		ifTrue: [ 
+		ifTrue: [
 			self markAsUnselected: element.
 			self unselect: element ]
-		ifFalse: [ 
+		ifFalse: [
 			self markASelected: element.
 			self select: element ]
 ]

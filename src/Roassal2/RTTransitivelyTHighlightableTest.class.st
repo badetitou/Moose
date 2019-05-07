@@ -11,20 +11,20 @@ RTTransitivelyTHighlightableTest >> testBasicNoCycle [
 	v := RTView new.
 	v addAll: (RTBox elementsOn: (1 to: 3)).
 	RTGridLayout on: v elements.
-	
+
 	eb := RTEdgeBuilder new.
 	eb view: v.
 	eb useAssociations: (Array with: 1 -> 2 with: 2 -> 3 ).
-	
+
 	self assert: (v canvas shapes allSatisfy: [ :s | s color = RTShape defaultColor ]).
 	element := v elementFromModel: 1.
 	int := RTTransitivelyHighlightable new color: Color red.
 	element @ int.
 	element announce: TRMouseEnter new.
-	
+
 	allShapes := v canvas shapes select: [ :s | s class == TRBoxShape ].
 	self assert: (allShapes allSatisfy: [ :s | s color = Color red ]).
-	
+
 	self assert: int getConnectedElementBlock notNil.
 	self assert: (int getConnectedElementBlock rtValue: element) class equals: RTGroup.
 	self assert: (int getConnectedElementBlock rtValue: element) size equals: 1.
@@ -38,16 +38,16 @@ RTTransitivelyTHighlightableTest >> testBasicNoCycleAndIncoming [
 	v := RTView new.
 	v addAll: (RTBox elementsOn: (1 to: 3)).
 	RTGridLayout on: v elements.
-	
+
 	eb := RTEdgeBuilder new.
 	eb view: v.
 	eb useAssociations: (Array with: 1 -> 2 with:  2 -> 3 ).
-	
+
 	self assert: (v canvas shapes allSatisfy: [ :s | s color = RTShape defaultColor ]).
 	element := v elementFromModel: 3.
 	element @ (RTTransitivelyHighlightable new focusOnIncomingElements; color: Color red).
 	element announce: TRMouseEnter new.
-	
+
 	allShapes := v canvas shapes select: [ :s | s class == TRBoxShape ].
 	self assert: (allShapes allSatisfy: [ :s | s color = Color red ]).
 ]
@@ -59,16 +59,16 @@ RTTransitivelyTHighlightableTest >> testBasicWithCycle [
 	v := RTView new.
 	v addAll: (RTBox elementsOn: (1 to: 3)).
 	RTGridLayout on: v elements.
-	
+
 	eb := RTEdgeBuilder new.
 	eb view: v.
 	eb useAssociations: (Array with: 1 -> 2 with: 2 -> 3 with: 3 -> 1).
-	
+
 	self assert: (v canvas shapes allSatisfy: [ :s | s color = RTShape defaultColor ]).
 	element := v elementFromModel: 1.
 	element @ (RTTransitivelyHighlightable new color: Color red).
 	element announce: TRMouseEnter new.
-	
+
 	allShapes := v canvas shapes select: [ :s | s class == TRBoxShape ].
 	self assert: (allShapes allSatisfy: [ :s | s color = Color red ]).
 ]
@@ -80,20 +80,20 @@ RTTransitivelyTHighlightableTest >> testBasicWithCycleAndEdgeHighlighting [
 	v := RTView new.
 	v addAll: (RTBox elementsOn: (1 to: 3)).
 	RTGridLayout on: v elements.
-	
+
 	eb := RTEdgeBuilder new.
 	eb view: v.
 	eb useAssociations: (Array with: 1 -> 2 with: 2 -> 3 with: 3 -> 1).
-	
+
 	self assert: (v canvas shapes allSatisfy: [ :s | s color = RTShape defaultColor ]).
 	element := v elementFromModel: 1.
 	int := RTTransitivelyHighlightable new color: Color red.
 	int edgeColor: Color black.
 	element @ int.
 	element announce: TRMouseEnter new.
-	
+
 	self assert: int shouldHighlightEdges.
-	
+
 	allShapes := v canvas shapes select: [ :s | s class == TRBoxShape ].
 	self assert: (allShapes allSatisfy: [ :s | s color = Color red ]).
 ]

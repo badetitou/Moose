@@ -14,7 +14,7 @@ RTVerticalTickLineDecorator >> render [
 	| xLine mm |
 	mm := RTMetricNormalizer new.
 	(self minValue to: self maxValue by: self step)
-		do: [ :x | 
+		do: [ :x |
 			xLine := mm
 				getValue: x
 				min: self fromPoint x

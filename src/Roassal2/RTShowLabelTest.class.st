@@ -23,7 +23,7 @@ RTShowLabelTest >> testBasic [
 
 	box testCaseAnnounce: TRMouseEnter.
 	self assert: view canvas shapes size equals: 2.
-	
+
 	box testCaseAnnounce: TRMouseLeave.
 	self assert: view canvas shapes size equals: 1.
 
@@ -49,14 +49,14 @@ RTShowLabelTest >> testBasic02 [
 	self assert: labelledInteraction textElement notNil.
 	self assert: (labelledInteraction textElement rtValue: e) equals: 1.
 
-	"Low level highlight"	
+	"Low level highlight"
 	self assert: v canvas numberOfShapes equals: 1.
 	int doHighlightElement: e.
 	self assert: v canvas numberOfShapes equals: 2.
 	int doUnhighlightElement: e.
 	self assert: v canvas numberOfShapes equals: 1.
-	
-	"High level highlight"	
+
+	"High level highlight"
 	self assert: v canvas numberOfShapes equals: 1.
 	int doHighlight: e.
 	self assert: v canvas numberOfShapes equals: 2.
@@ -84,7 +84,7 @@ RTShowLabelTest >> testBasic03 [
 	box announce: TRMouseEnter.
 	box announce: TRMouseEnter.
 	self assert: view canvas shapes size equals: 2.
-	
+
 	box announce: TRMouseLeave.
 	self assert: view canvas shapes size equals: 1.
 
@@ -104,7 +104,7 @@ RTShowLabelTest >> testVisit [
 	int highlightObject: #yourself.
 	int top.
 	int color: Color red.
-	
+
 	e := (RTBox elementOn: 3).
 	v := RTView new.
 	v add: e.
@@ -126,14 +126,14 @@ RTShowLabelTest >> testWithNesting [
 	int := RTShowLabel new.
 	int highlightObject: #yourself.
 	e @ int.
-	
+
 	"We enter and leave the outter element"
 	self assert: v canvas numberOfShapes equals: 2.
 	e announce: TRMouseEnter.
 	self assert: v canvas numberOfShapes equals: 3.
 	e announce: TRMouseLeave.
 	self assert: v canvas numberOfShapes equals: 2.
-	
+
 
 	"We enter the outer and inner elements"
 	e announce: TRMouseEnter.
@@ -162,14 +162,14 @@ RTShowLabelTest >> testWithNesting02 [
 	int := RTShowLabel new.
 	int highlightObject: #yourself.
 	e @ int.
-	
+
 	"We enter and leave the outter element"
 	self assert: v canvas numberOfShapes equals: 2.
 	e announce: TRMouseEnter.
 	self assert: v canvas numberOfShapes equals: 3.
 	e announce: TRMouseLeave.
 	self assert: v canvas numberOfShapes equals: 2.
-	
+
 
 	"We enter the outer and inner elements"
 	e announce: TRMouseEnter.

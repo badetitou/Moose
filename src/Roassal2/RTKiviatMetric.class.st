@@ -38,13 +38,13 @@ Class {
 { #category : #accessing }
 RTKiviatMetric >> block [
 "This block is about values of metric"
-	^ block 
+	^ block
 ]
 
 { #category : #accessing }
 RTKiviatMetric >> block: aOneArgBlock [
 "This block is about values of metric"
-	block := aOneArgBlock 
+	block := aOneArgBlock
 ]
 
 { #category : #private }
@@ -99,7 +99,7 @@ RTKiviatMetric >> minValue: aNumber [
 { #category : #accessing }
 RTKiviatMetric >> modelBlock [
 "this block is about axis rotation, size..."
-	^ modelBlock 
+	^ modelBlock
 ]
 
 { #category : #accessing }
@@ -109,8 +109,8 @@ RTKiviatMetric >> modelBlock: aBlockOrSymbol [
 ]
 
 { #category : #accessing }
-RTKiviatMetric >> named [ 
-	 ^ named 
+RTKiviatMetric >> named [
+	 ^ named
 ]
 
 { #category : #accessing }

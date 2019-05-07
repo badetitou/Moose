@@ -1,5 +1,5 @@
 "
-RTUMLExample new installTitle: 'BlackColor' 
+RTUMLExample new installTitle: 'BlackColor'
 		code:
 		'
 
@@ -173,7 +173,7 @@ RTUMLExample >> exampleColoredProtocols [
 	b addObjects: someClasses.
 	b treeLayout.
 	b build.
-	^ b view	
+	^ b view
 
 ]
 
@@ -230,7 +230,7 @@ b shape arrowedLine
         withHorizontalAttachPoint.
 
 b edgesDo: [ :edges|
-	edges connectFrom: 'trCanvas' to: TRCanvas. ].        
+	edges connectFrom: 'trCanvas' to: TRCanvas. ].
 ^ b
 ]
 
@@ -400,9 +400,9 @@ RTUMLExample >> exampleWithNonClasses [
 		{ 'MyClass' . { #iv1 . #iv2 } . { #method1 . #method2 . #method3 }}  .
 		{ 'MyClass2' . { #iv2 . #iv2 } . { #method1 . #method2 . #method4 }}  }."
 	objects := Array
-		with: (Array with: 'MyClass' with: (Array with: #iv1 with: #iv2) 
+		with: (Array with: 'MyClass' with: (Array with: #iv1 with: #iv2)
 			with: (Array with: #method1 with: #method2 with: #method3 ) )
-		with: (Array with: 'MyClass2' with: (Array with: #iv3 with: #iv4) 
+		with: (Array with: 'MyClass2' with: (Array with: #iv3 with: #iv4)
 			with: (Array with: #method4 with: #method5 with: #method6 ) ).
 
 	b := RTUMLClassBuilder new.
@@ -451,7 +451,7 @@ b := RTUMLClassBuilder new.
 b methodShape
 	if: [ :method | method selector beginsWith: 'init' ] color: Color green;
 	if: [ :method | method selector beginsWith: 'with' ] color: Color red.
-			
+
 b attributeShape label
 	if: [ :attribute | attribute beginsWith: 'a' ] color: Color blue.
 b addObjects: RTShape withAllSubclasses.

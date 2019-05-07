@@ -15,7 +15,7 @@ Class {
 RTMorphingView class >> exampleForceBasedLayout [
 	<noTest>
 	| randomView view lay |
-	
+
 	lay := RTForceBasedLayout new.
 
 	randomView := [ | rndView |
@@ -32,11 +32,11 @@ RTMorphingView class >> exampleForceBasedLayout [
 	view := randomView value.
 	view elements do: [ :el | el color: Color gray. el @ RTLabeled ].
 
-	view addMenu: 'Animate!' callback: [ 
-		view @ (RTMorphingView new 
-						referenceView: randomView value; 
+	view addMenu: 'Animate!' callback: [
+		view @ (RTMorphingView new
+						referenceView: randomView value;
 						smoothTransition: 0.3).
-		view elements do: [ :el | 
+		view elements do: [ :el |
 			el pushFront.
 			(el hasAttribute: #RTLabelledLabel) ifFalse: [ el @ RTLabeled ]
 		]
@@ -60,11 +60,11 @@ RTMorphingView class >> exampleSimple [
 
 	v2 := RTView new.
 	v2 addAll: ((RTEllipse new color: Color green trans) elementsOn: #(1)).
-	v2 addMenu: 'animate' callback:  [ 
+	v2 addMenu: 'animate' callback:  [
 		v2 @ (RTMorphingView new referenceView: v1; smoothTransition: 0.3).
 	].
 
-	v2 addMenu: 'camerea' callback:  [ 
+	v2 addMenu: 'camerea' callback:  [
 		v2 canvas camera scale: 10.
 		v2 signalUpdate.
 	].
@@ -96,7 +96,7 @@ RTMorphingView class >> exampleWithVaryingEdgeSize [
 		useAssociations: (Array with: 1 -> 2 with: 2 -> 3).
 	RTHorizontalLineLayout on: v2 elements.
 	"---"
-	v2 addMenu: 'animate' callback:  [ 
+	v2 addMenu: 'animate' callback:  [
 		v2 @ (RTMorphingView new referenceView: v1; smoothTransition: 0.3).
 	].
 	v2 canvas camera scale: 10.
@@ -118,7 +118,7 @@ RTMorphingView >> hasCompleted [
 RTMorphingView >> initialize [
 
 	super initialize.
-	
+
 	self pushElementsToFrontAndEdgesToBack.
 ]
 
@@ -130,30 +130,30 @@ RTMorphingView >> initializeElement: aView [
 	allModels := (aView elements collect: #model) asArray.
 	referenceElements := referenceView elementsFromModels: allModels.
 	referenceModels := referenceElements collect: #model.
-	
-	"Removing old elements and edges that are not in the new view"
-	aView removeElements: (aView elementsFromModels: (allModels difference: referenceModels)).	
-	aView removeAllEdges.
-	
-	"Adding elements that are not in the old view"
-	aView addAll: (referenceView elements difference: referenceElements).	
 
-	"Adding edges"	
+	"Removing old elements and edges that are not in the new view"
+	aView removeElements: (aView elementsFromModels: (allModels difference: referenceModels)).
+	aView removeAllEdges.
+
+	"Adding elements that are not in the old view"
+	aView addAll: (referenceView elements difference: referenceElements).
+
+	"Adding edges"
 	edges := RTEdgeBuilder new
 						view: aView;
 						useAssociations: (referenceView edges collect: #model).
-		
+
 	"Updating color and width of edges"
 	aView edges do: [ :edge | | referenceEdge |
-		referenceEdge := referenceView edgeFromModel: edge model. 
+		referenceEdge := referenceView edgeFromModel: edge model.
 		edge @ RTMakeEdgeNotUpdatable.
 		edge trachelShape color: referenceEdge trachelShape strokePaint.
 		edge trachelShape width: referenceEdge trachelShape width.
 	].
 
-	(aView elementsFromModels: referenceModels) with: referenceElements do: [ :e1 :e2 | 
-		self translate: e1 toPositionOf: e2. 
-		self resize: e1 toExtentOf: e2. 
+	(aView elementsFromModels: referenceModels) with: referenceElements do: [ :e1 :e2 |
+		self translate: e1 toPositionOf: e2.
+		self resize: e1 toExtentOf: e2.
 		e1 color: e2 color.
 	].
 
@@ -183,7 +183,7 @@ RTMorphingView >> initializeElementOLD: aView [
 				difference: (aView edges collect: #model)).
 	(aView elementsFromModels: referenceModels)
 		with: referenceElements
-		do: [ :e1 :e2 | 
+		do: [ :e1 :e2 |
 			self translate: e1 toPositionOf: e2.
 			self resize: e1 toExtentOf: e2 ].
 	self afterTranslationDoActionOn: aView
@@ -192,19 +192,19 @@ RTMorphingView >> initializeElementOLD: aView [
 { #category : #configuration }
 RTMorphingView >> morphIntoView: aRTView [
 
-	afterAllTranslationsBlocks 
-		add: [ :view | view @ (RTMorphingView new 
-													referenceView: aRTView; 
+	afterAllTranslationsBlocks
+		add: [ :view | view @ (RTMorphingView new
+													referenceView: aRTView;
 													smoothTransition)]
 ]
 
 { #category : #configuration }
 RTMorphingView >> pushElementsToFrontAndEdgesToBack [
 
-	afterAllTranslationsBlocks 
+	afterAllTranslationsBlocks
 		add: [ :view | view edges do: #pushBack ];
 		add: [ :view | view elements do: #pushFront ]
-		
+
 ]
 
 { #category : #configuration }

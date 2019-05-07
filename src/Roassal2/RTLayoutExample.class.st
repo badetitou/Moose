@@ -1,7 +1,7 @@
 "
 Example about layouts
 
-RTLayoutExample new installTitle: 'ConditionaLayoutInMondrian' 
+RTLayoutExample new installTitle: 'ConditionaLayoutInMondrian'
 		code:
 		'
 b := RTMondrian new.
@@ -12,7 +12,7 @@ b shape rectangle
 b nodes: Collection withAllSubclasses forEach: [ :cls |
 	b nodes: cls methods.
 	b edges connectToAll: #dependentMethods.
-	b layout 
+	b layout
 		ifElement: #isConnected then: RTTreeLayout new;
 		else: RTGridLayout new.
  ].
@@ -21,7 +21,7 @@ b edges connectFrom: #superclass.
 b layout tree.
 b build.
 ^ b view'
-	
+
 "
 Class {
 	#name : #RTLayoutExample,
@@ -216,7 +216,7 @@ b shape rectangle
 b nodes: Collection withAllSubclasses forEach: [ :cls |
 	b nodes: cls rtmethods.
 	b edges connectToAll: #dependentMethods.
-	b layout 
+	b layout
 		ifElement: #isConnected then: RTTreeLayout new;
 		else: RTGridLayout new.
  ].
@@ -701,7 +701,7 @@ b shape box size: 20; color: Color red trans.
 b nodes: (1 to: 128).
 b edges connectFrom: [ :v | v // 2 ].
 b layout horizontalReversedTree.
-b 
+b
 "
 	| v es eb |
 	v := RTView new.

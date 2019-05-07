@@ -79,14 +79,14 @@ RTAnchorConstraint >> build [
 		ifTrue: [ edge when: #DCRTHandleMoved asClass do: [ self update ] ].
 	element
 		when: TRMouseDragStart
-		do: [ 
+		do: [
 			guideLine color: Color gray.
 			guideEdge update.
 			guideEdge view signalUpdate ].
 	element
 		when: TRMouseDragEnd
 		do:
-			[ 
+			[
 			guideLine color: Color transparent.
 			guideEdge update.
 			guideEdge view signalUpdate ]
@@ -179,7 +179,7 @@ RTAnchorConstraint >> moveAwayFrom: aRectangle via: aVector [
 		select: [ :each | aRectangle containsPoint: each ].
 	segment := (corners
 		collect:
-			[ :each | 
+			[ :each |
 			| sg |
 			sg := RTLineSegment from: each to: each + vector.
 			RTLineSegment from: each to: (sg intersectRectangle: aRectangle) anyOne ])
@@ -200,7 +200,7 @@ RTAnchorConstraint >> moveAwayFrom: aRectangle via: aVector [
 RTAnchorConstraint >> moveAwayFromSegment: aSegment [
 	(aSegment intersectRectangle: element encompassingRectangle)
 		ifNotEmpty:
-			[ :crossings | 
+			[ :crossings |
 			element
 				translateBy:
 					aSegment vector normal

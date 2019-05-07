@@ -107,11 +107,11 @@ RTBoxPlotDataSet >> renderBoxPlotIn: view item: item [
 			max: builder extent y negated
 			minValue: minY
 			maxValue: maxY.
-	
+
 	showMean ifFalse: [ ^ self ].
 	e := meanShape elementOn: item.
 	view add: e.
-	
+
 	normalizer elements: (Array with: e );
 		normalizeX: [ :i | mx ]
 		min: 0
@@ -140,7 +140,7 @@ RTBoxPlotDataSet >> renderBoxPlotLines: view item: item [
 	e4 := b elementOn: item.
 	e5 := b elementOn: item.
 	view add: e4; add: e5.
-	
+
 	normalizer := RTMetricNormalizer new.
 	normalizer elements: (Array with: e1 with: e2 with: e3 with: e4 with: e5).
 	normalizer normalizeX: [ :m | mx ]
@@ -148,15 +148,15 @@ RTBoxPlotDataSet >> renderBoxPlotLines: view item: item [
 		max: builder extent x
 		minValue: minX
 		maxValue: maxX.
-		
+
 	normalizer elements: (Array with: e1 with: e2 with: e3);
 		normalizeY: #yourself
 		min: 0
 		max: builder extent y negated
 		minValue: minY
 		maxValue: maxY.
-		
-	
+
+
 	normalizer elements: (Array with: e4);
 		normalizeY: [ :i | i maxRegularValue - ((i maxRegularValue - i q3)/2) ]
 		min: 0
@@ -168,7 +168,7 @@ RTBoxPlotDataSet >> renderBoxPlotLines: view item: item [
 		max: builder extent y negated
 		minValue: minY
 		maxValue: maxY.
-		
+
 	normalizer elements: (Array with: e5);
 		normalizeY: [ :i | i q1 - ((i q1 - i minRegularValue )/2) ]
 		min: 0
@@ -180,8 +180,8 @@ RTBoxPlotDataSet >> renderBoxPlotLines: view item: item [
 		max: builder extent y negated
 		minValue: minY
 		maxValue: maxY.
-	
-	
+
+
 ]
 
 { #category : #hooks }
@@ -190,11 +190,11 @@ RTBoxPlotDataSet >> renderDotsIn: view item: item [
 	elements := dotBuilder elementsOn: points.
 	builder view addAll: elements.
 	interaction setUpElements: elements.
-	
+
 	RTMetricNormalizer new
 		elements: elements;
 		normalizeX: [ :m | x rtValue: model ]
-			min: 0 
+			min: 0
 			max: builder extent x
 			minValue: minX
 			maxValue: maxX.
@@ -205,7 +205,7 @@ RTBoxPlotDataSet >> renderDotsIn: view item: item [
 			max: builder extent y negated
 			minValue: minY
 			maxValue: maxY.
-			
+
 	elementActions do: [ :act | act rtValue: elements ].
 	self renderLinesFor: elements in: view.
 ]
@@ -213,11 +213,11 @@ RTBoxPlotDataSet >> renderDotsIn: view item: item [
 { #category : #hooks }
 RTBoxPlotDataSet >> renderIn: view [
 	|  item |
-	
+
 	item := RTBoxPlotItem new.
 	item model: model;
 		values: self getValuesY.
-	
+
 	self renderBoxPlotIn: view item: item.
 	self renderBoxPlotLines: view item: item.
 	self renderOutliersIn: view item: item.
@@ -242,7 +242,7 @@ RTBoxPlotDataSet >> renderOutliersIn: view item: item [
 		max: builder extent y negated
 		minValue: minY
 		maxValue: maxY
-		 
+
 ]
 
 { #category : #accessing }

@@ -19,7 +19,7 @@ RTGrayLinearColor >> initialize [
 
 { #category : #accessing }
 RTGrayLinearColor >> max [
-	max = -1 ifTrue: [ 
+	max = -1 ifTrue: [
 		max := scope inject: -1000000 into: [ :s :e | s max: (command rtValue: e) ] ].
 
 	^ max
@@ -27,7 +27,7 @@ RTGrayLinearColor >> max [
 
 { #category : #accessing }
 RTGrayLinearColor >> min [
-	min = -1 ifTrue: [ 
+	min = -1 ifTrue: [
 		min := scope inject: 1000000 into: [ :s :e | s min: (command rtValue: e) ] ].
 
 	^ min
@@ -35,7 +35,7 @@ RTGrayLinearColor >> min [
 
 { #category : #accessing }
 RTGrayLinearColor >> rtValue: anObject [
-	| intensity v |	
+	| intensity v |
 	self min = self max ifTrue: [ ^ Color gray ].
 	v := command rtValue: anObject.
 	intensity := 1 - ((v - self min) / (self max - self min)).

@@ -39,23 +39,23 @@ RTCollision >> avoidOverlapWith: aShape step: step [
 	This method avoids the translation"
 	| delta tt side |
 	^ (self checkCollistionFor: aShape)
-		ifTrue: [ 
+		ifTrue: [
 			| r en |
 			en := aShape encompassingRectangle.
 			r := (elementToCheckForCollision detect: [ :e | e encompassingRectangle intersects: en ]) encompassingRectangle.
 
 			"We need to determine which side is the most relevant"
-			
-			tt := (r bottom - en top). side := #bottom.		
+
+			tt := (r bottom - en top). side := #bottom.
 			(tt abs > (r right - en left) abs) ifTrue: [ tt := r right - en left. side := #right ].
 			(tt abs > (r top - en bottom) abs) ifTrue: [ tt := r top - en bottom. side := #top ].
 			(tt abs > (r left - en right) abs) ifTrue: [ tt := r left - en right. side := #left ].
-			
+
 			side == #right ifTrue: [ delta := tt @ 0 ].
 			side == #left ifTrue: [ delta := tt @ 0 ].
 			side == #top ifTrue: [ delta := 0 @ tt ].
 			side == #bottom ifTrue: [ delta := 0 @ tt ].
-			
+
 			callback value: aShape value: side value.
 			aShape translateBy: delta ]
 ]

@@ -38,7 +38,7 @@ RTSVGPopup class >> onClick: anExporter targets: aRTShape [
 
 { #category : #adding }
 RTSVGPopup >> addEventHandlers: aStream id: aString element: aRTElement  center: aNumber [
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #adding }
@@ -94,12 +94,12 @@ RTSVGPopup >> initialize [
 
 { #category : #adding }
 RTSVGPopup >> mouseAction: aString [
-	^click 
+	^click
 		ifTrue: ["Still does not work"
 	'
     <set id="',aString,'s" attributeName="visibility" from="visible" to="hidden" begin="',aString,'.click"/>
   '			  ]
-		ifFalse: [  
+		ifFalse: [
 	'
     <set attributeName="visibility" from="hidden" to="visible" begin="',aString,'.mouseover" end="',aString,'.mouseout"/>
   ']

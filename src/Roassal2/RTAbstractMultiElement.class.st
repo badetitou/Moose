@@ -75,7 +75,7 @@ RTAbstractMultiElement >> remove [
 RTAbstractMultiElement >> renderOn: trachelCanvas [
 	super renderOn: trachelCanvas.
 	ownedElements
-		do: [ :c | 
+		do: [ :c |
 			c
 				update;
 				renderOn: trachelCanvas ].

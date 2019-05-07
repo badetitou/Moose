@@ -40,7 +40,7 @@ RTApplicationMatrix >> example01 [
 	item01 row: 'Australia'.
 	item01 column: 'Corporate Services'.
 	item01 color: Color lightRed.
-	
+
 	item02 := RTAMItem new.
 	item02 itemName: 'Bonus Card Use Watch'.
 	item02 row: 'Australia'.
@@ -56,7 +56,7 @@ RTApplicationMatrix >> example01 [
 	item04 row: 'France'.
 	item04 column: 'Customer Relationship'.
 	item04 color: Color lightGreen.
-	
+
 	b add: item01; add: item02; add: item03; add: item04.
 	^ b
 ]
@@ -65,7 +65,7 @@ RTApplicationMatrix >> example01 [
 RTApplicationMatrix >> initialize [
 	super initialize.
 	items := OrderedCollection new.
-	
+
 ]
 
 { #category : #accessing }
@@ -93,27 +93,27 @@ RTApplicationMatrix >> renderIn: aView [
 
 	| cells el elementsAsGroup itemsPerCell rowElements  |
 	cells := OrderedCollection new.
-	
+
 	"First line"
 	cells add: (RTLabel elementOn: 'AppMatrix').
-	self columns do: [ :cName | 
+	self columns do: [ :cName |
 		el := RTLabel elementOn: cName.
 		view add: el.
 		cells add: el.
 	].
-	
+
 	self rows do: [ :row |
 		el := RTLabel elementOn: row.
 		view add: el.
 		cells add: el.
-		
+
 		rowElements := RTGroup new.
 		self columns do: [ :column |
 			itemsPerCell := self itemsAtRow: row andColumn: column.
-			
+
 			"elementsAsGroup := ((RTBox new height: 20; width: 200) + (RTLabel new text: #itemName)) elementsOn: itemsPerCell."
 			elementsAsGroup := self elementsOn: itemsPerCell.
-		
+
 			view addAll: elementsAsGroup.
 			RTVerticalLineLayout new gapSize: 1; on: elementsAsGroup.
 			cells add: elementsAsGroup.
@@ -121,7 +121,7 @@ RTApplicationMatrix >> renderIn: aView [
 		].
 	].
 	RTCellLayout new lineItemsCount: self numberOfColumns + 1; on: cells.
-	
+
 ]
 
 { #category : #'accessing vectorwise' }

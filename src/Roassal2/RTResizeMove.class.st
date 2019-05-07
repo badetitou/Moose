@@ -12,11 +12,11 @@ Class {
 RTResizeMove >> addedIn: trachelCanvas [
 	"We make sure that there is no existing resize animation in the animation queue."
 	| conflictingAnimations |
-	conflictingAnimations := trachelCanvas animations 
-					select: [ :anim | (anim class == self class 
+	conflictingAnimations := trachelCanvas animations
+					select: [ :anim | (anim class == self class
 										and: [ anim element == element ])
 										and: [ self ~~ anim ] ].
-	trachelCanvas animationsRemoveAll: conflictingAnimations. 
+	trachelCanvas animationsRemoveAll: conflictingAnimations.
 
 ]
 
@@ -47,12 +47,12 @@ RTResizeMove >> start [
 RTResizeMove >> toExtent: toExtent during: numberOfSeconds on: anElement [
 	element := anElement.
 	originalExtent := anElement extent.
-	
+
 	animatedValue := TRVIAnimatedValue new
 									evaluator: [ :t | originalExtent interpolateTo: toExtent at: t ];
 									timer: (TRVITimer new cycleLength: numberOfSeconds);
 									yourself.
-	
+
 ]
 
 { #category : #public }

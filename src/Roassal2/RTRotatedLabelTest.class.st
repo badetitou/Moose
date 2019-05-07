@@ -16,5 +16,5 @@ RTRotatedLabelTest >> testBasic [
 	v addAll: (shape elementsOn: Collection withAllSubclasses).
 
 	v canvas color: Color white.
-	
+
 ]

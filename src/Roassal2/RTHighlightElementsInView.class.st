@@ -11,13 +11,13 @@ v @  RTHighlightElementsInView.
 ]]]
 
 [[[
-| b | 
+| b |
 b := RTMondrian new.
 b node: 4 forIt: [
 	b node: 4 ].
 b view @ RTHighlightElementsInView new transparent.
 b
-]]]			
+]]]
 "
 Class {
 	#name : #RTHighlightElementsInView,
@@ -49,7 +49,7 @@ RTHighlightElementsInView >> highlightElementsUsing: string [
 	String has to be a regular expression"
 	string ifEmpty: [ ^ self processEmptyString ].
 	(self getRelevantElementsFor: string)
-		do: [ :e | 
+		do: [ :e |
 			self rememberPreviousColorIfNecessaryFor: e.
 			e trachelShape color: self currentColor ].
 	self increaseColorIndex.
@@ -94,7 +94,7 @@ RTHighlightElementsInView >> processEmptyString [
 	view attributeAt: #RTHighlightElementsInView ifAbsentPut: [ 1 ].
 	"Should remove the color previously set"
 	view elements
-		do: [ :e | 
+		do: [ :e |
 			(e hasAttribute: #prevousColorRTHighlightElementsInView)
 				ifTrue: [ e trachelShape
 						color: (e attributeAt: #prevousColorRTHighlightElementsInView).

@@ -77,7 +77,7 @@ RTCityBuilder >> initializeCities [
 	cities := Dictionary new.
 	cities at: 'Santiago' put: -33.4500 @ -70.66.
 	cities at: 'Vina del Mar' put: -33 @ -71.52.
-	
+
 	cities at: 'New York City' put: 40.67 @ -73.94 .
 	cities at: 'Washington, D.C.' put: 38.89 @ -77.03.
 	cities at: 'Paris' put: 48.85 @ 2.35.
@@ -93,7 +93,7 @@ RTCityBuilder >> initializeCities [
 	cities at: 'La Paz' put: -16.5 @ -68.15.
 	cities at: 'Quito' put: -0.25 @ -78.58.
 	cities at: 'Caracas' put: 10.5 @ -66.92.
-	
+
 	cities at: 'Shanghai' put: 31.2 @ 121.5.
 ]
 

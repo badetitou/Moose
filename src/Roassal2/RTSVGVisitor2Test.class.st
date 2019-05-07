@@ -14,7 +14,7 @@ Class {
 RTSVGVisitor2Test >> setUp [
 	super setUp.
 	visitor := RTJavascriptVisitor new.
-	
+
 ]
 
 { #category : #tests }
@@ -48,7 +48,7 @@ RTSVGVisitor2Test >> testAddPopup [
 			group add: background. ]).
 	visitor addInteractions: element.
 	self assert: visitor stream contents equals: 'ints: [new RTPopup([
-		{type: "box", id: "0", w: 10, h: 10, color: {r:0,g:0,b:255}, ints: [], matrix:{shx: 0,shy: 0,sx: 1,sy: 1,x: 0,y: 0}}, 
+		{type: "box", id: "0", w: 10, h: 10, color: {r:0,g:0,b:255}, ints: [], matrix:{shx: 0,shy: 0,sx: 1,sy: 1,x: 0,y: 0}},
 		{type: "box", id: "1", w: 20, h: 20, color: {r:0,g:0,b:0}, ints: [], matrix:{shx: 0,shy: 0,sx: 1,sy: 1,x: 0,y: 0}}, ]) ], '
 ]
 
@@ -65,7 +65,7 @@ RTSVGVisitor2Test >> testBasic [
 	self assert: visitor stream contents isNotEmpty.
 	visitor visitNoShape: nil.
 	self assert: size equals: visitor stream contents size.
-	
+
 ]
 
 { #category : #tests }
@@ -99,8 +99,8 @@ RTSVGVisitor2Test >> testVisitArrowShape [
 	self assert: visitor stream contents equals:'mamani.color({r:255,g:255,b:255});
 	mamani.camera.setScale(1.0001);
 	var shapes = [
-		{type: "box", id: "0", w: 5, h: 5, color: {r:223,g:223,b:223}, ints: [], matrix:{shx: 0,shy: 0,sx: 1,sy: 1,x: 0,y: 0}}, 
-		{type: "box", id: "1", w: 5, h: 5, color: {r:223,g:223,b:223}, ints: [], matrix:{shx: 0,shy: 0,sx: 1,sy: 1,x: 0,y: 0}}, 
+		{type: "box", id: "0", w: 5, h: 5, color: {r:223,g:223,b:223}, ints: [], matrix:{shx: 0,shy: 0,sx: 1,sy: 1,x: 0,y: 0}},
+		{type: "box", id: "1", w: 5, h: 5, color: {r:223,g:223,b:223}, ints: [], matrix:{shx: 0,shy: 0,sx: 1,sy: 1,x: 0,y: 0}},
 		{id: "2", type:"multi", shapes:[
 		{type: "line", id: "3",fromid:''0'',toid:''1'',color: {r:223,g:223,b:223},  width: 1,ap: new RTCenteredAttachPoint(false)},
 		{type: "simplearrow", id: "4", fromid: ''0'', toid: ''1'',color: {r:223,g:223,b:223},  width: 1, size: 10, percentage: 1,ap: new RTCenteredAttachPoint(false), base: 10},], offsets: [{x: 0, y: 0},{x: 0, y: 0},]},
@@ -152,7 +152,7 @@ RTSVGVisitor2Test >> testVisitLineShape [
 { #category : #tests }
 RTSVGVisitor2Test >> testVisitPolygonShape [
 	| shape |
-	shape := RTPolygon new 
+	shape := RTPolygon new
 		vertices: (Array with: 0@0 with: 1@0 with: 1@1); elementOn: 'foo'.
 	visitor visitElement: shape.
 	self assert: visitor stream contents equals: '
@@ -163,7 +163,7 @@ RTSVGVisitor2Test >> testVisitPolygonShape [
 RTSVGVisitor2Test >> testVisitSVGPath [
 	| shape |
 	shape := RTSVGPath new path:'M 100 100 L 300 100 L 200 300 z'; element.
-	
+
 	visitor visitElement: shape.
 	self assert: visitor stream contents equals: '
 		{type: "path", id: "0", d:"M 100 100 L 300 100 L 200 300 z", o: {x: 100, y: 100}, c: {x: 300, y: 300},bordercolor: {r: 0, g: 0, b:0}, sw: 1,color: {r:0,g:0,b:0,a:0}, matrix:{shx: 0,shy: 0,sx: 1,sy: 1,x: 0,y: 0}}, '

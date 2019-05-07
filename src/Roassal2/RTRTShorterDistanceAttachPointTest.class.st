@@ -30,7 +30,7 @@ RTRTShorterDistanceAttachPointTest >> setUp [
 { #category : #tests }
 RTRTShorterDistanceAttachPointTest >> testHorizontalTwoElements [
 	e2 translateBy: 90 @ 0.
-	
+
 	self assert: (lineShape startingPointOf: edge) equals: 35 @ 0.
 	self assert: (lineShape endingPointOf: edge) equals: 55 @ 0.
 ]
@@ -38,7 +38,7 @@ RTRTShorterDistanceAttachPointTest >> testHorizontalTwoElements [
 { #category : #tests }
 RTRTShorterDistanceAttachPointTest >> testVerticalTwoElements [
 	e2 translateBy: 0 @ 50.
-		
+
 	self assert: (lineShape startingPointOf: edge) equals: 0 @ 15.
 	self assert: (lineShape endingPointOf: edge) equals: 0 @ 35.
 ]

@@ -33,7 +33,7 @@ RTRadar >> extent: newExtent [
 RTRadar >> initialize [
 	super initialize.
 	extent := 250@250.
-	
+
 ]
 
 { #category : #accessing }
@@ -52,7 +52,7 @@ RTRadar >> renderIn: aView [
 			lupa first translateTo: view canvas extent /2.
 			ext := targetView canvas encompassingRectangle extent.
 			Transcript crShow: sc.
-			lupa second translateTo: view canvas extent * 
+			lupa second translateTo: view canvas extent *
 				(targetView canvas camera position ) / ext.
 			lupa updateShape. ] ).
 	view canvas privateShapes: targetView canvas privateShapes.
@@ -65,12 +65,12 @@ RTRadar >> renderIn: aView [
 		height: [ targetView canvas extent y * sc ];
 		color: Color transparent;
 		borderColor: Color blue.
-		
+
 	lupa := RTGroup new.
 	lupa add: box element.
 	lupa add: box2 element.
 	lupa do: [ :e| 	view canvas addFixedShape: e trachelShape ].
 
-	
-	
+
+
 ]

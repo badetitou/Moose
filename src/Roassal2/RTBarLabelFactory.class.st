@@ -64,7 +64,7 @@ RTBarLabelFactory >> initialize [
 	self fontSize: 12.
 	self label: #yourself.
 	self rotation: -30.
-	 
+
 ]
 
 { #category : #accessing }

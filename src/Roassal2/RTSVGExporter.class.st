@@ -34,7 +34,7 @@ RTSVGExporter class >> exportBuilderAsSVG: aRTBuilder filename: aString [
 ]
 
 { #category : #'as yet unclassified' }
-RTSVGExporter class >> exportViewAsSVG: aRTView [ 
+RTSVGExporter class >> exportViewAsSVG: aRTView [
 
 	^ self new view: aRTView; exportToFile
 ]
@@ -52,7 +52,7 @@ RTSVGExporter class >> interactiveExportBuilderAsSVG: aRTBuilder [
 ]
 
 { #category : #'as yet unclassified' }
-RTSVGExporter class >> interactiveExportViewAsSVG: aRTView [ 
+RTSVGExporter class >> interactiveExportViewAsSVG: aRTView [
 
 	^ self new view: aRTView; interactiveExportToFile
 ]
@@ -72,7 +72,7 @@ RTSVGExporter >> addCanvasColor [
 RTSVGExporter >> addCanvasSize: bounds [
 	|pair|
 	pair := self getFinalBounds: bounds.
-	stream 
+	stream
 		nextPutAll: ('width="<1p>px" height="<2p>px" ' expandMacrosWith: pair first with: pair second).
 ]
 
@@ -84,11 +84,11 @@ RTSVGExporter >> addCode [
 	step := (TRLabelShape new
 					text: lines first;
 						encompassingRectangle) height.
-	hightStart := (step / 2) rounded. 
+	hightStart := (step / 2) rounded.
 	stream
 		nextPutAll:
 				'<rect  x="',canvasWidth asString,'" y="',0 asString,'" width="',((3*(finalWidth - canvasWidth)/4) rounded) asString,'" height="',finalHeight asString,'" fill="rgb(192,192,192)" />' , String cr.
-	lines do: [ :l |  
+	lines do: [ :l |
 		stream
 			nextPutAll: String cr,'<text x="',(canvasWidth + 5) asString,'" y="',hightStart asString,'" font-size="12"><tspan font-family = "Arial, Helvetica, sans-serif" xml:space="preserve">',l,'</tspan></text>'.
 		hightStart := hightStart + step]
@@ -96,14 +96,14 @@ RTSVGExporter >> addCode [
 
 { #category : #svg }
 RTSVGExporter >> addEnd [
-	
+
 	stream
 		nextPutAll: '</svg>'.
 ]
 
 { #category : #svg }
 RTSVGExporter >> addStart: bounds [
-	self 
+	self
 		addVersion;
 		addCanvasSize: bounds;
 		addCanvasColor;
@@ -198,10 +198,10 @@ RTSVGExporter >> getFinalBounds: bounds [
 		ifFalse: [ | maxW line w h|
 			maxW := 0.
 			line := ''.
-			code lines do: [ :l | 
+			code lines do: [ :l |
 				maxW := maxW max: l size.
 				maxW = l size
-					ifTrue: [ line := l ].	
+					ifTrue: [ line := l ].
 				].
 			w := (TRLabelShape new
 					text: line;
@@ -210,7 +210,7 @@ RTSVGExporter >> getFinalBounds: bounds [
 					text: line;
 						height).
 			finalWidth := canvasWidth  + w.
-			finalHeight := canvasHeight max: (h * code lines size) 			
+			finalHeight := canvasHeight max: (h * code lines size)
 			  ].
 	^ Array with: finalWidth with: finalHeight
 ]
@@ -225,34 +225,34 @@ RTSVGExporter >> initialize [
 RTSVGExporter >> interactiveExportToFile [
 
 	| fileStream fileRef |
-	
-	fileRef := TRPlatform current 
+
+	fileRef := TRPlatform current
 		dialogRequestSaveFilename: 'Export as SVG'
 		extensions: #('svg')
 		path: nil.
-		
+
 	fileRef ifNil: [ TRPlatform current inform: 'Saving cancelled'. ^ self ].
-	
+
 	fileStream := fileRef writeStream.
-	[ self exportOnStream: fileStream ] 
+	[ self exportOnStream: fileStream ]
 		ensure: [ fileStream notNil ifTrue: [ fileStream close ] ]
 ]
 
 { #category : #accessing }
 RTSVGExporter >> stream [
-	
+
 	^stream
 ]
 
 { #category : #accessing }
 RTSVGExporter >> stream: aStream [
-	
+
 	stream := aStream
 ]
 
 { #category : #accessing }
 RTSVGExporter >> view [
-	
+
 	^view
 ]
 

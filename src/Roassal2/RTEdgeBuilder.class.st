@@ -2,7 +2,7 @@
 RTEdgeBuilder offers an API to easily build edges.
 
 Here is an example:
-[ [ [ 
+[ [ [
 	| v es |
 	v := RTView new.
 
@@ -56,7 +56,7 @@ RTEdgeBuilder >> connectFrom: aFromBlock to: aBlockOrASymbol [
 	| toElement fromElement |
 	self resetCreatedEdges.
 	self fromElements copy
-		do: [ :e | 
+		do: [ :e |
 			fromElement := self fromElements elementFromModel: (aFromBlock rtValue: e model).
 			toElement := self toElements elementFromModel: (aBlockOrASymbol rtValue: e model).
 			toElement ifNotNil: [ self createEdgeIfNecessaryFrom: fromElement to: toElement ] ].
@@ -69,14 +69,14 @@ RTEdgeBuilder >> connectFrom: aFromBlock toAll: aBlockOrASymbol [
 
 	| fromElement tes |
 	self resetCreatedEdges.
-	self fromElements copy do: [ :e | 
+	self fromElements copy do: [ :e |
 		fromElement := self fromElements elementFromModel: (aFromBlock rtValue: e model).
 		tes := self toElements elementsFromModels: (aBlockOrASymbol rtValue: e model).
-		tes ifNotNil: [ 
-			tes do: [ :toE | 
+		tes ifNotNil: [
+			tes do: [ :toE |
 				self createEdgeIfNecessaryFrom: fromElement to: toE ] ] ].
 	self moveBehindIfNecessary: createdEdges.
-	^ createdEdges 
+	^ createdEdges
 ]
 
 { #category : #public }
@@ -90,11 +90,11 @@ RTEdgeBuilder >> connectFromAll: aFromBlockOrSymbol to: aBlockOrASymbol [
 
 	| toElement tfromElements |
 	self resetCreatedEdges.
-	self fromElements copy do: [ :e | 
-		tfromElements := self fromElements elementsFromModels: (aFromBlockOrSymbol rtValue: e model). 
+	self fromElements copy do: [ :e |
+		tfromElements := self fromElements elementsFromModels: (aFromBlockOrSymbol rtValue: e model).
 		toElement := self toElements elementFromModel: (aBlockOrASymbol rtValue: e model).
-		tfromElements ifNotNil: [ 
-			tfromElements do: [ :fromElement | 
+		tfromElements ifNotNil: [
+			tfromElements do: [ :fromElement |
 				self createEdgeIfNecessaryFrom: fromElement to: toElement ] ] ].
 	self moveBehindIfNecessary: createdEdges.
 	^ createdEdges
@@ -110,10 +110,10 @@ RTEdgeBuilder >> connectToAll: aBlockOrASymbol [
 	"Should this method use connectFrom:ToAll: ?????"
 	| tmptoElements |
 	self resetCreatedEdges.
-	self fromElements copy do: [ :e | 
+	self fromElements copy do: [ :e |
 		tmptoElements := self toElements elementsFromModels: (aBlockOrASymbol rtValue: e model).
-		tmptoElements ifNotNil: [ 
-			tmptoElements do: [ :toE | 
+		tmptoElements ifNotNil: [
+			tmptoElements do: [ :toE |
 				self createEdgeIfNecessaryFrom: e to: toE ] ] ].
 	self moveBehindIfNecessary: createdEdges.
 	^ createdEdges
@@ -127,7 +127,7 @@ RTEdgeBuilder >> createEdgeIfNecessaryFrom: fromElement to: toElement [
 ]
 
 { #category : #'private - utility' }
-RTEdgeBuilder >> edgeFrom: source to: target [ 
+RTEdgeBuilder >> edgeFrom: source to: target [
 	"source and target are elements"
 	| edge |
 	edge := super edgeFrom: source to: target.
@@ -163,7 +163,7 @@ RTEdgeBuilder >> fromObjects [
 RTEdgeBuilder >> fromObjects: someObjectsOrABlock [
 	"Identify the elements we are considering for the edge building process. Note that the view has to be set beforehand."
 	self assert: [ viewHasBeenManuallySet ] description: 'A view has to be set, please use #view:'.
-	 
+
 	(someObjectsOrABlock isCollection and: [ someObjectsOrABlock isSymbol not ])
 		ifTrue: [ self fromElements: (view elementsFromModels: someObjectsOrABlock) ]
 		ifFalse: [ self fromElements: (view elements select: [ :el | someObjectsOrABlock rtValue: el model ]) ]
@@ -173,14 +173,14 @@ RTEdgeBuilder >> fromObjects: someObjectsOrABlock [
 RTEdgeBuilder >> highlightable [
 	"Make the edges highlightable.
 	Here is an example:
-	
+
 	| b edges |
 	b := RTMondrian new.
 	b shape circle size: 10; color: Color red.
 	b nodes: (1 to: 20).
 
-	b edges 
-		moveBehind; 
+	b edges
+		moveBehind;
 		highlightable;
 		connectFrom: [ :v | v // 2 ].
 
@@ -188,8 +188,8 @@ RTEdgeBuilder >> highlightable [
 	b
 
 	"
-	actions add: [ :edge | 
-		edge @ RTHighlightable ] 
+	actions add: [ :edge |
+		edge @ RTHighlightable ]
 ]
 
 { #category : #initialization }
@@ -198,35 +198,35 @@ RTEdgeBuilder >> initialize [
 	self noRepetition.
 	shouldMoveBehind := false.
 	shouldNotBeUsedInLayout := true.
-	
+
 	"The view has to be explicitely set by the end-user"
 	viewHasBeenManuallySet := false.
-	
+
 	actions := OrderedCollection new.
-	
+
 	"We could have edges from A to B, and from B to A"
 	self beDirectional
 ]
 
 { #category : #testing }
 RTEdgeBuilder >> isBidirectional [
-	"Return true or false, indicating whether the edge builder is bidirectional or not (i.e., if 
+	"Return true or false, indicating whether the edge builder is bidirectional or not (i.e., if
 	edges from A to B, __and__ B to A can be created"
-	^ beDirectional 
+	^ beDirectional
 ]
 
 { #category : #accessing }
 RTEdgeBuilder >> label: twoArgBlock [
 	"Method useful to label edges. The argument is a two arg block that accept the starting object model and the ending object model. The block has to return a String that will be used to label the edge.
-	
+
 	Here is an example:
 	| b edges |
 	b := RTMondrian new.
 	b shape circle size: 10; color: Color red.
 	b nodes: (1 to: 20).
 
-	b edges 
-		moveBehind; 
+	b edges
+		moveBehind;
 		highlightable;
 		label: [ :from :to | from asString, '>', to asString ];
 		connectFrom: [ :v | v // 2 ].
@@ -240,15 +240,15 @@ RTEdgeBuilder >> label: twoArgBlock [
 { #category : #accessing }
 RTEdgeBuilder >> label: twoArgBlock fontSize: fontSizeAsBlockOrValue [
 	"Method useful to label edges. The argument is a two arg block that accept the starting object model and the ending object model. The block has to return a String that will be used to label the edge.
-	
+
 	Here is an example:
 	| b edges |
 	b := RTMondrian new.
 	b shape circle size: 10; color: Color red.
 	b nodes: (1 to: 20).
 
-	b edges 
-		moveBehind; 
+	b edges
+		moveBehind;
 		highlightable;
 		label: [ :from :to | from asString, '>', to asString ] fontSize: 5;
 		connectFrom: [ :v | v // 2 ].
@@ -256,26 +256,26 @@ RTEdgeBuilder >> label: twoArgBlock fontSize: fontSizeAsBlockOrValue [
 	b layout cluster.
 	b
 	"
-	actions add: [ :edge | 
+	actions add: [ :edge |
 		| lbl lblEl |
 		lbl := twoArgBlock value: edge from model value: edge to model.
 		lblEl := RTLabel new height: fontSizeAsBlockOrValue; elementOn: lbl.
 		view add: lblEl.
-		TRConstraint stick: lblEl between: edge from and: edge to ] 
+		TRConstraint stick: lblEl between: edge from and: edge to ]
 ]
 
 { #category : #accessing }
 RTEdgeBuilder >> labelElement: oneArgBlock [
 	"Method useful to label edges. The argument is a one arg block that accept the edge. The block has to return a String that will be used to label the edge.
-	
+
 	Here is an example:
 	| b edges |
 	b := RTMondrian new.
 	b shape circle size: 10; color: Color red.
 	b nodes: (1 to: 20).
 
-	b edges 
-		moveBehind; 
+	b edges
+		moveBehind;
 		highlightable;
 		labelElement: [ :anEdge | anEdge from model asString, '>', anEdge to model asString ];
 		connectFrom: [ :v | v // 2 ].
@@ -289,15 +289,15 @@ RTEdgeBuilder >> labelElement: oneArgBlock [
 { #category : #accessing }
 RTEdgeBuilder >> labelElement: oneArgBlock fontSize: fontSizeAsBlockOrValue [
 	"Method useful to label edges. The argument is a one arg block that accept the edge. The block has to return a String that will be used to label the edge.
-	
+
 	Here is an example:
 	| b edges |
 	b := RTMondrian new.
 	b shape circle size: 10; color: Color red.
 	b nodes: (1 to: 20).
 
-	b edges 
-		moveBehind; 
+	b edges
+		moveBehind;
 		highlightable;
 		labelElement: [ :anEdge | anEdge from model asString, '>', anEdge to model asString ] fontSize: 5;
 		connectFrom: [ :v | v // 2 ].
@@ -305,12 +305,12 @@ RTEdgeBuilder >> labelElement: oneArgBlock fontSize: fontSizeAsBlockOrValue [
 	b layout cluster.
 	b
 	"
-	actions add: [ :edge | 
+	actions add: [ :edge |
 		| lbl lblEl |
 		lbl := oneArgBlock value: edge.
 		lblEl := RTLabel new height: fontSizeAsBlockOrValue; elementOn: lbl.
 		view add: lblEl.
-		TRConstraint stick: lblEl between: edge from and: edge to ] 
+		TRConstraint stick: lblEl between: edge from and: edge to ]
 ]
 
 { #category : #'private - utility' }
@@ -379,7 +379,7 @@ b edges
 b layout tree.
 b
 
-	
+
 	"
 	shouldNotBeUsedInLayout := false
 ]
@@ -425,12 +425,12 @@ RTEdgeBuilder >> shouldCreateEdgeFrom: fromElement to: toElement [
 { #category : #'public using source' }
 RTEdgeBuilder >> source: objects connectFrom: fromblock to: toBlock [
 	"Define some edges from objects that are not part of the view
-	
+
 nbOfNodes := 40.
 nbOfRandomEdges := 40.
 
 nodes := 1 to: nbOfNodes.
-edges := (1 to: nbOfRandomEdges) 
+edges := (1 to: nbOfRandomEdges)
 				collect: [ :notUsed | nodes atRandom -> nodes atRandom ].
 
 b := RTMondrian new.
@@ -449,8 +449,8 @@ b
 	self assert: [ objects notNil ] description: 'Cannot provide a nil value as the source'.
 	self assert: [ objects isCollection ] description: 'Need to provide a collection as the source'.
 	allObjects := Set new.
-	
-	assocs := objects collect: [ :o | 
+
+	assocs := objects collect: [ :o |
 		| f t |
 		f := fromblock rtValue: o.
 		t := toBlock rtValue: o.
@@ -463,12 +463,12 @@ b
 { #category : #'public using source' }
 RTEdgeBuilder >> source: objects connectFrom: fromblock toAll: toBlock [
 	"Define some edges from objects that are not part of the view
-	
+
 nbOfNodes := 40.
 nbOfRandomEdges := 40.
 
 nodes := 1 to: nbOfNodes.
-edges := (1 to: nbOfRandomEdges) 
+edges := (1 to: nbOfRandomEdges)
 				collect: [ :notUsed | nodes atRandom -> {nodes atRandom . nodes atRandom} ].
 
 b := RTMondrian new.
@@ -486,10 +486,10 @@ b
 	| assocs allObjects |
 	allObjects := Set new.
 
-	assocs := objects flatCollect: [ :o | 
+	assocs := objects flatCollect: [ :o |
 		| cc |
 		cc := toBlock rtValue: o.
-		cc collect: [ :ccc | 
+		cc collect: [ :ccc |
 			| t |
 			t := fromblock rtValue: o.
 			allObjects add: t; add: ccc.
@@ -501,12 +501,12 @@ b
 { #category : #'public using source' }
 RTEdgeBuilder >> source: objects connectFromAll: fromBlock to: toBlock [
 	"Define some edges from objects that are not part of the view
-	
+
 nbOfNodes := 40.
 nbOfRandomEdges := 40.
 
 nodes := 1 to: nbOfNodes.
-edges := (1 to: nbOfRandomEdges) 
+edges := (1 to: nbOfRandomEdges)
 				collect: [ :notUsed | {nodes atRandom . nodes atRandom} -> nodes atRandom ].
 
 b := RTMondrian new.
@@ -524,10 +524,10 @@ b
 	| assocs allObjects |
 	allObjects := Set new.
 
-	assocs := objects flatCollect: [ :o | 
+	assocs := objects flatCollect: [ :o |
 		| cc |
 		cc := fromBlock rtValue: o.
-		cc collect: [ :ccc | 
+		cc collect: [ :ccc |
 			| t |
 			t := toBlock rtValue: o.
 			allObjects add: ccc; add: t.
@@ -562,7 +562,7 @@ RTEdgeBuilder >> toObjects [
 RTEdgeBuilder >> toObjects: someObjectsOrABlock [
 	"Identify the elements we are considering for the edge building process. Note that the view has to be set beforehand."
 	self assert: [ viewHasBeenManuallySet ] description: 'A view has to be set, please use #view:'.
-	 
+
 	(someObjectsOrABlock isCollection and: [ someObjectsOrABlock isSymbol not ])
 		ifTrue: [ self toElements: (view elementsFromModels: someObjectsOrABlock) ]
 		ifFalse: [ self toElements: (view elements select: [ :el | someObjectsOrABlock rtValue: el model ]) ]
@@ -573,7 +573,7 @@ RTEdgeBuilder >> useAssociation: assoc [
 	"assoc have to be between model objects"
 	| result |
 	self assert: [ assoc isKindOf: Association ] description: 'Please, provide an association instead'.
-	
+
 	result := self useAssociations: (Array with: assoc).
 	result ifEmpty: [ ^ nil ].
 	^ result first
@@ -582,10 +582,10 @@ RTEdgeBuilder >> useAssociation: assoc [
 { #category : #'public associations' }
 RTEdgeBuilder >> useAssociations: associations [
 	"associations have to be between model objects"
-	
+
 	"
 	Here is an example
-	
+
 b := RTMondrian new.
 b nodes: (1 to: 3).
 b shape line
@@ -593,10 +593,10 @@ b shape line
 	withVerticallAttachPoint.
 b edges noRepetition; useAssociations: { 1 -> 2 . 2 -> 3 . 1 -> 2}.
 b layout grid.
-b 
+b
 
 	"
-	
+
 	| fromElement toElement |
 	createdEdges := RTGroup new.
 	associations do: [ :assoc |

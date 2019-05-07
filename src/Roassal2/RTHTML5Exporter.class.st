@@ -42,7 +42,7 @@ RTHTML5Exporter class >> importRoassalJS: fileName [
 	"
 	self importRoassalJS: 'roassal.js'
 	"
-	
+
 	| content code |
 	content := ((fileName asFileReference readStream contents copyReplaceAll: '''' with: '"')
 		copyReplaceAll: String cr
@@ -84,7 +84,7 @@ RTHTML5Exporter >> addEnd [
 
 { #category : #helpers }
 RTHTML5Exporter >> addStart: aView [
-	self writeText: 
+	self writeText:
 '<!DOCTYPE html>
 <html>
 	<head>
@@ -96,7 +96,7 @@ RTHTML5Exporter >> addStart: aView [
 		</script>
 		<script src="',self roassalJSfile,'"></script>
 		<style type="text/css">
-			body, svg { 
+			body, svg {
 				margin: 0;
 				padding: 0;
 				-moz-user-select:-moz-none;
@@ -113,7 +113,7 @@ RTHTML5Exporter >> addStart: aView [
 		</style>
 		<script type="text/javascript">
 function buildView() {
-	'. 
+	'.
 ]
 
 { #category : #helpers }
@@ -175,7 +175,7 @@ RTHTML5Exporter >> directory: aFile [
 { #category : #accessing }
 RTHTML5Exporter >> directoryPathname: aPathAsString [
 	"Set the directory where the view is exported"
-	self directory: aPathAsString asFileReference 
+	self directory: aPathAsString asFileReference
 ]
 
 { #category : #'Pillar example' }
@@ -263,16 +263,16 @@ RTHTML5Exporter >> fileName: string [
 { #category : #'Pillar utility' }
 RTHTML5Exporter >> getIFrameDefFromView: aView label: aLabelAsString directory: aDirectory [
 	"This method is useful when invoked from within Pillar"
-	
+
 	| htmlFileName writeStream |
 	htmlFileName := (aDirectory / aLabelAsString, 'html') pathString.
 	writeStream := htmlFileName asFileReference writeStream.
 	RTHTML5Exporter new directory: aDirectory; export: aView toStream: writeStream.
-	^ '<iframe src="', htmlFileName, '" 
-		name="', aLabelAsString, '" 
-		style="border:none" 
-		width="', (aView canvas encompassingRectangle width * (aView canvas camera scale + self marginScale )) printString,'" 
-		height="', (aView canvas encompassingRectangle height * (aView canvas camera scale + self marginScale )) printString,'"></iframe>' 
+	^ '<iframe src="', htmlFileName, '"
+		name="', aLabelAsString, '"
+		style="border:none"
+		width="', (aView canvas encompassingRectangle width * (aView canvas camera scale + self marginScale )) printString,'"
+		height="', (aView canvas encompassingRectangle height * (aView canvas camera scale + self marginScale )) printString,'"></iframe>'
 ]
 
 { #category : #'initialize-release' }
@@ -287,13 +287,13 @@ RTHTML5Exporter >> initialize [
 
 { #category : #'Pillar utility' }
 RTHTML5Exporter >> insert: aView named: aName inPillarStream: aStream [
-	self insert: aView named: aName inPillarStream: aStream directory: self defaultDirectory 
+	self insert: aView named: aName inPillarStream: aStream directory: self defaultDirectory
 ]
 
 { #category : #'Pillar utility' }
 RTHTML5Exporter >> insert: aView named: aName inPillarStream: aStream directory: aDirectory [
 	"Here is an example on how to use this method
-	
+
 
 PRHTMLWriter defaultConfigurations anyOne
     inputString: '
@@ -339,7 +339,7 @@ RTHTML5Exporter >> loadingPillar [
 
 "
 
-Gofer new 
+Gofer new
     smalltalkhubUser: 'Pier' project: 'Pillar';
     configuration;
     load.

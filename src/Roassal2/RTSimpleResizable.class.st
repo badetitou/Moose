@@ -23,7 +23,7 @@ RTSimpleResizable >> createHandleFor: element [
 
 	| handle |
 	handle := (RTEllipse new size: 10) element.
-	handle addCallback: (TRTranslationCallback block: [ :shape :step | 
+	handle addCallback: (TRTranslationCallback block: [ :shape :step |
 		| tStep newSize |
 		tStep := handle position - element encompassingRectangle bottomRight + (handle extent / 2).
 		newSize := (element extent + (tStep)) max: (20 @ 20).
@@ -55,11 +55,11 @@ RTSimpleResizable >> removeResizeHandleOn: element [
 RTSimpleResizable >> showResizeHandleOn: element [
 	| handle |
 	self removeResizeHandleOn: element.
-	
+
 	handle := self createHandleFor: element.
-	
+
 	element view add: handle.
 	handle translateTo: element encompassingRectangle bottomRight - (handle extent / 2).
-	element attributeAt: #resizeHandle put: handle. 
+	element attributeAt: #resizeHandle put: handle.
 	element view signalUpdate
 ]

@@ -42,7 +42,7 @@ RTLayoutTranslator >> translate: element by: deltaPosition [
 { #category : #hook }
 RTLayoutTranslator >> translate: element to: newPosition [
 	"Translate of the center of the element"
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #'public - translating' }

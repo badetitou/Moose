@@ -12,7 +12,7 @@ Class {
 
 { #category : #'instance creation' }
 RTDummyNode class >> on: anEdge slot: anIndex [
-	
+
 	^(self new)
 		edge: anEdge;
 		slot: anIndex;
@@ -21,13 +21,13 @@ RTDummyNode class >> on: anEdge slot: anIndex [
 
 { #category : #accessing }
 RTDummyNode >> edge [
-	
+
 	^edge
 ]
 
 { #category : #accessing }
 RTDummyNode >> edge: anEdge [
-	
+
 	edge := anEdge
 ]
 
@@ -38,7 +38,7 @@ RTDummyNode >> extent [
 
 { #category : #accessing }
 RTDummyNode >> height [
-	
+
 	^0
 ]
 
@@ -54,7 +54,7 @@ RTDummyNode >> signalUpdate [
 
 { #category : #accessing }
 RTDummyNode >> slot: anIndex [
-	
+
 ]
 
 { #category : #accessing }
@@ -64,7 +64,7 @@ RTDummyNode >> translateBy: apoint [
 
 { #category : #accessing }
 RTDummyNode >> translateTo: aPoint [
-	
+
 	"edge index: index point: aPoint"
 ]
 
@@ -75,6 +75,6 @@ RTDummyNode >> view [
 
 { #category : #accessing }
 RTDummyNode >> width [
-	
+
 	^0
 ]

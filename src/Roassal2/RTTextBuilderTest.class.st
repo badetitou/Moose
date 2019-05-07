@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #asserting }
-RTTextBuilderTest >> assertModel: anObject1 position: aSymbol1 equals: anObject2 position: aSymbol2 [ 
+RTTextBuilderTest >> assertModel: anObject1 position: aSymbol1 equals: anObject2 position: aSymbol2 [
 	| position1 position2 |
 	position1 := aSymbol1 cull: (self encompassingRectangleFromModel: anObject1).
 	position2 := aSymbol2 cull: (self encompassingRectangleFromModel: anObject2).
@@ -20,7 +20,7 @@ RTTextBuilderTest >> assertModel: anObject1 position: aSymbol1 equals: anObject2
 ]
 
 { #category : #accessing }
-RTTextBuilderTest >> elementFromModel: anObject [ 
+RTTextBuilderTest >> elementFromModel: anObject [
 	^ builder view elementFromModel: anObject
 ]
 
@@ -55,18 +55,18 @@ RTTextBuilderTest >> testAdditionalInformation [
 	| text trigger elHello elWorld |
 	text := 'hello world'.
 	trigger := false.
-	builder wordHook: [ :anElement :anInterval | 
-								anElement model = 'hello' 
-									ifTrue: [ anElement attributeAt: #myValue put: 'value' ] ]. 
-	builder wordInteraction 
-				when: TRMouseClick 
-				do: [ :event | (event element hasAttribute: #myValue) 
+	builder wordHook: [ :anElement :anInterval |
+								anElement model = 'hello'
+									ifTrue: [ anElement attributeAt: #myValue put: 'value' ] ].
+	builder wordInteraction
+				when: TRMouseClick
+				do: [ :event | (event element hasAttribute: #myValue)
 										ifTrue: [ trigger := true ] ].
 	builder addText: text.
 
 	elHello := builder view elementFromModel: 'hello'.
 	elWorld := builder view elementFromModel: 'world'.
-	
+
 	self assert: (elHello hasAttribute: #myValue).
 	self deny: (elWorld hasAttribute: #myValue).
 	self assert: (elHello attributeAt: #myValue) = 'value'.
@@ -74,24 +74,24 @@ RTTextBuilderTest >> testAdditionalInformation [
 	self deny: trigger.
 	elHello announce: (TRMouseClick new shape: elHello trachelShape).
 	self assert: trigger.
-	
+
 	trigger := false.
 	self deny: trigger.
 	elWorld announce: (TRMouseClick new shape: elWorld trachelShape).
 	self deny: trigger.
-	
+
 ]
 
 { #category : #tests }
 RTTextBuilderTest >> testClickableWord [
 	| t element |
 	t := false.
-	 
-	builder wordInteraction 
+
+	builder wordInteraction
 					when: TRMouseClick do: [ :event | t := true ].
 	builder addText: 'hello world'.
 	self deny: t.
-	
+
 	element := builder view elementFromModel: 'hello'.
 	element announce: TRMouseClick.
 	self assert: t
@@ -110,7 +110,7 @@ RTTextBuilderTest >> testHookIntervals [
 	words := OrderedCollection new.
 	intervals := OrderedCollection new.
 	text := 'my whole text', String cr, 'a b c'.
-	builder wordHook: [ :anElement :anInterval | 
+	builder wordHook: [ :anElement :anInterval |
 		words add: anElement model.
 		intervals add: anInterval. ].
 	builder addText: text.
@@ -118,12 +118,12 @@ RTTextBuilderTest >> testHookIntervals [
 	arr add: 'my'; add: ' '; add: 'whole'; add: ' '; add: 'text'; add: 'a'; add: ' '; add: 'b'; add: ' '; add: 'c'.
 	self assert: words asArray equals: arr asArray.
 	arr := OrderedCollection new.
-	arr add: (1 to: 2); add: (3 to: 3); add: (4 to: 8); add: (9 to: 9); add: (10 to: 13) ; add: (15 to: 15); add: (16 to: 16); add: (17 to: 17); 
+	arr add: (1 to: 2); add: (3 to: 3); add: (4 to: 8); add: (9 to: 9); add: (10 to: 13) ; add: (15 to: 15); add: (16 to: 16); add: (17 to: 17);
 		add: (18 to: 18); add: (19 to: 19).
-	self 
-		assert: intervals asArray 
+	self
+		assert: intervals asArray
 		equals: arr asArray
-					
+
 ]
 
 { #category : #tests }
@@ -172,7 +172,7 @@ RTTextBuilderTest >> testOpeningOnMultilineText2Position [
 hola mundo'.
 	builder addText: text.
 	spaces := builder view elements select: [ :each | each model = ' ' ].
-	
+
 	self assertModel: 'hello' position: #top equals: 'world' position: #top.
 	self assertModel: 'hola' position: #top equals: 'mundo' position: #top.
 	self assertModel: 'hello' position: #left equals: 'hola' position: #left.
@@ -193,7 +193,7 @@ RTTextBuilderTest >> testOpeningOnMultilineText3 [
 RTTextBuilderTest >> testOpeningOnText [
 	builder addText: 'hello world'.
 	self assert: builder view numberOfElements = 4.
-	
+
 	builder addText: 'hello world'.
 	self assert: builder view numberOfElements = 8.
 ]

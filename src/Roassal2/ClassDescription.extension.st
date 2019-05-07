@@ -29,8 +29,8 @@ ClassDescription >> commonSuperclassWith: aClass [
 	1 to: (t1 size min: t2 size) do: [ :i |
 		(t1 at: i) ~~ (t2 at: i)
 			ifTrue: [ ^ t1 at: (i - 1) ] ].
-	
-	^ t1 size < t2 size 
+
+	^ t1 size < t2 size
 		ifTrue: [ t1 last ]
 		ifFalse: [ t2 last ]
 ]
@@ -51,7 +51,7 @@ ClassDescription >> computeYoungestMethod [
 	aMethod := ms anyOne.
 	d := aMethod date.
 	m := aMethod.
-	
+
 	ms do: [ :cm | cm date > d ifTrue: [ m := cm. d := cm date ] ].
 	^ m
 ]
@@ -73,13 +73,13 @@ ClassDescription >> hasAnyMethodProducedAfterDay: aNumberOfDays [
 ]
 
 { #category : #'*Roassal2-Core' }
-ClassDescription >> isReferencedBy: aClass [ 
+ClassDescription >> isReferencedBy: aClass [
 	"
 	Return true or false on whether the class receiver is referenced by aClass
-	
-	Halt isReferencedBy: Object 
+
+	Halt isReferencedBy: Object
 	"
-	^ aClass dependentClasses includes: self 
+	^ aClass dependentClasses includes: self
 ]
 
 { #category : #'*Roassal2-Core' }

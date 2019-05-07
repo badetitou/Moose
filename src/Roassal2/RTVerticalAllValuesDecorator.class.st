@@ -12,7 +12,7 @@ b addDecorator: deco.
 
 b axisX noTick; noLabel.
 b axisY noTick; noLabel.
-b 
+b
 =-=-=-=-
 "
 Class {
@@ -22,8 +22,8 @@ Class {
 }
 
 { #category : #drawing }
-RTVerticalAllValuesDecorator >> render [	
-	self addAll: self datasetValues asSet. 
+RTVerticalAllValuesDecorator >> render [
+	self addAll: self datasetValues asSet.
 	super render.
 
 ]

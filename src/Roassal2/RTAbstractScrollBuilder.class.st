@@ -30,16 +30,16 @@ RTAbstractScrollBuilder >> barHeight [
 	"To get the height of the bar for the vertical scroll bar."
 	(self barSpecific = #scalable) ifTrue: [
 		| max min s |
-		
+
 		max := self size -50.
 		min := 30.
-			
+
 		s := (self size * (self view canvas extent y) / (self encompassingRectangleFromSpaceToPixel height) / self view canvas camera scale).
-		
+
 		(s > max) ifTrue: [ ^max ].
 		(s < min) ifTrue: [ ^min ].
 		^ s.
-		
+
 		] ifFalse: [ ^ self width]
 ]
 
@@ -55,12 +55,12 @@ RTAbstractScrollBuilder >> barShape: aSymbol [
 
 { #category : #accessing }
 RTAbstractScrollBuilder >> barSpecific [
-	^ barSpecific 
+	^ barSpecific
 ]
 
 { #category : #accessing }
 RTAbstractScrollBuilder >> barSpecific: aSymbol [
-	barSpecific := aSymbol 
+	barSpecific := aSymbol
 ]
 
 { #category : #'private - bar management' }
@@ -68,12 +68,12 @@ RTAbstractScrollBuilder >> barWidth [
 	 "To get the width of the bar for the horizontal scroll bar. To change the width of the bar in general see #width:"
 	(self barSpecific = #scalable) ifTrue: [
 		| max min s |
-		
+
 		max := self size -50.
 		min := 30.
-		
+
 		s := (self size * (self view canvas extent x) / (self encompassingRectangleFromSpaceToPixel width) / self view canvas camera scale).
-		
+
 		(s > max) ifTrue: [ ^max ].
 		(s < min) ifTrue: [ ^min ].
 		^ s.
@@ -158,7 +158,7 @@ RTAbstractScrollBuilder >> fixedPosition [
 { #category : #accessing }
 RTAbstractScrollBuilder >> fixedPosition: aPositionOrABlock [
 	"set the initial position of the scroll bar, if a block, the block will be evaluated with 'cull self'. For example a block [:v | v view canvas extent] will set the position to canvas extent, just as [<myBuilder> view canvas extent]. If you want the scrollBar to be fully free and movable without reset position, set a point for fixedPosition."
-	fixedPosition:= aPositionOrABlock 
+	fixedPosition:= aPositionOrABlock
 ]
 
 { #category : #'as yet unclassified' }
@@ -191,9 +191,9 @@ RTAbstractScrollBuilder >> notify [
 	"Update the scroll bar"
 	self encompassingRectangleUpdate.
 	self encompassingRectangleFromSpaceToPixelUpdate.
-	
-	
-	
+
+
+
 ]
 
 { #category : #'as yet unclassified' }
@@ -201,14 +201,14 @@ RTAbstractScrollBuilder >> notifyWith: anElement [
 	"Update the scroll bar and add the callback"
 	self notify.
 	anElement addCallback: (TRTranslationCallback new block: [ self encompassingRectangleUpdate. self encompassingRectangleFromSpaceToPixelUpdate. self signalUpdate.]).
-	
-	
-	
+
+
+
 ]
 
 { #category : #accessing }
 RTAbstractScrollBuilder >> orientation [
-	^ orientation 
+	^ orientation
 ]
 
 { #category : #accessing }
@@ -219,8 +219,8 @@ RTAbstractScrollBuilder >> orientation: aSymbol [
 
 { #category : #hooks }
 RTAbstractScrollBuilder >> renderIn: aView [
-	self shouldNotImplement 
-	 
+	self shouldNotImplement
+
 ]
 
 { #category : #accessing }
@@ -237,32 +237,32 @@ RTAbstractScrollBuilder >> shapes: aRTScrollBarShapes [
 
 { #category : #signalling }
 RTAbstractScrollBuilder >> signalUpdate [
-	
+
 	"this method is used to increase the size of the shapes composing the scroll bar when the size is defined by a Block, for example to follow the size of the windows
 	Or if the position is fixed on the border on the widows, the scroll bar should follow the windows border at signal updates"
 
 	self assert: (self shapes isNotNil).
 
-	(self shapes collection) ifNotEmpty: [ 
-			
-		(self sizeBlock isBlock) 
-			ifTrue: [ self signalUpdateSize] 
-			ifFalse: [ 
-				(self orientation = #horizontal) 
-					ifTrue: [ self positionOnBorderHorizontal] 
+	(self shapes collection) ifNotEmpty: [
+
+		(self sizeBlock isBlock)
+			ifTrue: [ self signalUpdateSize]
+			ifFalse: [
+				(self orientation = #horizontal)
+					ifTrue: [ self positionOnBorderHorizontal]
 					ifFalse: [ self positionOnBorderVertical]
 				].
 			self signalUpdatePosition.
 		].
 
-	self view signalUpdate. 
-	
+	self view signalUpdate.
+
 ]
 
 { #category : #accessing }
 RTAbstractScrollBuilder >> size [
 	"get the value of the size, in case of block, evaluation of self"
-	^ size rtValue: self 
+	^ size rtValue: self
 ]
 
 { #category : #accessing }
@@ -274,7 +274,7 @@ RTAbstractScrollBuilder >> size: aSizeOraBlock [
 { #category : #'as yet unclassified' }
 RTAbstractScrollBuilder >> sizeBlock [
 	"SizeBlock allows to get the block and not the result of the evaluation of the size block on size, obtained by self size"
-	^ size.  
+	^ size.
 ]
 
 { #category : #accessing }

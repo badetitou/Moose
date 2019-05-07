@@ -19,7 +19,7 @@ Class {
 
 { #category : #accessing }
 RTAbstractNormalizer >> command [
-	
+
 	^ command
 ]
 
@@ -31,6 +31,6 @@ RTAbstractNormalizer >> command: aValueOrASymbolOrABlock [
 
 { #category : #accessing }
 RTAbstractNormalizer >> rtValue: anEntity [
-	
+
 	self subclassResponsibility
 ]

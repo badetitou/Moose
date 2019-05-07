@@ -69,10 +69,10 @@ RTAbstractLine >> attachPoint: aRTAttachPoint [
 RTAbstractLine >> copyWithSimpleArrow [
 	"Return a new line, the one with arrow"
 	| arrow |
-	arrow := RTSimpleArrowHead new 
-				color: Color red; 
+	arrow := RTSimpleArrowHead new
+				color: Color red;
 				attachPoint: RTVerticalAttachPoint instance.
-	arrow size: 15; baseSize: 10. 
+	arrow size: 15; baseSize: 10.
 	^ self + arrow
 ]
 
@@ -118,7 +118,7 @@ RTAbstractLine >> initialize [
 
 { #category : #testing }
 RTAbstractLine >> isSelfLoopAllowedFor: anEdge [
-	^ anEdge from = anEdge to 
+	^ anEdge from = anEdge to
 		ifTrue: [ allowSelfLoop ]
 		ifFalse: [ true].
 ]

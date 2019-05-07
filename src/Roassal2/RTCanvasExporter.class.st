@@ -1,7 +1,7 @@
 "
 A DCTRCanvasExporter is exporter of canvas into image
-	
-	supported formats: png, jpg, jpeg, bmp, gif	
+
+	supported formats: png, jpg, jpeg, bmp, gif
 	usage example:
 
 	(DCTRCanvasExporter canvas: roassalView canvas)
@@ -50,7 +50,7 @@ RTCanvasExporter >> canvas: aCanvas [
 
 	canvas := aCanvas veryDeepCopy.
 	canvas morph
-		ifNil: [ 
+		ifNil: [
 			canvas buildMorph.
 			self whole ]
 ]
@@ -74,7 +74,7 @@ RTCanvasExporter >> example01 [
 	b edges connectFrom: #superclass.
 	b layout tree.
 	b build.
-	
+
 	view := b view.
 	(RTCanvasExporter canvas: view canvas)
 		withoutFixedShapes;
@@ -112,7 +112,7 @@ RTCanvasExporter >> fileName: aFileName [
 
 { #category : #settings }
 RTCanvasExporter >> format: imageFormat [
-	"supported formats: png, jpg, jpeg, bmp, gif	
+	"supported formats: png, jpg, jpeg, bmp, gif
 	usage examples:
 		format: 'png'
  		format: #png"

@@ -21,7 +21,7 @@ RTVerticalValuesDecoratorTest >> testBasic [
 	b axisX noTick; noLabel.
 	b axisY noTick; noLabel.
 	b build.
-	
+
 	labels := b view canvas shapes select: [ :s | s class == TRLabelShape ].
 	self assert: labels size equals: 2.
 ]
@@ -42,7 +42,7 @@ RTVerticalValuesDecoratorTest >> testBasic02 [
 	b axisX noTick; noLabel.
 	b axisY noTick; noLabel.
 	b build.
-	
+
 	labels := b view canvas shapes select: [ :s | s class == TRLabelShape ].
 	self assert: labels size equals: 5.
 ]
@@ -64,7 +64,7 @@ RTVerticalValuesDecoratorTest >> testBasic03 [
 	b axisX noTick; noLabel.
 	b axisY noTick; noLabel.
 	b build.
-	
+
 	labels := b view canvas shapes select: [ :s | s class == TRLabelShape ].
 	self assert: labels size equals: 5.
 ]

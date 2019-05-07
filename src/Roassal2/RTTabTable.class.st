@@ -247,12 +247,12 @@ RTTabTable class >> openTSVfile [
 	ensure: [ stream close ].
 	self assert: [tab values first size = 3] description: 'Wrong CSV structure'.
 	tab convertColumnsAsInteger: #(1).
-	
+
 	^ tab
 ]
 
 { #category : #data }
-RTTabTable class >> southAmericanCountries [ 
+RTTabTable class >> southAmericanCountries [
 
 	^ #('Brazil' 'Colombia' 'Argentina' 'Peru' 'Venezuela' 'Chile' 'Ecuador' 'Bolivia' 'Paraguay' 'Uruguay' 'Guyana' 'Suriname' 'French' 'Falkland' 'Islands')
 ]
@@ -266,7 +266,7 @@ RTTabTable >> attributes [
 { #category : #updating }
 RTTabTable >> breakDown: l usingDelimiters: delimitersAsCharacter [
 	^ l subStringsKeepingEmptyFields: delimitersAsCharacter
-	
+
 
 ]
 
@@ -279,7 +279,7 @@ RTTabTable >> cleanedValuesOfColumn: indexAsNumberOfString [
 { #category : #converting }
 RTTabTable >> convertColumn: index to: blockForConvertion [
 	"Convert a column of the table"
-	values do: [ :row | 
+	values do: [ :row |
 		| v i |
 		i := (self convertFromNameToIndexIfNecessary: index).
 		v := row at: i.
@@ -306,7 +306,7 @@ RTTabTable >> convertColumns: collectionOfIntegers to: aBlock [
 	"collectionOfIntegers is a collection of integers corresponding to column to convert"
 	"block is a one-arg block that takes as input a string and return the wanted value"
 
-	collectionOfIntegers do: [ :index | 
+	collectionOfIntegers do: [ :index |
 		self convertColumn: index to: aBlock ]
 ]
 
@@ -334,8 +334,8 @@ RTTabTable >> convertFromNameToIndexIfNecessary: anObject [
 	"The method return the index"
 	^ anObject isNumber
 		ifTrue: [ anObject ]
-		ifFalse: [ 
-			"Then we are surely a string" 
+		ifFalse: [
+			"Then we are surely a string"
 			self indexOfName: anObject ]
 ]
 
@@ -355,7 +355,7 @@ RTTabTable >> detectDelimiterIn: aString [
 { #category : #accessing }
 RTTabTable >> dictionaryValues [
 	^ self values
-		collect: [ :row | 
+		collect: [ :row |
 			(row withIndexCollect: [ :each :i | (firstRow at: i) asSymbol -> each ])
 				asOrderedDictionary ]
 ]
@@ -372,7 +372,7 @@ RTTabTable >> firstRow [
 
 { #category : #converting }
 RTTabTable >> gather: columnIndex using: twoArgBlock [
-	| d key | 
+	| d key |
 	d := Dictionary new.
 	values do: [ :row |
 		key := row at: columnIndex.
@@ -391,7 +391,7 @@ RTTabTable >> gtInspectorTableIn: composite [
 		display: [ firstRow ifNil: [ self values allButFirst ] ifNotNil: [ self values ] ].
 	titles := firstRow ifNil: [ self values first ].
 	titles
-		withIndexDo: [ :heading :i | 
+		withIndexDo: [ :heading :i |
 			tbl
 				column: heading
 				evaluated: [ :each | GTObjectPrinter new asTruncatedTextFrom: (each at: i) ] ].
@@ -417,8 +417,8 @@ RTTabTable >> input: txt [
 RTTabTable >> input: txt usingDelimiter: delimitersAsCharacter [
 	"txt is a large string in which we have one entry per line"
 
-	values := (txt lines 
-					select: #notEmpty 
+	values := (txt lines
+					select: #notEmpty
 					thenCollect: [ :l | self breakDown: l trimBoth usingDelimiters: delimitersAsCharacter asString ])
 		select: #notEmpty
 ]
@@ -442,9 +442,9 @@ RTTabTable >> maximum [
 	| max |
 	"We initialize the mininum to any value found in the table"
 	max := self values last detect: #isNumber ifNone: [ 0 ].
-	
+
 	self values do: [ :row |
-		row do: [ :value | 
+		row do: [ :value |
 			value isNumber ifTrue: [ max := max max: value ] ] ].
 	^ max
 ]
@@ -455,9 +455,9 @@ RTTabTable >> minimum [
 	| min |
 	"We initialize the mininum to any value found in the table"
 	min := self values last detect: #isNumber ifNone: [ 0 ].
-	
+
 	self values do: [ :row |
-		row do: [ :value | 
+		row do: [ :value |
 			value isNumber ifTrue: [ min := min min: value ] ] ].
 	^ min
 ]
@@ -508,11 +508,11 @@ RTTabTable >> replaceEmptyValuesWith: aValue inColumns: columns [
 { #category : #converting }
 RTTabTable >> replaceZeroWithCumulativeValuesInColumns: columns [
 	columns
-		do: [ :column | 
+		do: [ :column |
 			| previous |
 			previous := 0.
 			values
-				do: [ :row | 
+				do: [ :row |
 					(row at: column) = 0 ifTrue: [ row at: column put: previous ].
 					previous := row at: column ] ]
 ]

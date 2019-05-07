@@ -10,16 +10,16 @@ RTEdgeBuilder new
 	elements: es;
 	connectFrom: [ :vv | vv // 2 ].
 
-v addMenu: 'Remember!' callback: [ 
+v addMenu: 'Remember!' callback: [
 	positions := es collect: #position.
 	 ].
 
-v addMenu: 'Recall!' callback: [ 
+v addMenu: 'Recall!' callback: [
 	positions with: es do: [ :p :e | e translateTo: p ].
 	v signalUpdate.
 	 ].
 
-v addMenu: 'Start layout!' callback: [ 
+v addMenu: 'Start layout!' callback: [
 	force := RTForceBasedLayout new.
 	force initialLayout: RTNoLayout new.
 	animation := RTSpringLayoutStepping new.
@@ -27,10 +27,10 @@ v addMenu: 'Start layout!' callback: [
 	animation inView: v.
 ].
 
-v addMenu: 'Stop layout!' callback: [ 
+v addMenu: 'Stop layout!' callback: [
 	animation stopAndRemove
 ].
-v 
+v
 "
 Class {
 	#name : #RTNoLayout,

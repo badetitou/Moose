@@ -61,7 +61,7 @@ RTDominanceTreeLayoutTest >> testReverse [
 	layout verticallyReverse.
 	layout horizontallyReverse.
 	layout on: elements.
-	
+
 	compositeShape := edge trachelShape.
 	self assert: compositeShape class equals: TRCompositeShape.
 	self assert: compositeShape shapes first class equals: TRLineShape.

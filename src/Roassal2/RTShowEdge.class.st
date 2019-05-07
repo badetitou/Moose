@@ -67,7 +67,7 @@ RTShowEdge >> connectToAll: aBlock [
 	"Establish some connections"
 	"aBlock accepts an object and returns a list of objects"
 	"aBlock return an object or a list of objects to highlight"
-	
+
 	"
 	Here is an example on how to use it, using the Mondrian builder:
 	-=-=-=-=-=-=-=-=
@@ -76,7 +76,7 @@ RTShowEdge >> connectToAll: aBlock [
 	b interaction showEdge connectToAll: [ :v | Array with: v + 1 ].
 	b nodes: #(1 2 2 3).
 
-	b layout circle initialRadius: 10. 
+	b layout circle initialRadius: 10.
 	b
 	-=-=-=-=-=-=-=-=
 
@@ -89,12 +89,12 @@ RTShowEdge >> connectToAll: aBlock [
 	b nodes: Collection withAllSubclasses.
 	b edges moveBehind; connectFrom: #superclass.
 	b normalizer normalizeSize: #numberOfMethods; normalizeColor: #numberOfMethods.
-	b layout cluster. 
-	b	
+	b layout cluster.
+	b
 	-=-=-=-=-=-=-=-=
 	"
-	
-	connectToElements := [ :el | 
+
+	connectToElements := [ :el |
 		| objects |
 		objects := aBlock rtValue: el model.
 		(objects flatCollect: [ :o | el view elementsFromModel: o ]) copyWithout: nil
@@ -153,12 +153,12 @@ RTShowEdge >> initialize [
 RTShowEdge >> initializeElement: element [
 	element
 		when: TRMouseEnter
-		do: [ :e | 
+		do: [ :e |
 			self doShowEdges: element.
 			e signalUpdate ].
 	element
 		when: TRMouseLeave
-		do: [ :e | 
+		do: [ :e |
 			self doHideEdges: element.
 			e signalUpdate ]
 ]
@@ -182,7 +182,7 @@ RTShowEdge >> recordElement: anElement [
 { #category : #actions }
 RTShowEdge >> removeAllAddedEdges [
 	self class lastHighlightedElements ifNil: [ ^ self ].
-	(self class lastHighlightedElements select: [ :edge | edge view notNil ]) 
+	(self class lastHighlightedElements select: [ :edge | edge view notNil ])
 		do: #remove.
 	self class lastHighlightedElements: nil
 ]

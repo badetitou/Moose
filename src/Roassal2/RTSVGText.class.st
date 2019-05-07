@@ -43,8 +43,8 @@ RTSVGText >> addMatrix: stream visitor: visitor [
 		nextPutAll: ', ';
 		nextPutAll: (visitor number: self y);
 		nextPutAll: ') '.
-		
-	
+
+
 ]
 
 { #category : #adding }
@@ -73,7 +73,7 @@ RTSVGText >> addPosition: stream [
 	|box temp |
 	box := element encompassingRectangle.
 	temp := RTSVGVisitor new.
-	
+
 	stream
 		nextPutAll: 'x="';
 		nextPutAll: (temp number: (self x - (box width / 5)));
@@ -103,7 +103,7 @@ RTSVGText >> content: anObject [
 ]
 
 { #category : #accessing }
-RTSVGText >> element: anElement text: aString at: aPoint color: aColor [	
+RTSVGText >> element: anElement text: aString at: aPoint color: aColor [
 	self element: anElement text: aString at: aPoint color: aColor angle: nil
 ]
 

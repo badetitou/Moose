@@ -27,7 +27,7 @@ RTMenuBuilder class >> setGraphMenuOn: view [
 		menu: 'Find'
 		background: Color blue
 		callback: [ | element |
-			element := TRPlatform current 
+			element := TRPlatform current
 				dialogChooseFrom: (view elements collect: #model)
 				values: view elements.
 			element notNil
@@ -46,7 +46,7 @@ RTMenuBuilder >> configureViewEvents [
 	view when: TRMouseClick do: [ :evt | | anim |
 			anim := RTNopAnimation new
 				waitFor: 0.1 after: [
-					closingSubmenuFlag ifTrue: [  
+					closingSubmenuFlag ifTrue: [
 						parentMenus ifNotEmpty: [parentMenus first hideAll].
 						view signalUpdate.
 						]
@@ -60,7 +60,7 @@ RTMenuBuilder >> configureViewEvents [
 
 { #category : #utility }
 RTMenuBuilder >> createParentMenu: aTitle [
-	
+
 	^ self createParentMenu: aTitle background: (Color gray darker alpha: 0).
 ]
 
@@ -73,27 +73,27 @@ RTMenuBuilder >> createParentMenu: aTitle background: aColor [
 { #category : #utility }
 RTMenuBuilder >> createParentMenu: aTitle background: aColor highlightColor: aColor2 [
 	| lbl index menu |
-	
-	index := view canvas fixedShapes 
+
+	index := view canvas fixedShapes
 						inject: 0 into: [ :s :e | s max: (e encompassingRectangle topRight x + 10) ].
-						
+
 	lbl := TRLabelShape new text: aTitle; translateLeftTo: (index +20) @ 20.
 	lbl color: Color black.
 	view canvas addFixedShape: lbl.
-	
+
 	menu := RTMenu new view: view; label: lbl; menuLabelBackgroundShapeAndColor: aColor; menuBackgroundColor: aColor; highlightColor: aColor2.
 	self addParentMenu: menu.
 	lbl element: (menu).
-	
+
 	lbl element labelBackground when: TRMouseEnter do: [ :event | self enterSubmenuOf: lbl].
 	lbl element labelBackground when: TRMouseClick do: [ :e | self showSubmenuOf: lbl].
-	
-	lbl element labelBackground when: TRMouseLeave do: [ :e |	
+
+	lbl element labelBackground when: TRMouseLeave do: [ :e |
 		| anim |
-		lbl element isLocked ifFalse: [ 
+		lbl element isLocked ifFalse: [
 			anim := RTNopAnimation new
-				waitFor: 0.1 after: [ 
-					closingSubmenuFlag ifTrue: [ 
+				waitFor: 0.1 after: [
+					closingSubmenuFlag ifTrue: [
 						lbl element hideItems.
 						lbl element endHighlight
 						]
@@ -102,7 +102,7 @@ RTMenuBuilder >> createParentMenu: aTitle background: aColor highlightColor: aCo
 			self signalUpdate.
 			]
 		].
-		
+
 	^ lbl
 ]
 
@@ -120,23 +120,23 @@ RTMenuBuilder >> createView [
 { #category : #utility }
 RTMenuBuilder >> enterSubmenuOf: lbl [
 	| menu labels|
-	
+
 	menu := lbl element.
-	
-	"We mark the submenu as open" 
+
+	"We mark the submenu as open"
 	(menu isLocked) ifTrue: [ ^ self signalUpdate].
 	menu hideAll.
 	menu isLocked: false.
 	menu isOpen: true.
-	
+
 	menu executeHighlight.
-	
+
 	labels := menu items collect: [ :item | | m |
 		m := nil.
-		m := self menu: item label 
-			background: Color transparent 
-			highlightColor: Color transparent 
-			callback: [ 
+		m := self menu: item label
+			background: Color transparent
+			highlightColor: Color transparent
+			callback: [
 			item execute: m.
 			menu isLocked ifFalse: [ menu hideAll ] ].
 		item menu: m.
@@ -149,18 +149,18 @@ RTMenuBuilder >> enterSubmenuOf: lbl [
 
 	menu update.
 	self signalUpdate.
-		
-	lbl element menuBackground when: TRMouseEnter do: [ :e | 
+
+	lbl element menuBackground when: TRMouseEnter do: [ :e |
 				closingSubmenuFlag := false.
 				self signalUpdate].
-			
-	lbl element menuBackground when: TRMouseLeave do: [ :e | 
+
+	lbl element menuBackground when: TRMouseLeave do: [ :e |
 			| anim |
 			closingSubmenuFlag := true.
 			anim := RTNopAnimation new
-				waitFor: 0.1 after: [ 
+				waitFor: 0.1 after: [
 					lbl element isLocked ifFalse: [
-						closingSubmenuFlag ifTrue: [  
+						closingSubmenuFlag ifTrue: [
 							lbl element hideItems.
 							lbl element endHighlight.
 							]
@@ -177,7 +177,7 @@ RTMenuBuilder >> initialize [
 	closingSubmenuFlag := false.
 	super initialize.
 	parentMenus := OrderedCollection new.
-	
+
 ]
 
 { #category : #utility }
@@ -190,25 +190,25 @@ RTMenuBuilder >> leaveSubmenuOf: lbl [
 ]
 
 { #category : #public }
-RTMenuBuilder >> menu: aTitle background: aColor callback: callback [ 
+RTMenuBuilder >> menu: aTitle background: aColor callback: callback [
 	"Return a trachel shape, in which the callback has been set up"
-	^ self menu: aTitle background: aColor highlightColor:  (aColor alpha: (aColor alpha + 0.2)) callback: callback. 
+	^ self menu: aTitle background: aColor highlightColor:  (aColor alpha: (aColor alpha + 0.2)) callback: callback.
 ]
 
 { #category : #public }
-RTMenuBuilder >> menu: aTitle background: aColor highlightColor: aColor2 callback: callback [ 
+RTMenuBuilder >> menu: aTitle background: aColor highlightColor: aColor2 callback: callback [
 	"Return a trachel shape, in which the callback has been set up"
 	| lbl index |
-	
+
 	self configureViewEvents.
-	
-	index := view canvas fixedShapes 
+
+	index := view canvas fixedShapes
 						inject: 0 into: [ :s :e | s max: (e encompassingRectangle topRight x + 10) ].
 	lbl := TRLabelShape new text: aTitle; translateLeftTo: (index +20) @ 20.
 	lbl color: Color black.
 	view canvas addFixedShape: lbl.
 	lbl element: (RTMenu new view: view; label: lbl; menuBackgroundColor: aColor; buttonLabelBackgroundShapeAndColor: aColor; highlightColor: aColor2 ).
-	
+
 	lbl when: TRMouseClick do: [ :event | lbl element hideAll. callback value. ].
 	lbl when: TRMouseEnter do: [ :event | closingSubmenuFlag := false. lbl element executeHighlight; executeTextHighlight. self signalUpdate. ].
 	lbl when: TRMouseLeave do: [ :event | lbl element endHighlight. self signalUpdate. ].
@@ -224,10 +224,10 @@ RTMenuBuilder >> menu: aTitle callback: callback [
 ]
 
 { #category : #public }
-RTMenuBuilder >> menu: aTitle highlight: aColor callback: callback [ 
+RTMenuBuilder >> menu: aTitle highlight: aColor callback: callback [
 	"Return a trachel shape, in which the callback has been set up"
 	"callback is a zero-arg block, without argument therefore"
-	^ self menu: aTitle background: (Color gray darker alpha: 0) highlightColor: aColor callback: callback. 
+	^ self menu: aTitle background: (Color gray darker alpha: 0) highlightColor: aColor callback: callback.
 ]
 
 { #category : #public }
@@ -238,10 +238,10 @@ RTMenuBuilder >> menu: aTitle subcheckmenu: menuname background: color callback:
 		 menu: aTitle
 		 submenu: menuname
 		 background: color
-		 callback: [ 
+		 callback: [
 			checkmenu selected: checkmenu selected not.
 			callback value: checkmenu].
-	checkmenu after: [ :menu | 
+	checkmenu after: [ :menu |
 		menu text: checkmenu label.
 		self signalUpdate].
 	^ checkmenu.
@@ -254,10 +254,10 @@ RTMenuBuilder >> menu: aTitle subcheckmenu: menuname callback: callback [
 	checkmenu := self
 		 menu: aTitle
 		 submenu: menuname
-		 callback: [ 
+		 callback: [
 			checkmenu selected: checkmenu selected not.
 			callback value: checkmenu].
-	checkmenu after: [ :menu | 
+	checkmenu after: [ :menu |
 		menu text: checkmenu label.
 		self signalUpdate].
 	^ checkmenu.
@@ -275,9 +275,9 @@ RTMenuBuilder >> menu: aTitle subcheckmenus: menus background: color [
 { #category : #public }
 RTMenuBuilder >> menu: aTitle submenu: aSubMenuName background: aColor callback: callback [
 	| parentMenu menuItem |
-	
+
 	parentMenu := (self parentMenus) detect: [ :m | m label text = aTitle] ifFound: [:m | m label] ifNone: [parentMenu := self createParentMenu: aTitle background: aColor].
-	
+
 	menuItem := RTMenuItem new name: aSubMenuName; callback: callback; color: aColor.
 	parentMenu element add: menuItem.
 	^ menuItem.
@@ -286,9 +286,9 @@ RTMenuBuilder >> menu: aTitle submenu: aSubMenuName background: aColor callback:
 { #category : #public }
 RTMenuBuilder >> menu: aTitle submenu: aSubMenuName background: aColor highlightColor: aColor2 callback: callback [
 	| parentMenu menuItem |
-	
+
 	parentMenu := (self parentMenus) detect: [ :m | m label text = aTitle] ifFound: [:m | m label] ifNone: [parentMenu := self createParentMenu: aTitle background: aColor highlightColor: aColor2].
-	
+
 	menuItem := RTMenuItem new name: aSubMenuName; callback: callback; color: aColor.
 	parentMenu element add: menuItem.
 	^ menuItem.
@@ -297,9 +297,9 @@ RTMenuBuilder >> menu: aTitle submenu: aSubMenuName background: aColor highlight
 { #category : #public }
 RTMenuBuilder >> menu: aTitle submenu: aSubMenuName callback: callback [
 	| parentMenu menuItem |
-	
+
 	parentMenu := (self parentMenus) detect: [ :m | m label text = aTitle] ifFound: [:m | m label] ifNone: [parentMenu := self createParentMenu: aTitle].
-	
+
 	menuItem := RTMenuItem new name: aSubMenuName; callback: callback.
 	parentMenu element add: menuItem.
 	^ menuItem.
@@ -307,7 +307,7 @@ RTMenuBuilder >> menu: aTitle submenu: aSubMenuName callback: callback [
 
 { #category : #public }
 RTMenuBuilder >> menu: aTitle submenus: menus background: aColor [
-	^ menus collect: [ :m | 
+	^ menus collect: [ :m |
 		self menu: aTitle submenu: m key background: aColor callback: m value].
 ]
 
@@ -320,32 +320,32 @@ RTMenuBuilder >> parentMenus [
 RTMenuBuilder >> showSubmenuOf: lbl [
 	| menu  labels |
 	menu := lbl element.
-	
+
 	"Check if submenu is locked"
 	menu isLocked
-		ifTrue: [ 
+		ifTrue: [
 			menu hideItems.
 			menu endHighlight.
 			self signalUpdate.
 			 ^ self].
-		
-	"We mark the submenu as locked" 
+
+	"We mark the submenu as locked"
 	menu isLocked: true.
 	menu executeLockHighlight.
 	menu isOpen
-		ifFalse: [ 
-	
-	"We mark the submenu as open" 
+		ifFalse: [
+
+	"We mark the submenu as open"
 		menu hideAll.
 		menu isOpen: true.
 
 		menu executeLockHighlight.
-	
+
 		labels := menu items collect: [ :item | | m |
 			m := nil.
 			m := self menu: item label background: (Color white alpha:0) callback: [item execute: m].
 			item menu: m.
-			m 
+			m
 		].
 
 		labels doWithIndex: [ :l :i | | p |
@@ -354,7 +354,7 @@ RTMenuBuilder >> showSubmenuOf: lbl [
 		].
 	menu update.
 	].
-	
+
 	self signalUpdate.
 
 ]

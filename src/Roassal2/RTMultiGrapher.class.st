@@ -27,7 +27,7 @@ g2 add: ds2.
 g1 axisY
 	title: 'y 1';
 	color: Color red.
-	
+
 g2 axisY
 	title: 'y 2';
 	color: Color blue.
@@ -82,13 +82,13 @@ RTMultiGrapher >> legend [
 { #category : #hooks }
 RTMultiGrapher >> renderIn: aView [
 	graphers
-		withIndexDo: [ :each :i | 
+		withIndexDo: [ :each :i |
 			each yOffset: (i - 1) * yOffset.
 			each build.
 			aView addFromView: each view ].
 	legendBuilder
 		ifNotNil: [ graphers
-				do: [ :each | 
+				do: [ :each |
 					each legend: legendBuilder.
 					each renderLegend ].
 			aView addFromView: legendBuilder view.

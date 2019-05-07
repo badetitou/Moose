@@ -26,7 +26,7 @@ RTAbstractLabeled class >> hasLabel: anElement [
 ]
 
 { #category : #public }
-RTAbstractLabeled class >> removeLabelFrom: aRTElement [ 
+RTAbstractLabeled class >> removeLabelFrom: aRTElement [
 	| callback label |
 	callback := aRTElement attributeAt: #RTLabelledCallback ifAbsent: [ ^ self ].
 	aRTElement trachelShape removeCallback: callback ifAbsent: [ ].
@@ -60,7 +60,7 @@ RTAbstractLabeled >> bottomLeft [
 
 { #category : #'public - layout' }
 RTAbstractLabeled >> center [
-	position := #center		
+	position := #center
 ]
 
 { #category : #accessing }
@@ -86,7 +86,7 @@ RTAbstractLabeled >> fontSize: aPixelSizeAsInteger [
 { #category : #initialization }
 RTAbstractLabeled >> initialize [
 	super initialize.
-	
+
 	"Labels should be in the back per default"
 	shouldBeInTheBack := true.
 ]
@@ -103,7 +103,7 @@ RTAbstractLabeled >> isBottomLeft [
 
 { #category : #testing }
 RTAbstractLabeled >> isCenter [
-	^ position = #center		
+	^ position = #center
 ]
 
 { #category : #testing }
@@ -146,10 +146,10 @@ RTAbstractLabeled >> lowColor: aBlockOrColor [
 RTAbstractLabeled >> makeLabelHighlightableIfNecessaryBy: element [
 	"Do nothing if there is no need to"
 	highlightable ifFalse: [ ^ self ].
-	
+
 	labelTrachel color: lowColor.
 	element when: TRMouseEnter do: [ :evt | labelTrachel color: color. labelTrachel pushFront. evt signalUpdate ].
-	element when: TRMouseLeave do: [ :evt | 
+	element when: TRMouseLeave do: [ :evt |
 		labelTrachel canvas ifNotNil: [ labelTrachel color: lowColor. self pushBackLabelIfNecessary. evt signalUpdate ] ].
 ]
 
@@ -185,7 +185,7 @@ RTAbstractLabeled >> right [
 { #category : #'public configuration' }
 RTAbstractLabeled >> setAsHighlightable [
 	"Make the label highlightable by moving the mouse over the element
-	
+
 	Consider the example:
 	=-=-=-=-=-
 	| v es |
@@ -196,7 +196,7 @@ RTAbstractLabeled >> setAsHighlightable [
 	RTHorizontalLineLayout on: es.
 
 	es do: [ :e |
-		e @ (RTLabeled new color: Color red; setAsHighlightable) ]. 
+		e @ (RTLabeled new color: Color red; setAsHighlightable) ].
 	es @ RTDraggable.
 	v
 	=-=-=-=-=-
@@ -206,8 +206,8 @@ RTAbstractLabeled >> setAsHighlightable [
 
 { #category : #'public configuration' }
 RTAbstractLabeled >> setAsShouldBeInTheFront [
-	"This method let the label trachel shape to be always in the front. 
-	
+	"This method let the label trachel shape to be always in the front.
+
 	Consider the example:
 	=-=-=-=-=-
 	v := RTView new.
@@ -217,7 +217,7 @@ RTAbstractLabeled >> setAsShouldBeInTheFront [
 	RTHorizontalLineLayout on: es.
 
 	es do: [ :e |
-		e @ (RTLabeled new color: Color red; setAsHighlightable; setAsShouldBeInTheFront) ]. 
+		e @ (RTLabeled new color: Color red; setAsHighlightable; setAsShouldBeInTheFront) ].
 	es @ RTDraggable.
 	v
 	=-=-=-=-=-

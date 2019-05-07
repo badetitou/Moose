@@ -52,7 +52,7 @@ RTAbstractPlugin class >> menuCommandOn: aBuilder [
 		yourself.
 	b
 		with: [ self allNotLoadedPluginClasses
-						do: [ :cls | 
+						do: [ :cls |
 							(aBuilder item: self menuConfigurationEntryTitle , cls new label)
 								order: 15;
 								parent: self menuConfigurationSymbol;
@@ -64,7 +64,7 @@ RTAbstractPlugin class >> menuCommandOn: aBuilder [
 
 	b
 		with: [ self allLoadedPluginClasses
-						do: [ :cls | 
+						do: [ :cls |
 							(aBuilder item: self menuConfigurationEntryTitle , cls new label)
 								order: 25;
 								parent: self menuConfigurationSymbol;
@@ -107,7 +107,7 @@ RTAbstractPlugin >> isLoaded [
 { #category : #public }
 RTAbstractPlugin >> pluginName [
 	self doesItLoadCode ifFalse: [ ^ self label ].
-	^ self isLoaded 
+	^ self isLoaded
 		ifTrue: [ 'Update ', self label ]
 		ifFalse: [ 'Load ', self label ]
 ]

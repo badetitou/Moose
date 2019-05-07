@@ -12,7 +12,7 @@ RTShapeTest >> testArcShape [
 	el := arc element.
 	RTView new add: el.
 	el encompassingRectangle
-	
+
 ]
 
 { #category : #tests }
@@ -63,16 +63,16 @@ RTShapeTest >> testComposing [
 	e + s1 + s2.
 	v := RTView new.
 	v add: e.
-	
+
 	self assert: v canvas numberOfShapes = 2.
 
 	self assert: v canvas shapes first class == TRLabelShape.
 	self assert: v canvas shapes second class == TRBoxShape.
-	
+
 
 "	self assert: c shape2 extent = (5@5).
 	self assert: c shape1 width > 10.
-"	
+"
 ]
 
 { #category : #composing }
@@ -86,7 +86,7 @@ RTShapeTest >> testComposingAndEvent [
 	e when: TRMouseClick do: [ :evt | t := true  ].
 	v := RTView new.
 	v add: e.
-	
+
 	self deny: t.
 	e announce: TRMouseClick.
 	self assert: t
@@ -106,7 +106,7 @@ RTShapeTest >> testInstance [
 	| s |
 	self assert: RTBox instance class == RTBox.
 	self assert: RTBox instance ~~ RTBox instance.
-	
+
 	s := RTBox instance.
 	self assert: s instance == s.
 ]

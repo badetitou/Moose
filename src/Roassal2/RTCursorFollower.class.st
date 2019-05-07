@@ -43,14 +43,14 @@ RTCursorFollower >> color: aColor [
 { #category : #createLinesAndLabels }
 RTCursorFollower >> createLinesAndLabelsIfNecessary [
 	lineH
-		ifNil: [ 
+		ifNil: [
 			lineH := TRLineShape new.
 			lineH color: color.
 			canvas := builder view canvas.
 			canvas addShape: lineH.
 			lineV := TRLineShape new.
 			canvas addShape: lineV.
-			
+
 			labelH := TRLabelShape new.
 			labelH color: color.
 			canvas addShape: labelH.
@@ -110,7 +110,7 @@ RTCursorFollower >> labelYTextConvertion: aOneArgBlock [
 { #category : #createLinesAndLabels }
 RTCursorFollower >> removeLinesAndLabelsIfNecessary [
 	lineH notNil
-		ifTrue: [ 
+		ifTrue: [
 			lineH remove.
 			lineV remove.
 			labelH remove.
@@ -127,10 +127,10 @@ RTCursorFollower >> render [
 	| p pp |
 	builder view
 		when: TRMouseMove
-		do: [ :evt | 
+		do: [ :evt |
 			p := evt position.
 			(self isPointOverTheBuilder: p)
-				ifTrue: [ 
+				ifTrue: [
 					self createLinesAndLabelsIfNecessary.
 					lineH from: 0 @ p y to: builder extent x @ p y.
 					lineV from: p x @ 0 to: p x @ builder extent y negated.

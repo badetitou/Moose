@@ -8,7 +8,7 @@ Class {
 RTOnlineDocumentation class >> menuCommandOn: aBuilder [
 	<worldMenu>
 	(aBuilder item: #'Online documentation')
-			order: 0.001; 
+			order: 0.001;
 			parent: #Roassal;
 			label: 'Online documentation';
 			help: 'opne the Roassal documentation in a web browser';
@@ -22,7 +22,7 @@ RTOnlineDocumentation >> addAnimationTo: v [
 	v when: TRMouseClick do: [ :event | v clean ].
 	v
 		when: TRMouseMove
-		do: [ :event | 
+		do: [ :event |
 			e := (RTBox new
 				color: (Color red alpha: 0.2);
 				size: 20 atRandom + 5) element.

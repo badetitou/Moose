@@ -40,14 +40,14 @@ RTMultiCompositeShapeTest >> testBeforeAddingToAView [
 	e2 := (RTShapeBuilder new cross color: Color red trans) element.
 	e1 translateTo: 50 @ 50.
 	e2 translateTo: 50 @ 50.
-	
+
 	self assert: e1 position equals: 50 @ 50.
 	self assert: e2 position equals: 50 @ 50.
-	
+
 	v := RTView new.
 	v add: e1.
 	v add: e2.
-	
+
 	self assert: e1 position equals: 50 @ 50.
 	self assert: e2 position equals: 50 @ 50.
 ]
@@ -63,7 +63,7 @@ RTMultiCompositeShapeTest >> testColor [
 	s color: Color red.
 	e := s element.
 	v add: e.
-	
+
 	self assert: e trachelShape shapes first color equals: Color red
 ]
 
@@ -73,7 +73,7 @@ RTMultiCompositeShapeTest >> testComposedCompositedShape [
 	| s1 s2 e v |
 	s1 := RTCompositeShape new.
 	s2 := RTCompositeShape new.
-	
+
 	s1 add: (RTBox new color: Color blue; size: 20).
 	s1 add: (RTBox new color: Color red; size: 20).
 	s1 vertical.
@@ -81,9 +81,9 @@ RTMultiCompositeShapeTest >> testComposedCompositedShape [
 	s2 add: s1.
 	s2 add: (RTBox new color: Color green; size: 20).
 	s2 vertical.
-	
+
 	e := s2 element.
-	
+
 	"The element has to be added to the view in order to have the #vertical layout applied"
 	v := RTView new.
 	v add: e.
@@ -97,14 +97,14 @@ RTMultiCompositeShapeTest >> testExtentCompositedShape [
 
 	| s1  e v |
 	s1 := RTCompositeShape new.
-	
+
 	s1 add: (RTBox new color: Color blue; size: 20).
 	s1 add: (RTBox new color: Color red; size: 20).
 	s1 vertical.
 	e := s1 element.
 	v := RTView new.
 	v add: e.
-	
+
 	self assert: e height equals: 40
 ]
 
@@ -126,7 +126,7 @@ RTMultiCompositeShapeTest >> testScenario [
 
 	e := s element.
 	v add: e.
-	v 
+	v
 
 ]
 
@@ -146,10 +146,10 @@ RTMultiCompositeShapeTest >> testTranslationBy [
 
 	self assert: view canvas numberOfShapes equals: 3.
 	self assert: el shape class equals: RTCompositeShape.
-	
+
 	ps := view canvas shapes collect: #position.
 	self assert: ps equals: (Array with: (0 @ 0) with: (15 @ 0) with: (30 @ 0)).
-	
+
 	el translateBy: 10 @ 5.
 	ps2 := view canvas shapes collect: #position.
 	self assert: ps2 equals: (ps + (10 @ 5)).
@@ -171,7 +171,7 @@ RTMultiCompositeShapeTest >> testTranslationTo [
 
 	self assert: view canvas numberOfShapes equals: 3.
 	self assert: el shape class equals: RTCompositeShape.
-	
+
 	ps := view canvas shapes collect: #position.
 	self assert: ps equals: (Array with: (0 @ 0) with: (15 @ 0) with: (30 @ 0)).
 
@@ -191,7 +191,7 @@ RTMultiCompositeShapeTest >> testVerticalAndChangingElementSize [
 	s add: b2.
 	s vertical.
 	s setAutomaticRelayout.
-	
+
 	e := s element.
 	view := RTView new.
 	view add: e.
@@ -199,7 +199,7 @@ RTMultiCompositeShapeTest >> testVerticalAndChangingElementSize [
 	"No resize has been done"
 	self assert: (view canvas shapes collect: #encompassingRectangle) first equals: (((-5/2)@ (-5/2)) corner: ((5/2)@(5/2))).
 	self assert: (view canvas shapes collect: #encompassingRectangle) second equals: ((-10@(5/2)) corner: (10@(45/2))).
-	
+
 	"We resize the second box"
 	e trachelShape shapes second extent: 5 @ 5.
 "	e trachelShape resetInnerShapes; vertical; relayout."
@@ -217,18 +217,18 @@ RTMultiCompositeShapeTest >> testVerticalAndChangingElementSize2 [
 	s add: b1.
 	s add: b2.
 	s vertical.
-	
+
 	e := s element.
 	view := RTView new.
 	view add: e.
-	
+
 	"No resize has been done"
 	self assert: (view canvas shapes collect: #encompassingRectangle) first equals: (((-5/2)@ (-5/2)) corner: ((5/2)@(5/2))).
 	self assert: (view canvas shapes collect: #encompassingRectangle) second equals: (((-5/2)@(5/2)) corner: ((5/2)@(15/2))).
-	
+
 	"We resize the second box"
 	e trachelShape shapes second extent: 5 @ 5.
-	
+
 ]
 
 { #category : #tests }
@@ -247,7 +247,7 @@ RTMultiCompositeShapeTest >> testVerticalLayoutAndTranslation [
 	v add: e @ RTDraggable.
 
 	self assert: e trachelShape shapes second position equals: 0 @ 16.
-	
+
 	self assert: (e trachelShape offsets asArray) equals: (Array with: (0 @ 0) with: (0 @ 16.0)).
 
 	tb1 := e trachelShape shapes first.
@@ -255,12 +255,12 @@ RTMultiCompositeShapeTest >> testVerticalLayoutAndTranslation [
 	self assert: (e trachelShape offsetOf: tb1) equals: 0 @ 0.
 	self assert: (e trachelShape offsetOf: tb2) equals: 0 @ 16.0.
 
-	positions := (e trachelShape shapes collect: #position) asArray.	
+	positions := (e trachelShape shapes collect: #position) asArray.
 	self assert: positions equals: (Array with: (0 @ 0) with: (0 @ 16)).
 
 	e translateTo: 0 @ 0.
-	
+
 	positions := (e trachelShape shapes collect: #position) asArray.
 	self assert: positions equals: (Array with: (0 @ -8) with: (0 @ 8)).
-	
+
 ]

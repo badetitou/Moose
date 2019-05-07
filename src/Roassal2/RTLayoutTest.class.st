@@ -11,7 +11,7 @@ Class {
 RTLayoutTest >> setUp [
 	super setUp.
 	view := RTView new.
-	
+
 	1 to: 20 do: [ :i | view add: (RTBox elementOn: i) ]
 ]
 
@@ -27,12 +27,12 @@ RTLayoutTest >> testCellLayout [
 		view: v;
 		useAssociations: (Array with: 30 -> 50 with: 30 -> 80).
 
-	RTCellLayout new 
+	RTCellLayout new
 		gapSize: 0; on: els.
 	el30 := els first.
 	el50 := els second.
 	el80 := els third.
-	
+
 	self assert: el30 encompassingRectangle bottom + 10 equals: el80 encompassingRectangle top.
 	self assert: el30 encompassingRectangle right + 25 equals: el50 encompassingRectangle left.
 	self assert: el50 encompassingRectangle bottom equals: el80 encompassingRectangle top.
@@ -66,14 +66,14 @@ RTLayoutTest >> testCircleLayout [
 		add: (400@93);
 		add: (431@154).
 	self assert: ((view elements collect: #position) collect: #asIntegerPoint) asArray = answer asArray
-	
+
 ]
 
 { #category : #tests }
 RTLayoutTest >> testCircleLayoutOnEmpty [
 
 	RTCircleLayout new applyOn: #()
-	
+
 ]
 
 { #category : #tests }
@@ -95,7 +95,7 @@ RTLayoutTest >> testFlowLayoutAlignment [
 	l := RTFlowLayout new.
 	self assert: l isAlignTop.
 	self deny: l isAlignBottom.
-	
+
 	l alignBottom.
 	self deny: l isAlignTop.
 	self assert: l isAlignBottom.
@@ -109,13 +109,13 @@ RTLayoutTest >> testFlowLayoutAlignmentLayoutBottom [
 	l := RTFlowLayout new.
 	l alignBottom.
 	l on: es.
-	
+
 "	RTView new
 		addAll: es;
 		open.
-"		
+"
 	self assert: (es collect: #position) asArray = (Array with: (10.0@0.0) with: (30.0@ -5.0) with: (60.0@ -10.0))
-	
+
 ]
 
 { #category : #tests }
@@ -125,11 +125,11 @@ RTLayoutTest >> testFlowLayoutAlignmentLayoutCenter [
 	l := RTFlowLayout new.
 	l alignCenter.
 	l on: es.
-	
+
 "	RTView new
 		addAll: es;
 		open.
-		
+
 "	self assert: (es collect: #position) asArray = (Array with: (10.0@5) with: (30.0@5) with: (60.0@5))
 
 ]
@@ -140,11 +140,11 @@ RTLayoutTest >> testFlowLayoutAlignmentLayoutTop [
 	es := (RTBox new size: [ :v | v * 10 ]) elementsOn: #(1 2 3).
 	l := RTFlowLayout new.
 	l on: es.
-	
+
 "	RTView new
 		addAll: es;
 		open.
-"		
+"
 	self assert: (es collect: #position) asArray = (Array with: (10.0@10.0) with: (30.0@15.0) with: (60.0@20.0))
 ]
 
@@ -198,7 +198,7 @@ RTLayoutTest >> testHorizontalFlowLayoutAlignment [
 	l := RTHorizontalFlowLayout new.
 	self assert: l isAlignTop.
 	self deny: l isAlignBottom.
-	
+
 	l alignBottom.
 	self deny: l isAlignTop.
 	self assert: l isAlignBottom.
@@ -211,13 +211,13 @@ RTLayoutTest >> testHorizontalFlowLayoutAlignmentLayoutBottom [
 	l := RTHorizontalFlowLayout new.
 	l alignBottom.
 	l on: es.
-	
+
 "	RTView new
 		addAll: es;
 		open.
-"		
+"
 	self assert: (es collect: #position) asArray = (Array with: (0@10.0) with: (-5@30.0) with: (-10.0@ 60.0))
-	
+
 ]
 
 { #category : #'flow layout' }
@@ -227,11 +227,11 @@ RTLayoutTest >> testHorizontalFlowLayoutAlignmentLayoutCenter [
 	l := RTHorizontalFlowLayout new.
 	l alignCenter.
 	l on: es.
-	
+
 "	RTView new
 		addAll: es;
 		open.
-		
+
 "	self assert: (es collect: #position) asArray = (Array with: (5@10.0) with: (5@30.0) with: (5@60.0))
 
 ]
@@ -242,11 +242,11 @@ RTLayoutTest >> testHorizontalFlowLayoutAlignmentLayoutTop [
 	es := (RTBox new size: [ :v | v * 10 ]) elementsOn: #(1 2 3).
 	l := RTHorizontalFlowLayout new.
 	l on: es.
-	
+
 "	RTView new
 		addAll: es;
 		open.
-"		
+"
 	self assert: (es collect: #position) asArray = (Array with: (10.0@10.0) with: (15.0@30.0) with: (20.0@60.0))
 ]
 
@@ -257,7 +257,7 @@ RTLayoutTest >> testHorizontalLineLayout [
 	RTHorizontalLineLayout on: view elements.
 	answer := (((Array new: 20) at: 1 put: (((5/2)@(5/2))); at: 2 put: (((35/2)@(5/2))); at: 3 put: (((65/2)@(5/2))); at: 4 put: (((95/2)@(5/2))); at: 5 put: (((125/2)@(5/2))); at: 6 put: (((155/2)@(5/2))); at: 7 put: (((185/2)@(5/2))); at: 8 put: (((215/2)@(5/2))); at: 9 put: (((245/2)@(5/2))); at: 10 put: (((275/2)@(5/2))); at: 11 put: (((305/2)@(5/2))); at: 12 put: (((335/2)@(5/2))); at: 13 put: (((365/2)@(5/2))); at: 14 put: (((395/2)@(5/2))); at: 15 put: (((425/2)@(5/2))); at: 16 put: (((455/2)@(5/2))); at: 17 put: (((485/2)@(5/2))); at: 18 put: (((515/2)@(5/2))); at: 19 put: (((545/2)@(5/2))); at: 20 put: (((575/2)@(5/2))); yourself)).
 	self assert: (view elements collect: #position) asArray = answer
-	
+
 ]
 
 { #category : #tests }
@@ -273,12 +273,12 @@ RTLayoutTest >> testHorizontalLineLayoutWithBox [
 	elWorldWidth := elWorld width.
 	RTHorizontalLineLayout new gapSize: 0; on: view elements.
 	"view open."
-	
+
 	self assert: elHello width = elHelloWidth.
 	self assert: elWorld width = elWorldWidth.
 	self assert: elHello encompassingRectangle width = elHelloWidth.
 	self assert: elWorld encompassingRectangle width = elWorldWidth.
-	
+
 	self assert: elHello encompassingRectangle top = elWorld encompassingRectangle top.
 	self assert: elHello encompassingRectangle right <= elWorld encompassingRectangle left.
 
@@ -296,12 +296,12 @@ RTLayoutTest >> testHorizontalLineLayoutWithText [
 	elWorldWidth := elWorld width.
 	RTHorizontalLineLayout new gapSize: 0; on: view elements.
 	"view open."
-	
+
 	self assert: elHello width = elHelloWidth.
 	self assert: elWorld width = elWorldWidth.
 	self assert: elHello encompassingRectangle width = elHelloWidth.
 	self assert: elWorld encompassingRectangle width = elWorldWidth.
-	
+
 	self assert: elHello encompassingRectangle top = elWorld encompassingRectangle top.
 	self assert: elHello encompassingRectangle bottom = elWorld encompassingRectangle bottom.
 	self deny: elHello encompassingRectangle right > elWorld encompassingRectangle left.
@@ -319,8 +319,8 @@ RTLayoutTest >> testHorizontalTreeLayout [
 	RTEdgeBuilder new
 		view: v;
 		useAssociations: (Array with: 30 -> 50 with: 30 -> 80).
-	
-	RTHorizontalTreeLayout new 
+
+	RTHorizontalTreeLayout new
 		isLayered: false; leftGap: 0; topGap: 0; verticalGap: 0; horizontalGap: 0; on: els.
 	el30 := els first.
 	el50 := els second.
@@ -373,11 +373,11 @@ RTLayoutTest >> testSugiyamaLayout [
 	elements := (RTBox new size: 50) elementsOn: (1 to: 20).
 	view := RTView new.
 	view addAll: elements.
-	elements allButFirst do: [:e | 
+	elements allButFirst do: [:e |
 	 	view add: (RTLine edgeFrom: elements first to: e) ].
-	
+
 	RTSugiyamaLayout on: elements.
-	
+
 	result := (((RTGroup new) add: ((522.0@28.0)); add: ((999.0@98.0)); add: ((946.0@98.0)); add: ((893.0@98.0)); add: ((840.0@98.0)); add: ((787.0@98.0)); add: ((734.0@98.0)); add: ((681.0@98.0)); add: ((628.0@98.0)); add: ((575.0@98.0)); add: ((522.0@98.0)); add: ((469.0@98.0)); add: ((416.0@98.0)); add: ((363.0@98.0)); add: ((310.0@98.0)); add: ((257.0@98.0)); add: ((204.0@98.0)); add: ((151.0@98.0)); add: ((98.0@98.0)); add: ((45.0@98.0)); yourself)).
 	self assert: (result includesAll: (elements collect: #position))
 ]
@@ -462,8 +462,8 @@ RTLayoutTest >> testVerticalLineLayoutOnElements [
 	el2 := RTBox new size: #yourself; elementOn: 50.
 	view add: el1; add: el2.
 	self assert: view elements size equals: 2.
-	RTVerticalLineLayout new 
-		gapSize: 0; 
+	RTVerticalLineLayout new
+		gapSize: 0;
 		on: view elements.
 	self assert: el1 height equals: 30.
 	self assert: el2 height equals: 50.
@@ -481,12 +481,12 @@ RTLayoutTest >> testVerticalLineLayoutOnGroups [
 	line2 := RTBox new size: #yourself; elementsOn: #(50).
 	view addAll: line1; addAll: line2.
 	self assert: view elements size equals: 2.
-	RTVerticalLineLayout new 
-		gapSize: 0; 
+	RTVerticalLineLayout new
+		gapSize: 0;
 		on: (Array with: line1 with: line2).
 	el1 := line1 first.
 	el2 := line2 first.
-	
+
 	self assert: el1 height equals: 30.
 	self assert: el2 height equals: 50.
 	self assert: el1 position equals: 15 @ 15.
@@ -507,7 +507,7 @@ RTLayoutTest >> testVerticalTreeLayout [
 		view: v;
 		useAssociations: (Array with: 30 -> 50 with: 30 -> 80).
 
-	RTTreeLayout new 
+	RTTreeLayout new
 		isLayered: false; leftGap: 0; topGap: 0; verticalGap: 0; horizontalGap: 0; on: els.
 	el30 := els first.
 	el50 := els second.

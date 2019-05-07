@@ -18,7 +18,7 @@ RTLazyMetricNormalizerTest >> testBasic [
 	n foo.
 	n bar.
 	self assert: n numberOfReceivedMessages equals: 2.
-	
+
 	n resetMessages.
 	self assert: n numberOfReceivedMessages equals: 0.
 ]
@@ -29,7 +29,7 @@ RTLazyMetricNormalizerTest >> testBasic02 [
 	es := RTBox elementsOn: (1 to: 5).
 	n elements: es.
 	n normalizeSize: #yourself.
-	
+
 	self assert: es last trachelShape extent equals: 5 @ 5.
 
 	n build.
@@ -43,7 +43,7 @@ RTLazyMetricNormalizerTest >> testBasic03ReuseOfMetrics [
 	n elements: es.
 	n normalizeSize: #yourself.
 	n build.
-	
+
 	es2 := RTBox elementsOn: (1 to: 5).
 	n elements: es2.
 	n build.

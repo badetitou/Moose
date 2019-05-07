@@ -7,19 +7,19 @@ Class {
 { #category : #hooks }
 RTStretchBehavior >> on: backElement setNested: elements [
 	"It makes a scaling/zooming effect.
-	If you change backElement's extent, it changes proportionaly extent and position of nested elements. 
-	So the overall image --- composition of backElement and elements --- does not change. 
+	If you change backElement's extent, it changes proportionaly extent and position of nested elements.
+	So the overall image --- composition of backElement and elements --- does not change.
 	It only zoom in/out the overall image."
 	| callback |
 	super on: backElement setNested: elements.
-	callback := TRExtentCallback block: [ :shape :ratio | 
+	callback := TRExtentCallback block: [ :shape :ratio |
 		| mainPosition |
 		mainPosition := backElement position.
-		elements do: [ :eachElement | 
+		elements do: [ :eachElement |
 			| eachPosition |
 			eachPosition := eachElement position.
-			eachElement 
+			eachElement
 				extent: eachElement extent * ratio;
 				translateTo: mainPosition + ((eachPosition - mainPosition) * ratio) ] ].
-	backElement trachelShape addCallback: callback 
+	backElement trachelShape addCallback: callback
 ]

@@ -42,11 +42,11 @@ RTMouseHoverZoom >> desiredExtent: anExtentOrOneArgBlock [
 { #category : #private }
 RTMouseHoverZoom >> doZoomEffect: anElement [
 	(anElement hasAttribute: self attributeSymbol) ifTrue: [ ^ self ].
-	
+
 	zoomInElements do: [ :el | self undoZoomEffect: el ].
 	zoomInElements := OrderedCollection new.
 	zoomInElements add: anElement.
-	
+
 	anElement attributeAt: self attributeSymbol put: anElement extent.
 	self setExtent: (desiredExtent rtValue: anElement) for: anElement after: [].
 ]
@@ -64,7 +64,7 @@ RTMouseHoverZoom >> initialize [
 RTMouseHoverZoom >> initializeElement: element [
 	element when: TRMouseEnter do: [ :anEvent |
 		self doZoomEffect: element ].
-	
+
 	element when: TRMouseLeave do: [ :anEvent |
 		self undoZoomEffect: element ]
 ]

@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 RTInspectorScript >> description [
-	^ 
+	^
 'Simple visual object inspector'
 ]
 
@@ -23,18 +23,18 @@ RTInspectorScript >> execute [
 
 	nodes := Dictionary new.
 
-	block := [ :anObject | 
-	    
+	block := [ :anObject |
+
 	    b := RTMondrian new.
 	    b shape box color: Color gray trans; withTextAbove.
-	    
+
 	    b node: anObject class name forIt: [
 	        b shape label text: #key;
 	            if: [:assoc | assoc value isNil ] color: Color brown.
-	        b interaction 
+	        b interaction
 	                noInteractions;
 	                highlight;
-	                when: TRMouseClick do: [ :evt | 
+	                when: TRMouseClick do: [ :evt |
 	                    | obj |
 	                    "When we click on a label, we add the nodes, and create a link"
 	                          obj := evt element model value.
@@ -52,10 +52,10 @@ RTInspectorScript >> execute [
 	    b build.
 	    "The elements we have just built are added to the view"
 	    v addAll: b view elements.
-	    
+
 	    "We refresh the view"
 	    v signalUpdate.
-	    
+
 	    outterBox := b view elements first.
 	    nodes at: anObject put: outterBox.
 	].

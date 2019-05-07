@@ -20,7 +20,7 @@ Another example using conditional layout:
 b := RTMondrian new.
 b nodes: self.
 b edges connectToAll: [ :c | c queryAllOutgoingInvocations atTypeScope ].
-b layout 
+b layout
 	forceWithCharge: -300;
 	ifElement: #isNotConnected then: RTNullLayout new.
 b
@@ -60,16 +60,16 @@ RTLayoutBuilder >> circleWithRadius: aRadiusInPixels [
 { #category : #'public - layout' }
 RTLayoutBuilder >> clean [
 	"Move non connected elements to a side
-	
+
 	Here is an example:
 -=-=-=-=-=
-b := RTMondrian new. 
+b := RTMondrian new.
 b nodes: Collection allSubclasses.
 b normalizer normalizeSize: #numberOfMethods.
 
 b edges connectFrom: #superclass.
-b layout 
-	tree; 
+b layout
+	tree;
 	clean.
 b
 -=-=-=-=-=
@@ -99,9 +99,9 @@ RTLayoutBuilder >> doActionsOnEdgesFor: elements [
 	elements do: [ :e | allEdges addAll: e connectedEdges ].
 	asSet := allEdges asSet.
 	actionOnEdges
-		do: [ :act | 
+		do: [ :act |
 			asSet
-				do: [ :e | 
+				do: [ :e |
 					e isUsedInLayout
 						ifTrue: [ act rtValue: e ] ] ]
 ]
@@ -127,7 +127,7 @@ RTLayoutBuilder >> dynamicForce [
 ]
 
 { #category : #'public - condition' }
-RTLayoutBuilder >> else: elseLayout [ 
+RTLayoutBuilder >> else: elseLayout [
 	self assert: [ layout class == RTConditionalLayout ].
 	layout elseLayout: elseLayout
 ]
@@ -225,7 +225,7 @@ RTLayoutBuilder >> ifConnectedThen: thenLayout [
 "
 b := RTMondrian new.
 b nodes: (1 to: 100).
-b layout 
+b layout
 	force;
 	ifConnectedThen: RTGridLayout new.
 b edges connectTo: [ :v | v \\ 4 ].
@@ -241,13 +241,13 @@ RTLayoutBuilder >> ifElement: blockCondition then: thenLayout [
 Here is an example:
 b := RTMondrian new.
 b nodes: (1 to: 100).
-b layout 
+b layout
 	force;
 	ifElement: #isNotConnected then: RTGridLayout new.
 b edges connectTo: [ :v | v \\ 4 ].
 b.
 "
-	
+
 	| oldLayout |
 	oldLayout := layout.
 	layout := RTConditionalLayout new.
@@ -260,8 +260,8 @@ b.
 { #category : #'public - condition' }
 RTLayoutBuilder >> ifNotConnectedThen: thenLayout [
 	"Apply a layout on the set of elements that are not connected.
-	
-	
+
+
 	b := RTMondrian new.
 	b nodes: Collection allSubclasses.
 	b edges connectFrom: #superclass.
@@ -300,7 +300,7 @@ RTLayoutBuilder >> none [
 ]
 
 { #category : #'public - condition' }
-RTLayoutBuilder >> overall: overallLayout [ 
+RTLayoutBuilder >> overall: overallLayout [
 	self assert: [ layout class == RTConditionalLayout ].
 	layout overallLayout: overallLayout
 ]
@@ -323,7 +323,7 @@ RTLayoutBuilder >> processPartitions: elements [
 		tupple second on: els.
 		groupOfElements add: els asGroup.
 		 ].
-	
+
 	layout on: groupOfElements
 ]
 
@@ -346,7 +346,7 @@ RTLayoutBuilder >> setUpElements: elements [
 	self doActionsOnEdgesFor: elements.
 
 	dynamicForceBasedLayout ifTrue: [ ^ self doDynamicForceBasedLayoutOn: elements ].
-	
+
 	elements do: #updateEdgesOFF.
 	self hasPartition
 		ifTrue: [ self processPartitions: elements ]

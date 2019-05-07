@@ -29,9 +29,9 @@ RTSmoothLayoutTranslator >> hasCompleted [
 ]
 
 { #category : #'initialize-release' }
-RTSmoothLayoutTranslator >> initialize [ 
+RTSmoothLayoutTranslator >> initialize [
 	super initialize.
-	
+
 	"The amount of seconds we need to complete the transition"
 	nbCycles := 2
 ]
@@ -39,7 +39,7 @@ RTSmoothLayoutTranslator >> initialize [
 { #category : #accessing }
 RTSmoothLayoutTranslator >> nbCycles: anInteger [
 	"Set the number of cycle we need to complete the transition"
-	nbCycles := anInteger 
+	nbCycles := anInteger
 ]
 
 { #category : #hook }

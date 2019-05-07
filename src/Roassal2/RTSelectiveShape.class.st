@@ -29,7 +29,7 @@ RTSelectiveShape >> backgroundColorElement: aValueOrAOneArgBlock [
 { #category : #accessing }
 RTSelectiveShape >> backgroundColorFor: element [
 	color := backgroundColor rtValue: element.
-	color isColor ifFalse: [ 
+	color isColor ifFalse: [
 		color := Color colorFrom: color ].
 	^ color
 ]
@@ -59,7 +59,7 @@ RTSelectiveShape >> getShapeBySymbol: symbol [
 RTSelectiveShape >> if: block shapeElement: block2 [
 	| oldShape |
 	oldShape := self shapeElement.
-	^ self shapeElement: [ :e | (block rtValue: e) 
+	^ self shapeElement: [ :e | (block rtValue: e)
 		ifTrue: [ block2 rtValue: e ]
 		ifFalse: [ oldShape rtValue: e ] ]
 ]
@@ -104,10 +104,10 @@ RTSelectiveShape >> shapeElement: aShapeOrSymbol [
 RTSelectiveShape >> shapeFor: anElement [
 	| res |
 	res := shape rtValue: anElement.
-	res isSymbol ifTrue: [ 
+	res isSymbol ifTrue: [
 		res := self getShapeBySymbol: res ].
-	^ res 
-	
+	^ res
+
 ]
 
 { #category : #accessing }

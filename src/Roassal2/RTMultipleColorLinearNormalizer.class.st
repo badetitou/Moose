@@ -50,7 +50,7 @@ RTMultipleColorLinearNormalizer >> rtValue: anEntity [
 { #category : #'initialize-release' }
 RTMultipleColorLinearNormalizer >> valueRange: anArrayOfNumbers colorRange: anArrayOfColors [
 	" {1. 2. 3} {Color red. Color yellow. Color green}"
-	
+
 	| size start end |
 	normalizers := Dictionary new.
 	self assert: anArrayOfNumbers size = anArrayOfColors size.

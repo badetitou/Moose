@@ -9,8 +9,8 @@ Class {
 
 { #category : #accesing }
 Roassal2VW >> blacklist [
-	^ { RTGeneralExample>>#combiningRoassalAndMorphic. 
-	RTElementTest >> #testPlatformPopup. 
+	^ { RTGeneralExample>>#combiningRoassalAndMorphic.
+	RTElementTest >> #testPlatformPopup.
 	RTRoassalExample >> #examplePlatformPoup.
 	RTAbstractExample class >> #createIcon.
 	RTAbstractExample >> #installTitle:code:.
@@ -175,27 +175,27 @@ bexamples := Registry bundleNamed: 'Roassal2-Examples'.
 map := Dictionary new.
 classes := b allClasses.
 currentB := nil.
-classes do:[:cls | 
+classes do:[:cls |
 	cat := cls myClass category asString.
 	(m1 includes: cat) ifTrue: [
 
 		currentB := b.
-		('*Test' match: cls myClass name) ifTrue: [ 
+		('*Test' match: cls myClass name) ifTrue: [
 			currentB := btests.
-			('*Tests' match: cat) 
+			('*Tests' match: cat)
 				ifFalse: [ cat := cat , '-Tests'.] ]
 			ifFalse: [
-		(('*Example*' match: cls myClass name) or: [ '*Examples' match: cls myClass name]) 
-			ifTrue: [ 
+		(('*Example*' match: cls myClass name) or: [ '*Examples' match: cls myClass name])
+			ifTrue: [
 				currentB := bexamples.
 				cat := cat , '-Examples' ] ].
-		('Trachel*' match: cat) 
+		('Trachel*' match: cat)
 			ifTrue: [ cat := 'Roassal2-', cat ].
-		p := map at: cat ifAbsent: [ 
+		p := map at: cat ifAbsent: [
 			p := Registry packageNamedOrCreate: cat.
 			currentB addItem: p.
 			map at: cat put: p.
-			p  ]. 
+			p  ].
 		XChangeSet current moveWholeClass: cls toPackage: p ]. ].
 
 "
@@ -206,24 +206,24 @@ Roassal2VW >> codeToDeletePackages [
 	"
 | b arr list |
 list := OrderedCollection new.
-list 
-	add: 'Roassal2-Extentions'; 
+list
+	add: 'Roassal2-Extentions';
 	add: 'Roassal2-Pharo';
-	add: 'Roassal2-Visualworks'; 
+	add: 'Roassal2-Visualworks';
 	add: 'Roassal2-Tests-Extentions';
 	add: 'Roassal2-Examples-Extentions'.
 arr := Array with: 'Roassal2' with: 'Roassal2-Examples' with: 'Roassal2-Tests'.
-arr do: [ :ar | 
+arr do: [ :ar |
 	b := Registry bundleNamed: ar.
-	b leafItems do: [ :pkg | 
+	b leafItems do: [ :pkg |
 		(list includes: pkg name) ifFalse: [
 			pkg doUnloadFromImage.
 		]. ]. ].
 
 
 	"
-			
-			
+
+
 ]
 
 { #category : #exporting }
@@ -240,9 +240,9 @@ Roassal2VW >> exporter [
 	^  cls exporter
 		environment: 'Roassal2';
 		methodsBlacklist: self blacklist;
-		packages: {'Roassal2'. 'Trachel'} 
+		packages: {'Roassal2'. 'Trachel'}
 			without: {
-				'Trachel-MorphSpecific'. 'Roassal2-OpenStreetMap'. 
+				'Trachel-MorphSpecific'. 'Roassal2-OpenStreetMap'.
 				'Roassal2-MorphSpecific'. 'Roassal2-Plugins'.
 				'Roassal2-ExporterVW'. 'Roassal2-MorphSpecific-Menu' };
 		yourself

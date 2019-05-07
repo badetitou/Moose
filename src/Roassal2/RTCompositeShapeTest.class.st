@@ -46,11 +46,11 @@ RTCompositeShapeTest >> testAllSameSize01 [
 	combo:= RTCompositeShape new allOfSameSize; add: box1; add: box2.
 
 	v := RTView new.
-	v add: combo element. 
-	
+	v add: combo element.
+
 	self assert: v numberOfElements equals: 1.
 	self assert: v canvas numberOfShapes equals: 2.
-	
+
 	self assert: (v canvas shapes collect: #encompassingRectangle) asSet size equals: 1
 ]
 
@@ -64,11 +64,11 @@ RTCompositeShapeTest >> testAllSameSize01AndVertical [
 	combo:= RTCompositeShape new allOfSameSize; add: box1; add: box2; vertical.
 
 	v := RTView new.
-	v add: combo element. 
-	
+	v add: combo element.
+
 	self assert: v numberOfElements equals: 1.
 	self assert: v canvas numberOfShapes equals: 2.
-	
+
 	firstShape := v canvas shapes first.
 	secondShape := v canvas shapes second.
 	self assert: firstShape position x equals: secondShape position x.
@@ -105,7 +105,7 @@ RTCompositeShapeTest >> testCallbacks [
 
 	self assert: ellipse trachelShape numberOfCallbacks equals: 0.
 	self assert: compo trachelShape numberOfCallbacks equals: 2.
-	
+
 	shapes := compo trachelShape shapes.
 	self assert: shapes first numberOfCallbacks equals: 2
 ]
@@ -129,14 +129,14 @@ RTCompositeShapeTest >> testCallbacks02 [
 { #category : #centering }
 RTCompositeShapeTest >> testCenter [
 	| v es shape |
-	v := RTView new. 
+	v := RTView new.
 	shape := RTCompositeShape new.
 	shape add: (RTBox new height: 10; color: Color green; width: #yourself).
 	shape add: (RTBox new height: 10; color: Color red; width: [ :cc | 100 - cc ]).
 
 	es := shape elementsOn: #(0 50 100).
 	v addAll: es.
-	
+
 	self assert: es first position equals: 0 @ 0.
 	self assert: es second position equals: 0 @ 0.
 	self assert: es third position equals: 0 @ 0.
@@ -146,15 +146,15 @@ RTCompositeShapeTest >> testCenter [
 { #category : #centering }
 RTCompositeShapeTest >> testCenter2 [
 	| v es shape |
-	v := RTView new. 
+	v := RTView new.
 	shape := RTCompositeShape new.
 	shape add: (RTBox new height: 10; color: Color green; width: #yourself).
 	shape add: (RTBox new height: 10; color: Color red; width: [ :cc | 100 - cc ]).
 	shape horizontal.
-	
+
 	es := shape elementsOn: #(0 50 100).
 	v addAll: es.
-	
+
 	"Ideally, we should have 0 @ 0"
 	self assert: es first position equals: 50 @ 0.
 	self assert: es second position equals: 25 @ 0.
@@ -165,16 +165,16 @@ RTCompositeShapeTest >> testCenter2 [
 { #category : #centering }
 RTCompositeShapeTest >> testCenter2AndTranslation [
 	| v es shape |
-	v := RTView new. 
+	v := RTView new.
 	shape := RTCompositeShape new.
 	shape add: (RTBox new height: 10; color: Color green; width: #yourself).
 	shape add: (RTBox new height: 10; color: Color red; width: [ :cc | 100 - cc ]).
 	shape horizontal.
-	
+
 	es := shape elementsOn: #(0 50 100).
 	v addAll: es.
 	es translateTo: 10 @ 10.
-	
+
 	self assert: es first position equals: 35 @ 10.
 	self assert: es second position equals: 10 @ 10.
 	self assert: es third position equals: -15 @ 10.
@@ -184,15 +184,15 @@ RTCompositeShapeTest >> testCenter2AndTranslation [
 { #category : #centering }
 RTCompositeShapeTest >> testCenter3 [
 	| v es shape |
-	v := RTView new. 
+	v := RTView new.
 	shape := RTCompositeShape new.
 	shape add: (RTBox new height: 10; color: Color green; width: #yourself).
 	shape add: (RTBox new height: 10; color: Color red; width: [ :cc | 100 - cc ]).
 	shape vertical.
-	
+
 	es := shape elementsOn: #(0 50 100).
 	v addAll: es.
-	
+
 	self assert: es first position equals: 0 @ 5.
 	self assert: es second position equals: 0 @ 5.
 	self assert: es third position equals: 0 @ 5.
@@ -202,16 +202,16 @@ RTCompositeShapeTest >> testCenter3 [
 { #category : #centering }
 RTCompositeShapeTest >> testCenter3AndTranslation [
 	| v es shape |
-	v := RTView new. 
+	v := RTView new.
 	shape := RTCompositeShape new.
 	shape add: (RTBox new height: 10; color: Color green; width: #yourself).
 	shape add: (RTBox new height: 10; color: Color red; width: [ :cc | 100 - cc ]).
 	shape vertical.
-	
+
 	es := shape elementsOn: #(0 50 100).
 	v addAll: es.
 	es translateTo: 10 @ 10.
-	
+
 	self assert: es first position equals: 10 @ 10.
 	self assert: es second position equals: 10 @ 10.
 	self assert: es third position equals: 10 @ 10.
@@ -221,7 +221,7 @@ RTCompositeShapeTest >> testCenter3AndTranslation [
 { #category : #centering }
 RTCompositeShapeTest >> testCenterAndTranslation [
 	| v es shape |
-	v := RTView new. 
+	v := RTView new.
 	shape := RTCompositeShape new.
 	shape add: (RTBox new height: 10; color: Color green; width: #yourself).
 	shape add: (RTBox new height: 10; color: Color red; width: [ :cc | 100 - cc ]).
@@ -229,7 +229,7 @@ RTCompositeShapeTest >> testCenterAndTranslation [
 	es := shape elementsOn: #(0 50 100).
 	v addAll: es.
 	es translateTo: 10 @ 10.
-	
+
 	self assert: es first position equals: 10 @ 10.
 	self assert: es second position equals: 10 @ 10.
 	self assert: es third position equals: 10 @ 10.
@@ -239,27 +239,27 @@ RTCompositeShapeTest >> testCenterAndTranslation [
 { #category : #centering }
 RTCompositeShapeTest >> testCenterVerticalLineLayout [
 	| v es shape |
-	v := RTView new. 
+	v := RTView new.
 	shape := RTCompositeShape new.
 	shape add: (RTBox new height: 10; color: Color green; width: #yourself).
 	shape add: (RTBox new height: 10; color: Color red; width: [ :cc | 100 - cc ]).
 	shape horizontal.
-	
+
 	es := shape elementsOn: #(0 50 100).
 	v addAll: es.
 	RTVerticalLineLayout on: es.
 
 	self assert: es second width equals: 100.0.
-	
+
 	self assert: (es collect: [ :e | e width ]) asArray equals: #(100 100 100).
 	self assert: (es collect: [ :e | e position x ]) asArray equals: #(50 50 50).
-	
+
 	self assert: es first trachelShape shapes first encompassingRectangle  equals: ( (0.0@0.0) corner: (0.0@10.0)).
 	self assert: es first trachelShape shapes second encompassingRectangle  equals: ( (0.0@0.0) corner: (100.0@10.0)).
-	
+
 	self assert: es second trachelShape shapes first encompassingRectangle equals: ( (0.0@20.0) corner: (50.0@30.0)).
 	self assert: es second trachelShape shapes second encompassingRectangle  equals: ( (50.0@20.0) corner: (100.0@30.0)).
-	
+
 	self assert: es third trachelShape shapes first encompassingRectangle equals: ( (0.0@40.0) corner: (100.0@50.0)).
 	self assert: es third trachelShape shapes second encompassingRectangle equals: ( (100.0@40.0) corner: (100.0@50.0)).
 ]
@@ -267,22 +267,22 @@ RTCompositeShapeTest >> testCenterVerticalLineLayout [
 { #category : #centering }
 RTCompositeShapeTest >> testCenterVerticalLineLayout2 [
 	| v es shape |
-	v := RTView new. 
+	v := RTView new.
 	shape := RTCompositeShape new.
 	shape add: (RTBox new height: 10; color: Color green; width: #yourself).
 	shape add: (RTBox new height: 10; color: Color red; width: [ :cc | 100 - cc ]).
 	shape horizontal.
-	
+
 	es := shape elementsOn: #(0 100).
 	v addAll: es.
 	RTVerticalLineLayout on: es.
-			
+
 	self assert: es first trachelShape shapes first encompassingRectangle  equals: ( (0.0@0.0) corner: (0.0@10.0)).
 	self assert: es first trachelShape shapes second encompassingRectangle  equals: ( (0.0@0.0) corner: (100.0@10.0)).
-	
+
 	self assert: es second trachelShape shapes first encompassingRectangle equals: ( (0.0@20.0) corner: (100.0@30.0)).
 	self assert: es second trachelShape shapes second encompassingRectangle  equals: ( (100.0@20.0) corner: (100.0@30.0)).
-	
+
 
 ]
 
@@ -297,8 +297,8 @@ RTCompositeShapeTest >> testHeightFor [
 	shape height: 50.
 	e := shape elementOn: 'hello'.
 	"RTView new add: e; open"
-	
-	
+
+
 ]
 
 { #category : #tests }
@@ -309,11 +309,11 @@ RTCompositeShapeTest >> testRemoving [
 	s add: RTLabel new.
 	s add: RTBox new.
 	e := s element.
-	
+
 	v := RTView new.
 	v add: e.
 	self assert: v numberOfElements equals: 1.
-	
+
 	e remove.
 	self assert: v numberOfElements equals: 0.
 ]
@@ -359,7 +359,7 @@ RTCompositeShapeTest >> testWidth [
 	s1 := RTBox new size: 5.
 	s2 := RTBox new size: 9.
 	c add: s1; add: s2.
-	
+
 	c width: 20.
 	self assert: (s1 width rtValue: RTElement new) equals: 20.
 	self assert: (s2 width rtValue: RTElement new) equals: 20.
@@ -373,8 +373,8 @@ RTCompositeShapeTest >> testWidthWithLabel [
 	s1 := RTBox new size: 5.
 	s2 := RTLabel new.
 	c add: s1; add: s2.
-	
+
 	c width: 20.
 	self assert: (s1 width rtValue: RTElement new) equals: 20.
-	
+
 ]

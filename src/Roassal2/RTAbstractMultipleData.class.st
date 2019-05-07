@@ -31,9 +31,9 @@ RTAbstractMultipleData >> addMetric: aBlockOrSymbolOrValue color: aColor [
 RTAbstractMultipleData >> addedInBuilder: aBuilder [
 	super addedInBuilder: aBuilder.
 	aBuilder axisX noLabel; noTick.
-	
+
 	elements := RTGroup new.
-	points do: [ :p | 
+	points do: [ :p |
 		| values es |
 		values := metrics collect: [ :m | m rtValue: p ].
 		es := barBuilder elementsOn: values.
@@ -58,7 +58,7 @@ RTAbstractMultipleData >> colors: aCollectionOfColors [
 { #category : #accessing }
 RTAbstractMultipleData >> colorsToUse [
 	"Return a collection of colors to use"
-	^ colors isEmpty 
+	^ colors isEmpty
 		ifTrue: [ self colorPalette ]
 		ifFalse: [ colors ]
 ]
@@ -135,15 +135,15 @@ RTAbstractMultipleData >> renderIn: aView [
 
 	RTAlignment new elements: positiveElements; fixedElement: centralDot; bottom.
 	"TRConstraint use: centralDot alignFromBottom: positiveElements.	"
-		
+
 	"We treat the element with a negative value"
 	negativeElements := elements copyWithoutAll: positiveElements.
 	negativeElements
-		ifNotEmpty: [ 
+		ifNotEmpty: [
 			RTMetricNormalizer new
 				elements: negativeElements;
 				normalizeElementHeight: [ :anElement | y rtValue: anElement ]
-					min: centralDot position y negated 
+					min: centralDot position y negated
 					max: 0
 					minValue: minY
 					maxValue: 0.
@@ -155,15 +155,15 @@ RTAbstractMultipleData >> renderIn: aView [
 { #category : #hooks }
 RTAbstractMultipleData >> resetShapeBuilderForBar [
 	super resetShapeBuilderForBar.
-	
+
 	"Default width that compute an appropriate width"
-	barBuilder width: [ :object | 
+	barBuilder width: [ :object |
 		(builder extent x / (self numberOfPoints * self numberOfMetrics * 2)) asFloat ]
 ]
 
 { #category : #hooks }
 RTAbstractMultipleData >> selectElementsForAddingBarTitle [
-	"Return the collection of principal element for each element group.  
+	"Return the collection of principal element for each element group.
 	This principal element is used to position the title label"
 	self subclassResponsibility
 ]

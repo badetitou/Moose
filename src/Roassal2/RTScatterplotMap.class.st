@@ -24,20 +24,20 @@ RTScatterplotMap >> convert: lat with: lon [
 	lambda0 := -96 degreesToRadians.
 	phi1 := 29.5 degreesToRadians.
 	phi2 := 45.5 degreesToRadians.
-	
+
 	phi := lat degreesToRadians.
 	lambda := lon degreesToRadians.
-	
+
 	n := 0.5 * (phi1 sin + phi2 sin).
 	theta := n * (lambda - lambda0).
 	c := phi1 cos + (2 * n * phi1 sin).
 	c := c * c.
 	rho := (c - (2 * n * phi sin)) sqrt / n.
 	rho0 := (c - (2 * n * phi0 sin)) sqrt / n.
-	
+
 	x := rho * theta sin.
 	y := rho0 - (rho * theta cos).
-	
+
 	^ x @ y
 ]
 
@@ -51,18 +51,18 @@ RTScatterplotMap >> run [
 	tab removeFirstRow.
 	tab convertColumns: #(2 3) to: [ :s | | str |
 		str := s.
-		(str = '') ifTrue: [ str := '0' ]. 
+		(str = '') ifTrue: [ str := '0' ].
 		(str beginsWith: '"+' ) ifTrue: [ str := str allButFirst allButFirst allButLast ].
 		(str first = $") ifTrue: [ Float readFrom: str allButFirst allButLast ] ifFalse: [  Float readFrom: str ] ].
 	allLonLat := tab values collect: [ :row | (row at: 2) @ (row at: 3) ].
-	
+
 	v := RTView new.
 	v @ RTDraggableView.
 	shape := (RTEllipse new size: 2; color: (Color blue alpha: 0.01)).
 	es := shape elementsOn: allLonLat.
 	es @ RTPopup.
 	v addAll: es.
-	es do: [ :el | 
+	es do: [ :el |
 		| p |
 		p := RTScatterplotMap new convert: el model x with: el model y.
 		el translateTo: (p x * 300) @ (p y negated * 300).

@@ -26,9 +26,9 @@ Class {
 
 { #category : #public }
 RTUMLClassBuilder >> addObject: object [
-	
+
 	classes add: object.
-	
+
 ]
 
 { #category : #public }
@@ -88,11 +88,11 @@ RTUMLClassBuilder >> buildEdges [
 	eb shape shape: lineShape shape.
 	eb connectFrom: self superclass.
 	"eb connectFrom: self superclass to: #yourself."
-	
+
 	eb := RTEdgeBuilder new.
 	eb view: view.
 	eb elements: view elements.
-	
+
 	self edges do: [ :asso |
 		eb shape shape: asso key.
 		asso value value: eb.
@@ -102,12 +102,12 @@ RTUMLClassBuilder >> buildEdges [
 { #category : #public }
 RTUMLClassBuilder >> buildSchema: aView [
 	| group box r label e1 e2  l h attributes methods line headerline midline clh |
-	
-	classes do: [ :object | 
+
+	classes do: [ :object |
 		group := RTGroup new.
 		group add: (self classNameShape elementOn: object).
 		clh := group encompassingRectangle height.
-			
+
 		label := self attributeShape shape.
 		(attributes := self attributesOf: object) do: [ :attribute |
 			| lab |
@@ -117,20 +117,20 @@ RTUMLClassBuilder >> buildSchema: aView [
 		RTVerticalLineLayout new gapSize: 0; on: group.
 		r := group encompassingRectangle.
 		h := r height.
-		
+
 		label := self methodShape shape.
-		(methods := self methodsForClass: object) do: [ :method | 
-			| lab | 
+		(methods := self methodsForClass: object) do: [ :method |
+			| lab |
 			lab := label elementOn: method.
 			lab notNil
 				ifTrue: [ group add: lab ] ].
-	
+
 		RTVerticalLineLayout new gapSize: 0; on: group.
 		r := group encompassingRectangle.
-		group first trachelShape 
+		group first trachelShape
 			translateTo: (r center x @ group first trachelShape center y).
 		box := self boxShape elementOn: object.
-		
+
 		line := [ :p1 :p2 |
 			e1 := (RTBox new size: 0) elementOn: p1.
 			e2 := (RTBox new size: 0) elementOn: p2.
@@ -141,23 +141,23 @@ RTUMLClassBuilder >> buildSchema: aView [
 			group add: e1; add: e2; add: l. ].
 		headerline := [ line value: (r left@ clh) value: (r right@ clh)  ].
 		midline := [ line value: (r left@h) value: (r right@h)  ].
-		attributes isEmpty 
-			ifTrue: [ 
+		attributes isEmpty
+			ifTrue: [
 				methods isEmpty ifTrue: [  ]
 					ifFalse: [ headerline value. ] ]
-			ifFalse: [  
+			ifFalse: [
 				headerline value.
 				methods isEmpty ifTrue: [  ]
 					ifFalse: [ midline value ]  ].
-		
+
 		RTNest new on: box nest: group.
-	
+
 		self interaction setUpElement: box.
 		classesGroup add: box.
 		aView add: box.
 		aView addAll: group.
 	].
-	
+
 ]
 
 { #category : #accessing }
@@ -173,7 +173,7 @@ RTUMLClassBuilder >> classNameShape [
 { #category : #shapes }
 RTUMLClassBuilder >> classNameShape: aUMLShapeBuilder [
 	^ classNameShape := aUMLShapeBuilder
-	
+
 ]
 
 { #category : #accessing }
@@ -184,13 +184,13 @@ RTUMLClassBuilder >> classesGroup [
 { #category : #accessing }
 RTUMLClassBuilder >> classname [
 	^ classname
-	
+
 ]
 
 { #category : #accessing }
 RTUMLClassBuilder >> classname: aSelector [
 	classname := aSelector
-	
+
 ]
 
 { #category : #public }
@@ -242,9 +242,9 @@ RTUMLClassBuilder >> example3 [
 	"
 	| objects|
 	objects := Array
-		with: (Array with: 'MyClass' with: (Array with: #iv1 with: #iv2) 
+		with: (Array with: 'MyClass' with: (Array with: #iv1 with: #iv2)
 			with: (Array with: #method1 with: #method2 with: #method3 ) )
-		with: (Array with: 'MyClass2' with: (Array with: #iv3 with: #iv4) 
+		with: (Array with: 'MyClass2' with: (Array with: #iv3 with: #iv4)
 			with: (Array with: #method4 with: #method5 with: #method6 ) ).
 
 	^ RTUMLClassBuilder new
@@ -268,7 +268,7 @@ RTUMLClassBuilder >> example4 [
 	b methodShape label
 		if: [ :method | method selector beginsWith: 'init' ] color: Color green;
 		if: [ :method | method selector beginsWith: 'with' ] color: Color red.
-			
+
 	b attributeShape label
 		if: [ :attribute | attribute beginsWith: 'a' ] color: Color blue.
 	b addObjects: RTShape withAllSubclasses.
@@ -283,9 +283,9 @@ RTUMLClassBuilder >> example5 [
 	"
 	| objects b |
 	objects := Array
-		with: (Array with: 'MyClass' with: (Array with: #iv1 with: #iv2) 
+		with: (Array with: 'MyClass' with: (Array with: #iv1 with: #iv2)
 			with: (Array with: #method1 with: #method2 with: #method3 ) )
-		with: (Array with: 'MyClass2' with: (Array with: #iv3 with: #iv4) 
+		with: (Array with: 'MyClass2' with: (Array with: #iv3 with: #iv4)
 			with: (Array with: #method4 with: #method5 with: #method6 ) ).
 
 	b := RTUMLClassBuilder new.
@@ -378,7 +378,7 @@ RTUMLClassBuilder >> initialize [
 	self interaction draggable.
 	self prepare: self methodShape selector: #methodselector.
 	self prepare: self attributeShape selector: #attributeselector.
-	
+
 ]
 
 { #category : #initialization }
@@ -459,10 +459,10 @@ RTUMLClassBuilder >> methodselector: aSelector [
 
 { #category : #private }
 RTUMLClassBuilder >> prepare: builder selector: selector [
-	builder shape class = RTNoShape ifTrue: [ 
+	builder shape class = RTNoShape ifTrue: [
 		builder label height: self fontSizeOfMembers ].
 	builder text: [ :obj | (self perform: selector) rtValue: obj ].
-	
+
 ]
 
 { #category : #hooks }

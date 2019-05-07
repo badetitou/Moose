@@ -33,7 +33,7 @@ RTSBFadeInteraction >> action: ablock [
 
 { #category : #computing }
 RTSBFadeInteraction >> children: element [
-	(element attributes includesKey: #children) ifTrue: [ 
+	(element attributes includesKey: #children) ifTrue: [
 		^ element attributes at: #children ]
 	ifFalse: [ ^ #() ].
 ]
@@ -41,7 +41,7 @@ RTSBFadeInteraction >> children: element [
 { #category : #computing }
 RTSBFadeInteraction >> fade: element [
 	| color |
-	(element attributes includesKey: #scolor) 
+	(element attributes includesKey: #scolor)
 		ifTrue: [ color := element attributes at: #scolor ]
 		ifFalse: [
 			color := element color.
@@ -54,19 +54,19 @@ RTSBFadeInteraction >> fade: element [
 { #category : #computing }
 RTSBFadeInteraction >> fade: element element: target [
 	"recursive fade the elements"
-	
+
 	| res v |
 	res := true.
 	(element = target) ifTrue: [ res := false. ].
-	
-	(self children: element) do: [ :node | 
+
+	(self children: element) do: [ :node |
 		v := self fade: node element element: target.
 		v ifTrue: [ self fade: node element ]
 		ifFalse: [ res := false. ].
 	].
 
 	^ res.
-	
+
 ]
 
 { #category : #computing }
@@ -84,27 +84,27 @@ RTSBFadeInteraction >> focus: element [
 	oldPath := self path: element.
 	self sbpath: element put: oldPath.
 	self restoreElements: oldPath.
-	
-	
+
+
 ]
 
 { #category : #hooks }
 RTSBFadeInteraction >> initializeElement: element [
-	
-	element when: TRMouseEnter do: [ :event | 
+
+	element when: TRMouseEnter do: [ :event |
 		stillInSunburst := true.
-		self focus: element. 
+		self focus: element.
 		self updateCanvas: element.
 		action ifNotNil: [ action value: element model ].
 		 ].
-	
+
 	element when: TRMouseLeave do: [ :event | | anim |
 		stillInSunburst := false.
 		anim := RTNopAnimation new
 			waitFor: 1 after: [
 				stillInSunburst ifFalse: [self restore: element. self updateCanvas: element.].
 				 ].
-		
+
 		element view addAnimation: anim.
 		anim start.
 		action ifNotNil: [ action value: nil ] ].
@@ -112,7 +112,7 @@ RTSBFadeInteraction >> initializeElement: element [
 
 { #category : #computing }
 RTSBFadeInteraction >> parentOf: element [
-	
+
 	| e |
 	e := element view elements first.
 	^ e
@@ -124,7 +124,7 @@ RTSBFadeInteraction >> path: element [
 	e := element.
 	path := OrderedCollection new.
 	path add: e.
-	[ e attributes includesKey: #parent ] whileTrue: [ 
+	[ e attributes includesKey: #parent ] whileTrue: [
 		e := e attributes at: #parent.
 		(e isNil) ifTrue: [ ^ path ].
 		path add: e. ].
@@ -140,16 +140,16 @@ RTSBFadeInteraction >> restore: element [
 { #category : #computing }
 RTSBFadeInteraction >> restoreElement: el [
 	| color |
-	(el attributes includesKey: #scolor) ifTrue: [ 
+	(el attributes includesKey: #scolor) ifTrue: [
 		color := el attributes at: #scolor.
 		el trachelShape color: color. ]
-	
+
 ]
 
 { #category : #computing }
 RTSBFadeInteraction >> restoreElements: elements [
 	elements do: [ :e | self restoreElement: e ].
-	
+
 ]
 
 { #category : #computing }
@@ -157,13 +157,13 @@ RTSBFadeInteraction >> sbpath: element [
 	| att |
 	att := element view elements first attributes.
 	^ (att includesKey: #sbpath) ifTrue: [ att at: #sbpath ] ifFalse: [ nil ]
-	
+
 ]
 
 { #category : #computing }
 RTSBFadeInteraction >> sbpath: element put: path [
 	element view elements first attributes at: #sbpath put: path.
-	
+
 ]
 
 { #category : #computing }

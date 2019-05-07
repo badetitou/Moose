@@ -74,11 +74,11 @@ RTAxisRenderer >> axisFrom: fromPosition to: toPosition width: lineThicknessInPi
 	| ticks labelShape labelValues labels tickIntervalForLabel labelledTicks |
 	"We add the labels"
 	self axisLineFrom: fromPosition to: toPosition width: lineThicknessInPixels.
-	
+
 	"We insert the title if necessary"
 	self insertTitleIfNecessaryTo: toPosition.
 
-	
+
 	self numberOfTicks = 0 ifTrue: [ ^ self ].
 	ticks := self addTicksFrom: toPosition to: fromPosition.
 	self numberOfLabels = 0 ifTrue: [ ^ self ].
@@ -87,17 +87,17 @@ RTAxisRenderer >> axisFrom: fromPosition to: toPosition width: lineThicknessInPi
 	labelValues := (0 to: self numberOfLabels)
 		collect: [ :i | self minValue + (i * (self maxValue - self minValue) / self numberOfLabels) ].
 
-	labelShape := RTLabel new 
+	labelShape := RTLabel new
 		color: self defaultLabelColor;
 		text: [ :i | self getStringFromNumber: (labelValues at: i + 1) ];
 		height: self labelFontHeight.
 	labels := labelShape elementsOn: (0 to: self numberOfLabels).
-	labels withIndexDo: [ :label :i | 
+	labels withIndexDo: [ :label :i |
 		self moveLabel: label againstTick: (labelledTicks at: i).
 		self rotateLabelIfNecessary: label.
 		label model: nil ].
-	
-	self addAllToView: labels.	
+
+	self addAllToView: labels.
 	labels pushBack
 ]
 
@@ -110,7 +110,7 @@ RTAxisRenderer >> axisLineFrom: aPositionFrom to: aPositionTo [
 { #category : #rendering }
 RTAxisRenderer >> axisLineFrom: aPositionFrom to: aPositionTo width: numberOfPixels [
 	"Add the lines, with a width of numberOfPixels"
-	| edge ex2 ex1 |		
+	| edge ex2 ex1 |
 	ex1 := (RTBox new size: 0) element.
 	ex2 := (RTBox new size: 0) element.
 	ex2 translateTo: (aPositionTo).
@@ -155,7 +155,7 @@ RTAxisRenderer >> getStringFromNumber: aNumber [
 RTAxisRenderer >> insertTitleIfNecessaryTo: toPosition [
 	| lbl |
 	self title notEmpty
-		ifTrue: [ 
+		ifTrue: [
 			lbl := (RTLabel new text: self title; color: self defaultLabelColor) element.
 			self addToView: lbl.
 			lbl translateTo: toPosition - config titlePosition ]
@@ -163,7 +163,7 @@ RTAxisRenderer >> insertTitleIfNecessaryTo: toPosition [
 
 { #category : #accessing }
 RTAxisRenderer >> labelFontHeight [
-	^ config labelFontHeight 
+	^ config labelFontHeight
 ]
 
 { #category : #'accessing-computed' }
@@ -201,7 +201,7 @@ RTAxisRenderer >> rotateLabelIfNecessary: label [
 	"Rotate and position the label if necessary"
 	config areLabelRotated ifFalse: [ ^ self ].
 	label rotateByDegrees: config labelRotation.
-	label translateBy: (label width / -2 * config labelRotation degreesToRadians cos @ 
+	label translateBy: (label width / -2 * config labelRotation degreesToRadians cos @
 								(label width / -2 * config labelRotation degreesToRadians sin)) "+ (5 @ 0)".
 ]
 

@@ -1,6 +1,6 @@
 "
 An element is a wrapper to an external provided object (e.g., a number, a file, your object).
-To an element, you can add a shape (composed or not), and interaction. Elements are added in a view. 
+To an element, you can add a shape (composed or not), and interaction. Elements are added in a view.
 
 To be visible, elements must have at least one shape. One key aspect of Roassal is that shapes may accept metrics or numerical values to define their visual dimensions (''e.g.,'' height, width, color, border width). Instead of giving absolute numerical values to define the visual aspect of the graphical element (as with most visualization frameworks), functions used as metrics may be provided.
 
@@ -22,7 +22,7 @@ Class {
 }
 
 { #category : #public }
-RTElement class >> forCollection: aCollection [ 
+RTElement class >> forCollection: aCollection [
 	^ (aCollection collect: [ :v | self on: v ]) asArray
 ]
 
@@ -45,7 +45,7 @@ RTElement >> addCallback: aCallback [
 { #category : #initialization }
 RTElement >> addConnectedEdge: anEdge [
 	[ anEdge class == RTEdge ] assert.
-	(self connectedEdges includes: anEdge) 
+	(self connectedEdges includes: anEdge)
 		ifFalse: [ self connectedEdges add: anEdge ]
 ]
 
@@ -181,7 +181,7 @@ RTElement >> parentElement: anElement [
 { #category : #accessing }
 RTElement >> position [
 	^ trachelShape position
-	
+
 ]
 
 { #category : #actions }
@@ -190,7 +190,7 @@ RTElement >> remove [
 	view ifNil: [ self error: 'cannot remove an element that is not part of a view' ].
 	view removeElement: self.
 	self removeConnectedEdges.
-	view := nil 
+	view := nil
 ]
 
 { #category : #initialization }
@@ -210,15 +210,15 @@ RTElement >> removeWithItsConnectedEdges [
 	view ifNil: [ self error: 'cannot remove an element that is not part of a view' ].
 	self connectedEdges copy do: [ :anEdge | anEdge view ifNotNil: [ anEdge remove ] ].
 	view removeElement: self.
-	view := nil 
+	view := nil
 ]
 
 { #category : #actions }
 RTElement >> removeWithNestedElements [
 	"Remove the element from the view. Edges that may be connected are also removed"
 	self nestedElements do: #remove.
-	self remove. 
-	
+	self remove.
+
 ]
 
 { #category : #actions }
@@ -232,7 +232,7 @@ RTElement >> rotateByDegrees: degree [
 	"Translate the element to a new position. If I am connected to some edges, the edges are also updated."
 
 	trachelShape rotateByDegrees: (degree rtValue: self model).
-	
+
 	"No idea what to do with that"
 	"self updateConnectedEdges"
 ]

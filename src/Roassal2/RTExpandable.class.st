@@ -8,21 +8,21 @@ v := RTView new.
 s := RTShapeBuilder new
 		rectangle;
 		width: [ :c | c numberOfVariables * 5 ]; height: #numberOfMethods.
-		
+
 es := s elementsOn: RTShape withAllSubclasses.
 v add: es.
 
 es @ RTPopup @ (RTLabelled new setAsHighlightable).
 
 expand := (RTExpandable new
-				group: [ :group :element | 
-					methods := (RTBox new color: Color red) 
+				group: [ :group :element |
+					methods := (RTBox new color: Color red)
 										elementsOn: element model rtmethods.
 					RTGridLayout on: methods.
 					methods @ RTPopup.
 					group addAll: methods];
 				afterBlock: [ RTGridLayout on: es] ).
-es @ expand. 
+es @ expand.
 
 RTGridLayout on: es.
 ^ v
@@ -83,7 +83,7 @@ RTExpandable >> evaluateAfterBlock [
 RTExpandable >> group [
 	"Return aTwoArgBlock has to follow the pattern [ :group :element |  ... ]
 	group is an empty group. You need to add what you want to be displayed in the popup. el is the element on which the mouse is above."
-	^ groupBlock 
+	^ groupBlock
 ]
 
 { #category : #'as yet unclassified' }
@@ -108,12 +108,12 @@ RTExpandable >> select: element [
 	| es |
 	"es := self createOrRetreiveElementsFor: element."
 	es := self createAndRememberElementsFor: element.
-	
+
 	element view addAll: es.
 
-	RTNest new 
+	RTNest new
 		on: element nest: es.
-		
+
 	self evaluateAfterBlock.
 
 ]

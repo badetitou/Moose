@@ -29,11 +29,11 @@ RTPathAnimation >> cubic: prev to: current at: t [
 	c1 := cp second.
 	c2 := cp third.
 	c3 := current.
-	
+
 	cx := 3.0 * (c1 x - c0 x).
 	bx := (3.0 * (c2 x - c1 x)) - cx.
 	ax := c3 x - c0 x - cx - bx.
-	
+
 	cy := 3.0 * (c1 y - c0 y).
 	by := (3.0* (c2 y - c1 y)) - cy.
 	ay := c3 y - c0 y - cy - by.
@@ -78,7 +78,7 @@ RTPathAnimation >> path: aString [
 	answer := OrderedCollection new.
 	absolute := true.
 	p := 0@0.
-	abso := [ :da | absolute 
+	abso := [ :da | absolute
 		ifTrue: [ da ]
 		ifFalse: [ p + da ] ].
 	point := [ :da | p := absolute
@@ -92,7 +92,7 @@ RTPathAnimation >> path: aString [
 		key = #relative ifTrue: [ absolute := false ].
 		key = #moveTo: ifTrue: [ point value: args first. answer add: curve. ].
 		key = #lineTo: ifTrue: [ point value: args first. answer add: curve. ].
-		key = #curveVia:and:to: ifTrue: [ 
+		key = #curveVia:and:to: ifTrue: [
 			cp1 := abso value: args first.
 			cp2 := abso value: args second.
 			p := abso value: args third.
@@ -101,7 +101,7 @@ RTPathAnimation >> path: aString [
 			args at: 3 put: cp2.
 			answer add: curve ] ].
 	curves := answer.
-	
+
 ]
 
 { #category : #accessing }
@@ -114,7 +114,7 @@ RTPathAnimation >> position: i [
 { #category : #refreshing }
 RTPathAnimation >> refresh [
 	| t prev current key position |
-	
+
 	curves ifEmpty: [ ^ self ].
 	t := animatedValue value.
 	index := (t * curves size) ceiling.
@@ -127,14 +127,14 @@ RTPathAnimation >> refresh [
 	key := (curves at: index) first.
 	position := nil.
 	((key = #moveTo:) or: [ key = #lineTo: ])
-		ifTrue: [ 
+		ifTrue: [
 			position := self
 				linear: prev
 				to: current
 				at: t ].
 	key = #curveVia:and:to:
-		ifTrue: [ position := self 
-			cubic: prev 
+		ifTrue: [ position := self
+			cubic: prev
 			to: current
 			at: t
 			 ].
@@ -143,7 +143,7 @@ RTPathAnimation >> refresh [
 		during rtValue: element.
 		element signalUpdate.
 		].
-	
+
 ]
 
 { #category : #accessing }
@@ -157,7 +157,7 @@ RTPathAnimation >> seconds: seconds [
 		evaluator: [ :t | t ];
 		timer: (TRVITimer new cycleLength: seconds);
 		yourself.
-	
+
 
 
 ]

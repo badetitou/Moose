@@ -32,7 +32,7 @@ RTAbstractDataSet >> adjustMinAndMaxValues [
 		ifTrue: [ minY := 0 ].
 	maxY < 0
 		ifTrue: [ maxY := 0 ].
-		
+
 	minX > 0
 		ifTrue: [ minX := 0 ].
 	maxX < 0
@@ -41,7 +41,7 @@ RTAbstractDataSet >> adjustMinAndMaxValues [
 
 { #category : #accessing }
 RTAbstractDataSet >> builder: aBuilder [
-	builder := aBuilder 
+	builder := aBuilder
 ]
 
 { #category : #'min and max' }
@@ -59,7 +59,7 @@ RTAbstractDataSet >> computeMinAndMaxForX [
 
 	(minX < 0 and: [ maxX < 0 ]) ifTrue: [ maxX := 0 ].
 	(minX > 0 and: [ maxX > 0 ]) ifTrue: [ minX := 0 ].
-	
+
 
 
 ]
@@ -71,10 +71,10 @@ RTAbstractDataSet >> computeMinAndMaxForY [
 	self assert: [ computed allSatisfy: [ :obj | obj isKindOf: Number ] ] description: 'You have provided objects that are not number. Please adjust what you provide to #points: #x: and #y:'.
 	minY := computed min.
 	maxY := computed max.
-	
+
 	(minY < 0 and: [ maxY < 0 ]) ifTrue: [ maxY := 0 ].
 	(minY > 0 and: [ maxY > 0 ]) ifTrue: [ minY := 0 ].
-	
+
 ]
 
 { #category : #'public - lines' }
@@ -128,7 +128,7 @@ RTAbstractDataSet >> getPixelPositionOf: aPoint [
 		getValue: aPoint x min: 0 max: builder extent x minValue: minX maxValue: maxX.
 	anY := RTMetricNormalizer new
 		getValue: aPoint y min: 0 max: builder extent y negated minValue: minY maxValue: maxY.
-			
+
 	^ anX @ anY
 ]
 
@@ -141,7 +141,7 @@ RTAbstractDataSet >> getPositionFromPixelPosition: aPoint [
 		getValue: aPoint x min: minX max: maxX minValue: 0 maxValue: builder extent x.
 	anY := RTMetricNormalizer new
 		getValue: aPoint y min: minY max: maxY minValue: 0 maxValue: builder extent y.
-			
+
 	^ anX @ anY negated
 ]
 
@@ -164,7 +164,7 @@ RTAbstractDataSet >> highlightIf: aOneArgBlock using: secondOneArgBlock [
 
 	elementActions add: [ :elements |
 		elements do: [ :element |
-		(aOneArgBlock rtValue: element model) ifTrue: [ 
+		(aOneArgBlock rtValue: element model) ifTrue: [
 			element @ (RTLabeled new text: [ :model | secondOneArgBlock rtValue: model ]; setAsHighlightable).
 		] ] ]
 ]
@@ -176,21 +176,21 @@ RTAbstractDataSet >> initialize [
 	x := #yourself.
 	y := #yourself.
 	self resetMinAndMax.
- 
+
 	dotBuilder := RTShapeBuilder new.
 	dotBuilder circle size: 5.
-	
+
 	"Maybe this can be lazily done"
 	histogramBuilder := RTShapeBuilder new.
 	histogramBuilder rectangle.
-	
+
 	"Maybe this can be lazily done"
 	lineBuilder := RTShapeBuilder new.
-	
+
 	interaction := RTInteractionBuilder new.
 	interaction popup.
 	shouldConnect := false.
-	
+
 	elementActions := OrderedCollection new.
 ]
 
@@ -273,7 +273,7 @@ RTAbstractDataSet >> renderDotAndLinesIn: aView [
 	elements := dotBuilder elementsOn: points.
 	builder view addAll: elements.
 	interaction setUpElements: elements.
-	
+
 	RTMetricNormalizer new
 		elements: elements;
 		normalizeX: [ :model | x rtValue: model ]
@@ -281,7 +281,7 @@ RTAbstractDataSet >> renderDotAndLinesIn: aView [
 			max: builder extent x
 			minValue: minX
 			maxValue: maxX.
-			
+
 	RTMetricNormalizer new
 		elements: elements;
 		normalizeY: [ :model | y rtValue: model ]
@@ -289,9 +289,9 @@ RTAbstractDataSet >> renderDotAndLinesIn: aView [
 			max: builder extent y negated
 			minValue: minY
 			maxValue: maxY.
-			
+
 	elementActions do: [ :act | act rtValue: elements ].
-			
+
 	self renderLinesFor: elements in: aView
 ]
 
@@ -311,7 +311,7 @@ RTAbstractDataSet >> renderLinesFor: elements in: aView [
 
 	t := elements first.
 	elements allButFirst
-		do: [ :tt | 
+		do: [ :tt |
 			l := lineBuilder edgeFrom: t to: tt.
 			interaction setUpElement: l.
 			aView add: l.

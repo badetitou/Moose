@@ -28,7 +28,7 @@ RTSVGViewPopup class >> onClick: anExporter view: aRTView targets: aRTShape [
 RTSVGViewPopup >> addEventHandlers: aStream id: aString element: aRTElement center: aNumber [
 	aStream nextPutAll: '<g visibility="hidden">', String cr.
 	RTSVGVisitor visit: (self view value: aRTElement model) on: aStream center: aNumber.
-	aStream 
+	aStream
 		nextPutAll: (self mouseAction: aString);
 		nextPutAll:  '</g>'
 ]

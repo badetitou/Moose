@@ -62,7 +62,7 @@ RTNopAnimation >> waitFor: seconds [
 							evaluator: [ :t | blockToExecute value ];
 							timer: (TRVITimer new cycleLength: seconds);
 							yourself.
-	
+
 ]
 
 { #category : #'waiting-specific' }
@@ -72,5 +72,5 @@ RTNopAnimation >> waitFor: seconds after: aBlock [
 							finishCallback: aBlock;
 							timer: (TRVITimer new cycleLength: seconds);
 							yourself.
-	
+
 ]

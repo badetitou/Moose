@@ -1,5 +1,5 @@
 "
-RTStackBarPlotExample new installTitle: 'SimpleWithDifferentColor' 
+RTStackBarPlotExample new installTitle: 'SimpleWithDifferentColor'
 		code:
 		'
 | b |
@@ -13,7 +13,7 @@ b add: #(5 3 2 0).
 b barWidth: 200 height: 20.
 b open.
 ^ b view canvas'
-	
+
 "
 Class {
 	#name : #RTStackBarPlotExample,
@@ -81,8 +81,8 @@ RTStackBarPlotExample >> exampleSurveyResult [
 	b add: #(37	33	0	0 0) title: 'DN1'.
 	b add: #(24	26	17	3 0) title: 'DN2'.
 	b add: #(25	29	15	1 0) title: 'DN3'.
-	b add: #(30	33	6	1 0) title: 'DN4'.	
-					
+	b add: #(30	33	6	1 0) title: 'DN4'.
+
 	b addLegend: #('strongly agree' 'agree' 'neutral' 'disagree' 'strongly disagree').
 	b barWidth: 260 height: 20.
 

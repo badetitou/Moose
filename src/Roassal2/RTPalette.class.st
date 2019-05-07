@@ -3,20 +3,20 @@ Define a set of colors.
 
 Examples showing all the palletes:
 -=-=-=
-| v allLines lbl es lb| 
+| v allLines lbl es lb|
 v := RTView new.
 allLines := OrderedCollection new.
 
 (RTPalette class selectors sorted) do: [ :selector |
 	lbl := RTLabel elementOn: selector.
-	
+
 	v add: lbl.
-	
+
 	es := (RTBox new size: 20) elementsOn: (1 to: 5).
 	v addAll: es.
 	es @ (RTMouseHoverZoom new desiredExtent: [ :anElement | anElement extent * 1.7 ]).
 	TRConstraint stick: lbl onTheLeftOf: es first.
-	
+
 	RTHorizontalLineLayout new gapSize: 3; on: es.
 	RTMetricNormalizer new
 		elements: es;
@@ -59,8 +59,8 @@ Class {
 
 { #category : #palettes }
 RTPalette class >> c1 [
-	^ Array 
-		with: (Color r: 225 g: 206 b: 122 range: 255) 
+	^ Array
+		with: (Color r: 225 g: 206 b: 122 range: 255)
 		with: (Color r: 251 g: 255 b: 185 range: 255)
 		with: (Color r: 253 g: 214 b: 146 range: 255)
 		with: (Color r: 236 g: 115 b: 87 range: 255)
@@ -200,7 +200,7 @@ RTPalette class >> c9 [
 { #category : #'from Stephen Few' }
 RTPalette class >> darkBright [
 	"Palette from Stephen Few, from Show me your numbers book"
-	
+
 	"
 	b := RTMondrian new.
 	b shape box width: 80; height: 30; color: #yourself.
@@ -208,7 +208,7 @@ RTPalette class >> darkBright [
 	b layout verticalLine; gapSize: 0.
 	b
 	"
-	
+
 	| r |
 	r := OrderedCollection new.
 	r add: (Color red: 0 green: 0 blue: 0).
@@ -227,7 +227,7 @@ RTPalette class >> darkBright [
 { #category : #'from Stephen Few' }
 RTPalette class >> light [
 	"Palette from Stephen Few, from Show me your numbers book"
-	
+
 	"
 	b := RTMondrian new.
 	b shape box width: 80; height: 30; color: #yourself.
@@ -235,7 +235,7 @@ RTPalette class >> light [
 	b layout verticalLine; gapSize: 0.
 	b
 	"
-	
+
 	| r |
 	r := OrderedCollection new.
 	r add: (Color red: 140 green: 140 blue: 140).
@@ -254,7 +254,7 @@ RTPalette class >> light [
 { #category : #'from Stephen Few' }
 RTPalette class >> medium [
 	"Palette from Stephen Few, from Show me your numbers book"
-	
+
 	"
 	b := RTMondrian new.
 	b shape box width: 80; height: 30; color: #yourself.
@@ -262,7 +262,7 @@ RTPalette class >> medium [
 	b layout verticalLine; gapSize: 0.
 	b
 	"
-	
+
 	| r |
 	r := OrderedCollection new.
 	r add: (Color red: 77 green: 77 blue: 77).

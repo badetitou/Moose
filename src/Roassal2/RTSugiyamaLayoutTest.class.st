@@ -15,5 +15,5 @@ RTSugiyamaLayoutTest >> testBasic [
 		view: v;
 		connectFrom: [ :value | value // 2 ].
 	RTSugiyamaLayout on: v elements.
-	
+
 ]

@@ -24,7 +24,7 @@ Class {
 
 { #category : #'instance creation' }
 RTNExplicitIdentityNormalizer class >> withCommand: aBlock withColors: aCollection withDefaultColor: aColor [
-	
+
 	^(self withCommand: aBlock)
 		colors: aCollection;
 		defaultColor: aColor;
@@ -33,31 +33,31 @@ RTNExplicitIdentityNormalizer class >> withCommand: aBlock withColors: aCollecti
 
 { #category : #accessing }
 RTNExplicitIdentityNormalizer >> colors [
-	
+
 	^colors
 ]
 
 { #category : #accessing }
 RTNExplicitIdentityNormalizer >> colors: anObject [
-	
+
 	colors := anObject
 ]
 
 { #category : #accessing }
 RTNExplicitIdentityNormalizer >> defaultColor [
-	
+
 	^defaultColor
 ]
 
 { #category : #accessing }
 RTNExplicitIdentityNormalizer >> defaultColor: anObject [
-	
+
 	defaultColor := anObject
 ]
 
 { #category : #private }
 RTNExplicitIdentityNormalizer >> nextColor [
-	
+
 	colorIndex := colorIndex + 1.
 	^colorIndex > self colors size
 		ifTrue: [ self defaultColor ]

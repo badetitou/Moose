@@ -19,7 +19,7 @@ RTVerticalTickLineDecoratorTest >> testBasicHorizontal [
 
 	b shouldUseNiceLabels: false.
 	b build.
-	
+
 	self assert: b axisX numberOfTicks equals: 4.
 	self assert: b axisX step equals: 1.
 	self assert: d step equals: 2.
@@ -40,7 +40,7 @@ RTVerticalTickLineDecoratorTest >> testBasicHorizontalWithNumberOfTicks [
 	b addDecorator: d.
 
 	b build.
-	
+
 	self assert: b axisX numberOfTicks equals: 4.
 	self assert: b axisX step equals: 1.
 	self assert: d step equals: 4 / 5.
@@ -61,7 +61,7 @@ RTVerticalTickLineDecoratorTest >> testBasicHorizontalWithStep [
 	b addDecorator: d.
 
 	b build.
-	
+
 	self assert: b axisX numberOfTicks equals: 4.
 	self assert: b axisX step equals: 1.
 	self assert: d step equals: 1.
@@ -81,7 +81,7 @@ RTVerticalTickLineDecoratorTest >> testBasicVertical [
 	b addDecorator: d.
 
 	b build.
-	
+
 	self assert: b axisX numberOfTicks equals: 4.
 	self assert: b axisX step equals: 1.
 	self assert: d step equals: 1.
@@ -102,7 +102,7 @@ RTVerticalTickLineDecoratorTest >> testBasicVerticalWithNumberOfTicks [
 	b addDecorator: d.
 
 	b build.
-	
+
 	self assert: b axisX numberOfTicks equals: 4.
 	self assert: b axisX step equals: 1.
 	self assert: d step equals: 2 / 5.
@@ -123,7 +123,7 @@ RTVerticalTickLineDecoratorTest >> testBasicVerticalWithStep [
 	b addDecorator: d.
 
 	b build.
-	
+
 	self assert: b axisX numberOfTicks equals: 4.
 	self assert: b axisX step equals: 1.
 	self assert: d step equals: 1.

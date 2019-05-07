@@ -30,7 +30,7 @@ Class {
 RTBorderStyle >> dash [
 	"
 	Here is an example of use:
-	
+
 v := RTView new.
 
 strings := #('Hello' 'World' 'Bonjour').

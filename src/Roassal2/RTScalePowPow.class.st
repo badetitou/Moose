@@ -12,7 +12,7 @@ Class {
 
 { #category : #'instance creation' }
 RTScalePowPow class >> exponent: exponent [
-	^ self new 
+	^ self new
 		exponent: exponent;
 		yourself
 ]

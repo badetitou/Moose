@@ -12,7 +12,7 @@ b addDecorator: RTVerticalMinValueDecorator new red.
 b addDecorator: RTVerticalMaxValueDecorator new blue.
 
 b axisY noLabel.
-b 
+b
 =-=-=-=
 "
 Class {
@@ -22,8 +22,8 @@ Class {
 }
 
 { #category : #drawing }
-RTVerticalMinValueDecorator >> render [	
-	self add: self datasetValues min. 
+RTVerticalMinValueDecorator >> render [
+	self add: self datasetValues min.
 	super render.
 
 ]

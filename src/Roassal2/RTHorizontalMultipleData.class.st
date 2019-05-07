@@ -1,8 +1,8 @@
 "
 RTHorizontalMultipleData handles multiple metrics per data points. It is rendered using bar chart.
 
-[[[ 
-| b d |			
+[[[
+| b d |
 b := RTGrapher new.
 
 d := RTHorizontalMultipleData new.
@@ -57,15 +57,15 @@ RTHorizontalMultipleData >> renderIn: aView [
 
 	RTAlignment new elements: positiveElements; fixedElement: centralDot; bottom.
 	"TRConstraint use: centralDot alignFromBottom: positiveElements.	"
-		
+
 	"We treat the element with a negative value"
 	negativeElements := elements copyWithoutAll: positiveElements.
 	negativeElements
-		ifNotEmpty: [ 
+		ifNotEmpty: [
 			RTMetricNormalizer new
 				elements: negativeElements;
 				normalizeElementHeight: [ :anElement | y rtValue: anElement ]
-					min: centralDot position y negated 
+					min: centralDot position y negated
 					max: 0
 					minValue: minY
 					maxValue: 0.
@@ -76,7 +76,7 @@ RTHorizontalMultipleData >> renderIn: aView [
 
 { #category : #hooks }
 RTHorizontalMultipleData >> selectElementsForAddingBarTitle [
-	"Return the collection of principal element for each element group.  
+	"Return the collection of principal element for each element group.
 	This principal element is used to position the title label"
 	^ groupedElements collect: [ :es | es at: (es size / 2) asInteger + 1 ]
 ]

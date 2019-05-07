@@ -25,7 +25,7 @@ RTDoubleBarBuilder >> bottomValue: aBlock titled: aTitle [
 	"The gray bar"
 	 | configuration |
 	self metric: aBlock color: Color lightGray height: 20.
-	
+
 	configuration := RTAxisConfiguration new.
 	configuration builder: self.
 	configuration title: aTitle.
@@ -37,7 +37,7 @@ RTDoubleBarBuilder >> bottomValue: aBlock titled: aTitle [
 	configuration numberOfTicks: 4.
 	configuration lineThickness: 3.
 	configuration axisFrom: bottomExtremity position to: bottomExtremity position + (width @ 0).
-	
+
 ]
 
 { #category : #util }
@@ -89,16 +89,16 @@ RTDoubleBarBuilder >> initialize [
 { #category : #configuration }
 RTDoubleBarBuilder >> metric: aBlock color: aColor height: anHeight [
 	| boxes |
-	boxes := elements collect: [ :el | 
+	boxes := elements collect: [ :el |
 		| b |
 		b := (RTBox new height: anHeight; color: aColor) elementOn: el model.
 		b @ (RTPopup text: [ :model | aBlock rtValue: model ]).
 		b ].
-	RTMetricNormalizer new 
+	RTMetricNormalizer new
 		elements: boxes;
 		normalizeWidth: aBlock min: 2 max: width minValue: 0.
- 		
-	elements with: boxes do: [ :e :b | 		 
+
+	elements with: boxes do: [ :e :b |
 		RTConstraint move: b onTheRightOf: e.
 		b translateBy: 2 @ 0. ].
 	view addAll: boxes.
@@ -145,7 +145,7 @@ RTDoubleBarBuilder >> topValue: aBlock titled: aTitle [
 	"The red bar"
 	 | configuration |
 	self metric: aBlock color: Color red height: 10.
-	
+
 	configuration := RTAxisConfiguration new.
 	configuration builder: self.
 	configuration title: aTitle.

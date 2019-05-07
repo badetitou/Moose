@@ -1,5 +1,5 @@
 "
-RTLineDecorationExample new installTitle: 'Cool' 
+RTLineDecorationExample new installTitle: 'Cool'
 		code:
 		'
 	| v b1 b2 edges |
@@ -27,7 +27,7 @@ v := RTView new
 edges do: [ :each | each update ].
 v
 '
-	
+
 "
 Class {
 	#name : #RTLineDecorationExample,
@@ -141,7 +141,7 @@ addHead := [ :aHeadName :anOffset |
 
 heads := (RTStyledMultiLine rtmethods collect: [ :m | m selector ]) select: [ :m | m endsWith: 'Head' ].
 offset := 0.
-heads	do: [ :id | 
+heads	do: [ :id |
 		addHead value: id value: offset.
 		offset := offset + 40 ].
 

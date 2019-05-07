@@ -25,7 +25,7 @@ RTNestTest >> testAutomaticLayout [
 	v add: bigElement.
 	v add: bigElement2.
 
-	RTNest new 
+	RTNest new
 		layout: RTFlowLayout new;
 		on: e nest: (Array with: bigElement with: bigElement2).
 
@@ -41,26 +41,26 @@ RTNestTest >> testBasic [
 	el2 := RTBox element.
 	el translateTo: 100 @ 50.
 	RTNest
-		new 
+		new
 		layout: RTGridLayout new;
 		on: el nest: (Array with: el2).
 
 	view add: el.
 	view add: el2.
-	
+
 	self assert: el position asIntegerPoint = (100 @ 50).
 	self assert: el2 position asIntegerPoint = (100 @ 50).
 
 	self assert: el trachelShape width = 15.
 	self assert: el trachelShape height = 15.
-	
+
 	self assert: el2 trachelShape width = 5.
 	self assert: el2 trachelShape height = 5.
 ]
 
 { #category : #tests }
 RTNestTest >> testChangeExtent [
-	| view el innerElement1 innerElement2 
+	| view el innerElement1 innerElement2
 		elExtent elPosition extent1 extent2 position1 position2 ratio |
 	view := RTView new.
 	el := (RTBox new color: Color red) element.
@@ -99,7 +99,7 @@ RTNestTest >> testDifferentSizes [
 	innerElement2 := (RTBox new size: 20) element.
 	el translateTo: 100 @ 50.
 	RTNest
-		new 
+		new
 		layout: RTGridLayout new;
 		on: el nest: (RTGroup with: innerElement1 with: innerElement2).
 
@@ -124,27 +124,27 @@ RTNestTest >> testDragAndDrop [
 	shape := RTCompositeShape new.
 	shape add: RTBox new.
 	shape add: RTBox new.
-	
+
 	es := shape elementsOn: #(1).
 	v addAll: es.
 	outer := es anyOne.
-	
+
 	RTNest new
 		for: es
 		inShape: #first
-		add: [ :group :model | 
+		add: [ :group :model |
 			inner := (RTBox new color: Color blue) elementOn: 'hello'.
 			group add: inner ].
-		
+
 	self assert: outer position equals: 0 @ 2.
-	self assert: inner position equals: 0 @ 0.	
-		
+	self assert: inner position equals: 0 @ 0.
+
 	outer translateBy: 5 @ 5.
 	self assert: outer position equals: 5 @ 7.0.
-	self assert: inner position equals: 5 @ 5.	
-	
-	
-	
+	self assert: inner position equals: 5 @ 5.
+
+
+
 ]
 
 { #category : #'composed shape' }
@@ -152,15 +152,15 @@ RTNestTest >> testDragAndDrop2 [
 	| v shape e inner |
 	v := RTView new.
 	shape := RTBox new.
-	
+
 	e := shape element.
-	
+
 	inner := (RTBox new color: Color blue) element.
 	RTNest new on: e nest: (RTGroup with: inner).
-		
+
 	self assert: e position equals: 0 @ 0.
-	self assert: inner position equals: 0 @ 0.	
-		
+	self assert: inner position equals: 0 @ 0.
+
 	e translateBy: 5 @ 5.
 	self assert: e position equals: 5 @ 5.
 	self assert: inner position equals: 5 @ 5
@@ -171,26 +171,26 @@ RTNestTest >> testDragAndDropWithoutComposite [
 	| v shape es outer  inner |
 	v := RTView new.
 	shape := RTBox new.
-	
+
 	es := shape elementsOn: #(1).
 	v addAll: es.
 	outer := es anyOne.
-	
+
 	RTNest new
 		for: es
-		add: [ :group :model | 
+		add: [ :group :model |
 			inner := (RTBox new color: Color blue) elementOn: 'hello'.
 			group add: inner ].
-		
+
 	self assert: outer position equals: 0 @ 0.
-	self assert: inner position equals: 0 @ 0.	
-		
+	self assert: inner position equals: 0 @ 0.
+
 	outer translateBy: 5 @ 5.
 	self assert: outer position equals: 5 @ 5.
-	self assert: inner position equals: 5 @ 5.	
-	
-	
-	
+	self assert: inner position equals: 5 @ 5.
+
+
+
 ]
 
 { #category : #encompassing }
@@ -199,7 +199,7 @@ RTNestTest >> testEncompassingRectangle [
 	| e1 e2 r |
 	e1 := (RTBox new size: 10) element.
 	e2 := (RTBox new size: 30) element.
-	
+
 	r := RTNest new encompassingRectangleOf: (Array with: e1 with: e2).
 	self assert: r = ((-15 @ -15) extent: (30 @ 30))
 ]
@@ -226,14 +226,14 @@ RTNestTest >> testForAdd [
 
 	RTNest new
 		for: es
-		add: [ :group :model | 
+		add: [ :group :model |
 			group addAll: ((RTBox new color: Color blue) elementsOn: (1 to: model)).
 			RTGridLayout on: group.
 		].
 
 	RTGridLayout on: es.
-	
-	positions := 
+
+	positions :=
 ((Array new: 20) at: 1 put: ((7.5@7.5)); at: 2 put: ((32.5@7.5)); at: 3 put: ((62.5@12.5)); at: 4 put: ((12.5@42.5)); at: 5 put: ((47.5@42.5)); at: 6 put: ((8.0@8.0)); at: 7 put: ((28.0@8.0)); at: 8 put: ((38.0@8.0)); at: 9 put: ((58.0@8.0)); at: 10 put: ((68.0@8.0)); at: 11 put: ((58.0@18.0)); at: 12 put: ((8.0@38.0)); at: 13 put: ((18.0@38.0)); at: 14 put: ((8.0@48.0)); at: 15 put: ((18.0@48.0)); at: 16 put: ((38.0@38.0)); at: 17 put: ((48.0@38.0)); at: 18 put: ((58.0@38.0)); at: 19 put: ((38.0@48.0)); at: 20 put: ((48.0@48.0)); yourself).
 	self assert: (v elements collect: #position) asArray equals: positions
 ]
@@ -244,7 +244,7 @@ RTNestTest >> testInner [
 	| view host el1 el2 edge |
 	view := RTView new.
 	host := (RTBox new color: (Color purple alpha: 0.5)) element.
-	el1 := RTBox element. 
+	el1 := RTBox element.
 	el2 := RTBox element.
 	edge := RTLine edgeFrom: el1 to: el2.
 	view add: host; add: el1; add: el2; add: edge.
@@ -252,7 +252,7 @@ RTNestTest >> testInner [
 	RTTreeLayout new on: (Array with: el1 with: el2) edges: view edges.
 	RTNest new on: host nest: (Array with: el1 with: el2).
 
-	self assert: el1 position equals: (0.5@ (-25/2)).	
+	self assert: el1 position equals: (0.5@ (-25/2)).
 	self assert: el2 position equals: (0.5@(25/2)).
 	self assert: host position equals: (0@0).
 ]
@@ -275,7 +275,7 @@ RTNestTest >> testInnerElement1 [
 	v add: innerElement.
 
 	RTNest new
-		onTrachelShape: e trachelShape shapes second nest: (Array with: innerElement).  
+		onTrachelShape: e trachelShape shapes second nest: (Array with: innerElement).
 
 	self assert: innerElement position equals: 0 @ 20
 ]
@@ -285,7 +285,7 @@ RTNestTest >> testInnerElement2 [
 
 	| v shape e innerBox innerElements |
 	v := RTView new.
-	
+
 	shape := RTCompositeShape new.
 	shape add: (RTBox new size: 20; color: (Color green alpha: 0.3)).
 	shape add: (RTBox new size: 20; color: (Color blue alpha: 0.3)) translateBy: 0 @ 20.
@@ -299,7 +299,7 @@ RTNestTest >> testInnerElement2 [
 	RTGridLayout on: innerElements.
 
 	RTNest new
-		onTrachelShape: e trachelShape shapes second nest: innerElements.  
+		onTrachelShape: e trachelShape shapes second nest: innerElements.
 
 	self assert: (innerElements collect: #position) asArray equals: (Array with: (-7.0@20.0) with: (8.0@20.0))
 ]
@@ -319,17 +319,17 @@ RTNestTest >> testInnerElement3 [
 
 	innerBox := RTBox new size: 10; color: (Color red alpha: 0.9).
 	innerElements := innerBox elementsOn: #(2 3).
-	
+
 	RTVerticalLineLayout on: innerElements.
 
 	RTNest new
-		onTrachelShape: e trachelShape shapes second nest: innerElements.  
+		onTrachelShape: e trachelShape shapes second nest: innerElements.
 
 	e trachelShape vertical.
-	
+
 	v add: e.
 	v addAll: innerElements.
-	
+
 	self assert: (innerElements collect: #position) asArray equals: (Array with: (0 @ 20.0) with: (0 @ 40.0))
 ]
 
@@ -355,7 +355,7 @@ RTNestTest >> testInnerElement4 [
 
 	RTHorizontalLineLayout on: es.
 	es @ RTDraggable.
-	
+
 	self assert: es first position ~= es second position
 ]
 
@@ -400,7 +400,7 @@ RTNestTest >> testLabelInCompositeShape [
 	v add: e.
 
 	RTNest new
-		for: (Array with: e) add: [ :group :model | 
+		for: (Array with: e) add: [ :group :model |
 			bigElement := ((RTBox new size: 20; color: Color red) element).
 			group add: bigElement. ].
 
@@ -421,7 +421,7 @@ RTNestTest >> testLabelNotInCompositeShape [
 	v add: e.
 
 	RTNest new
-		for: (Array with: e) add: [ :group :model | 
+		for: (Array with: e) add: [ :group :model |
 			bigElement := ((RTBox new size: 20; color: Color red) element).
 			group add: bigElement ].
 
@@ -449,9 +449,9 @@ RTNestTest >> testLayout [
 	bigElement2 := ((RTBox new size: 20; color: Color red) element).
 	v add: bigElement.
 	v add: bigElement2.
-	
+
 	RTFlowLayout on: (Array with: bigElement with: bigElement2).
-	RTNest new 
+	RTNest new
 		on: e nest: (Array with: bigElement with: bigElement2).
 
 	self assert: bigElement position equals: (-12.0@2).
@@ -476,7 +476,7 @@ RTNestTest >> testMultiline [
 	RTNest new on: b nest: (Array with: e).
 
 	self assert: (RTNest new encompassingRectangleOf: (Array with: e)) extent equals: e encompassingRectangle extent.
-	
+
 	"This has to be fixed."
 	"self assert: (b encompassingRectangle extent) equals: (e encompassingRectangle extent + (10 @ 10)) "
 ]
@@ -499,9 +499,9 @@ RTNestTest >> testMultiline02 [
 	RTNest new on: b nest: (Array with: e).
 
 	self assert: (RTNest new encompassingRectangleOf: (Array with: e)) extent equals: e encompassingRectangle extent.
-	
+
 	"This has to be fixed"
-	"self assert: (b encompassingRectangle extent) equals: (e encompassingRectangle extent + (10 @ 10))" 
+	"self assert: (b encompassingRectangle extent) equals: (e encompassingRectangle extent + (10 @ 10))"
 ]
 
 { #category : #'multi line' }
@@ -539,7 +539,7 @@ RTNestTest >> testMultiline04 [
 	RTNest new on: b nest: (Array with: e).
 	v add: b.
 	v add: e.
-	
+
 	self assert: (RTNest new encompassingRectangleOf: (Array with: e)) extent equals: e encompassingRectangle extent.
 	"self assert: (b encompassingRectangle extent) equals: (e encompassingRectangle extent + (10 @ 10)) "
 ]
@@ -560,7 +560,7 @@ RTNestTest >> testNestingComposite [
 	  add: ((RTEllipse new
 	    size: 25;
 	    color: Color red));
-	  vertical.  
+	  vertical.
 "	compShape := (RTEllipse new
 	    size: 25;
 	    color: Color red)."
@@ -569,7 +569,7 @@ RTNestTest >> testNestingComposite [
 	RTNest new for: (Array with: element) add: [ :group :model |
 		group addAll: elements.
 		RTGridLayout on: group.].
-	
+
 	"Testing"
 	ellipses := v canvas shapes select: [ :t | t class == TREllipseShape ].
 	self assert: ellipses size equals: 2.
@@ -585,18 +585,18 @@ RTNestTest >> testResizableInnerNode [
 
 	self deny: inner trachelShape hasCallback.
 	self deny: outter trachelShape hasCallback.
-	RTNest new 
+	RTNest new
 		onResizable: outter nest: (Array with: inner).
 "	self deny: outter trachelShape hasCallback."
 	self assert: inner trachelShape hasCallback.
-	
+
 	self assert: outter encompassingRectangle extent = (15 @ 15).
 	self assert: inner encompassingRectangle extent = (5 @ 5).
-	
+
 	inner extent: 10 @ 10.
 	self assert: inner encompassingRectangle extent = (10 @ 10).
 	self assert: outter encompassingRectangle extent = (20 @ 20).
-	
+
 
 ]
 
@@ -609,18 +609,18 @@ RTNestTest >> testResizableInnerNodeAndTranslateInnerNode [
 
 	self deny: inner trachelShape hasCallback.
 	self deny: outter trachelShape hasCallback.
-	RTNest new 
+	RTNest new
 		onResizable: outter nest: (Array with: inner).
 
 	self assert: inner trachelShape hasCallback.
-	
+
 	self assert: outter encompassingRectangle extent = (15 @ 15).
 	self assert: inner encompassingRectangle extent = (5 @ 5).
 
 	inner translateBy: 5 @ 5.
 	self assert: inner encompassingRectangle extent = (5 @ 5).
 	self assert: outter encompassingRectangle extent = (15 @ 15).
-	
+
 
 ]
 
@@ -630,7 +630,7 @@ RTNestTest >> testSimpleExample [
 	| view el shape inner |
 	view := RTView new.
 	el := (RTBox new color: (Color purple alpha: 0.3)) element.
-	
+
 	shape := RTBox new color: (Color purple alpha: 0.3).
 	inner := (shape elementOn: #inner).
 
@@ -638,7 +638,7 @@ RTNestTest >> testSimpleExample [
 	view add: inner.
 
 	RTNest
-		new 
+		new
 		layout: RTGridLayout new;
 		on: el nest: (RTGroup with: inner).
 
@@ -653,7 +653,7 @@ RTNestTest >> testSimpleExample [
 
 	"This may change later"
 	self deny: inner trachelShape hasCallback.
-	
+
 ]
 
 { #category : #tests }
@@ -661,9 +661,9 @@ RTNestTest >> testView [
 
 	| v n |
 	self assert: RTNest new view isNil.
-	
+
 	v := RTView new.
-	
+
 	n := RTNest new.
 	n view: v.
 
@@ -680,22 +680,22 @@ RTNestTest >> testWithTwoInnerNodes [
 	shape := RTBox new color: (Color red alpha: 0.3).
 	innerElement := shape element.
 	innerElement2 := shape element.
-	
+
 	view add: innerElement.
 	view add: innerElement2.
-	
+
 	RTNest
-		new 
+		new
 		layout: RTGridLayout new;
 		on: el nest: (Array with: innerElement with: innerElement2).
-		
+
 	view add: el.
-	
+
 	self assert: el position = (100 @ 50).
 
 	self assert: el trachelShape width = 25.
 	self assert: el trachelShape height = 15.
-	
-	self assert: (innerElement2 position - innerElement position) = (10 @ 0) 
-	
+
+	self assert: (innerElement2 position - innerElement position) = (10 @ 0)
+
 ]

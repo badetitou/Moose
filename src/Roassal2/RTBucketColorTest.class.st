@@ -17,8 +17,8 @@ RTBucketColorTest >> testGivenCommandAndCollectionDefault [
 	(elements collect: #color) with: defaultPalette do: [ :elementColor :realColor |
 		self assert: elementColor equals: realColor.
 		 ]
-	
-	
+
+
 ]
 
 { #category : #tests }
@@ -37,6 +37,6 @@ RTBucketColorTest >> testGivenCommandAndCollectionDefault2 [
 	self assert: (elements at: 22) color equals: defaultPalette fourth.
 	self assert: (elements at: 29) color equals: defaultPalette fifth.
 
-	
-	
+
+
 ]

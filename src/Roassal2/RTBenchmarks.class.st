@@ -15,7 +15,7 @@ RTBenchmarks >> bench01 [
 	"
 	self new bench01
 	"
-	
+
 	| v es |
 	v := RTView new.
 	es := RTBox new elementsOn: (1 to: 20000).
@@ -31,7 +31,7 @@ RTBenchmarks >> bench02 [
 	"Exercizing Mondrian"
 	"
 	self new bench02
-	" 
+	"
 
 	^ [ | b |
 		b := RTMondrian new.
@@ -45,7 +45,7 @@ RTBenchmarks >> bench03 [
 	"Exercizing force layout"
 	"
 	self new bench03
-	" 
+	"
 
 	^ [ | b |
 		b := RTMondrian new.
@@ -60,7 +60,7 @@ RTBenchmarks >> bench04 [
 	"Exercizing force layout"
 	"
 	self new bench04
-	" 
+	"
 
 	^ [ | b ds |
 		b := RTGrapher new.
@@ -76,7 +76,7 @@ RTBenchmarks >> bench05 [
 	"Simple benchamark for RTUMLClassBuilder"
 	"
 	self new bench05
-	" 
+	"
 
 	^ [ | b |
 	b := RTUMLClassBuilder new
@@ -99,8 +99,8 @@ RTBenchmarks >> bench05 [
 RTBenchmarks >> bench06 [
 	"Simple benchamark for rendering"
 	"
-	self new bench06 
-	" 
+	self new bench06
+	"
 
 	^ [ | b |
 		b := RTMondrian new.

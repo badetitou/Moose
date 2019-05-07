@@ -24,11 +24,11 @@ Class {
 { #category : #public }
 RTAbstractHighlightable class >> allSibblings [
 	"Define the interaction to highlight all the elements having the same (using #=) model"
-	^ self highlightElements: [ :el | 
-		el model 
-			ifNotNil: [ el view elementsFromModel: el model ] 
+	^ self highlightElements: [ :el |
+		el model
+			ifNotNil: [ el view elementsFromModel: el model ]
 			ifNil: [ #() ] ]
-	
+
 	"^ self highlightElements: [ :el | el view elements select: [ :e | e model notNil and: [ e model = el model ] ] ]"
 ]
 
@@ -51,10 +51,10 @@ RTAbstractHighlightable class >> lastHighlightedElements [
 
 { #category : #'reset shape' }
 RTAbstractHighlightable class >> lastHighlightedElements: elements [
-	lastHighlightedElements 
+	lastHighlightedElements
 		ifNil: [ lastHighlightedElements := elements ]
 		ifNotNil: [ lastHighlightedElements := lastHighlightedElements, elements ].
-	
+
 ]
 
 { #category : #'reset shape' }
@@ -91,10 +91,10 @@ RTAbstractHighlightable >> doUnhighlight: element [
 	self unhighlightRecordedElements.
 	(element hasAttribute: self attributeIdentificator)
 		ifFalse: [ ^ self ].
-	(element attributeAt: self attributeIdentificator) 
+	(element attributeAt: self attributeIdentificator)
 		do: [ :el | self doUnhighlightElement: el ].
 	element removeAttributeAt: self attributeIdentificator.
-	
+
 ]
 
 { #category : #actions }
@@ -111,7 +111,7 @@ RTAbstractHighlightable >> getRelevantElementsFrom: elements [
 { #category : #public }
 RTAbstractHighlightable >> highlight: aBlock [
 	"aBlock return an object or a list of objects to highlight"
-	highlightElements := [ :el | 
+	highlightElements := [ :el |
 		| objects |
 		objects := aBlock rtValue: el model.
 		(objects flatCollect: [ :o | el view elementsFromModel: o ]) copyWithout: nil
@@ -132,54 +132,54 @@ RTAbstractHighlightable >> highlightElements: aBlock [
 { #category : #public }
 RTAbstractHighlightable >> highlightObject: aBlock [
 	"aBlock returns an object to highlight"
-	
+
 	"
 Example:
 
 b := RTMondrian new.
 b shape circle size: 10.
-b interaction showEdge 
+b interaction showEdge
 	connectToAll: #subclasses.
 
 b interaction highlightNeighbors: #subclasses color: Color red.
 
-b interaction showLabel 
+b interaction showLabel
 	highlightObject: #superclass.
-	
+
 
 b nodes: (Collection withAllSubclasses).
 b edges moveBehind; connectFrom: #superclass.
 b layout radial.
 b
 	"
-	
+
 	self highlight: [ :oo | Array with: (aBlock rtValue: oo) ]
 ]
 
 { #category : #public }
 RTAbstractHighlightable >> highlightObjects: aBlock [
 	"aBlock returns an array of objects to highlight"
-	
+
 	"
 Example:
 
 b := RTMondrian new.
 b shape circle size: 10.
-b interaction showEdge 
+b interaction showEdge
 	connectToAll: #subclasses.
 
 b interaction highlightNeighbors: #subclasses color: Color red.
 
-b interaction showLabel 
+b interaction showLabel
 	highlightObjects: #subclasses.
-	
+
 
 b nodes: (Collection withAllSubclasses).
 b edges moveBehind; connectFrom: #superclass.
 b layout radial.
 b
 	"
-	
+
 	self highlight: [ :oo | aBlock rtValue: oo ]
 ]
 
@@ -193,12 +193,12 @@ RTAbstractHighlightable >> initialize [
 RTAbstractHighlightable >> initializeElement: element [
 	element
 		when: TRMouseEnter
-		do: [ :e | 
+		do: [ :e |
 			self doHighlight: element.
 			e signalUpdate ].
 	element
 		when: TRMouseLeave
-		do: [ :e | 
+		do: [ :e |
 			self doUnhighlight: element.
 			e signalUpdate ]
 ]

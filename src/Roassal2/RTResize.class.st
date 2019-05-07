@@ -1,7 +1,7 @@
 "
 Adjust the size of the Elements.
 
-[ [ [ 
+[ [ [
 	values := #(35 26 5 18 17 60 36 13 16 28 29 3 8 0 3 2 14 12 13 17 1 9 3 3 4 1 1 1 2 1 1 61).
 	v := RTView new.
 	n := RTMultiLinearColorForIdentity new objects: values.
@@ -10,7 +10,7 @@ Adjust the size of the Elements.
 	v addAll: es.
 	RTResize new elements: es; sameSize.
 	RTHorizontalLineLayout new gapSize: 0; on: es.
-	
+
 	v
  ] ] ]
 "
@@ -22,23 +22,23 @@ Class {
 
 { #category : #'accessing - computed' }
 RTResize >> biggestElement [
-	^ elements inject: elements anyOne into: [ :biggestElement :e | 
+	^ elements inject: elements anyOne into: [ :biggestElement :e |
 			biggestElement extent < e extent
-				ifTrue: [ e ] ifFalse: [ biggestElement ] ] 
+				ifTrue: [ e ] ifFalse: [ biggestElement ] ]
 ]
 
 { #category : #'accessing - computed' }
 RTResize >> biggestExtent [
 	fixedElement ifNotNil: [ ^ fixedElement extent ].
-	^ elements inject: 0 @ 0 into: [ :maxExtent :e | 
-			maxExtent max: e extent ] 
+	^ elements inject: 0 @ 0 into: [ :maxExtent :e |
+			maxExtent max: e extent ]
 ]
 
 { #category : #'accessing - computed' }
 RTResize >> highestElement [
-	^ elements inject: elements anyOne into: [ :highestElement :e | 
+	^ elements inject: elements anyOne into: [ :highestElement :e |
 			highestElement extent y < e extent y
-				ifTrue: [ e ] ifFalse: [ highestElement ] ] 
+				ifTrue: [ e ] ifFalse: [ highestElement ] ]
 ]
 
 { #category : #public }
@@ -66,7 +66,7 @@ RTResize >> useBiggestElement [
 
 { #category : #'public - configuration' }
 RTResize >> useHighestElement [
-	self fixedElement: self highestElement 
+	self fixedElement: self highestElement
 ]
 
 { #category : #'public - configuration' }
@@ -76,7 +76,7 @@ RTResize >> useWidestElement [
 
 { #category : #'accessing - computed' }
 RTResize >> widestElement [
-	^ elements inject: elements anyOne into: [ :widestElement :e | 
+	^ elements inject: elements anyOne into: [ :widestElement :e |
 			widestElement extent x < e extent x
-				ifTrue: [ e ] ifFalse: [ widestElement ] ] 
+				ifTrue: [ e ] ifFalse: [ widestElement ] ]
 ]

@@ -55,14 +55,14 @@ RTAreaBuilder >> initialize [
 { #category : #public }
 RTAreaBuilder >> interpolator: anObject [
 	interpolate := anObject.
-	interpolateReverse := (anObject isKindOf: RTLinePathBuilder ) 
-		ifTrue: [ 
-			lvar := interpolate closed 
-				ifTrue: [ 'M' ] 
+	interpolateReverse := (anObject isKindOf: RTLinePathBuilder )
+		ifTrue: [
+			lvar := interpolate closed
+				ifTrue: [ 'M' ]
 				ifFalse: ['L'].
 			 interpolate reverse. ]
 		ifFalse: [ interpolate ].
-	
+
 ]
 
 { #category : #'computed accessing' }
@@ -78,24 +78,24 @@ RTAreaBuilder >> pathFor: element [
 	x := y := nil.
 	fx1 := x0 == x1 ifTrue: [ [ x ] ] ifFalse: [ x1 ].
 	fy1 := y0 == y1 ifTrue: [ [ y ] ] ifFalse: [ y1 ].
-	segment := [ 
-		segments 
-			add: 'M'; 
+	segment := [
+		segments
+			add: 'M';
 			add: (interpolate rtValue: (points1->tension) );
 			add: lvar;
 			add: (interpolateReverse rtValue: (points0 reverse -> tension));
 			add: 'Z'. ].
-	
-	1 to: n do: [ :i | 
+
+	1 to: n do: [ :i |
 		d := datapoints at: i.
-		(defined rtValue: d) 
-			ifTrue: [ 
+		(defined rtValue: d)
+			ifTrue: [
 				x := fx0 rtValue: d.
 				y := fy0 rtValue: d.
 				points0 add: x@y.
-				points1 add: (fx1 rtValue: d)@ (fy1 rtValue: d) ] 
-			ifFalse: [ 
-				points0 ifNotEmpty: [ 
+				points1 add: (fx1 rtValue: d)@ (fy1 rtValue: d) ]
+			ifFalse: [
+				points0 ifNotEmpty: [
 					segment value.
 					points0 := OrderedCollection new.
 					points1 := OrderedCollection new. ] ]

@@ -13,8 +13,8 @@ Class {
 }
 
 { #category : #public }
-RTCell class >> elements: aCollection columns: anInteger [ 
-	
+RTCell class >> elements: aCollection columns: anInteger [
+
 	^ self new columns: anInteger; elements: aCollection; yourself
 ]
 
@@ -70,15 +70,15 @@ RTCell >> element: anObject [
 ]
 
 { #category : #accessing }
-RTCell >> elements: aCollection [ 
+RTCell >> elements: aCollection [
 
 	| rows  col |
 	rows := (aCollection size / columns) ceiling rounded.
 	col := Array new: rows * columns.
 	1 to: aCollection size do: [ :i | col at: i put: (aCollection at: i)].
-	elements := RTCellMatrix 
+	elements := RTCellMatrix
 						rows: rows
-						columns: columns 
+						columns: columns
 						contents: col.
 	self computeColumnWidths.
 	self computeRowHeights.

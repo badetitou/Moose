@@ -1,15 +1,15 @@
 "
 A RTPopup is an interaction that dynamically add a text or a group of elements above the element pointed by the mouse.
 
-Example of use: 
+Example of use:
 -=-=-=
 	v := RTView new.
 	es := (RTEllipse new color: Color blue) elementsOn: Collection withAllSubclasses.
 	v addAll: es.
 
-	aPopup := RTPopup new 
-		text: [ :aClass | 
-				'Classname = ', aClass name, String cr,	
+	aPopup := RTPopup new
+		text: [ :aClass |
+				'Classname = ', aClass name, String cr,
 				'NbMethod=', aClass numberOfMethods asString, String cr,
 				'NbVariables=', aClass numberOfVariables asString ].
 	aPopup borderColor: Color black.
@@ -25,7 +25,7 @@ Example of use:
 	RTGridLayout new on: es.
 
 	v
--=-=-= 
+-=-=-=
 
 Another example of use:
 -=-=-=-=-=-=-=-=-=-=-=-=
@@ -35,10 +35,10 @@ es := RTLabel elementsOn: (1 to: 10).
 
 v addAll: es.
 
-es @ (RTPopup new 
+es @ (RTPopup new
 	background: Color blue
-	group: [ :group :el |  
- 
+	group: [ :group :el |
+
 		group addAll: (RTEllipse elementsOn: (1 to: el model)).
 		RTWeightedCircleLayout new
 			initialRadius: 50;
@@ -68,7 +68,7 @@ Class {
 { #category : #lastPopup }
 RTPopup class >> removeLastPopup [
 	self lastPopup ifNil: [ ^ self ].
-	self lastPopup do: [ :e | 
+	self lastPopup do: [ :e |
 		((e notNil and: [ e isNumber not])and: [ e view notNil ]) ifTrue: [ e remove ] ].
 
 	self resetLastPopup
@@ -83,7 +83,7 @@ RTPopup class >> text: aBlockOrSymbol [
 	The argument receives
 		- an object, in case that the popup is defined for RTElement
 		- an association (from -> to) in case the popup is added to edges
-	
+
 	Here is an example that define a popup on edges
 	b := RTMondrian new.
 	b shape circle size: 10; color: Color red.
@@ -93,7 +93,7 @@ RTPopup class >> text: aBlockOrSymbol [
 	edges @ (RTPopup text: [ :association | 'An edge from ', association key asString, ' to ', association value asString ]).
 	b layout cluster.
 	b
-	
+
 	"
 	^ self new text: aBlockOrSymbol
 ]
@@ -114,7 +114,7 @@ RTPopup >> alphaPopupBackground: aValue [
 RTPopup >> background: aColor group: aTwoArgBlock [
 	"aTwoArgBlock has to follow the pattern [ :group :element |  ... ]
 	group is an empty group. You need to add what you want to be displayed in the popup. el is the element on which the mouse is above."
-	
+
 	self group: [ :group :el |
 		| backgroundElement |
 		backgroundElement := self createBackgroundElement: aColor.
@@ -141,7 +141,7 @@ v elements @ (RTPopup new backgroundColor: Color green).
 RTGridLayout on: v elements.
 v elements do: [ :el | el announce: TRMouseEnter new ].
 v
-	
+
 	"
 	backgroundColor := aColor
 ]
@@ -174,17 +174,17 @@ b
 RTPopup >> createAndShowPopupFor: element event: event [
 	| popupPosition popup idealPosition |
 	self removeLastPopup.
-	
+
 	popup := self getNewPopupFor: element.
 	self lastPopup: popup.
-	
+
 	"The following is useful when testing"
 	event position isNil
 		ifTrue: [ idealPosition := element position ]
 		ifFalse: [ idealPosition := event position ].
 	popupPosition := self closestPositionOf: popup from: idealPosition inView: element view.
 
-	popup translateTopLeftTo: popupPosition.	
+	popup translateTopLeftTo: popupPosition.
 
 ]
 
@@ -250,7 +250,7 @@ RTPopup >> named: aOneArgBlock background: aColor group: aTwoArgBlock [
 	group is an empty group. You need to add what you want to be displayed in the popup. el is the element on which the mouse is above."
 
 	self
-		group: [ :group :el | 
+		group: [ :group :el |
 			| background label |
 			background := self createBackgroundElement: aColor.
 			label := (RTLabel new
@@ -286,7 +286,7 @@ v elements do: [ :el | el announce: TRMouseEnter new ].
 { #category : #public }
 RTPopup >> simpleText: aOneArgBlock [
 	"Define a simple textual popup, without background"
-	
+
 "For example:
 
 v := RTView new.
@@ -296,12 +296,12 @@ v elements @ (RTPopup new simpleText: [ :nb | 'hello ', nb asString ]).
 RTGridLayout on: v elements.
 v
 "
-	self group: [ :group :element | 
-		group add: 
-			(RTLabel new 
+	self group: [ :group :element |
+		group add:
+			(RTLabel new
 				color: Color black;
 				text: (aOneArgBlock rtValue: element model)) element
-		] 
+		]
 
 ]
 
@@ -314,7 +314,7 @@ RTPopup >> text: aOneArgBlock [
 	The argument receives
 		- an object, in case that the popup is defined for RTElement
 		- an association (from -> to) in case the popup is added to edges
-	
+
 	Here is an example that define a popup on edges
 	b := RTMondrian new.
 	b shape circle size: 10; color: Color red.
@@ -324,7 +324,7 @@ RTPopup >> text: aOneArgBlock [
 	edges @ (RTPopup text: [ :association | 'An edge from ', association key asString, ' to ', association value asString ]).
 	b layout cluster.
 	b
-	
+
 	"
 
 	self textElement: [ :el | aOneArgBlock rtValue: el model ]
@@ -345,20 +345,20 @@ RTPopup >> textElement: aOneArgBlock [
 	"
 	Set the text of the popup
 	The argument, when evaluated with a RTElement return an object, to which #asString is sent to
-	
+
 	See #text: for a longer description
 	"
-	self group: [ :group :element | 
+	self group: [ :group :element |
 		| backRectangle lbl |
 		backRectangle := self createBackgroundElement: backgroundColor "(RTBox new color: (backgroundColor alpha: self alphaPopupBackground); borderWidth: 5; borderColor: borderColor) element".
-		
-		lbl := (RTLabel new 
+
+		lbl := (RTLabel new
 				color: textColor;
 				height: textHeight;
 				text: (aOneArgBlock rtValue: element) asString) element.
 		RTNest new centerOn: backRectangle elements: (Array with: lbl).
 		group add: backRectangle; add: lbl
-		] 
+		]
 
 ]
 

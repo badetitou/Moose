@@ -1,5 +1,5 @@
 "
-A RTArc is an arc portion. e.g., 
+A RTArc is an arc portion. e.g.,
 	RTArc new externalRadius: 100; innerRadius: 20; outerAngle: 45 innerAngle: 90
 
 Instance Variables
@@ -93,7 +93,7 @@ RTArc >> externalRadius: aValueOrAOneArgBlock [
 ]
 
 { #category : #accessing }
-RTArc >> externalRadiusElement: aValue [ 	
+RTArc >> externalRadiusElement: aValue [
 	externalRadius := aValue
 ]
 
@@ -151,10 +151,10 @@ RTArc >> trachelShapeClass [
 { #category : #hooks }
 RTArc >> updateFor: anElement trachelShape: trachelShape [
 	trachelShape isNil ifTrue: [ ^ self ].
-	trachelShape 
-		alphaAngle: (self alphaAngleFor: anElement) 
-		betaAngle: (self betaAngleFor: anElement)  
-		innerRadius: (self innerRadiusFor: anElement) 
+	trachelShape
+		alphaAngle: (self alphaAngleFor: anElement)
+		betaAngle: (self betaAngleFor: anElement)
+		innerRadius: (self innerRadiusFor: anElement)
 		externalRadius: (self externalRadiusFor: anElement);
 		color: (self colorFor: anElement);
 		rotateByDegrees:  (self rotationFor: anElement);

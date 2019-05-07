@@ -56,7 +56,7 @@ RTValueLinearNormalizer >> minScale: aValue [
 
 { #category : #accessing }
 RTValueLinearNormalizer >> rtValue: anEntity [
-	
+
 	"Normalize value based on minimum and maximum value."
 	| value slope |
 	value := self command rtValue: anEntity.
@@ -66,6 +66,6 @@ RTValueLinearNormalizer >> rtValue: anEntity [
 
 { #category : #'as yet unclassified' }
 RTValueLinearNormalizer >> slope: anEntity [
-	
+
 	^ (maxScale - minScale) / ((self maximumValue: anEntity) asFloat - (self minimumValue: anEntity )asFloat).
 ]

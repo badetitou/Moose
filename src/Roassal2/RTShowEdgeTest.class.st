@@ -18,7 +18,7 @@ RTShowEdgeTest >> testBasic [
 	self assert: v numberOfEdges = 0.
 	es first announce: TRMouseEnter.
 	self assert: v numberOfEdges = 1.
-	
+
 	es first announce: TRMouseLeave.
 	self assert: v numberOfEdges = 0.
 ]
@@ -37,7 +37,7 @@ RTShowEdgeTest >> testBasic2 [
 	self assert: v numberOfEdges = 0.
 	es third announce: TRMouseEnter.
 	self assert: v numberOfEdges = 1.
-	
+
 	es third announce: TRMouseLeave.
 	self assert: v numberOfEdges = 0.
 ]

@@ -14,7 +14,7 @@ RTEdgeBuilderTest >> setUp [
 	super setUp.
 	view := RTView new.
 	elements := RTBox elementsOn: (1 to: 10).
-	view addAll: elements. 
+	view addAll: elements.
 	b := RTEdgeBuilder new.
 ]
 
@@ -60,8 +60,8 @@ RTEdgeBuilderTest >> testCompositeShapes [
 
 	edges := eb	connectFrom: #yourself toAll: #subclasses.
 	RTTreeLayout on: els.
-	
-	
+
+
 	self assert: (edges allSatisfy: [ :e | e shape == lineShape ])
 ]
 
@@ -86,7 +86,7 @@ RTEdgeBuilderTest >> testCompositeShapes02 [
 		shape: lineShape;
 		connectFrom: #yourself toAll: #subclasses.
 	RTTreeLayout on: els.
-	
+
 	self assert: (edges allSatisfy: [ :e | e shape == lineShape ])
 ]
 
@@ -96,9 +96,9 @@ RTEdgeBuilderTest >> testConnectFrom [
 	b view: view.
 	b objects: #(1 2).
 	b connectFrom: [ :v | v - 1 ].
-	
+
 	self assert: view numberOfEdges equals: 1.
-	
+
 	e := view edges anyOne.
 	self assert: e from model equals: 1.
 	self assert: e to model equals: 2.
@@ -110,9 +110,9 @@ RTEdgeBuilderTest >> testConnectTo [
 	b view: view.
 	b objects: #(1 2).
 	b connectTo: [ :v | v - 1 ].
-	
+
 	self assert: view numberOfEdges equals: 1.
-	
+
 	e := view edges anyOne.
 	self assert: e from model equals: 2.
 	self assert: e to model equals: 1.
@@ -124,9 +124,9 @@ RTEdgeBuilderTest >> testConnectToAll [
 	b view: view.
 	b objects: #(1 2 3).
 	b connectToAll: [ :v | Array with: v - 1 with: v - 2 ].
-	
+
 	self assert: view numberOfEdges equals: 3.
-	 
+
 	eFrom := (view edges collect: [ :edge | edge from model ]) sorted asArray.
 	eTo := (view edges collect: [ :edge | edge to model ]) sorted asArray.
 	self assert: eFrom equals: #(2 3 3).
@@ -145,7 +145,7 @@ RTEdgeBuilderTest >> testElements [
 	b := RTEdgeBuilder new.
 	b view: view.
 	self assert: b fromElements equals: view elements.
-	
+
 	es := RTBox elementsOn: (1 to: 4).
 	b elements: es.
 	self assert: b fromElements equals: es.
@@ -162,7 +162,7 @@ RTEdgeBuilderTest >> testElementsToLookup [
 					toElements: es2;
 					connectTo: #yourself.
 	self assert: edges size equals: 3.
-	
+
 	self assert: edges first from equals: es1 first.
 	self assert: edges first to equals: es2 first.
 ]
@@ -175,7 +175,7 @@ RTEdgeBuilderTest >> testFromAll [
 
 	es := (RTEllipse new size: 20) elementsOn: (1 to: 2).
 	v addAll: es.
-	
+
 	self assert: v edges size equals: 0.
 	RTEdgeBuilder new
 		view: v;
@@ -195,7 +195,7 @@ RTEdgeBuilderTest >> testFromObjects [
 	"
 	view := RTView new.
 	elements := RTBox elementsOn: (1 to: 10).
-	view addAll: elements. 
+	view addAll: elements.
 	b := RTEdgeBuilder new."
 
 	| edges |
@@ -216,9 +216,9 @@ RTEdgeBuilderTest >> testFromObjects02 [
 	"
 	view := RTView new.
 	elements := RTBox elementsOn: (1 to: 10).
-	view addAll: elements. 
+	view addAll: elements.
 	b := RTEdgeBuilder new."
-	
+
 	b view: view.
 	b fromObjects: #(1).
 	b connectFrom: #yourself to: 10.
@@ -234,7 +234,7 @@ RTEdgeBuilderTest >> testFromObjectsError [
 "
 view := RTView new.
 	elements := RTBox elementsOn: (1 to: 10).
-	view addAll: elements. 
+	view addAll: elements.
 	b := RTEdgeBuilder new."
 	self should: [ RTEdgeBuilder new  fromObjects: #(1 2) ] raise: Error
 ]
@@ -243,7 +243,7 @@ view := RTView new.
 RTEdgeBuilderTest >> testFromObjectsToElements [
 	| edges |
 	b view: view.
-	edges := 
+	edges :=
 		b fromObjects: #(1 2);
 			toElements: (elements copyFrom: 10 to: 10);
 			connectTo: 10.
@@ -264,7 +264,7 @@ RTEdgeBuilderTest >> testNoMoveBehind [
 
 	RTEdgeBuilder new
 		view: view;
-		useAssociations: (Array 
+		useAssociations: (Array
 									with: 1 -> 2
 									with: 2 -> 3
 									with: 5 -> 6).
@@ -276,9 +276,9 @@ RTEdgeBuilderTest >> testObjectFrom [
 	| e |
 	b view: view.
 	b objects: #(1 2); connectFrom: [ :v | v - 1 ].
-	
+
 	self assert: view numberOfEdges equals: 1.
-	
+
 	e := view edges anyOne.
 	self assert: e from model equals: 1.
 	self assert: e to model equals: 2.
@@ -289,9 +289,9 @@ RTEdgeBuilderTest >> testObjectTo [
 	| e |
 	b view: view.
 	b objects: #(1 2); connectTo: [ :v | v - 1 ].
-	
+
 	self assert: view numberOfEdges equals: 1.
-	
+
 	e := view edges anyOne.
 	self assert: e from model equals: 2.
 	self assert: e to model equals: 1.
@@ -305,7 +305,7 @@ RTEdgeBuilderTest >> testObjects [
 
 "	view := RTView new.
 	elements := RTBox elementsOn: (1 to: 10).
-	view addAll: elements. 
+	view addAll: elements.
 	b := RTEdgeBuilder new."
 ]
 
@@ -317,7 +317,7 @@ RTEdgeBuilderTest >> testObjects02 [
 
 "	view := RTView new.
 	elements := RTBox elementsOn: (1 to: 10).
-	view addAll: elements. 
+	view addAll: elements.
 	b := RTEdgeBuilder new."
 ]
 
@@ -329,7 +329,7 @@ RTEdgeBuilderTest >> testObjects03 [
 
 "	view := RTView new.
 	elements := RTBox elementsOn: (1 to: 10).
-	view addAll: elements. 
+	view addAll: elements.
 	b := RTEdgeBuilder new."
 ]
 
@@ -342,12 +342,12 @@ RTEdgeBuilderTest >> testShouldAllowBidirection [
 	b noBidirectional.
 	b objects: #(1 2).
 	b useAssociations: (Array with: 1 -> 2 with: 2 -> 1 ).
-	self deny: b isBidirectional. 
-	
+	self deny: b isBidirectional.
+
 	elements := view elementsFromModels: #(1 2).
 	self assert: elements size equals: 2.
 	self assert: (b shouldCreateEdgeFrom: elements first to: elements second).
-	
+
 	self assert: view numberOfEdges equals: 1.
 	self assert: view edges anyOne from model equals: 1.
 	self assert: view edges anyOne to model equals: 2.
@@ -368,7 +368,7 @@ RTEdgeBuilderTest >> testSimple [
 
 	RTEdgeBuilder new
 		view: view;
-		useElementAssociations: (Array 
+		useElementAssociations: (Array
 									with: elements first -> elements second
 									with: elements second -> elements third).
 	self assert: view numberOfEdges equals: 2
@@ -379,7 +379,7 @@ RTEdgeBuilderTest >> testSimple2 [
 
 	RTEdgeBuilder new
 		view: view;
-		useAssociations: (Array 
+		useAssociations: (Array
 									with: 1 -> 2
 									with: 2 -> 3
 									with: 5 -> 6).
@@ -417,7 +417,7 @@ RTEdgeBuilderTest >> testSimple5 [
 		view: view;
 		fromObjects: #(1 2 3 6);
 		connectFrom: #yourself toAll: [ :v | Array with: v + 1 with: v + 2 ].
-		
+
 	self assert: view numberOfEdges equals: 8.
 
 ]
@@ -450,17 +450,17 @@ RTEdgeBuilderTest >> testSource [
 
 	| v es eb c |
 	v := RTView new.
-	es := RTBox elementsOn: #(1 2 3). 
+	es := RTBox elementsOn: #(1 2 3).
 	v addAll: es.
-	
+
 	eb := RTEdgeBuilder new.
 	eb view: v.
-	
+
 	c := OrderedCollection new.
 	c add: 1 -> 2.
 	c add: 3 -> 1.
 	eb source: c connectFrom: #key to: #value.
-	
+
 	self assert: v numberOfEdges equals: 2
 ]
 
@@ -469,7 +469,7 @@ RTEdgeBuilderTest >> testToObjects [
 	"
 	view := RTView new.
 	elements := RTBox elementsOn: (1 to: 10).
-	view addAll: elements. 
+	view addAll: elements.
 	b := RTEdgeBuilder new."
 
 	b view: view.
@@ -485,22 +485,22 @@ RTEdgeBuilderTest >> testToObjects [
 RTEdgeBuilderTest >> testUseInLayout [
 
 	b
-		view: view; 
-		notUseInLayout; 
+		view: view;
+		notUseInLayout;
 		connectTo: [ :v | v + 1 ].
 	RTTreeLayout on: view elements.
-	
+
 	self assert: (view elements collect: #position) asArray equals: ((Array new: 10) at: 1 put: ((7.5@7.5)); at: 2 put: ((15.5@7.5)); at: 3 put: ((23.5@7.5)); at: 4 put: ((31.5@7.5)); at: 5 put: ((39.5@7.5)); at: 6 put: ((47.5@7.5)); at: 7 put: ((55.5@7.5)); at: 8 put: ((63.5@7.5)); at: 9 put: ((71.5@7.5)); at: 10 put: ((79.5@7.5)); yourself)
 ]
 
 { #category : #'tests - use in layout' }
 RTEdgeBuilderTest >> testUseInLayoutDefault [
 
-	b 
+	b
 		view: view;
 		connectTo: [ :v | v + 1 ].
 	RTTreeLayout on: view elements.
-	
+
 	self assert: (view elements collect: #position) asArray equals: ((Array new: 10) at: 1 put: ((7.5@7.5)); at: 2 put: ((7.5@32.5)); at: 3 put: ((7.5@57.5)); at: 4 put: ((7.5@82.5)); at: 5 put: ((7.5@107.5)); at: 6 put: ((7.5@132.5)); at: 7 put: ((7.5@157.5)); at: 8 put: ((7.5@182.5)); at: 9 put: ((7.5@207.5)); at: 10 put: ((7.5@232.5)); yourself)
 ]
 
@@ -510,7 +510,7 @@ RTEdgeBuilderTest >> testWithMoveBehind [
 	RTEdgeBuilder new
 		view: view;
 		moveBehind;
-		useAssociations: (Array 
+		useAssociations: (Array
 									with: 1 -> 2
 									with: 2 -> 3
 									with: 5 -> 6).
@@ -538,7 +538,7 @@ RTEdgeBuilderTest >> testconnectFromToAll [
 					toElements: es2;
 					connectFrom: #yourself toAll: [ :obj | Array with: obj ].
 	self assert: edges size equals: 3.
-	
+
 	self assert: edges first from equals: es1 first.
 	self assert: edges first to equals: es2 first.
 ]

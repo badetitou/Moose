@@ -17,17 +17,17 @@ Class {
 { #category : #helpers }
 RTJavascriptVisitor >> addBorderColor: c [
 	c ifNil: [ ^ self].
-	
+
 	stream nextPutAll: ('bordercolor: {r: <1p>, g: <2p>, b:<3p>' expandMacrosWith: (c red*255) rounded with: (c green*255) rounded with:  (c blue*255) rounded ).
 	c alpha = 1 ifTrue: [ stream nextPutAll: '}, ' ]
 	ifFalse: [ stream nextPutAll: (', a: <1p>}, ' expandMacrosWith: c alpha) ]
-	
+
 ]
 
 { #category : #helpers }
 RTJavascriptVisitor >> addBorderWidth: aShape [
 	(aShape strokePaint isNil or: [ aShape strokeWidth < 0 ]) ifTrue: [ ^ self ].
-	stream 
+	stream
 		nextPutAll: 'sw: ';
 		nextPutAll: (self number: aShape strokeWidth);
 		nextPutAll: ','.
@@ -38,12 +38,12 @@ RTJavascriptVisitor >> addColor: c [
 	stream nextPutAll: 'color: '.
 	self addColorBase: c.
 	stream nextPutAll: ', '.
-	
+
 ]
 
 { #category : #helpers }
 RTJavascriptVisitor >> addColorBase: c [
-	stream 
+	stream
 		nextPutAll: '{r:';
 		nextPutAll: (self number: (c red*255) rounded);
 		nextPutAll: ',g:';
@@ -51,7 +51,7 @@ RTJavascriptVisitor >> addColorBase: c [
 		nextPutAll: ',b:';
 		nextPutAll: (self number: (c blue*255) rounded).
 	c alpha = 1 ifTrue: [ stream nextPutAll: '}' ]
-	ifFalse: [ stream 
+	ifFalse: [ stream
 		nextPutAll: ',a:';
 		nextPutAll: (self number: c alpha);
 		nextPutAll: '}' ]
@@ -68,7 +68,7 @@ RTJavascriptVisitor >> addInteractions: aShape [
 
 { #category : #helpers }
 RTJavascriptVisitor >> addMatrix: m [
-	stream 
+	stream
 		nextPutAll: 'matrix:{shx: ';
 		nextPutAll: (self number: m shx);
 		nextPutAll: 	',shy: ';
@@ -82,7 +82,7 @@ RTJavascriptVisitor >> addMatrix: m [
 		nextPutAll: ',y: ';
 		nextPutAll: (self number: m y);
 		nextPutAll: '}}, '.
-	
+
 ]
 
 { #category : #helpers }
@@ -113,7 +113,7 @@ RTJavascriptVisitor >> exportFixedShapes: aBool [
 { #category : #initialization }
 RTJavascriptVisitor >> initialize [
 	names := Dictionary new.
-	validInteractions := #(#RTDraggableView #RTDraggable #RTPopup 
+	validInteractions := #(#RTDraggableView #RTDraggable #RTPopup
 	#RTHighlightable #RTLabeled #RTShowEdge #RTShowLabel #RTZoomableView
 	#RTFocusElement #RTLinkView).
 	self exportFixedShapes: true.
@@ -208,23 +208,23 @@ RTJavascriptVisitor >> visitArrowHeadShape: arrowShape [
 	stream nextPutAll: '
 		{type: "headarrow", id: "';
 		nextPutAll: (self nameFor: arrowShape);
-		nextPutAll: ('", fromid: <1p>, toid: <2p>,' 
+		nextPutAll: ('", fromid: <1p>, toid: <2p>,'
 		expandMacrosWith:  (self nameFor: e from trachelShape) with: (self nameFor: e to trachelShape) ).
 	self addColor: arrowShape color.
 	self addBorderColor: arrowShape strokePaint.
-	
-	stream 
+
+	stream
 		nextPutAll: ' width: ';
 		nextPutAll: (self number: arrowShape width);
 		nextPutAll: ', size: ';
 		nextPutAll: (self number: arrowShape mySize).
 	self visitAttachPoint: e trShape: arrowShape.
-	stream 
+	stream
 		nextPutAll: ', base: ';
 		nextPutAll: (self number: arrowShape baseSize);
 		nextPutAll: '},'.
-	
-	
+
+
 ]
 
 { #category : #visitor }
@@ -234,13 +234,13 @@ RTJavascriptVisitor >> visitArrowShape: arrowShape [
 	stream nextPutAll: '
 		{type: "simplearrow", id: "';
 		nextPutAll: (self nameFor: arrowShape).
-	stream 
+	stream
 		nextPutAll: '", fromid: ''';
 		nextPutAll: (self nameFor: e from trachelShape);
 		nextPutAll: ''', toid: ''';
 		nextPutAll: (self nameFor: e to trachelShape);
 		nextPutAll: ''','.
-		
+
 	self addColor: arrowShape strokePaint.
 	stream
 		nextPutAll: ' width: ';
@@ -250,7 +250,7 @@ RTJavascriptVisitor >> visitArrowShape: arrowShape [
 		nextPutAll: ', percentage: ';
 		nextPutAll: (self number: arrowShape percentage).
 	self visitAttachPoint: e trShape: arrowShape.
-	stream 
+	stream
 		nextPutAll: ', base: ';
 	 	nextPutAll: (self number: arrowShape baseSize);
 		nextPutAll: '},'.
@@ -264,10 +264,10 @@ RTJavascriptVisitor >> visitAttachPoint: element [
 { #category : #visitor }
 RTJavascriptVisitor >> visitAttachPoint: element index: index [
 	| ap |
-	element ifNil: [ 
+	element ifNil: [
 		^ stream nextPutAll: ',ap:RTCenteredAttachPoint' ].
-	ap := element shape class = RTCompositeShape 
-		ifTrue: [ element shape allShapes at: index ] 
+	ap := element shape class = RTCompositeShape
+		ifTrue: [ element shape allShapes at: index ]
 		ifFalse: [ "Too ugly but work for this special case"
 			(element shape class = RTDoubleArrowedLine and: [index = 3])
 				ifTrue: [ element shape headEnd ]
@@ -277,7 +277,7 @@ RTJavascriptVisitor >> visitAttachPoint: element index: index [
 		nextPutAll: '(';
 		nextPutAll: ap attachPoint isInverted asString;
 		nextPutAll: ')'.
-	
+
 ]
 
 { #category : #visitor }
@@ -293,36 +293,36 @@ RTJavascriptVisitor >> visitBezierShape: aBezierShape [
 	stream nextPutAll: '
 		{type: "bezier", id: "';
 		nextPutAll: (self nameFor: aBezierShape);
-		nextPutAll: ('", fromid: <1p>, toid: <2p>,' 
+		nextPutAll: ('", fromid: <1p>, toid: <2p>,'
 		expandMacrosWith:  (self nameFor: e from trachelShape) with: (self nameFor: e to trachelShape) ).
 	self addColor: aBezierShape strokePaint.
-	
-	shape class = RTBezierLine ifTrue: [ 
-		stream 
+
+	shape class = RTBezierLine ifTrue: [
+		stream
 			nextPutAll:  'tension: ';
 			nextPutAll: (self number: shape tension);
 			nextPutAll: ', ides: ['.
 		shape follow ifNotNil: [ shape setControllingElementsFromFollowFor: e ].
-		(shape controllingElements rtValue: e) do: [ :el | 
-			stream 
+		(shape controllingElements rtValue: e) do: [ :el |
+			stream
 				nextPutAll: '"';
 				nextPutAll: (self nameFor: el trachelShape);
 				nextPutAll: '", '] ].
-	
+
 	stream nextPutAll: '], width: ';
 		nextPutAll: (self number: aBezierShape width).
 	self visitAttachPoint: e.
 	stream nextPutAll: '},'.
-	
+
 ]
 
 { #category : #visitor }
 RTJavascriptVisitor >> visitBitMapShape: aBitmapShape [
 	| s icon64 |
 	s := WriteStream on: ByteArray new.
-	
+
 	TRPlatform current pngReadWriterClass putForm: (aBitmapShape form) onStream: s.
-	
+
 	icon64 := (TRPlatform current mimeEncode: s contents readStream multiLine: false).
 	stream nextPutAll: '
 		{type: "bitmap", id: "';
@@ -341,7 +341,7 @@ RTJavascriptVisitor >> visitBitMapShape: aBitmapShape [
 
 { #category : #visitor }
 RTJavascriptVisitor >> visitBoxShape: aBox [
-	
+
 	| box |
 	box := aBox basicEncompassingRectangle.
 	stream nextPutAll: '
@@ -369,8 +369,8 @@ RTJavascriptVisitor >> visitCanvas: aCanvas [
 	];
 	mamani.addFixedShapes(shapes);
 '
-	
-	
+
+
 
 ]
 
@@ -384,42 +384,42 @@ RTJavascriptVisitor >> visitDiamondShape: diamondShape [
 RTJavascriptVisitor >> visitDraggableInteraction: anInteraction with: anObject [
 	| list nest |
 	list := OrderedCollection new.
-	(anObject attributes includesKey: #RTLabelledLabel) ifTrue: [  
+	(anObject attributes includesKey: #RTLabelledLabel) ifTrue: [
 		list add: (anObject attributes at: #RTLabelledLabel).
 	].
-	((anObject shape class = RTCompositeShape) 
-	and: [ anObject shape automaticallyUpdateLayout ]) ifTrue: [ 
+	((anObject shape class = RTCompositeShape)
+	and: [ anObject shape automaticallyUpdateLayout ]) ifTrue: [
 		list addAll: anObject trachelShape shapes ].
 	nest := nil.
-	nest := [ :ob | 
-		(ob attributes includesKey: #nestedElements) ifTrue: [ 
+	nest := [ :ob |
+		(ob attributes includesKey: #nestedElements) ifTrue: [
 			(ob attributes at: #nestedElements) do: [ :e|
-				e isCollection 
+				e isCollection
 					ifTrue: [ list addAll: (e collect: [:x | nest value: x. x trachelShape ]) ]
 					ifFalse: [ nest value: e. list add: e trachelShape ] ] ].
 		].
 	nest value: anObject.
-	
-	list addAll: (anInteraction groupToDrag collect: [ :e|	
-			(e isKindOf: TRShape) 
-				ifTrue: [ e ] 
+
+	list addAll: (anInteraction groupToDrag collect: [ :e|
+			(e isKindOf: TRShape)
+				ifTrue: [ e ]
 				ifFalse: [ e trachelShape ] ] ).
-	list isEmpty 
+	list isEmpty
 		ifTrue: [ self visitInteraction: anInteraction with: anObject ]
 		ifFalse: [
 			stream nextPutAll: 'new RTDraggable(['.
-			list do: [ :e | 
+			list do: [ :e |
 				stream nextPutAll: '"';
 					nextPutAll: (self nameFor:e);
 					nextPutAll: '", ' ].
 			stream nextPutAll: '])' ]
-	
+
 ]
 
 { #category : #visitor }
 RTJavascriptVisitor >> visitEdge: edge [
 	edge trachelShape accept: self.
-	
+
 ]
 
 { #category : #visitor }
@@ -428,7 +428,7 @@ RTJavascriptVisitor >> visitElement: e [
 ]
 
 { #category : #visitor }
-RTJavascriptVisitor >> visitEllipseShape: anEllipse [	
+RTJavascriptVisitor >> visitEllipseShape: anEllipse [
 	| box |
 	box := anEllipse basicEncompassingRectangle.
 	stream nextPutAll: '
@@ -458,21 +458,21 @@ RTJavascriptVisitor >> visitHightlightableInteraction: anInt with: el [
 	self addColor: anInt highlightedColor.
 	add := [ :list |
 		list do: [ :e |
-			stream 
+			stream
 				nextPutAll: '"';
 				nextPutAll: (self nameFor: e trachelShape);
 				nextPutAll: '",'  ] ].
 	stream nextPutAll: 'ides: ['.
 	add value: ((anInt highlightElements) rtValue: el).
 	stream nextPutAll: ']'.
-	anInt shouldHighlightEdges ifTrue: [ 
+	anInt shouldHighlightEdges ifTrue: [
 		stream nextPutAll: ', ecolor: '.
 		self addColorBase: anInt edgeColor.
 		stream nextPutAll: ', edges: ['.
 		add value: ((anInt getConnectedEdgesBlock) rtValue: el).
 		stream nextPutAll: ']'. ].
 	stream nextPutAll: '})'.
-	
+
 
 
 ]
@@ -480,7 +480,7 @@ RTJavascriptVisitor >> visitHightlightableInteraction: anInt with: el [
 { #category : #'visitor-interactions' }
 RTJavascriptVisitor >> visitInteraction: interaction with: anObject [
 	stream nextPutAll: interaction class name.
-	
+
 ]
 
 { #category : #'visitor-interactions' }
@@ -518,7 +518,7 @@ RTJavascriptVisitor >> visitLabelledInteraction: anInt with: el [
 		self addColor: anInt color.
 		stream nextPutAll: 'low'.
 		self addColor: anInt lowColor.
-		stream 
+		stream
 			nextPutAll: 'lbl: ';
 			nextPutAll: '"';
 			nextPutAll: (self nameFor: anInt lbl);
@@ -527,15 +527,15 @@ RTJavascriptVisitor >> visitLabelledInteraction: anInt with: el [
 
 { #category : #visitor }
 RTJavascriptVisitor >> visitLineShape: aLine [
-	
+
 	| e fromTo |
 	e := aLine element.
-	fromTo := e 
+	fromTo := e
 		ifNil: [ '", fromid: ',(self pointToString: aLine from),',toid:',(self pointToString: aLine to),',' ]
-		ifNotNil: [ '",fromid:<1p>,toid:<2p>,' 
+		ifNotNil: [ '",fromid:<1p>,toid:<2p>,'
 			expandMacrosWith: (self nameFor: e from trachelShape)
 			with: (self nameFor: e to trachelShape) ].
-	
+
 	stream nextPutAll: '
 		{type: "line", id: "';
 		nextPutAll: (self nameFor: aLine);
@@ -545,7 +545,7 @@ RTJavascriptVisitor >> visitLineShape: aLine [
 		nextPutAll: (self number: aLine width).
 	self visitAttachPoint: e.
 	stream nextPutAll: '},'.
-	
+
 ]
 
 { #category : #'visitor-interactions' }
@@ -554,19 +554,19 @@ RTJavascriptVisitor >> visitLinkView: anInt with: el [
 	eview := anInt viewFor: el.
 	name := anInt nameFor: el.
 	name ifNil: [ name := self nameFor: el ].
-	
-	[ 
-	eview ifNotNil: [ 
-		exporter := RTHTML5Exporter new 
+
+	[
+	eview ifNotNil: [
+		exporter := RTHTML5Exporter new
 			fileName: name, '.html';
 			shouldCreateJS: false.
 		exporter createStream.
 		st := exporter stream.
-		exporter export: eview toStream: st] 
+		exporter export: eview toStream: st]
 	] on: Error do: [ :ex |
 	st close.
 	exporter export: anInt errorView ].
-	stream 
+	stream
 		nextPutAll: 'new RTLinkView("';
 		nextPutAll: name;
 			nextPutAll: '")'.
@@ -578,25 +578,25 @@ RTJavascriptVisitor >> visitMultiCompositeShape: aShape [
 		{id: "';
 		nextPutAll: (self nameFor: aShape);
 		nextPutAll: '", type:"multi", shapes:['.
-	"aShape element ifNotNil: [ 
-		aShape element shape automaticallyUpdateLayout ifTrue: [ 
-			(aShape element attributes includesKey: #nestedElements) ifTrue: [ 
+	"aShape element ifNotNil: [
+		aShape element shape automaticallyUpdateLayout ifTrue: [
+			(aShape element attributes includesKey: #nestedElements) ifTrue: [
 				self halt.
 				(aShape element attributes at: #nestedElements) addAll: aShape shapes ] ] ]."
-	aShape shapes do: [ :s| 
+	aShape shapes do: [ :s|
 		s element: aShape element.
 		s accept: self].
 	stream nextPutAll: '], offsets: ['.
-	aShape offsets do: [ :o | 
+	aShape offsets do: [ :o |
 		stream nextPutAll: '{x: ';
 			nextPutAll: (self number: o x);
 			nextPutAll: ', y: ';
 			nextPutAll: (self number: o y);
 			nextPutAll: '},' ].
-	
+
 	stream nextPutAll: ']'.
 
-	(aShape element isNil not and: [aShape element shape isKindOf: RTMultiColoredLine]) ifTrue: [ 
+	(aShape element isNil not and: [aShape element shape isKindOf: RTMultiColoredLine]) ifTrue: [
 		self visitAttachPoint: aShape element. ].
 	stream nextPutAll: '},'.
 ]
@@ -612,13 +612,13 @@ RTJavascriptVisitor >> visitPolygonShape: aPolygon [
 	r := aPolygon encompassingRectangle.
 	c := aPolygon color.
 	c ifNil: [ c:= Color transparent ].
-	
+
 	stream nextPutAll: '
 		{type: "polygon", id: "';
 		nextPutAll: (self nameFor: aPolygon);
 		nextPutAll: ('", o: {x: ',(self number: r origin x),', y: ',(self number: r origin y),'}');
 		nextPutAll: (', c: {x: ',(self number: r corner x),', y: ',(self number: r corner y),'}, p: "').
-	
+
 	aPolygon vertices do: [ :p |
 		stream nextPutAll: (self number: p x),',',(self number: p y),' '. ].
 	stream nextPutAll: '",'.
@@ -632,11 +632,11 @@ RTJavascriptVisitor >> visitPolygonShape: aPolygon [
 { #category : #'visitor-interactions' }
 RTJavascriptVisitor >> visitPopupInteraction: anInt with: el [
 	| elements |
-	[elements := anInt createPopupFor: el] 
+	[elements := anInt createPopupFor: el]
 		on: Error do: [ ^ self ].
-		
+
 	stream nextPutAll: 'new RTPopup(['.
-	elements do: [ :e | 
+	elements do: [ :e |
 		e trachelShape element: e.
 		e trachelShape accept: self ].
 	stream nextPutAll: ']) '.
@@ -673,10 +673,10 @@ RTJavascriptVisitor >> visitSVGPath: aSVGPath [
 		nextPutAll: aSVGPath pathString;
 		nextPutAll: '", o: {x: ',(self number: r origin x),', y: ',(self number: r origin y),'}' ;
 		nextPutAll: ', c: {x: ',(self number: r corner x),', y: ',(self number: r corner y),'},'.
-	
+
 	self addBorderColor: aSVGPath strokePaint.
 	self addBorderWidth: aSVGPath.
-	
+
 	self addColor: c.
 	self addInteractions: aSVGPath element.
 	self addMatrix: aSVGPath matrix.
@@ -686,13 +686,13 @@ RTJavascriptVisitor >> visitSVGPath: aSVGPath [
 RTJavascriptVisitor >> visitSVGPathLine: shape [
 	| e f t|
 	e := shape element.
-	e ifNil: [ 
+	e ifNil: [
 		f := self pointToString: shape from.
 		t := self pointToString: shape to
 	 ] ifNotNil: [
 		f := '"',(self nameFor: e from trachelShape),'"'.
 		t := '"',(self nameFor: e to trachelShape),'"' ].
-	stream 
+	stream
 		nextPutAll: '{type:"svgline", id: "';
 		nextPutAll: (self nameFor: shape);
 		nextPutAll: '", fromid: ';
@@ -701,20 +701,20 @@ RTJavascriptVisitor >> visitSVGPathLine: shape [
 		nextPutAll: t;
 		nextPutAll: ', '.
 	self addColor: shape color.
-	(e notNil and: [e shape class = RTLineDualWidth]) ifTrue: [ 
-		stream 
+	(e notNil and: [e shape class = RTLineDualWidth]) ifTrue: [
+		stream
 			nextPutAll: ' widthFrom: ';
 			nextPutAll: (self number: (e shape widthFrom rtValue: e));
 			nextPutAll: ', widthTo: ';
 			nextPutAll: (self number: (e shape widthTo rtValue: e)) ].
 	self visitAttachPoint: e.
 	stream nextPutAll: '},'
-	
+
 ]
 
 { #category : #visitor }
 RTJavascriptVisitor >> visitShape: aShape [
-	aShape accept: self 
+	aShape accept: self
 ]
 
 { #category : #'visitor-interactions' }
@@ -732,7 +732,7 @@ RTJavascriptVisitor >> visitShowEdgeInteraction: anInt with: el [
 
 { #category : #'visitor-interactions' }
 RTJavascriptVisitor >> visitShowLabelInteraction: anInt with: el [
-	
+
 	stream nextPutAll: 'new RTShowLabel(['.
 	((anInt highlightElements) rtValue: el) do: [:ele |
 		(anInt labelledInteraction initializeElement: ele) accept: self.
@@ -747,7 +747,7 @@ RTJavascriptVisitor >> visitView: aView [
 	stream nextPutAll: 'mamani.color('.
 	self addColorBase: aView canvas color.
 	stream nextPutAll:(');
-	mamani.camera.setScale(<1p>);' 
+	mamani.camera.setScale(<1p>);'
 	expandMacrosWith: aView canvas camera scale).
 
 	aView announcer subscriptions trSubscriptions isEmpty ifFalse: [
@@ -755,9 +755,9 @@ RTJavascriptVisitor >> visitView: aView [
 		self visitInteractions: aView.
 		stream nextPutAll: ');
 	'].
-	elements := (aView canvas shapes collect: [ :s | 
+	elements := (aView canvas shapes collect: [ :s |
 		s element isNil ifTrue: [ s ] ifFalse: [ s element ] ]) asOrderedCollection removeDuplicates.
-	
+
 	stream nextPutAll:'
 	var shapes = ['.
 	elements do: [ :e | e accept: self ].

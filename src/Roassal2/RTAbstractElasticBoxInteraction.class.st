@@ -56,7 +56,7 @@ RTAbstractElasticBoxInteraction >> dragViewWithEvent: e [
 
 { #category : #util }
 RTAbstractElasticBoxInteraction >> getOrCreateShapeForView [
-	^ (view attributes includesKey: self key) 
+	^ (view attributes includesKey: self key)
 		ifTrue: [ view attributes at: self key ]
 		ifFalse: [ self createShapeForView ].
 ]
@@ -96,14 +96,14 @@ RTAbstractElasticBoxInteraction >> initializeElement: anElement [
 	view canvas when: events first do: [ :e | draggingView := true ].
 	view canvas
 		when: events second
-		do: [ :e | 
+		do: [ :e |
 			draggingView := false.
 			self selectionStartFromEvent: e ].
 
 	view canvas
 		when: TRMouseDragging
 		do:
-			[ :e | 
+			[ :e |
 			draggingView
 				ifTrue: [ self dragViewWithEvent: e ]
 				ifFalse: [ self updateSelectableShapeWithEvent: e ] ].
@@ -111,7 +111,7 @@ RTAbstractElasticBoxInteraction >> initializeElement: anElement [
 	view canvas
 		when: TRMouseDragEnd
 		do:
-			[ :e | 
+			[ :e |
 			draggingView
 				ifTrue: [ draggingView := false ]
 				ifFalse: [ self selectionEndFromEvent: e ] ]
@@ -180,11 +180,11 @@ RTAbstractElasticBoxInteraction >> shapeBuilder [
 RTAbstractElasticBoxInteraction >> updateSelectableShapeWithEvent: event [
 	| s newgroup |
 	s := self getOrCreateShapeForView.
-	
+
 	self updateShape: s with: event.
-	
+
 	newgroup := self getSelectedElementsWith: s.
-	
+
 	group = newgroup ifFalse: [ | evt |
 		self removeSelection: group.
 		group := newgroup.
@@ -193,25 +193,25 @@ RTAbstractElasticBoxInteraction >> updateSelectableShapeWithEvent: event [
 		evt group: group.
 		self announcer announce: evt. ].
 	view signalUpdate.
-	
+
 ]
 
 { #category : #util }
 RTAbstractElasticBoxInteraction >> updateShape: s with: e [
 	"Update for box shape"
-	| p k o extent | 
+	| p k o extent |
 	p := e positionFromCamera.
 	k := #rtorigin.
 	(s attributes includesKey: k) ifTrue: [
 		o := s attributes at: k.
 		extent :=  p - o.
 		(allowNegatedBox and: [ extent x < 0 ])
-			ifTrue: [ 
-				extent := (extent x negated)@extent y. 
+			ifTrue: [
+				extent := (extent x negated)@extent y.
 				o := (o x - extent x)@ o y ].
 		(allowNegatedBox and: [ extent y < 0 ])
-			ifTrue: [ 
-				extent := extent x @ (extent y negated). 
+			ifTrue: [
+				extent := extent x @ (extent y negated).
 				o := o x @ (o y - extent y) ].
 		s trachelShape extent: extent.
 		s translateTo: o + (extent /2).

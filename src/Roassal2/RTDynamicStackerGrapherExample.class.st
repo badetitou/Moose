@@ -1,5 +1,5 @@
 "
-RTDynamicStackerGrapherExample new installTitle: 'Basic' 
+RTDynamicStackerGrapherExample new installTitle: 'Basic'
 		code:
 		'
 | b |
@@ -8,11 +8,11 @@ b numberOfBars: 10.
 b minY: -200; maxY: 200.
 
 b y: #yourself.
- 
+
 b barShape color: (Color red alpha: 0.3).
 b view addMenu: ''+ 1'' callback: [ b add: 400 atRandom - 200 ].
 ^ b view'
-	
+
 "
 Class {
 	#name : #RTDynamicStackerGrapherExample,
@@ -29,7 +29,7 @@ b numberOfBars: 10.
 b minY: -200; maxY: 200.
 
 b y: #yourself.
- 
+
 b barShape color: (Color red alpha: 0.3).
 b build.
 b view addMenu: '+ 1' callback: [ b add: 400 atRandom - 200 ].
@@ -63,10 +63,10 @@ composer := RTComposer new.
     a minY: -200; maxY: 200.
     a view: composer view.
     a y: #yourself.
-	a build.	
+	a build.
 composer group: #first.
 
-    b := RTDynamicStackedGrapher new.  
+    b := RTDynamicStackedGrapher new.
     b minY: -200; maxY: 200.
     b view: composer view.
     b y: #yourself.
@@ -118,7 +118,7 @@ b numberOfBars: 10.
 b minY: -200; maxY: 200.
 
 b y: #yourself.
- 
+
 b barShape color: (Color red alpha: 0.3).
 b textBelow: #yourself.
 

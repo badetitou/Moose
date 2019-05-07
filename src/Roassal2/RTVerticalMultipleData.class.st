@@ -5,7 +5,7 @@ Negative data are not allowed.
 
 Here is an example:
 [[[
-| b d |			
+| b d |
 b := RTGrapher new.
 
 d := RTVerticalMultipleData new.
@@ -17,14 +17,14 @@ d addMetric: #fourth.
 d barChartWithBarTitle: #first rotation: -30.
 b add: d.
 
-b			
-]]] 
+b
+]]]
 
 Here another example:
 [[[
 | b d classes |
 classes := (Collection withAllSubclasses reverseSortedAs: #numberOfMethods) first:	10.
-			
+
 b := RTGrapher new.
 
 d := RTVerticalMultipleData new.
@@ -36,7 +36,7 @@ d barChartWithBarTitle: #name rotation: -30.
 b add: d.
 
 b
-]]]			
+]]]
 "
 Class {
 	#name : #RTVerticalMultipleData,
@@ -51,10 +51,10 @@ RTVerticalMultipleData >> computeMinAndMaxForY [
 	self assert: [ computed allSatisfy: [ :obj | obj isKindOf: Number ] ] description: 'You have provided objects that are not number. Please adjust what you provide to #points: #x: and #y:'.
 	minY := computed min.
 	maxY := computed max.
-	
+
 	(minY < 0 and: [ maxY < 0 ]) ifTrue: [ maxY := 0 ].
 	(minY > 0 and: [ maxY > 0 ]) ifTrue: [ minY := 0 ].
-	
+
 ]
 
 { #category : #rendering }
@@ -64,7 +64,7 @@ RTVerticalMultipleData >> renderIn: aView [
 
 	| centralDot |
 	centralDot := self centralDot.
-	
+
 	"We compute the height"
 	RTMetricNormalizer new
 		elements: elements;
@@ -93,7 +93,7 @@ RTVerticalMultipleData >> renderIn: aView [
 
 { #category : #hooks }
 RTVerticalMultipleData >> selectElementsForAddingBarTitle [
-	"Return the collection of principal element for each element group.  
+	"Return the collection of principal element for each element group.
 	This principal element is used to position the title label"
 	^ groupedElements collect: #last
 ]

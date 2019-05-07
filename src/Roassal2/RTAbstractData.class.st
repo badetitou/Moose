@@ -29,7 +29,7 @@ RTAbstractData >> barChartUsing: barLabelFactory [
 	"Draw an histogram with title"
 	| v |
 	v := self barShape.
-	elementActions add: [ :someElements | 
+	elementActions add: [ :someElements |
 		| lbl |
 		self selectElementsForAddingBarTitle doWithIndex: [ :e :index |
 			| modelToBeUsed |
@@ -52,17 +52,17 @@ RTAbstractData >> barChartWithBarCenteredTitle: aBlockOrSymbol [
 RTAbstractData >> barChartWithBarCenteredTitle: aBlockOrSymbol color: aColor [
 	"Draw a bar chart with title"
 	self barShape.
-	elementActions add: [ :someElements | 
+	elementActions add: [ :someElements |
 		| lbl |
 		self selectElementsForAddingBarTitle doWithIndex: [ :e :index |
 			| modelToBeUsed |
 			modelToBeUsed := self getModelForElement:e atIndex: index.
-			lbl := (RTLabel new text: aBlockOrSymbol; color: aColor) 
+			lbl := (RTLabel new text: aBlockOrSymbol; color: aColor)
 						elementOn: modelToBeUsed.
 			TRConstraint move: lbl below: e.
 			elements anyOne view add: lbl.
 		] ].
-	 
+
 ]
 
 { #category : #'public - bar shape' }
@@ -86,7 +86,7 @@ RTAbstractData >> barChartWithBarTitle: aBlockOrSymbol rotation: rotationInDegre
 	barLabelFactory label: aBlockOrSymbol.
 	barLabelFactory rotation: rotationInDegree.
 	barLabelFactory color: aColor.
-	
+
 	^ self barChartUsing: barLabelFactory
 ]
 
@@ -102,7 +102,7 @@ RTAbstractData >> builder [
 
 { #category : #accessing }
 RTAbstractData >> builder: aBuilder [
-	builder := aBuilder 
+	builder := aBuilder
 ]
 
 { #category : #hooks }
@@ -131,10 +131,10 @@ RTAbstractData >> computeMinAndMaxForX [
 	self builder hasOrigin ifTrue: [
 		(minX > 0 and: [ maxX > 0 ]) ifTrue: [ minX := 0 ]
 	].
-	
+
 	"We do this to make sure that the bar on the right hand side is not on the right axisX extremity"
 	"(self dataSets anySatisfy: #shouldHaveBars) ifTrue: [ maxX := maxX + 1 ]"
-	
+
 
 
 ]
@@ -146,10 +146,10 @@ RTAbstractData >> computeMinAndMaxForY [
 	self assert: [ computed allSatisfy: [ :obj | obj isKindOf: Number ] ] description: 'You have provided objects that are not number. Please adjust what you provide to #points: #x: and #y:'.
 	minY := computed min.
 	maxY := computed max.
-	
+
 	(minY < 0 and: [ maxY < 0 ]) ifTrue: [ maxY := 0 ].
 	(minY > 0 and: [ maxY > 0 ]) ifTrue: [ minY := 0 ].
-	
+
 ]
 
 { #category : #initialization }
@@ -191,7 +191,7 @@ RTAbstractData >> getPixelPositionOf: aPoint [
 		getValue: aPoint x min: 0 max: builder extent x minValue: minX maxValue: maxX.
 	anY := RTMetricNormalizer new
 		getValue: aPoint y min: 0 max: builder extent y negated minValue: minY maxValue: maxY.
-			
+
 	^ anX @ anY
 ]
 
@@ -204,7 +204,7 @@ RTAbstractData >> getPositionFromPixelPosition: aPoint [
 		getValue: aPoint x min: minX max: maxX minValue: 0 maxValue: builder extent x.
 	anY := RTMetricNormalizer new
 		getValue: aPoint y min: minY max: maxY minValue: 0 maxValue: builder extent y.
-			
+
 	^ anX @ anY negated
 ]
 
@@ -223,7 +223,7 @@ RTAbstractData >> label [
 { #category : #accessing }
 RTAbstractData >> label: aString [
 	"Give a label to the code base. This is useful when a legend is rendered. Here is an example:
-	
+
 g := RTGrapher new.
 d := RTData new.
 d label: 'Collection code'.
@@ -321,15 +321,15 @@ RTAbstractData >> resetMinAndMax [
 RTAbstractData >> resetShapeBuilderForBar [
 	barBuilder := RTShapeBuilder new.
 	barBuilder rectangle.
-	
+
 	"Default width that compute an appropriate width"
-	barBuilder width: [ :object | 
+	barBuilder width: [ :object |
 		(builder extent x / (self numberOfPoints * self numberOfMetrics * 2)) asFloat ]
 ]
 
 { #category : #hooks }
 RTAbstractData >> selectElementsForAddingBarTitle [
-	"Return the collection of principal element for each element group.  
+	"Return the collection of principal element for each element group.
 	This principal element is used to position the title label"
 	self subclassResponsibility
 ]

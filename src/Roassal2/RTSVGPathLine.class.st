@@ -15,7 +15,7 @@ Class {
 { #category : #accessing }
 RTSVGPathLine >> linePathFor: anEdge [
 	^ String
-		streamContents: [ :s | 
+		streamContents: [ :s |
 			s
 				nextPutAll: 'M';
 				nextPutAll: anEdge from position x asFloat asString;
@@ -63,5 +63,5 @@ RTSVGPathLine >> updateFor: edge trachelShape: trachelShape [
 	trachelShape width: (self widthFor: edge).
 	trachelShape svgPath: (self pathFor: edge).
 	trachelShape color: Color transparent
-	
+
 ]

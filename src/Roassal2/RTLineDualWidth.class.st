@@ -22,7 +22,7 @@ Here is an example:
         add: e1;
         add: e2;
         add: (l edgeFrom: e1 to: e2).
-    view 
+    view
 -=-=-=
 
 Another example:
@@ -34,13 +34,13 @@ b := RTMondrian new.
 b shape circle withTextAbove: #packageName.
 b nodes: pak.
 
-b shape lineDualWidth 
-	color: Color blue trans; 
+b shape lineDualWidth
+	color: Color blue trans;
 	withShorterDistanceAttachPoint;
 	widthFrom: [ :anEdge | (anEdge from model numberOfDependenciesToward: anEdge to model) sqrt  * 4];
 	widthTo: [ :anEdge | (anEdge to model numberOfDependenciesToward: anEdge from model) sqrt * 4].
 
-b edges 
+b edges
 	noRepetition; noBidirectional;
 	connectToAll: #dependentPackages.
 b layout circle.
@@ -97,7 +97,7 @@ RTLineDualWidth >> pathFor: anEdge and: trachelShape [
 	| from to point side w1 w2 e dist sc z first |
 	e := 0.001.
 	^ String
-		streamContents: [ :s | 
+		streamContents: [ :s |
 			"Setting values"
 			from := trachelShape from.
 			to := trachelShape to.
@@ -115,13 +115,13 @@ RTLineDualWidth >> pathFor: anEdge and: trachelShape [
 					w1 := sc scale: w1.
 					w2 := sc scale: w2 ].
 			"creating utility blocks"
-			point := [ :p | 
+			point := [ :p |
 			s
 				nextPutAll: p x asFloat asString;
 				space;
 				nextPutAll: p y asFloat asString;
 				space ].
-			side := [ :vector :end :size | 
+			side := [ :vector :end :size |
 				| left right u unit middle l r |
 				u := vector normal.
 				unit := vector / (vector r max: 0.001).
@@ -150,7 +150,7 @@ RTLineDualWidth >> pathFor: anEdge and: trachelShape [
 
 { #category : #rendering }
 RTLineDualWidth >> updateFor: edge trachelShape: trachelShape [
-	trachelShape 
+	trachelShape
 		from: (attachPoint startingPointOf: edge) to: (attachPoint endingPointOf: edge);
 		resetPath;
 		strokePaint: Color transparent;
@@ -167,7 +167,7 @@ RTLineDualWidth >> widthFrom [
 { #category : #initialization }
 RTLineDualWidth >> widthFrom: aNumber [
 	widthFrom := aNumber
-	
+
 ]
 
 { #category : #initialization }
@@ -178,5 +178,5 @@ RTLineDualWidth >> widthTo [
 { #category : #initialization }
 RTLineDualWidth >> widthTo: aNumber [
 	widthTo := aNumber
-	
+
 ]

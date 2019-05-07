@@ -40,7 +40,7 @@ RTDataInteractionBuilder >> popupDecorator: aOneArgBlock [
 	| deco |
 	self
 		when: TRMouseEnter
-		do: [ :event | 
+		do: [ :event |
 			deco := aOneArgBlock value: event element model.
 			deco hasDatasets
 				ifFalse: [ deco dataset: dataSet ].
@@ -50,7 +50,7 @@ RTDataInteractionBuilder >> popupDecorator: aOneArgBlock [
 				render ].
 	self
 		when: TRMouseLeave
-		do: [ :event | 
+		do: [ :event |
 			deco remove.
 			self builder decorators remove: deco ]
 ]
@@ -60,7 +60,7 @@ RTDataInteractionBuilder >> toggleDataset [
 	"This is useful to toggle the curve. For example:
 You need to click on the legend item.
 
--=--=-=--=-=--=-=--=-=--=	
+-=--=-=--=-=--=-=--=-=--=
 g := RTGrapher new.
 d := RTData new.
 d label: 'Collection code'.

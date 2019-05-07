@@ -12,14 +12,14 @@ RTVisibleTest >> testBasic [
 	e := RTBox element.
 	v add: e.
 	t := 0.
-	e @ (RTVisible new 
-			visibleBlock: [ :el | t := t + 1 ]; 
+	e @ (RTVisible new
+			visibleBlock: [ :el | t := t + 1 ];
 			invisibleBlock: [ :el | t := t - 10 ]).
 
 	self assert: t equals: 1.
 	e translateBy: 5 @ 5.
 	self assert: t equals: 1.
-	
+
 	e translateTo: 1000 @ 1000.
 	self assert: t equals: -9.
 ]
@@ -32,13 +32,13 @@ RTVisibleTest >> testBasicWithoutInvisibleBlock [
 	e := RTBox element.
 	v add: e.
 	t := 0.
-	e @ (RTVisible new 
+	e @ (RTVisible new
 			visibleBlock: [ :el | t := t + 1 ]).
 
 	self assert: t equals: 1.
 	e translateBy: 5 @ 5.
 	self assert: t equals: 1.
-	
+
 	e translateTo: 1000 @ 1000.
 	self assert: t equals: 1.
 ]
@@ -60,7 +60,7 @@ RTVisibleTest >> testIsVisible [
 	| v e |
 	v := RTView new.
 	self assert: v canvas extent equals: 500 @ 500.
-	
+
 	e := (RTBox new size: 100) element.
 	v add: e.
 	e translateTo: 260 @ 260.
@@ -74,7 +74,7 @@ RTVisibleTest >> testIsVisible2 [
 	| v e |
 	v := RTView new.
 	self assert: v canvas extent equals: 500 @ 500.
-	
+
 	e := (RTBox new size: 100) element.
 	v add: e.
 	e translateTo: 248 @ 248.
@@ -88,7 +88,7 @@ RTVisibleTest >> testVisible [
 	| v t visible e |
 	v := RTView new.
 	self assert: v canvas extent equals: 500 @ 500.
-	
+
 	e := (RTBox new size: 100) element.
 	v add: e.
 	e translateTo: 260 @ 260.
@@ -106,7 +106,7 @@ RTVisibleTest >> testVisible2 [
 	| v t visible e |
 	v := RTView new.
 	self assert: v canvas extent equals: 500 @ 500.
-	
+
 	e := (RTBox new size: 100) element.
 	v add: e.
 	e translateTo: 248 @ 248.

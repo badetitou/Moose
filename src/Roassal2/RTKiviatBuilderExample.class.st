@@ -1,5 +1,5 @@
 "
-RTKiviatBuilderExample new installTitle: 'Colored3' 
+RTKiviatBuilderExample new installTitle: 'Colored3'
 		code:
 		'
 	| b myKiviatNodesElems m col |
@@ -28,21 +28,21 @@ RTKiviatBuilderExample >> exampleAOB [
 	fruits := RTKiviatFruitExample fruits.
 	b objects: fruits.
 	b shape circle color: [ :f | f kiviatNode named color ]; size: 10.
-	RTKiviatFruitExample rtmethods do: [ :met | 
-		met protocol = #metrics ifTrue: [ 
+	RTKiviatFruitExample rtmethods do: [ :met |
+		met protocol = #metrics ifTrue: [
 			b addMetric: met selector ] ].
 	b activateAxisTitle.
 	b activatePolygons.
 	b build.
-	
+
 	lb := RTLegendBuilder new.
 	lb view: b view.
 	lb right.
 	lb addText: 'Fruit example '.
 	fruits do: [ :f | lb addColor: f color text: f name ].
 	lb build.
-	
-	^ b view 
+
+	^ b view
 ]
 
 { #category : #icons }
@@ -253,7 +253,7 @@ RTKiviatBuilderExample >> exampleColored [
 	| b n |
 	b := RTKiviatBuilder new.
 	b objects: RTAbstractCircleLayout withAllSubclasses.
-	
+
 	n := RTMultiLinearColorForIdentity new objects: (b objects).
 	b shape circle color: [ :value | n rtValue: value kiviatNode named]; size: 10.
 
@@ -261,7 +261,7 @@ RTKiviatBuilderExample >> exampleColored [
 	b addMetric: #numberOfMethods.
 	b addMetric: #numberOfVariables.
 	b build.
-	^ b 
+	^ b
 ]
 
 { #category : #sources }
@@ -274,9 +274,9 @@ RTKiviatBuilderExample >> exampleColored2 [
 	b addMetric: #numberOfLinesOfCode.
 	b addMetric: #numberOfMethods.
 	b addMetric: #numberOfVariables.
-	
+
 	b activateAxisTitle.
-	
+
 	b build.
 	^ b view
 ]
@@ -349,14 +349,14 @@ RTKiviatBuilderExample >> exampleColored3 [
 	b addMetric: #numberOfLinesOfCode.
 	b addMetric: #numberOfMethods.
 	b addMetric: #numberOfVariables.
-	
+
 	b activateAxisTitle.
-	
+
 	b build.
-	
+
 	myKiviatNodesElems := (b view elements select: [ :e | (e model isKindOf: RTKiviatElement)]).
 	b objects do: [:o | m:= myKiviatNodesElems select: [ :e | (e model kiviatNode named name= o name)]. col := (Color random alpha: 0.6). m do: [:e | e color: col]].
-	
+
 	^ b view
 ]
 
@@ -535,7 +535,7 @@ RTKiviatBuilderExample >> exampleRandomValues [
 	| b  |
 	b := RTKiviatBuilder new.
 	b objects: (Array with: ('object1' -> ((1 to: 25) collect: [:i | i atRandom])) with: ('object2' -> ((1 to: 25) collect: [:i | i atRandom]))).
-	
+
 	b shapes: ((Array with: Color blue with: Color red) do: [:c | c alpha: 0.3]).
 
 	(1 to: 25) doWithIndex: [ :ei :i |
@@ -743,7 +743,7 @@ RTKiviatBuilderExample >> exampleWithArea [
 	b addMetric: #numberOfLinesOfCode.
 	b addMetric: #numberOfMethods.
 	b addMetric: #numberOfVariables.
-	
+
 	b activatePolygons.
 
 		b build.

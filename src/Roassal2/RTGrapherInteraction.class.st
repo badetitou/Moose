@@ -9,5 +9,5 @@ Class {
 
 { #category : #testing }
 RTGrapherInteraction class >> isAbstract [
-	^ self = RTGrapherInteraction 
+	^ self = RTGrapherInteraction
 ]

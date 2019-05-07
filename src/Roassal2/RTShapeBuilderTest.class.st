@@ -70,12 +70,12 @@ RTShapeBuilderTest >> testBorderColorAndCompositeShape [
 	builder box; withTextAbove; borderColor: Color black.
 	s := builder current.
 	shapes := s allShapes.
-	 
+
 	"Checking the label"
 	self assert: shapes first class equals: RTLabel.
 	label := shapes first.
 	self assert: label color equals: RTLabel defaultColor.
-	
+
 	"Checking the box"
 	self assert: shapes second class equals: RTBox.
 	box := shapes second.
@@ -103,7 +103,7 @@ RTShapeBuilderTest >> testColor [
 	| e |
 	builder rectangle color: Color blue.
 	e := builder elementOn: 1.
-	
+
 	self assert: (e shape colorFor: e) equals: Color blue.
 	self assert: e trachelShape color equals: Color blue.
 ]
@@ -112,11 +112,11 @@ RTShapeBuilderTest >> testColor [
 RTShapeBuilderTest >> testColorIf [
 
 	| e |
-	builder box 
+	builder box
 		if: true color: Color blue;
 		if: true color: Color red.
 	e := builder elementOn: 1.
-	
+
 	self assert: (e shape colorFor: e) equals: Color red.
 	self assert: e trachelShape color equals: Color red.
 ]
@@ -163,12 +163,12 @@ RTShapeBuilderTest >> testFillColorAndCompositeShape [
 	builder box; withTextAbove; fillColor: Color black.
 	s := builder current.
 	shapes := s allShapes.
-	 
+
 	"Checking the label"
 	self assert: shapes first class equals: RTLabel.
 	label := shapes first.
 	self assert: (label colorFor: RTElement new) equals: RTLabel defaultColor.
-	
+
 	"Checking the box"
 	self assert: shapes second class equals: RTBox.
 	box := shapes second.
@@ -182,12 +182,12 @@ RTShapeBuilderTest >> testFillColorAndCompositeShape02 [
 	builder box; withTextAbove; textColor: Color black; fillColor: Color red.
 	s := builder current.
 	shapes := s allShapes.
-	 
+
 	"Checking the label"
 	self assert: shapes first class equals: RTLabel.
 	label := shapes first.
 	self assert: (label colorFor: RTElement new) equals: Color black.
-	
+
 	"Checking the box"
 	self assert: shapes second class equals: RTBox.
 	box := shapes second.
@@ -201,7 +201,7 @@ RTShapeBuilderTest >> testHasSetShape [
 	builder rectangle.
 	self assert: builder hasSetShape.
 	self deny: builder hasSetLineShape.
-	
+
 	builder line.
 	self assert: builder hasSetShape.
 	self assert: builder hasSetLineShape.
@@ -211,13 +211,13 @@ RTShapeBuilderTest >> testHasSetShape [
 RTShapeBuilderTest >> testIfBorderColor [
 
 	| e |
-	builder 
+	builder
 		box;
 		if: true borderColor: Color red.
-		
+
 	self assert: (builder borderColor rtValue: RTElement new) equals: Color red.
 	e := builder elementOn: 42.
-	
+
 	self assert: (e shape borderColorFor: e) equals: Color red
 ]
 
@@ -233,10 +233,10 @@ RTShapeBuilderTest >> testLinearFillColorWithin [
 	m := (Array with: #(0) with: #(1) with: #(2)).
 	builder rectangle linearFillColor: #first within: m.
 	elements := builder elementsOn: m.
-	
+
 	self assert: elements first trachelShape color red > 0.9.
 	self assert: elements first trachelShape color green > 0.9.
-	self assert: elements first trachelShape color blue > 0.9.	
+	self assert: elements first trachelShape color blue > 0.9.
 	self assert: elements third trachelShape color = Color black.
 ]
 
@@ -265,7 +265,7 @@ RTShapeBuilderTest >> testShape [
 	e1 := builder elementOn: 3.
 	e2 := builder elementOn: 4.
 	e3 := builder elementOn: 5.
-	
+
 	self assert: (e1 shape colorFor: e1) = Color blue.
 	self assert: e1 trachelShape color = Color blue.
 	self assert: e2 trachelShape color = Color red.
@@ -281,7 +281,7 @@ RTShapeBuilderTest >> testShape2 [
 	e1 := builder elementOn: 3.
 	e2 := builder elementOn: 4.
 	e3 := builder elementOn: 5.
-	
+
 	self assert: (e1 shape colorFor: e1) = Color blue.
 	self assert: e1 trachelShape color = Color blue.
 	self assert: e2 trachelShape color = Color red.
@@ -294,15 +294,15 @@ RTShapeBuilderTest >> testWithText [
 	| v el |
 	v := RTView new.
 	builder := RTShapeBuilder new.
-	builder circle 
-				size: 50; 
+	builder circle
+				size: 50;
 				fillColor: (Color purple alpha: 0.3);
 				withText.
 	el := builder elementOn: 'hello'.
 	v add: el.
-	
+
 	self assert: el shape class == RTCompositeShape.
-	
+
 ]
 
 { #category : #withText }
@@ -311,16 +311,16 @@ RTShapeBuilderTest >> testWithTextAndColor [
 	| v el |
 	v := RTView new.
 	builder := RTShapeBuilder new.
-	builder circle 
-				size: 50; 
+	builder circle
+				size: 50;
 				fillColor: (Color purple alpha: 0.3);
 				withText;
 				withTextColor: Color red.
 	el := builder elementOn: 'hello'.
 	v add: el.
-	
+
 	self assert: el shape class == RTCompositeShape.
-	
+
 ]
 
 { #category : #withText }
@@ -329,16 +329,16 @@ RTShapeBuilderTest >> testWithTextAndTranslation [
 	| v el |
 	v := RTView new.
 	builder := RTShapeBuilder new.
-	builder circle 
-				size: 50; 
+	builder circle
+				size: 50;
 				fillColor: (Color purple alpha: 0.3);
 				withText.
 	el := builder elementOn: 'hello'.
 	el translateTo: 20 @ 20.
 	v add: el.
-	
+
 	self assert: el shape class == RTCompositeShape.
-	
+
 ]
 
 { #category : #tests }
@@ -350,13 +350,13 @@ RTShapeBuilderTest >> testWithTextHeightColor [
 		width: 40;
 		height: 30;
 		withText: #yourself height: 2 color: Color red.
-		
+
 	b node: 'hello'.
 	b build.
-	
+
 	self assert: b view numberOfElements equals: 1.
 	self assert: b view canvas numberOfShapes equals: 2.
-	
+
 	"That is weird... why 4 and not 2?"
 	self assert: b view canvas shapes second height equals: b view canvas shapes second font height.
 ]

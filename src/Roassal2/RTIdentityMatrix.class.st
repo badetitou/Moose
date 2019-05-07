@@ -9,7 +9,7 @@ Class {
 
 { #category : #accessing }
 RTIdentityMatrix >> at: u [
-	
+
 	| row |
 	row := rows
 		at: u
@@ -19,7 +19,7 @@ RTIdentityMatrix >> at: u [
 
 { #category : #accessing }
 RTIdentityMatrix >> at: u at: v [
-	
+
 	| row |
 	row := rows
 		at: u
@@ -31,7 +31,7 @@ RTIdentityMatrix >> at: u at: v [
 
 { #category : #accessing }
 RTIdentityMatrix >> at: u at: v put: aBoolean [
-	
+
 	| row |
 	"u -> v"
 	row := rows
@@ -46,6 +46,6 @@ RTIdentityMatrix >> at: u at: v put: aBoolean [
 
 { #category : #'initialize-release' }
 RTIdentityMatrix >> initialize [
-	
+
 	rows := IdentityDictionary new
 ]

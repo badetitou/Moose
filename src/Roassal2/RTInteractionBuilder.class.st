@@ -3,7 +3,7 @@
 b := RTMondrian new.
 
 b interaction snapToGrid.
-b shape rectangle size: 20. 
+b shape rectangle size: 20.
 b nodes: (1 to: 9).
 b layout grid.
 b
@@ -43,7 +43,7 @@ RTInteractionBuilder >> constrainedDraggable [
 	self removeInteractionOfType: RTAbstractDraggable.
 	i := RTConstrainedDraggable new.
 	i withinParent.
-	interactions add: i. 
+	interactions add: i.
 	^ i
 ]
 
@@ -51,7 +51,7 @@ RTInteractionBuilder >> constrainedDraggable [
 RTInteractionBuilder >> decoration [
 	| i |
 	i := RTDecoration new.
-	interactions add: i. 
+	interactions add: i.
 	^ i
 ]
 
@@ -79,7 +79,7 @@ RTInteractionBuilder >> hasInteractionOfType: cls [
 { #category : #public }
 RTInteractionBuilder >> highlight [
 	"Make elements highlighted when the mouse goes over. Blue is the default color
-	
+
 For example:
 -=-=-=
 b := RTMondrian new.
@@ -88,7 +88,7 @@ b shape label.
 b nodes: (1 to: 9).
 b layout grid.
 b
--=-=-=	
+-=-=-=
 	"
 	self highlightColored: Color blue
 ]
@@ -96,7 +96,7 @@ b
 { #category : #public }
 RTInteractionBuilder >> highlightColored: aColorOrAOneArgBlockOrSymbol [
 	"Make elements highlighted when the mouse goes over. The color is provided as argument
-	
+
 For example:
 -=-=-=
 b := RTMondrian new.
@@ -105,14 +105,14 @@ b shape label.
 b nodes: (1 to: 9).
 b layout grid.
 b
--=-=-=	
+-=-=-=
 	"
-	self when: TRMouseEnter do: [ :event | 
-		RTBlink 
+	self when: TRMouseEnter do: [ :event |
+		RTBlink
 			highlight: event element
 			color: (aColorOrAOneArgBlockOrSymbol rtValue: event element model) ].
 
-	self when: TRMouseLeave do: [ :event | 
+	self when: TRMouseLeave do: [ :event |
 		RTBlink
 			unhighlight: event element ].
 ]
@@ -120,10 +120,10 @@ b
 { #category : #'public - events-registering' }
 RTInteractionBuilder >> highlightEdges: aBlock [
 	"Highlight the elements for which the model is given by 'aBlock rtValue: element model', where 'element' is the current element
-	
+
 	aBlock takes as input an object and return a collection of objects.
 	"
-	
+
 	"
 	Example:
 b := RTMondrian new.
@@ -131,8 +131,8 @@ b interaction highlightEdges: [ :v | Array with: v - 1 with: v with: v + 1 ].
 b nodes: (1 to: 11).
 b layout grid.
 b edges connectToAll: [ :v | Array with: v - 1 with: v with: v + 1 ].
-b 
-	
+b
+
 	"
 	interactions add: [ :element | element @ (RTHighlightable new shouldHighlightEdges; pushFrontEdges; edgeColor: Color red) ]
 ]
@@ -140,10 +140,10 @@ b
 { #category : #'public - events-registering' }
 RTInteractionBuilder >> highlightEdges: aBlock color: aColor [
 	"Highlight the elements for which the model is given by 'aBlock rtValue: element model', where 'element' is the current element
-	
+
 	aBlock takes as input an object and return a collection of objects.
 	"
-	
+
 	"
 	Example:
 b := RTMondrian new.
@@ -151,8 +151,8 @@ b interaction highlightEdges: [ :v | Array with: v - 1 with: v with: v + 1 ].
 b nodes: (1 to: 11).
 b layout grid.
 b edges connectToAll: [ :v | Array with: v - 1 with: v with: v + 1 ].
-b 
-	
+b
+
 	"
 	interactions add: [ :element | element @ (RTHighlightable new shouldHighlightEdges; edgeColor: aColor) ]
 ]
@@ -166,18 +166,18 @@ RTInteractionBuilder >> highlightElements: elementsOrABlock [
 { #category : #'public - events-registering' }
 RTInteractionBuilder >> highlightNeighbors: aBlock [
 	"Highlight the elements for which the model is given by 'aBlock rtValue: element model', where 'element' is the current element
-	
+
 	aBlock takes as input an object and return a collection of objects.
 	"
-	
+
 	"
 	Example:
 b := RTMondrian new.
 b interaction highlightNeighbour: [ :v | Array with: v - 1 with: v with: v + 1 ].
 b nodes: (1 to: 11).
 b layout grid.
-b 
-	
+b
+
 	"
 	interactions add: [ :element | element @ (RTHighlightable highlight: aBlock) ]
 ]
@@ -185,20 +185,20 @@ b
 { #category : #'public - events-registering' }
 RTInteractionBuilder >> highlightNeighbors: aBlock color: aColorOrABlock [
 	"Highlight the elements for which the model is given by 'aBlock rtValue: element', where 'element' is the current element"
-	interactions add: [ :element | element @ (RTHighlightable new 
-																highlightedColor: aColorOrABlock; 
+	interactions add: [ :element | element @ (RTHighlightable new
+																highlightedColor: aColorOrABlock;
 																highlight: aBlock) ]
 ]
 
 { #category : #'public - events-registering' }
 RTInteractionBuilder >> highlightNeighbour: aBlock [
 	self deprecated: 'Use #highlightNeighbors: instead'.
-	
+
 	"Highlight the elements for which the model is given by 'aBlock rtValue: element model', where 'element' is the current element
-	
+
 	aBlock takes as input an object and return a collection of objects.
 	"
-	
+
 	"
 	Example:
 | b |
@@ -206,8 +206,8 @@ b := RTMondrian new.
 b interaction highlightNeighbors: [ :v | Array with: v - 1 with: v with: v + 1 ].
 b nodes: (1 to: 11).
 b layout grid.
-b 
-	
+b
+
 	"
 	interactions add: [ :element | element @ (RTHighlightable highlight: aBlock) ]
 ]
@@ -216,8 +216,8 @@ b
 RTInteractionBuilder >> highlightNeighbour: aBlock color: aColorOrABlock [
 	self deprecated: 'Use #highlightNeighbors:color: instead'.
 	"Highlight the elements for which the model is given by 'aBlock rtValue: element', where 'element' is the current element"
-	interactions add: [ :element | element @ (RTHighlightable new 
-																highlightedColor: aColorOrABlock; 
+	interactions add: [ :element | element @ (RTHighlightable new
+																highlightedColor: aColorOrABlock;
 																highlight: aBlock) ]
 ]
 
@@ -255,7 +255,7 @@ RTInteractionBuilder >> item: aTitle actionElement: aBlockOrSymbol [
 RTInteractionBuilder >> menu [
 	| i |
 	i := RTMenuActivable new.
-	interactions add: i. 
+	interactions add: i.
 	^ i
 ]
 
@@ -281,7 +281,7 @@ RTInteractionBuilder >> popup [
 	"Return a new popup, which is set in the builder"
 	| i |
 	i := RTPopup new.
-	self addExclusiveInteraction: i. 
+	self addExclusiveInteraction: i.
 	^ i
 ]
 
@@ -351,13 +351,13 @@ RTInteractionBuilder >> popupViewWithName: aTwoArgBlock backgroundColor: aBackgr
 { #category : #public }
 RTInteractionBuilder >> removeInteractionOfType: cls [
 	"Remove the interaction of type cls if present"
-	interactions 
-		detect: [ :anInt | anInt class == cls or: [ anInt class inheritsFrom: cls ] ] 
+	interactions
+		detect: [ :anInt | anInt class == cls or: [ anInt class inheritsFrom: cls ] ]
 		ifFound: [ :int | interactions := interactions copyWithout: int ]
 
 "	| int |
 	(interactions anySatisfy: [ :anInt | anInt class == cls or: [ anInt class inheritsFrom: cls ] ])
-		ifTrue: [ 
+		ifTrue: [
 			int := interactions detect: [ :anInt | anInt class == cls ].
 			interactions := interactions copyWithout: int ]"
 ]
@@ -365,7 +365,7 @@ RTInteractionBuilder >> removeInteractionOfType: cls [
 { #category : #building }
 RTInteractionBuilder >> setUpElement: elementOrGroup [
 	"elements is an RTGroup, that contains RTElement or RTEdges"
-	
+
 	interactions do: [ :int | elementOrGroup @ int ]
 ]
 
@@ -378,22 +378,22 @@ RTInteractionBuilder >> setUpElements: elements [
 { #category : #public }
 RTInteractionBuilder >> showEdge [
 	"Public method
-	
+
 	| b |
 	b := RTMondrian new.
 	b interaction showEdge connectToAll: [ :v | Array with: v + 1 ].
 	b nodes: #(1 2 2 3).
 
-	b layout circle initialRadius: 10. 
+	b layout circle initialRadius: 10.
 	b
 	"
-	
+
 	"
 	slighly more elaborated example:
 classes := Collection withAllSubclasses.
 b := RTMondrian new.
 b shape circle.
-b interaction showEdge 
+b interaction showEdge
 					shape: (RTArrowedLine new color: Color green);
 					connectToAll: #dependentClasses.
 b nodes: classes.
@@ -402,53 +402,53 @@ b normalizer normalizeSize: #numberOfLinesOfCode; normalizeColor: #numberOfLines
 b layout cluster.
 b
 	"
-	
-	
+
+
 
 	| i |
 	i := RTShowEdge new.
-	interactions add: i. 
+	interactions add: i.
 	^ i
 ]
 
 { #category : #public }
 RTInteractionBuilder >> showLabel [
 	"Public method
-	
+
 	| b |
 	b := RTMondrian new.
 	b interaction showEdge connectToAll: [ :v | Array with: v + 1 ].
 	b interaction showLabel highlightObject: [ :v | v + 1 ].
 	b nodes: #(1 2 2 3).
 
-	b layout circle initialRadius: 10. 
+	b layout circle initialRadius: 10.
 	b
 	"
-	
+
 	"
 	slighly more elaborated example:
 classes := Collection withAllSubclasses.
 b := RTMondrian new.
 b shape circle.
-b interaction showEdge 
+b interaction showEdge
 					shape: (RTArrowedLine new color: Color green);
 					connectToAll: #dependentClasses.
 
 b interaction showLabel
 					highlightObjects: #dependentClasses.
-					
+
 b nodes: classes.
 b edges moveBehind; connectFrom: #superclass.
 b normalizer normalizeSize: #numberOfLinesOfCode; normalizeColor: #numberOfLinesOfCode.
 b layout cluster.
 b
 	"
-	
-	
+
+
 
 	| i |
 	i := RTShowLabel new.
-	interactions add: i. 
+	interactions add: i.
 	^ i
 ]
 

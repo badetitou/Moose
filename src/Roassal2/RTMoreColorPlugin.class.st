@@ -13,16 +13,16 @@ RTMoreColorPlugin >> description [
 RTMoreColorPlugin >> execute [
 	"Code to be executed"
 
-	Gofer new 
+	Gofer new
 		smalltalkhubUser: 'StephaneDucasse' project: 'Colors';
-		package: 'MoreColors'; 
+		package: 'MoreColors';
 		load.
 ]
 
 { #category : #testing }
 RTMoreColorPlugin >> isLoaded [
 	^ RPackageOrganizer default includesPackageNamed: 'MoreColors'
- 
+
 ]
 
 { #category : #hooks }

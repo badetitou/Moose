@@ -31,8 +31,8 @@ zoom
 
 
 Principle:
-	1.0 in Roassal space -> 1km in OSM. 
-	R zoom to OSM zoom level: (base is 1km/pixel) 
+	1.0 in Roassal space -> 1km in OSM.
+	R zoom to OSM zoom level: (base is 1km/pixel)
 		1000 * Rzoom = 156543.034 meters/pixel / (2 ^ zoomlevel)
 		zoomlevel = ln( 156.543034 * Rzoom ) / ln 2
 		remainderZoom =  156.543034 * Rzoom / (2 ^ zoomlevel))
@@ -88,7 +88,7 @@ TROSMShape >> checkCallback [
 	| call |
 	onload ifNil: [ ^ self ].
 	call := true.
-	tiles keys do: [ :k | 
+	tiles keys do: [ :k |
 		(tiles at: k) = self class emptyTile ifTrue: [ call:= false] ].
 	call ifTrue: [ onload fork ].
 ]
@@ -106,15 +106,15 @@ TROSMShape >> drawOn: athensCanvas [
 	newTiles := Dictionary new.
 	self updateOsmZoomLevel.
 	semaphore
-		critical: [ 
+		critical: [
 			athensCanvas pathTransform
-				restoreAfter: [ 
+				restoreAfter: [
 					athensCanvas pathTransform
 						translateBy: canvas camera position;
 						scaleBy: 1 / canvas camera scale asFloat.
 					athensCanvas
 						clipBy: self translatedRectangle
-						during: [ 
+						during: [
 							start := self fromOurSpaceToTile: self translatedRectangle topLeft.
 							end := self fromOurSpaceToTile: self translatedRectangle bottomRight.
 							start x to: end x do: [ :xi | start y to: end y do: [ :yi | self drawTile: xi @ yi on: athensCanvas with: newTiles ] ].
@@ -125,14 +125,14 @@ TROSMShape >> drawOn: athensCanvas [
 { #category : #drawing }
 TROSMShape >> drawTile: aPoint on: athensCanvas with: newTiles [
 	"Draw a single tile at the right position."
-	
+
 	| paint |
 	(tiles
 		at: (Array with: aPoint x with: aPoint y with: osmZoomLevel)
 		ifAbsent: [ self getTile: aPoint ])
-		ifNotNil: [ :aTile | 
+		ifNotNil: [ :aTile |
 			athensCanvas pathTransform
-				restoreAfter: [ 
+				restoreAfter: [
 					athensCanvas pathTransform
 						translateBy: (self fromOSMSpaceToOurSpace: aPoint * 256);
 						scaleBy: (self remainderZoom: osmZoomLevel).
@@ -222,12 +222,12 @@ TROSMShape >> getTile: aPoint [
 			(aPoint y) with:
 			osmZoomLevel)
 		put: self class emptyTile.
-	[ 
+	[
 	| aTile z |
 	z := osmZoomLevel.
 	Processor yield.
-	aTile := [ 
-	TRPlatform current downloadPng: 
+	aTile := [
+	TRPlatform current downloadPng:
 			('https://a.tile.openstreetmap.org' asZnUrl
 				addPathSegment: z printString;
 				addPathSegment: aPoint x printString;
@@ -235,7 +235,7 @@ TROSMShape >> getTile: aPoint [
 		on: Error
 		do: [ :ex |  ].
 	semaphore
-		critical: [ 
+		critical: [
 			tiles
 				at:
 					(Array with: (aPoint x) with:
@@ -317,10 +317,10 @@ TROSMShape >> ratio: aNumber [
 { #category : #accessing }
 TROSMShape >> rectangle [
 	^ rectangle
-		ifNil: [ 
+		ifNil: [
 			canvas
 				ifNil: [  ]
-				ifNotNil: [ 
+				ifNotNil: [
 					| rect |
 					rect := canvas extent negated / 2.0 extent: canvas extent.
 					copyright translateTo: rect corner - (copyright extent / 2).

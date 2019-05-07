@@ -22,7 +22,7 @@ RTLabelLegendItem >> color: aColor [
 { #category : #hooks }
 RTLabelLegendItem >> execute [
 
-	^ RTGroup new add: 
+	^ RTGroup new add:
 			((self newLabelShape: text) elementOn: model); yourself
 ]
 

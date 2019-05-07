@@ -1,24 +1,24 @@
 "
-RTTimelineSet new a set of events for the timeline. 
+RTTimelineSet new a set of events for the timeline.
 It takes a list of objects, lineIdentifier, start and end.
 
 Consider the following example:
-[ [ [ 
+[ [ [
 	data := #(#(c1 0 5) #(c1 6 8) #(c2 0 5) #(c2 8 10) #(c3 0 10) #(c4 5 10) #(c5 5 8)).
 
 	b := RTTimeline new.
-	
+
 	s := RTTimelineSet new.
 	s objects: data.
 	s lineIdentifier: #first.
 	s start: #second.
 	s end: #third.
 	b add: s.
-	
-	b axisX 
+
+	b axisX
 		numberOfLabels: 5;
 		labelRotation: -45;
-		labelConversion: [ :v | Date year: 2015 day: v ]. 
+		labelConversion: [ :v | Date year: 2015 day: v ].
 	b
 ]]]
 "
@@ -109,7 +109,7 @@ RTTimelineSet >> initializeShapeBuilder [
 
 { #category : #accessing }
 RTTimelineSet >> interaction [
-	^ interactionBuilder 
+	^ interactionBuilder
 ]
 
 { #category : #accessing }
@@ -174,11 +174,11 @@ RTTimelineSet >> renderIn: view using: timelineBuilder [
 
 	| translator |
 	self setRenderedHeight: timelineBuilder.
-		
+
 	elements := shapeBuilder elementsOn: objects.
 	interactionBuilder setUpElements: elements.
 	view addAll: elements.
-	
+
 	"We set the width of the elements"
 	RTMetricNormalizer new
 		elements: elements;
@@ -190,7 +190,7 @@ RTTimelineSet >> renderIn: view using: timelineBuilder [
 
 	"For the location"
 	translator := RTDirectLayoutTranslator new.
-	elements do: [ :e | 
+	elements do: [ :e |
 		| nx ny |
 		nx := self setRenderedXFor: e builder: timelineBuilder.
 		ny := self setRenderedYFor: e builder: timelineBuilder.
@@ -202,7 +202,7 @@ RTTimelineSet >> renderIn: view using: timelineBuilder [
 RTTimelineSet >> setRenderedHeight: timelineBuilder [
 	shapeBuilder
 		height:
-			[ :obj | 
+			[ :obj |
 			timelineBuilder extent y / timelineBuilder numberOfLines
 				- self gapBetweenTimeLines ]
 ]

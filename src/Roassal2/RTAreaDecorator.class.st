@@ -42,12 +42,12 @@ RTAreaDecorator >> render [
 		borderWidth: 0.
 	t := builder getPixelPositionOf: 0@0.
 	path := String new writeStream.
-	path 
+	path
 		nextPutAll: 'M';
 		nextPutAll: t x asFloat asString;
 		nextPutAll: ' ';
 		nextPutAll: t y asFloat asString.
-	
+
 	points doWithIndex: [ :v :i |
 		t := builder getPixelPositionOf: i@v.
 		path
@@ -57,7 +57,7 @@ RTAreaDecorator >> render [
 			nextPutAll: t y asFloat asString.
 		 ].
 	t := builder getPixelPositionOf: points size @ 0.
-	path 
+	path
 		nextPutAll: 'L';
 		nextPutAll: t x asFloat asString;
 		nextPutAll: ' ';
@@ -65,5 +65,5 @@ RTAreaDecorator >> render [
 		nextPutAll: 'Z'.
 	svg path: path contents.
 	builder view add: svg element.
-	
+
 ]

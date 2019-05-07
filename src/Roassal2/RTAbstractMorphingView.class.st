@@ -64,7 +64,7 @@ RTAbstractMorphingView >> initializeElement: aView [
 { #category : #configuration }
 RTAbstractMorphingView >> moveApartSingleElements [
 	| rms singleElements notSingleElements |
-	afterAllTranslationsBlocks add: [ :view | 
+	afterAllTranslationsBlocks add: [ :view |
 		rms := referenceModels elements collect: #model.
 		singleElements := (view elements reject: [ :e | rms includes: e model ]).
 		notSingleElements := (view elements select: [ :e | rms includes: e model ]).
@@ -75,7 +75,7 @@ RTAbstractMorphingView >> moveApartSingleElements [
 { #category : #configuration }
 RTAbstractMorphingView >> pushAllElementsToFront [
 
-	afterAllTranslationsBlocks add: [ :view | 
+	afterAllTranslationsBlocks add: [ :view |
 		view elements do: #pushFront
 	]
 ]

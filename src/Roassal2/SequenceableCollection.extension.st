@@ -8,7 +8,7 @@ SequenceableCollection >> cumsum [
    | sum |
 	sum := 0.
 	^ self collect: [ :v | sum := sum + v. sum ]
- 
+
 ]
 
 { #category : #'*Roassal2' }
@@ -38,7 +38,7 @@ SequenceableCollection >> histogram: aBlockOrSymbol [
 	increment := (max - min) / numberOfInterval.
 	buckets := OrderedCollection new.
 	current := min.
-	1 to: numberOfInterval do: [ :nbInterval | 
+	1 to: numberOfInterval do: [ :nbInterval |
 		elementsInCurrentBucket := values
 			select: [ :v | v >= current and: [ v < (current + increment) ] ].
 		buckets add: current -> elementsInCurrentBucket.
@@ -51,26 +51,26 @@ SequenceableCollection >> histogram: aBlockOrSymbol [
 	d y: [ :assoc | assoc value size ].
 	g add: d.
 	^ g
-	
-	
+
+
 	"	| b ds |
 	b := RTGrapher new.
-	
+
 	ds := RTHistogramSet new.
 	ds points: self.
 	ds barShape width: 20.
 	ds x: aBlockOrSymbol.
-	
-	ds barChartWithBarTitle: [:ar | 
-		ar second isEmpty 
+
+	ds barChartWithBarTitle: [:ar |
+		ar second isEmpty
 			ifTrue: ['[:]']
 			ifFalse: ['[', (ar second first isNumber ifTrue: [ar second first floor] ifFalse: [ar second first]) asString,':', (ar second last isNumber ifTrue: [ar second last ceiling] ifFalse: [ar second last]) asString,']']
 			].
-			
-	b add: ds. 
+
+	b add: ds.
 	b axisX title: 'Values'.
 	b axisY title: 'Frequency'.
-	
+
 	^ b."
 ]
 
@@ -81,32 +81,32 @@ SequenceableCollection >> plot [
 	"
 	| b ds |
 	b := RTGrapher new.
-	
+
 	"We defien the size of the charting area"
 	b extent: 500 @ 100.
-	
+
 	ds := RTData new.
 	"When the mouse is above a bar, say which class we are point at"
 	ds interaction popup.
 	ds points: self.
 	ds dotShape rectangle color: Color blue.
 	b add: ds.
-	
+
 	b build.
 	^ b view
-	
+
 ]
 
 { #category : #'*Roassal2' }
 SequenceableCollection >> removeDuplicates [
 	| iterator |
 	"Remove the copies of elements, but keep the same order"
-	
+
 	self ifEmpty: [ ^ self ].
 	iterator := 1.
 	[ iterator <= self size ]
 		whileTrue: [ | each newIndex |
-			each := self at: iterator.			
+			each := self at: iterator.
 			[ newIndex := (self indexOf: each startingAt: iterator+1).
 			newIndex > 0 ]
 				whileTrue: [ self removeAt: newIndex ].

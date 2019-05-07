@@ -12,7 +12,7 @@ g add: ds.
 
 g addDecorator: (RTRangeSelector new callback: [:es | es inspect ]).
 ""RTGrapherSelectRangeViewContext onGrapher: g.""
-g 
+g
 -=-=-=--=-=
 
 Another example:
@@ -27,7 +27,7 @@ b := [ :someClasses |
 	ds x: [ :cls | cls numberOfLinesOfCode ].
 	g add: ds.
 
-	g addDecorator: (RTRangeSelector new callback: [:es | 
+	g addDecorator: (RTRangeSelector new callback: [:es |
 		| classesToZoomIn |
 		classesToZoomIn := es collect: #model.
 		v cleanAll.
@@ -93,7 +93,7 @@ RTRangeSelector >> initialize [
 RTRangeSelector >> render [
 	self view
 		when: TRMouseDragStart
-		do: [ :evt | 
+		do: [ :evt |
 			| x |
 			x := evt positionFromCamera x.
 			pointWhenStartingDragging := x @ builder extent y negated.
@@ -105,7 +105,7 @@ RTRangeSelector >> render [
 			self signalUpdate ].
 	self view
 		when: TRMouseDragging
-		do: [ :evt | 
+		do: [ :evt |
 			rectangle := Rectangle
 				encompassing:
 					(Array
@@ -115,7 +115,7 @@ RTRangeSelector >> render [
 			self signalUpdate ].
 	self view
 		when: TRMouseDragEnd
-		do: [ :evt | 
+		do: [ :evt |
 			self callbackWithSelectedElements.
 			visualRange remove.
 			self signalUpdate ]

@@ -45,7 +45,7 @@ RTEdgeDrivenLayout class >> on: elements edges: edges [
 
 { #category : #'instance creation' }
 RTEdgeDrivenLayout class >> withEdges: aCollection [
-	
+
 	^self new initialize userDefinedEdges: aCollection
 ]
 
@@ -58,18 +58,18 @@ RTEdgeDrivenLayout >> addDefaultAttachPointToEdges [
 
 { #category : #accessing }
 RTEdgeDrivenLayout >> affectedNodes [
-	
+
 	^affectedNodes
 ]
 
 { #category : #accessing }
 RTEdgeDrivenLayout >> affectedNodes: anObject [
-	
+
 	affectedNodes := anObject
 ]
 
 { #category : #accessing }
-RTEdgeDrivenLayout >> affectedNodesOf:  aNode [ 
+RTEdgeDrivenLayout >> affectedNodesOf:  aNode [
 	^ affectedNodes ifNil: [ aNode nodes ]
 ]
 
@@ -81,7 +81,7 @@ RTEdgeDrivenLayout >> defaultAttachPoint [
 { #category : #'default values' }
 RTEdgeDrivenLayout >> defaultFromPositions [
 	^ #()
-	
+
 ]
 
 { #category : #'default values' }
@@ -98,14 +98,14 @@ RTEdgeDrivenLayout >> doAttachPoint [
 
 { #category : #hook }
 RTEdgeDrivenLayout >> doExecute: elements [
-	
+
 	self subclassResponsibility
 ]
 
 { #category : #hook }
 RTEdgeDrivenLayout >> doIncrementallyExecute: anElementNode [
 	"called by refreshLayoutEvery: ms. It is used to convey a feeling of incremental execution."
-	
+
 	self doExecute: anElementNode
 ]
 
@@ -117,14 +117,14 @@ RTEdgeDrivenLayout >> doNotAttachPoint [
 
 { #category : #private }
 RTEdgeDrivenLayout >> edges [
-	
+
 	^ edges
 ]
 
 { #category : #accessing }
 RTEdgeDrivenLayout >> edges: aCollection [
 	"Set the list of edges that should be considered for the layout.
-	If none is specified (i.e., if this method is not called), then the 
+	If none is specified (i.e., if this method is not called), then the
 	edges are infered."
 	edges := aCollection.
 	self shouldSetDefaultAttachPoint
@@ -134,35 +134,35 @@ RTEdgeDrivenLayout >> edges: aCollection [
 { #category : #iterator }
 RTEdgeDrivenLayout >> edgesDo: aBlock [
 	"Iterates over all the edges of the receiver."
-	
+
 	edges ifNil: [ ^ self ].
 	edges do: aBlock
 
 ]
 
 { #category : #hook }
-RTEdgeDrivenLayout >> executeOnElements: elements [ 
+RTEdgeDrivenLayout >> executeOnElements: elements [
 	"Execute the layout, myself, on the elements"
 
-	self userDefinedEdges isNil 
+	self userDefinedEdges isNil
 		ifTrue: [ self setEdgesFromElements: elements ]
-		ifFalse: 
+		ifFalse:
 			[ | flat |
 			flat := OrderedCollection new.
-			self userDefinedEdges do: 
-				[ :each | 
-				each isCollection 
+			self userDefinedEdges do:
+				[ :each |
+				each isCollection
 					ifTrue: [ flat addAll: each ]
 					ifFalse: [ flat add: each ] ].
-			flat := flat select: #isUsedInLayout. 
+			flat := flat select: #isUsedInLayout.
 			self edges: flat ].
-		
+
 	super executeOnElements: elements
 ]
 
 { #category : #accessing }
 RTEdgeDrivenLayout >> fromPositions: anArray [
-	
+
 	fromPositions := anArray
 ]
 
@@ -180,17 +180,17 @@ RTEdgeDrivenLayout >> isEdgeDrivenLayout [
 ]
 
 { #category : #accessing }
-RTEdgeDrivenLayout >> setEdgesFromElements: elements [ 
+RTEdgeDrivenLayout >> setEdgesFromElements: elements [
 
 	elements isEmpty ifTrue: [ ^ self ].
-	
+
 	^ self
 		edges:
 			((elements flatCollect: #incomingEdges)
 				select: [ :anEdge | anEdge isUsedInLayout and: (elements includes: anEdge from) ])
 "	view := elements anyOne view.
 	view ifNil: [ ^ self ].
-	self edges: (view edges select: [ :el | 
+	self edges: (view edges select: [ :el |
 		(el isUsedInLayout and: [ elements includes: el from ]) and: [ elements includes: el to ] ]).
 	"
 ]
@@ -203,13 +203,13 @@ RTEdgeDrivenLayout >> shouldSetDefaultAttachPoint [
 
 { #category : #accessing }
 RTEdgeDrivenLayout >> toPositions: anArray [
-	
+
 	toPositions := anArray
 ]
 
 { #category : #private }
 RTEdgeDrivenLayout >> userDefinedEdges [
-	
+
 	^userDefinedEdges
 ]
 
@@ -218,5 +218,5 @@ RTEdgeDrivenLayout >> userDefinedEdges: aCollectionOfEdges [
 	"useful to tell to the layout which edges have to be used for the layout"
 
 	userDefinedEdges := aCollectionOfEdges.
-	
+
 ]

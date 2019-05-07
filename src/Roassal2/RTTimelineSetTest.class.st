@@ -12,7 +12,7 @@ RTTimelineSetTest >> testBasic [
 
 	| b f |
 	b := RTTimeline new.
-	
+
 	f := RTTimelineSet new.
 	f shape rectangle color: Color green.
 	f start: [ :v | v ].
@@ -20,9 +20,9 @@ RTTimelineSetTest >> testBasic [
 	f lineIdentifier: #yourself.
 	f objects: #(1 2 3).
 	b add: f.
-	
+
 	b build.
-	
+
 	self assert: b numberOfEvents equals: 3
 ]
 
@@ -42,7 +42,7 @@ RTTimelineSetTest >> testLocalMinAndMax [
 	f end: [ :v | v + 1 ].
 	f lineIdentifier: #yourself.
 	f objects: #(1 2 3).
-	
+
 	self assert: f localMin equals: 1.
 	self assert: f localMax equals: 4.
 ]

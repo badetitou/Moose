@@ -11,7 +11,7 @@ Class {
 RTHowToReportABug class >> menuCommandOn: aBuilder [
 	<worldMenu>
 	(aBuilder item: #'How To Contribute')
-			order: 0.002; 
+			order: 0.002;
 			parent: self projectName asSymbol;
 			label: 'How To report a bug';
 			help: 'How to report a Roassal related bug';
@@ -25,7 +25,7 @@ RTHowToReportABug >> addAnimationTo: v [
 	v when: TRMouseClick do: [ :event | v clean ].
 	v
 		when: TRMouseMove
-		do: [ :event | 
+		do: [ :event |
 			e := (RTEllipse new
 				color: (RTPalette c4 atRandom alpha: 0.2);
 				size: 20 atRandom + 5) element.
@@ -51,13 +51,13 @@ RTHowToReportABug >> open [
 		add:
 			(RTLabel
 				elementOn: 'Problems and bugs can be reported on:').
-				
+
 
 	labels
 		add:
 			((RTLabel new color: Color veryVeryDarkGray)
 				elementOn: 'https://github.com/moosetechnology/Moose/issues').
-				
+
 	labels
 		add:
 			(RTLabel
@@ -68,7 +68,7 @@ RTHowToReportABug >> open [
 				elementOn: 'the moose mailing list or to the Slack #roassal channel').
 
 
-				
+
 	v add: labels.
 	RTVerticalLineLayout on: labels.
 

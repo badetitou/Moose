@@ -1,5 +1,5 @@
 "
-A RTSVGGroupPopup is a RTGroup popup. 
+A RTSVGGroupPopup is a RTGroup popup.
 "
 Class {
 	#name : #RTSVGGroupPopup,
@@ -28,7 +28,7 @@ RTSVGGroupPopup >> addEventHandlers: aStream id: aString element: aRTElement cen
 	visitor := RTSVGVisitor new stream: aStream; center: aNumber; yourself.
 	visitor canvas: myGroup encompassingRectangle.
 	visitor visitGroup: myGroup.
-	aStream 
+	aStream
 		nextPutAll:  '</g>'
 ]
 

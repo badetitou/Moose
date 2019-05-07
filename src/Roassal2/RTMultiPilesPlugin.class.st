@@ -12,20 +12,20 @@ RTMultiPilesPlugin >> description [
 { #category : #hooks }
 RTMultiPilesPlugin >> execute [
 
-	Gofer new 
+	Gofer new
 		smalltalkhubUser: 'abergel' project: 'GitLogExtractor';
-		package: 'GitLogExtractor'; 
+		package: 'GitLogExtractor';
 		load.
 
 
-	Gofer new 
+	Gofer new
 		smalltalkhubUser: 'AlisonFernandez' project: 'MultiPiles';
-		package: 'MultiPiles'; 
+		package: 'MultiPiles';
 		load.
 
-	Gofer new 
+	Gofer new
 		smalltalkhubUser: 'AlisonFernandez' project: 'MMatrix';
-		package: 'MultiPileMatrix'; 
+		package: 'MultiPileMatrix';
 		load.
 
 ]
@@ -33,7 +33,7 @@ RTMultiPilesPlugin >> execute [
 { #category : #testing }
 RTMultiPilesPlugin >> isLoaded [
 	^ RPackageOrganizer default includesPackageNamed: 'MultiPiles'
- 
+
 ]
 
 { #category : #hooks }

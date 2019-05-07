@@ -6,7 +6,7 @@ Class {
 
 { #category : #examples }
 RTBitmapExamples >> image01 [
-	
+
 	"
 	self new image01
 	"
@@ -23,7 +23,7 @@ RTBitmapExamples >> image01 [
 
 { #category : #examples }
 RTBitmapExamples >> image02 [
-	
+
 	"
 	self new image02
 

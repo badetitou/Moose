@@ -13,7 +13,7 @@ RTHTML5ExporterExample >> createIndexFor: aCollection [
 	index := TRPlatform current workingDirectory / 'index.html'.
 	index exists ifTrue: [ index delete ].
 	stream := index writeStream.
-	[ stream nextPutAll: 
+	[ stream nextPutAll:
 '<!DOCTYPE html>
 <html>
 	<head>
@@ -22,7 +22,7 @@ RTHTML5ExporterExample >> createIndexFor: aCollection [
 		<script type="text/javascript" src="http://objectprofile.com/bjqs.js"></script>
 		<link type="text/css" rel="Stylesheet" href="https://raw.githubusercontent.com/jcobb/basic-jquery-slider/master/bjqs.css" />
 		<link type="text/css" rel="Stylesheet" href="http://basic-slider.com/css/main.css" />
-		
+
 		<style type="text/css">
 			body{
 				margin: 0 auto
@@ -47,7 +47,7 @@ RTHTML5ExporterExample >> createIndexFor: aCollection [
 	<body><center>
 		<div id="my-slideshow">
 			<ul class="bjqs">'.
-	
+
 	(aCollection sorted: [ :a :b| a selector <= b selector ]) do: [ :met |
 		text := met methodClass name,'-', met selector asString.
 		stream nextPutAll: '
@@ -57,7 +57,7 @@ RTHTML5ExporterExample >> createIndexFor: aCollection [
 	<iframe width="800" height="800" ref="',met methodClass name, '-',met selector,'.html"></iframe>
 	</li>'.
 		].
-	stream nextPutAll: 
+	stream nextPutAll:
 '			</ul>
 		</div>
 		<img src="http://bradsknutson.com/wp-content/uploads/2013/04/page-loader.gif" style="display: none;">
@@ -128,18 +128,18 @@ examples doWithIndex: [ :ex :i | | link |
 	ex gtOpenOn: v.
 	name := views size printStringHex.
 	views at: ex put: name.
-	
+
 	v elements copy do: [ :e| |n |
 		n := views size printStringHex.
 		views at: e model put: n.
-		(e model method = (RTSpectrographExample >> #exampleRoassalVisualization)) ifTrue: [ 
+		(e model method = (RTSpectrographExample >> #exampleRoassalVisualization)) ifTrue: [
 			v canvas removeShape: (e attributes at: #RTLabelledLabel).
 			v removeElement: e. ]
-		ifFalse: [ 
+		ifFalse: [
 			view := e model returnValue.
 			[ (view isKindOf: RTBuilder) ifTrue: [ view build. view := view view ].
 			view @ RTDraggableView @ RTZoomableView.
-			exporter := RTHTML5Exporter new 
+			exporter := RTHTML5Exporter new
 				fileName: n, '.html';
 				shouldCreateJS: false.
 			exporter createStream.
@@ -150,21 +150,21 @@ examples doWithIndex: [ :ex :i | | link |
 				v removeElement: e ].
 		].
 	].
-	
+
 	RTGridLayout new
 		gapSize: 50;
 		on: v elements.
 	link := RTLinkView new name: [:e | views at: e ].
 	v elements @ link.
-	
-	RTHTML5Exporter new 
+
+	RTHTML5Exporter new
 		fileName: name, '.html';
 		shouldCreateJS: i = 1;
 		export: v.
 	].
 
 [
-	stream 
+	stream
 		nextPutAll: '
 <!DOCTYPE html>
 <html>
@@ -180,7 +180,7 @@ examples doWithIndex: [ :ex :i | | link |
         <link rel="stylesheet" href="css/default.css">
         <!-- Pushy CSS -->
         <link rel="stylesheet" href="css/pushy.css">
-        
+
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="js/highlight.pack.js"></script>
@@ -192,7 +192,7 @@ examples doWithIndex: [ :ex :i | | link |
         <nav class="pushy pushy-left">
             <ul>'.
 		examples do: [ :ex |
-			stream 
+			stream
 				nextPutAll: '
                 <li id="';
 				nextPutAll: (views at: ex);
@@ -207,8 +207,8 @@ examples doWithIndex: [ :ex :i | | link |
         </div>
         <script>
             var titles = [];'.
-		examples do: [ :ex | 
-			stream 
+		examples do: [ :ex |
+			stream
 				nextPutAll: '
             titles[''';
 				nextPutAll: (views at: ex);
@@ -217,9 +217,9 @@ examples doWithIndex: [ :ex :i | | link |
 				nextPutAll: ''';'. ].
 		stream nextPutAll: '
 				var sources = [];'.
-		examples do: [ :ex | 
-			ex gtExamples do: [ :examp| 
-				stream 
+		examples do: [ :ex |
+			ex gtExamples do: [ :examp|
+				stream
 					nextPutAll: '
 				sources[''';
 				 	nextPutAll: (views at: examp);
@@ -242,7 +242,7 @@ RTHTML5ExporterExample >> exportExampleCircleLayoutAndEdges [
 	| e view|
 	e := RTHTML5Exporter new.
 	view := RTRoassalExample new perform: #exampleCircleLayoutAndEdges.
-	
+
 	e export: view.
 ]
 
@@ -251,7 +251,7 @@ RTHTML5ExporterExample >> exportExampleClusterLayout [
 	| e view|
 	e := RTHTML5Exporter new.
 	view := RTRoassalExample new perform: #exampleClusterLayout.
-	
+
 	e export: view.
 ]
 
@@ -260,7 +260,7 @@ RTHTML5ExporterExample >> exportExampleColoredAndInteractionLabel [
 	| e view|
 	e := RTHTML5Exporter new.
 	view := RTGrapherExample new perform: #exampleColoredAndInteractionLabel.
-	
+
 	e export: view.
 ]
 
@@ -269,7 +269,7 @@ RTHTML5ExporterExample >> exportExampleHappyNewYear [
 	| e view|
 	e := RTHTML5Exporter new.
 	view := RTAnimationExample new perform: #exampleHappy2014.
-	
+
 	e export: view.
 ]
 
@@ -278,7 +278,7 @@ RTHTML5ExporterExample >> exportExampleLabels [
 	| e view|
 	e := RTHTML5Exporter new.
 	view := RTRoassalExample new perform: #exampleLabels.
-	
+
 	e export: view.
 ]
 
@@ -287,6 +287,6 @@ RTHTML5ExporterExample >> exportExampleLazyFormLoading [
 	| e view|
 	e := RTHTML5Exporter new.
 	view := RTRoassalExample new perform: #exampleLazyFormLoading.
-	
+
 	e export: view.
 ]

@@ -23,22 +23,22 @@ RTPolymorphicBoxLegendItem >> boxDescription: aString [
 RTPolymorphicBoxLegendItem >> execute [
 	| g ext1 ext2 box e lineExtremityShape lineShape topLine leftLine widthDescriptionElement heightDescriptionElement boxDescriptionLabel |
 	g := RTGroup new.
-	
+
 	"Defining extremities and line shape"
 	lineExtremityShape := RTBox new size: 1.
 	lineShape := RTDoubleArrowedLine new color: Color red.
-	
+
 	"Label for the descriptions"
 	widthDescriptionElement := (self newLabelShape: widthDescription) element.
 	heightDescriptionElement := (self newLabelShape: heightDescription) element.
 	g add: widthDescriptionElement.
 	g add: heightDescriptionElement.
-	
+
 	"The box"
 	box := (RTBox new extent: 30 @ 50) element.
 	g add: box.
 	e := box encompassingRectangle.
-	
+
 	"The top line"
 	ext1 := lineExtremityShape element.
 	ext2 := lineExtremityShape element.
@@ -49,12 +49,12 @@ RTPolymorphicBoxLegendItem >> execute [
 		add: ext1;
 		add: ext2.
 	g add: topLine.
-	
+
 	"The width label"
 	boxDescriptionLabel := (self newLabelShape: boxDescription) element.
 	g add: boxDescriptionLabel.
 	RTConstraint move: boxDescriptionLabel onTheRightOf: box.
-	
+
 	TRConstraint move: widthDescriptionElement between: ext1 and: ext2.
 	widthDescriptionElement translateBy: 0 @ (widthDescriptionElement extent y / -2 - 3).
 	ext1 := lineExtremityShape element.

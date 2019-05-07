@@ -1,5 +1,5 @@
 "
-A RTGroup represents collections of Roassal elements. A RTGroup is not designed to contain other things than Roassal elements. 
+A RTGroup represents collections of Roassal elements. A RTGroup is not designed to contain other things than Roassal elements.
 A RTGroup is polymorphic to RTElement. When an RTElement is expected, one can provide an RTGroup.
 "
 Class {
@@ -60,15 +60,15 @@ RTGroup >> attributeAt: aKey [
 ]
 
 { #category : #attributes }
-RTGroup >> attributeAt: aKey ifAbsent: aBlockClosure [ 
-	
-	^ self attributes at: aKey ifAbsent: aBlockClosure 
+RTGroup >> attributeAt: aKey ifAbsent: aBlockClosure [
+
+	^ self attributes at: aKey ifAbsent: aBlockClosure
 ]
 
 { #category : #attributes }
-RTGroup >> attributeAt: aKey ifAbsentPut: aBlockClosure [ 
-	
-	^ self attributes at: aKey ifAbsentPut: aBlockClosure 
+RTGroup >> attributeAt: aKey ifAbsentPut: aBlockClosure [
+
+	^ self attributes at: aKey ifAbsentPut: aBlockClosure
 ]
 
 { #category : #attributes }
@@ -97,7 +97,7 @@ RTGroup >> center [
 { #category : #copying }
 RTGroup >> deepCopy [
 	"Create a copy of myself, and a copy of each elements and edges."
-	
+
 	| copyOfMyself edgesCopy |
 	copyOfMyself := self class new.
 	self do: [ :anElement |
@@ -105,7 +105,7 @@ RTGroup >> deepCopy [
 	].
 
 	edgesCopy := self flatCollect: #connectedEdges as: Set.
-	edgesCopy do: [ :e | 
+	edgesCopy do: [ :e |
 		| edgeC copyFrom copyTo |
 		edgeC := e copy.
 		copyFrom := copyOfMyself elementFromModel: e from model.
@@ -116,11 +116,11 @@ RTGroup >> deepCopy [
 		copyTo connectedEdges add: edgeC."
 		].
 
-"	anotherCopy := self copy.	
+"	anotherCopy := self copy.
 	copyOfMyself with: anotherCopy do: [ :elementCopy :elementOriginal |
 		| edges |
 		edges := elementOriginal connectedEdges collect: #copy.
-		edges do: [ :e | 
+		edges do: [ :e |
 			e from: (copyOfMyself detect: [ :ee | ee model = e from model ]).
 			e to: (copyOfMyself detect: [ :ee | ee model = e to model ]) ].
 		self halt.
@@ -128,7 +128,7 @@ RTGroup >> deepCopy [
 		elementCopy connectedEdges addAll: edges.
 	]."
 	^ copyOfMyself
-	
+
 ]
 
 { #category : #accessing }
@@ -139,13 +139,13 @@ RTGroup >> edges [
 { #category : #accessing }
 RTGroup >> elementFromModel: anObject [
 	"Return an element that corresponds to the object provided as parameter. If none is found, then return nil"
-	
+
 	| t key|
 	self elementFromModelCache at: anObject ifPresent: [ :v |
 		v isCollection ifFalse: [ ^ v ] ].
 
 	"We have this line because of a bug of the implementation of CompiledMethod>>#="
-	t := (anObject class == CompiledMethod) 
+	t := (anObject class == CompiledMethod)
 				ifTrue: [ self detect: [ :el | el model == anObject ] ifNone: [ nil ] ]
 				ifFalse: [ self detect: [ :el | el model = anObject ] ifNone: [ nil ] ].
 	"We have this hack for nil objects because in visualWorks a dictionary cannot have nil as a key"
@@ -168,13 +168,13 @@ RTGroup >> elements [
 
 { #category : #accessing }
 RTGroup >> elementsFromModel: anObject [
-	"Return an element that corresponds to the object provided as parameter. If none is found, then return nil"	
+	"Return an element that corresponds to the object provided as parameter. If none is found, then return nil"
 
 	| t key |
 	self elementFromModelCache at: anObject ifPresent: [ :v | v isCollection ifTrue: [ ^ v ] ].
 
 	"We have this line because of a bug of the implementation of CompiledMethod>>#="
-	t := (anObject class == CompiledMethod) 
+	t := (anObject class == CompiledMethod)
 				ifTrue: [ self select: [ :el | el model == anObject ] ]
 				ifFalse: [ self select: [ :el | el model = anObject ] ].
 
@@ -188,7 +188,7 @@ RTGroup >> elementsFromModel: anObject [
 RTGroup >> elementsFromModels: objects [
 	"Return elements that corresponds to the objects provided as parameter. If none is found, then return an empty collection"
 	| answer t |
-	self assert: [ objects isCollection ] description: 'Provide a set of elements instead of one single element'. 
+	self assert: [ objects isCollection ] description: 'Provide a set of elements instead of one single element'.
 	answer := RTGroup new.
 	objects do: [ :o |
 		t := self elementsFromModel: o.
@@ -198,7 +198,7 @@ RTGroup >> elementsFromModels: objects [
 
 { #category : #public }
 RTGroup >> encompassingRectangle [
-	^ self 
+	^ self
 		ifEmpty: [ (0 @ 0) corner: (0 @ 0) ]
 		ifNotEmpty: [ Rectangle merging: (self collect: #encompassingRectangle) ]
 ]
@@ -215,34 +215,34 @@ RTGroup >> extent: newExtentT [
 	newExtent := newExtentT max: 1 @ 1.
 	encompassingRectangle := self encompassingRectangle.
 	oldExtent := encompassingRectangle extent.
-	
+
 	"Make top left to 0 @ 0"
 	self translateBy: encompassingRectangle topLeft negated.
-	
+
 	"Resizing and moving the position of each element"
 	self do: [ :element |
 		element translateTo: (element position * newExtent / oldExtent).
 		element extent: (element extent * newExtent / oldExtent).
 	].
-	
+
 	"Move back all the element to the original position"
 	self translateBy: encompassingRectangle topLeft.
-	
-	
-	
+
+
+
 ]
 
 { #category : #attributes }
-RTGroup >> hasAttribute: aKey [ 
+RTGroup >> hasAttribute: aKey [
 	"Return true if attributes includes aKey"
-	
+
 	^ attributes notNil and: [ attributes includesKey: aKey ]
 ]
 
 { #category : #attributes }
-RTGroup >> hasAttributes [ 
+RTGroup >> hasAttributes [
 	"Return true if at least one attributes is present"
-	
+
 	^ attributes notNil and: [ attributes notEmpty ]
 ]
 
@@ -317,7 +317,7 @@ RTGroup >> removeAttributeAt: aKey ifAbsent: anErrorBlock [
 { #category : #actions }
 RTGroup >> removeInteractionIfPresent: anInteractionClass [
 	"Remove an interaction, if present, on each element contained in the group
-	
+
 	For example:
 	-=-=-=-=-=
 	v := RTView new.

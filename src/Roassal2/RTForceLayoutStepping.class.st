@@ -23,14 +23,14 @@ RTForceLayoutStepping >> addEdges: someEdges [
 { #category : #updating }
 RTForceLayoutStepping >> addNode: anElement [
 	"Designate the collection of elements that have to be layouted"
-	layout 
+	layout
 		addNodes: (Array with: anElement)
 ]
 
 { #category : #updating }
 RTForceLayoutStepping >> addNodes: someElements [
 	"Designate the collection of elements that have to be layouted"
-	layout 
+	layout
 		addNodes: someElements
 ]
 
@@ -75,16 +75,16 @@ RTForceLayoutStepping >> layout [
 
 { #category : #accessing }
 RTForceLayoutStepping >> layout: aForceBasedLayout [
-	"Set an instance of the class RTForceBasedLayout. 
+	"Set an instance of the class RTForceBasedLayout.
 	This is useful in case the layout is initialized from outside"
 	self layoutWithoutPreparing: aForceBasedLayout.
-	view ifNotNil: 
+	view ifNotNil:
 		[ self prepareLayoutFor: view ]
 ]
 
 { #category : #accessing }
 RTForceLayoutStepping >> layoutWithoutPreparing: aForceBasedLayout [
-	"Set an instance of the class RTForceBasedLayout. 
+	"Set an instance of the class RTForceBasedLayout.
 	This is useful in case the layout is initialized from outside"
 	layout := aForceBasedLayout.
 
@@ -98,7 +98,7 @@ RTForceLayoutStepping >> nodes [
 { #category : #accessing }
 RTForceLayoutStepping >> nodes: elements [
 	"Designate the collection of elements that have to be layouted"
-	layout 
+	layout
 		prepareNodes: elements;
 		nodes: elements
 ]
@@ -126,7 +126,7 @@ RTForceLayoutStepping >> removeAllEdges [
 { #category : #updating }
 RTForceLayoutStepping >> removeNode: anElement [
 	"Designate the collection of elements that have to be layouted"
-	layout 
+	layout
 		removeNode: anElement
 ]
 

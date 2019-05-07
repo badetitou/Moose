@@ -48,7 +48,7 @@ RTDraggableView >> all [
 { #category : #initialization }
 RTDraggableView >> initialize [
 	super initialize.
-	
+
 	"Any button can be used to drag and drop"
 	self all.
 ]
@@ -60,19 +60,19 @@ RTDraggableView >> initializeElement: aView [
 	move := false.
 	aView canvas when: self mouse do: [ move := true].
 	aView canvas when: TRMouseDragging do: [ :e |
-		move ifTrue: [ 
+		move ifTrue: [
 			aView canvas camera translateBy: e step negated / aView canvas camera scale.
 			e signalUpdate ]
 		].
 	aView canvas when: TRMouseDragEnd do: [ move := false ].
-	
+
 ]
 
 { #category : #'public - configuration' }
 RTDraggableView >> left [
 	"Only the left mouse button can be used to drag and drop the view
 	For example:
-	
+
 	| v |
 	v := RTView new.
 	v @ RTDraggableView new left.
@@ -86,7 +86,7 @@ RTDraggableView >> left [
 RTDraggableView >> middle [
 	"Only the middle mouse button can be used to drag and drop the view
 	For example:
-	
+
 	| v |
 	v := RTView new.
 	v @ RTDraggableView new middle.
@@ -106,7 +106,7 @@ RTDraggableView >> mouse [
 RTDraggableView >> right [
 	"Only the right mouse button can be used to drag and drop the view
 	For example:
-	
+
 	| v |
 	v := RTView new.
 	v @ RTDraggableView new right.

@@ -19,19 +19,19 @@ RTSimpleArrowHeadTest >> testDragAndDropNodes [
 
 	e1 @ RTDraggable.
 	e2 @ RTDraggable.
-	
+
 	v add: e1.
 	v add: e2.
 	l := RTEdge from: e1 to: e2.
-	
+
 	l + (RTLine new color: Color red) + (RTSimpleArrowHead new color: Color red).
 	v add: l.
-	
+
 	"Checking"
 	lineTrachel := v canvas shapes detect: [ :s | s class == TRLineShape ].
 	self assert: lineTrachel from equals: l from position.
 	self assert: lineTrachel to equals: l to position.
-	
+
 	"Drag and Drop"
 	e1 translateBy: 10 @ 20.
 	self assert: lineTrachel from equals: l from position.

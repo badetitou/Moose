@@ -22,7 +22,7 @@ RTAIPackageslugin >> execute [
 	    smalltalkhubUser: 'abergel' project: 'GeneticAlgo';
 	    configurationOf: 'GeneticAlgo';
 	    loadDevelopment.
-	
+
 	Gofer it
 	    smalltalkhubUser: 'abergel' project: 'GeneticAlgo';
 	    package: 'GeneticAlgoAndNeuralNetwork';
@@ -33,7 +33,7 @@ RTAIPackageslugin >> execute [
 { #category : #hooks }
 RTAIPackageslugin >> isLoaded [
 	^ (RPackageOrganizer default includesPackageNamed: 'NeuralWorks') and: [ (RPackageOrganizer default includesPackageNamed: 'GeneticAlgo') ]
- 
+
 ]
 
 { #category : #hooks }

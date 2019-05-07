@@ -42,7 +42,7 @@ RTMarkerOnX >> markerColor: aColor [
 ]
 
 { #category : #hooks }
-RTMarkerOnX >> render [	
+RTMarkerOnX >> render [
 	| fromPosition toPosition e1 e2 l lineShape |
 	fromPosition := builder getPixelPositionOf: value @ 0.
 	toPosition := fromPosition - (0 @ 30).
@@ -50,7 +50,7 @@ RTMarkerOnX >> render [
 	e2 := (RTBox new size: 1) element.
 	e1 translateTo: fromPosition.
 	e2 translateTo: toPosition.
-	
+
 	lineShape := RTArrowedLine new.
 	lineShape head width: 3.
 	lineShape width: 3.

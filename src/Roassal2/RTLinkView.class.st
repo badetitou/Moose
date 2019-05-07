@@ -39,7 +39,7 @@ RTLinkView >> initialize [
 
 { #category : #hooks }
 RTLinkView >> initializeElement: element [
-	element when: TRMouseLeftClick do: [ 
+	element when: TRMouseLeftClick do: [
 		showView ifTrue: [ (self viewFor: element) inspect ]. ].
 ]
 
@@ -55,7 +55,7 @@ RTLinkView >> nameBlock [
 
 { #category : #accessing }
 RTLinkView >> nameElement: block [
-	nameBlock := block 
+	nameBlock := block
 ]
 
 { #category : #accessing }
@@ -86,7 +86,7 @@ RTLinkView >> titleElement: aBlock [
 { #category : #accessing }
 RTLinkView >> titleFor: element [
 	^ titleBlock rtValue: element
-	
+
 ]
 
 { #category : #accessing }
@@ -107,5 +107,5 @@ RTLinkView >> viewElement: aBlock [
 { #category : #accessing }
 RTLinkView >> viewFor: element [
 	^ viewBlock rtValue: element
-	
+
 ]

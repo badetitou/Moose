@@ -49,10 +49,10 @@ RTGrapherTest >> testAxis [
 	ds := RTData new.
 	ds points: #(1 2).
 	b add: ds.
-	
+
 	x1 := b axisX numberOfTicks: 4.
 	x2 := b axisX numberOfLabels: 5.
-	
+
 	self assert: x1 == x2.
 	self assert: x1 numberOfTicks equals: 5.
 	self assert: x1 numberOfLabels equals: 5.
@@ -66,10 +66,10 @@ RTGrapherTest >> testAxis02 [
 	ds := RTData new.
 	ds points: #(1 2).
 	b add: ds.
-	
+
 	x1 := b axisY numberOfTicks: 4.
 	x2 := b axisY numberOfLabels: 5.
-	
+
 	self assert: x1 == x2.
 	self assert: x1 numberOfTicks equals: 5.
 	self assert: x1 numberOfLabels equals: 5.
@@ -82,7 +82,7 @@ RTGrapherTest >> testDefault [
 	self assert: b maxX equals: 0.
 	self assert: b minY equals: 0.
 	self assert: b maxY equals: 0.
-	
+
 	self assert: b datasets isEmpty.
 	self assert: b decorators isEmpty.
 ]
@@ -152,7 +152,7 @@ RTGrapherTest >> testRender [
 	ds := RTData new.
 	ds points: #(1 2).
 	b add: ds.
-	
+
 	v := RTView new.
 	b renderIn: v
 ]
@@ -184,7 +184,7 @@ RTGrapherTest >> testScaling02 [
 	ds2 points: (1 to: 10).
 	ds2 yLog.
 	b add: ds2.
-	
+
 	self assert: b yScale equals: ds1 yScale
 ]
 
@@ -202,7 +202,7 @@ RTGrapherTest >> testScaling03 [
 	ds2 points: (1 to: 10).
 	ds2 yLinear.
 	b add: ds2.
-	
+
 	self should: [ b yScale ] raise: Error
 ]
 
@@ -220,7 +220,7 @@ RTGrapherTest >> testScaling04 [
 	ds2 points: (1 to: 10).
 	ds2 xLinear.
 	b add: ds2.
-	
+
 	self should: [ b xScale ] raise: Error.
 	self shouldnt: [ b yScale ] raise: Error
 ]
@@ -239,9 +239,9 @@ RTGrapherTest >> testSimple [
 	b add: ds.
 
 	b build.
-	
+
 	self assert: ds maxX equals: 6.
-	
+
 	self assert: b minX equals: 0.
 	self assert: b maxX equals: 6.
 	self assert: b minY equals: 0.
@@ -279,7 +279,7 @@ RTGrapherTest >> testSimple03 [
 	ds barShape rectangle color: Color lightBlue.
 	b add: ds.
 	b build.
-	
+
 	ds renderIn: RTView new.
 ]
 
@@ -295,7 +295,7 @@ RTGrapherTest >> testTitleOnAxes [
 	b axisX noTick; title: 'hello'.
 	b axisY noLabel; title: 'world'.
 	b build.
-	
+
 	labels := b view elements elements select: [ :el | el shape class == RTLabel ].
 	self assert: (labels anySatisfy: [ :e | e trachelShape text = 'hello' ]).
 	self assert: (labels anySatisfy: [ :e | e trachelShape text = 'world' ]).
@@ -313,7 +313,7 @@ RTGrapherTest >> testTitleOnAxes02 [
 	b axisX title: 'hello'.
 	b axisY title: 'world'.
 	b build.
-	
+
 	labels := b view elements elements select: [ :el | el shape class == RTLabel ].
 	self assert: (labels anySatisfy: [ :e | e trachelShape text = 'hello' ]).
 	self assert: (labels anySatisfy: [ :e | e trachelShape text = 'world' ]).

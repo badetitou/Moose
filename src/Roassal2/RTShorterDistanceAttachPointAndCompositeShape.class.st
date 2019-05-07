@@ -39,7 +39,7 @@ RTShorterDistanceAttachPointAndCompositeShape >> attachPointsFor: anEdge on: anE
 	| rec center |
 	rec := self getEncompassingRectangleOf: anElement.
 	center := rec center.
-	^ Array 
+	^ Array
 		"upper side"
 		with: ((center x) @ rec top)
 		 "right side"
@@ -48,7 +48,7 @@ RTShorterDistanceAttachPointAndCompositeShape >> attachPointsFor: anEdge on: anE
 		with: ((center x) @ rec bottom)
 		"left side"
 		with: (rec left @ (center y))
-	
+
 ]
 
 { #category : #'public - accessing' }
@@ -62,7 +62,7 @@ RTShorterDistanceAttachPointAndCompositeShape >> composedShapeSelection: aSymbol
 RTShorterDistanceAttachPointAndCompositeShape >> getEncompassingRectangleOf: anElement [
 	"Return the rectangle of the trachel shape that should be considered"
 	^ (self trachelShapeToBeConsideredOf: anElement) encompassingRectangle
-	
+
 ]
 
 { #category : #'public - hooks' }
@@ -80,7 +80,7 @@ RTShorterDistanceAttachPointAndCompositeShape >> initialize [
 { #category : #'public - hooks' }
 RTShorterDistanceAttachPointAndCompositeShape >> trachelShapeToBeConsideredOf: anElement [
 	"Return the trachel shape to be considered from the roassal element argument"
-	
+
 	^ (self hasCompositeShape: anElement)
 		ifTrue: [ composedShapeSelection rtValue: anElement trachelShape shapes ]
 		ifFalse: [ anElement trachelShape ]

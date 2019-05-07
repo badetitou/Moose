@@ -13,7 +13,7 @@ RTTreeLayoutTest >> testAddingAttachPoint [
 	lineShape := RTLine new.
 	l := lineShape edgeFrom: es first to: es second.
 	v add: l.
-	
+
 	self assert: lineShape attachPoint class equals: RTCenteredAttachPoint.
 	RTHorizontalTreeLayout on: es.
 	self assert: lineShape attachPoint class equals: RTHorizontalAttachPoint.
@@ -28,7 +28,7 @@ RTTreeLayoutTest >> testAddingAttachPointOnVertical [
 	lineShape := RTLine new.
 	l := lineShape edgeFrom: es first to: es second.
 	v add: l.
-	
+
 	self assert: lineShape attachPoint class equals: RTCenteredAttachPoint.
 	RTTreeLayout on: es.
 	self assert: lineShape attachPoint class equals: RTVerticalAttachPoint.
@@ -47,7 +47,7 @@ RTTreeLayoutTest >> testAttachPoint [
 
 	self assert: edge trachelShape from equals: 10 @ 15.
 	self assert: edge trachelShape from ~= es first center.
-	
+
 	self assert: edge trachelShape to equals: 10 @ 35.
 	self assert: edge trachelShape to ~= es second center.
 ]
@@ -65,7 +65,7 @@ RTTreeLayoutTest >> testAttachPointAndArrowedLine [
 
 	self assert: edge trachelShape from equals: 10 @ 15.
 	self assert: edge trachelShape from ~= es first center.
-	
+
 	self assert: edge trachelShape to equals: 10 @ 35.
 	self assert: edge trachelShape to ~= es second center.
 ]
@@ -112,7 +112,7 @@ RTTreeLayoutTest >> testBasic [
 { #category : #'tests - reversed' }
 RTTreeLayoutTest >> testHorizontallyReversed [
 	| layout v edge lineShape elements |
-	
+
 	v := RTView new.
 	elements := RTBox elementsOn: (1 to: 3).
 	v addAll: elements.
@@ -122,20 +122,20 @@ RTTreeLayoutTest >> testHorizontallyReversed [
 	edge := lineShape edgeFrom: elements first to: elements third.
 	v add: edge.
 	layout := RTTreeLayout new.
-	
+
 	"NO REVERSE"
 	layout on: elements.
 	self assert: elements second position y > elements first position y.
 	self assert: elements second position x < elements first position x.
 	self assert: elements second position y equals: elements third position y.
-	
+
 	"REVERSE"
 	layout horizontallyReverse.
 	layout on: elements.
 	self assert: elements second position y > elements first position y.
 	self assert: elements second position x > elements first position x.
 	self assert: elements second position y equals: elements third position y.
-	
+
 	"ATTACHPOINT"
 	self assert: (v edges noneSatisfy: [ :ed | ed shape attachPoint isInverted ]).
 	self assert: (v edges collect: [ :ed | ed shape attachPoint ]) asSet size equals: 1.
@@ -172,7 +172,7 @@ RTTreeLayoutTest >> testNotAddingAttachPoint [
 { #category : #'tests - reversed' }
 RTTreeLayoutTest >> testVerticallyReversed [
 	| layout v edge lineShape elements |
-	
+
 	v := RTView new.
 	elements := RTBox elementsOn: (1 to: 3).
 	v addAll: elements.
@@ -182,20 +182,20 @@ RTTreeLayoutTest >> testVerticallyReversed [
 	edge := lineShape edgeFrom: elements first to: elements third.
 	v add: edge.
 	layout := RTTreeLayout new.
-	
+
 	"NO REVERSE"
 	layout on: elements.
 	self assert: elements second position y > elements first position y.
 	self assert: elements second position x < elements first position x.
 	self assert: elements second position y equals: elements third position y.
-	
+
 	"REVERSE"
 	layout verticallyReverse.
 	layout on: elements.
 	self assert: elements second position y < elements first position y.
 	self assert: elements second position x < elements first position x.
 	self assert: elements second position y equals: elements third position y.
-	
+
 	"ATTACHPOINT"
 	self assert: (v edges collect: [ :ed | ed shape attachPoint ]) asSet size equals: 1.
 ]
@@ -209,7 +209,7 @@ RTTreeLayoutTest >> testVerticallyReversedAndAttachPoint [
 	edge := RTArrowedLine new color: Color red trans; edgeFrom: es first to: es second.
 	v add: edge.
 	es @ RTDraggable.
-	
+
 	RTTreeLayout new verticallyReverse; on: es.
 
 	self assert: edge trachelShape from equals: es first encompassingRectangle topCenter.
@@ -227,7 +227,7 @@ RTTreeLayoutTest >> testVerticallyReversedAndAttachPointNo [
 	edge := RTArrowedLine new color: Color red trans; edgeFrom: es first to: es second.
 	v add: edge.
 	es @ RTDraggable.
-	
+
 	RTTreeLayout new doNotAttachPoint; verticallyReverse; on: es.
 
 	self assert: edge trachelShape from equals: es first center.
@@ -245,7 +245,7 @@ RTTreeLayoutTest >> testVerticallyReversedAndAttachPointNo02 [
 	edge := RTArrowedLine new color: Color red trans; edgeFrom: es first to: es second.
 	v add: edge.
 	es @ RTDraggable.
-	
+
 	RTTreeLayout new verticallyReverse; doNotAttachPoint; on: es.
 
 	self assert: edge trachelShape from equals: es first center.

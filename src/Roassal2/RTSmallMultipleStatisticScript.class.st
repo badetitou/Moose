@@ -6,11 +6,11 @@ Class {
 
 { #category : #accessing }
 RTSmallMultipleStatisticScript >> description [
-	^ 
+	^
 'Gives the statistic of a TSV file (like a CSV file but with tabulation instead of comma).
 The file should have 4 columns: time<TAB>n1<TAB>n2<TAB>weight.
 time is an integer value. It could represent a time period.
-n1 and n2 are string values. 
+n1 and n2 are string values.
 weight is a float value.
 
 A textual description is provided.'
@@ -26,7 +26,7 @@ RTSmallMultipleStatisticScript >> execute [
 	n2 := Set new.
 	weights := Set new.
 	nbDataPoints := 0.
-	
+
 	tab := RTTabTable openTSVfile.
 	tab ifNil: [ ^ self ].
 	tab values do: [ :line |
@@ -38,13 +38,13 @@ RTSmallMultipleStatisticScript >> execute [
 	c := (WriteStream on: String new)
 			nextPutAll: 'Number of data points ';
 			nextPutAll: nbDataPoints asString; cr;
-			
+
 			nextPutAll: 'Number of n1 elements ';
 			nextPutAll: n1 size asString; cr;
-			
+
 			nextPutAll: 'Number of times ';
 			nextPutAll: times size asString; cr;
-			
+
 			nextPutAll: 'Number of n2 elements ';
 			nextPutAll: n2 size asString; cr;
 

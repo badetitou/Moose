@@ -23,19 +23,19 @@ RTShowLabel >> accept: aVisitor with: args [
 ]
 
 { #category : #actions }
-RTShowLabel >> doHighlightElement: anElement [ 
+RTShowLabel >> doHighlightElement: anElement [
 	anElement @ labelledInteraction.
 ]
 
 { #category : #actions }
-RTShowLabel >> doUnhighlightElement: anElement [ 
+RTShowLabel >> doUnhighlightElement: anElement [
 	labelledInteraction removeLabelFrom: anElement.
 ]
 
 { #category : #'reflective operations' }
-RTShowLabel >> doesNotUnderstand: aMessage [ 
-	labelledInteraction 
-		perform: aMessage selector 
+RTShowLabel >> doesNotUnderstand: aMessage [
+	labelledInteraction
+		perform: aMessage selector
 		withArguments: aMessage arguments
 ]
 

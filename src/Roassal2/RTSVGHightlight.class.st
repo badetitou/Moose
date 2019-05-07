@@ -42,7 +42,7 @@ RTSVGHightlight >> addFunctions: aStream [
 					affected.style["',attr,'"] = "',self color asHTMLColor,'";
 				}
 			};
-			
+
 			function unHightlight(evt) {
 				if (evt.target.id == "BackDrop")
 					return;

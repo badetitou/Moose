@@ -40,11 +40,11 @@ RTViewTest >> testAdding [
 	| e1 e2 |
 	e1 := RTBox element.
 	e2 := RTBox element.
-	
+
 	e1 setAsFixed.
 	view add: e1.
 	view add: e2.
-	
+
 	self assert: view canvas numberOfFixedShapes = 1.
 	self assert: view canvas numberOfShapes = 1.
 ]
@@ -65,7 +65,7 @@ RTViewTest >> testAddingEdgeSetsTheElementInTrachelShape [
 	el2 := RTBox element.
 	edge := RTLine edgeFrom: el1 to: el2.
 	view add: el1; add: el2.
-	view add: edge.	
+	view add: edge.
 	self assert: edge trachelShape element equals: edge
 ]
 
@@ -80,7 +80,7 @@ RTViewTest >> testAddingEdges [
 
 	self assert: view numberOfEdges = 0.
 	view add: edge.
-	self assert: view numberOfEdges = 1.	
+	self assert: view numberOfEdges = 1.
 ]
 
 { #category : #edges }
@@ -111,7 +111,7 @@ RTViewTest >> testCleaningView [
 	self assert: v numberOfElements equals: 0.
 	self assert: v canvas numberOfFixedShapes equals: 0.
 	self assert: v canvas numberOfShapes equals: 0.
-	
+
 ]
 
 { #category : #tests }
@@ -130,7 +130,7 @@ RTViewTest >> testCleaningViewHavingCallback [
 	self assert: v canvas numberOfFixedShapes equals: 0.
 	self assert: v canvas numberOfShapes equals: 0.
 	self assert: v announcer numberOfSubscriptions equals: 0.
-	
+
 ]
 
 { #category : #tests }
@@ -165,7 +165,7 @@ RTViewTest >> testEdgeFromModel [
 	edge := RTLine edgeFrom: e1 to: e2.
 	edge model: 'hello'.
 	view add: e1; add: e2; add: edge.
-	
+
 	self assert: (view edgeFromModel: 'hello') equals: edge
 ]
 
@@ -191,7 +191,7 @@ RTViewTest >> testElementsFromModel [
 	edge := RTLine edgeFrom: e1 to: e2.
 	edge model: 'hello'.
 	view add: e1; add: e2; add: e3; add: edge.
-	
+
 	self assert: (view elementsFromModel: 'hello') isEmpty.
 	self assert: (view elementsFromModel: 1) size equals: 2.
 	self assert: (view elementsFromModel: 2) size equals: 1.
@@ -211,7 +211,7 @@ RTViewTest >> testFillingCanvas [
 	view := RTView new.
 	view add: RTBox element.
 	canvas := view setUpCanvas.
-	
+
 	self assert: canvas class == TRCanvas.
 	self assert: canvas numberOfShapes = 1.
 ]
@@ -303,15 +303,15 @@ RTViewTest >> testPushBackEdges [
 	| es lastEdge |
 	es := RTBox new elementsOn: (1 to: 10).
 	view addAll: es.
-	
+
 	RTEdgeBuilder new
 		view: view;
 		objects: (1 to: 10);
 		connectFrom: [ :aValue | aValue // 3 ] to:  #yourself.
 	view add: (RTBox element).
 	RTTreeLayout on: es.
-	
-	
+
+
 	lastEdge := view edges last.
 	self assert: (view canvas shapes indexOf: lastEdge trachelShape) equals: 18.
 	view pushBackEdges.
@@ -324,15 +324,15 @@ RTViewTest >> testPushFrontEdges [
 	| es lastEdge |
 	es := RTBox new elementsOn: (1 to: 10).
 	view addAll: es.
-	
+
 	RTEdgeBuilder new
 		view: view;
 		objects: (1 to: 10);
 		connectFrom: [ :aValue | aValue // 3 ] to:  #yourself.
 	view add: (RTBox element).
 	RTTreeLayout on: es.
-	
-	
+
+
 	lastEdge := view edges last.
 	self assert: (view canvas shapes indexOf: lastEdge trachelShape) equals: 18.
 	view pushFrontEdges.
@@ -398,11 +398,11 @@ RTViewTest >> testRemoveElementsWithCompositeShape [
 	view add: el2.
 	self assert: view numberOfElements equals: 2.
 	self assert: view canvas shapes size equals: 4.
-	
+
 	view removeElements: (RTGroup with: el1).
 	self assert: view numberOfElements equals: 1.
 	self assert: view canvas shapes size equals: 2.
-	
+
 	view removeElements: (RTGroup with: el2).
 	self assert: view numberOfElements equals: 0.
 	self assert: view canvas shapes size equals: 0.
@@ -458,11 +458,11 @@ RTViewTest >> testRemovingEdges [
 	es := RTBox elementsOn: #(1 2).
 	view addAll: es.
 	view add: (RTLine edgeFrom: es first to: es second).
-	self assert: view numberOfEdges equals: 1. 
-	
+	self assert: view numberOfEdges equals: 1.
+
 	view removeAllEdges.
 	self assert: view numberOfEdges equals: 0.
-	
+
 	self assert: es first connectedEdges isEmpty.
 	self assert: es second connectedEdges isEmpty.
 ]
@@ -478,7 +478,7 @@ RTViewTest >> testRestoreCamera [
 	view restoreCamera.
 	view canvas camera translateTo: 5 @ 5.
 	view setUpCanvas.
-	
+
 	view := RTView new.
 	view add: (RTBox element).
 	view restoreCamera.
@@ -491,14 +491,14 @@ RTViewTest >> testRestoreCamera [
 { #category : #menu }
 RTViewTest >> testSignalUpdate [
 
-	RTView new signalUpdate 
+	RTView new signalUpdate
 ]
 
 { #category : #menu }
 RTViewTest >> testTrachelShape [
 
 	self assert: view trachelShape class equals: TRNoShape
-	
+
 ]
 
 { #category : #menu }

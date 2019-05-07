@@ -1,19 +1,19 @@
 "
-RTDSMExample new installTitle: 'EvolutionDSM' 
+RTDSMExample new installTitle: 'EvolutionDSM'
 		code:
 '
 	| b option data labels input other |
 	option := #(collab gtinspector).
 	option := TRPlatform current dialogChooseFrom: option values: option.
 	option ifNil: [ ^ nil ].
-	
-	data := RTTabTable new 
+
+	data := RTTabTable new
 		input: (RTDSMExample perform: option)
 		usingDelimiter: Character tab.
 	labels := data removeFirstRow.
 	input := Dictionary new.
 	other := Set new.
-	data values do: [ :line| | item timeline  | 
+	data values do: [ :line| | item timeline  |
 		item := input at: (line second) ifAbsentPut: [ Dictionary new ].
 		other add: line third.
 		timeline := item at: line third ifAbsentPut: [ OrderedCollection new ].
@@ -29,14 +29,14 @@ RTDSMExample new installTitle: 'EvolutionDSM'
 	b shape shape allShapes first size: 100.
 	b shape shape allShapes second
 		size: 100;
-		values: [ :assoc| 
-			assoc timeline 
+		values: [ :assoc|
+			assoc timeline
 				ifNil:  [ nil ]
 				ifNotNil: [ :ob | ob collect: #value ] ].
 	b selectElement: [ :e| e model score notNil ].
 	b score: [ :assoc | assoc score ].
-	^ b 
-	
+	^ b
+
 
 '
 "
@@ -421,14 +421,14 @@ RTDSMExample >> exampleEvolutionDSM [
 	option := #(collab gtinspector).
 	option := TRPlatform current dialogChooseFrom: option values: option.
 	option ifNil: [ ^ nil ].
-	
-	data := RTTabTable new 
+
+	data := RTTabTable new
 		input: (RTDSMExample perform: option)
 		usingDelimiter: Character tab.
 	labels := data removeFirstRow.
 	input := Dictionary new.
 	other := Set new.
-	data values do: [ :line| | item timeline  | 
+	data values do: [ :line| | item timeline  |
 		item := input at: (line second) ifAbsentPut: [ Dictionary new ].
 		other add: line third.
 		timeline := item at: line third ifAbsentPut: [ OrderedCollection new ].
@@ -444,14 +444,14 @@ RTDSMExample >> exampleEvolutionDSM [
 	b shape shape allShapes first size: 100.
 	b shape shape allShapes second
 		size: 100;
-		values: [ :assoc| 
-			assoc timeline 
+		values: [ :assoc|
+			assoc timeline
 				ifNil:  [ nil ]
 				ifNotNil: [ :ob | ob collect: #value ] ].
 	b selectElement: [ :e| e model score notNil ].
 	b score: [ :assoc | assoc score ].
-	^ b 
-	
+	^ b
+
 
 
 ]
@@ -530,8 +530,8 @@ IXz4QvhC+PCF8IXw4QvhC+HDF8IXwocvhA9fCF8IH74QvhA+fCF8IXz4QvhC+JyG3yIplAJj
 RTDSMExample >> exampleTopLabelRotation [
 
 	| dsm v keys |
-	v := Array 
-		with: (#A -> (Array with: #B with: #C)) 
+	v := Array
+		with: (#A -> (Array with: #B with: #C))
 		with: (#B -> (Array with: #A) ).
 	keys := #(A B C).
 	dsm := RTDSM new.

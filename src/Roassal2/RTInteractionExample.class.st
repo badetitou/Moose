@@ -1,9 +1,9 @@
 "
-self new installTitle: 'GroupOfGroups' 
+self new installTitle: 'GroupOfGroups'
 		code:
 		'
 ^ v'
-	
+
 "
 Class {
 	#name : #RTInteractionExample,
@@ -17,7 +17,7 @@ RTInteractionExample >> exampleDragAndDrop01 [
 | v e1 e2 |
 v := RTView new.
 
-e1 := (RTBox new size: 10; color: Color gray) element. 
+e1 := (RTBox new size: 10; color: Color gray) element.
 e2 := (RTEllipse new size: 30; color: Color blue) element.
 e1 @ RTDraggable.
 
@@ -25,9 +25,9 @@ e1 translateTo: 50 @ 50.
 v add: e1.
 v add: e2.
 
-e2 @ (RTDragAndDroppable new 
+e2 @ (RTDragAndDroppable new
 			host: e1;
-			do: [ :fromElement :toElement | 
+			do: [ :fromElement :toElement |
 				| newElement alreadyNested |
 				newElement := (RTBox new size: 20) element.
 				v add: newElement.
@@ -113,21 +113,21 @@ v := RTView new.
 s := RTShapeBuilder new
 		rectangle;
 		width: [ :c | c numberOfVariables * 5 ]; height: #numberOfMethods.
-		
+
 es := s elementsOn: RTShape withAllSubclasses.
 v add: es.
 
 es @ RTPopup @ (RTLabeled new setAsHighlightable).
 
 expand := (RTExpandable new
-				group: [ :group :element | 
-					methods := (RTBox new color: Color red) 
+				group: [ :group :element |
+					methods := (RTBox new color: Color red)
 										elementsOn: element model rtmethods.
 					RTGridLayout on: methods.
 					methods @ RTPopup.
 					group addAll: methods];
 				afterBlock: [ RTGridLayout on: es] ).
-es @ expand. 
+es @ expand.
 
 RTGridLayout on: es.
 ^ v
@@ -243,7 +243,7 @@ RTInteractionExample >> exampleResizable [
 	| v g |
 	v := RTView new.
 	g := RTGroup new.
-	g 
+	g
 		add: (RTBox new
 			size: 100;
 			borderColor: Color black;
@@ -295,7 +295,7 @@ RTInteractionExample >> exampleSelectableElements [
 b := RTMondrian new.
 b nodes: Collection withAllSubclasses.
 b layout flow.
-b normalizer 
+b normalizer
 	normalizeSize: #numberOfMethods.
 
 b build.

@@ -15,7 +15,7 @@ e2 @ RTDraggable.
 
 e2 translateBy: 80 @ 50.
 
-v 
+v
 -=-=-=-=-=-=-=-=-=-=-=-=
 
 Using an attach point:
@@ -37,24 +37,24 @@ e2 @ RTDraggable.
 
 e2 translateBy: 80 @ 50.
 
-v 
+v
 -=-=-=-=-=-=-=-=-=-=-=-=
 
 Slightly more sophisticated example:
 -=-=--=-=-=--=-=-=--=
 	| view elements |
-	view := RTView new.	
+	view := RTView new.
 	elements := RTBox elementsOn: (1 to: 100).
 	elements @ RTDraggable.
 	view addAll: elements.
-	RTEdge 
+	RTEdge
 		buildEdgesFromObjects: (1 to: 100)
-		from: [ :v | v // 2 ] to: #yourself 
+		from: [ :v | v // 2 ] to: #yourself
 		using: (RTLine new color: Color purple) inView: view.
 	RTTreeLayout on: view elements edges: view edges.
-	
+
 	view edges do: [ :e | e trachelShape pushBack ].
-	
+
 	view @ RTDraggableView.
 
 	^ view

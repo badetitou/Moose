@@ -21,7 +21,7 @@ RTMetricMapTest >> testNameConversion [
 	self assert: (b convertIntoSVGCountryName: 'New Zealand') = #NewZealand.
 	self assert: (b convertIntoSVGCountryName: 'Mauritius') = #Mauritania.
 	self assert: (b convertIntoSVGCountryName: 'MauritiusNotExisting') isNil.
-	
+
 	self assert: (b convertIntoSVGCountryName: 'FR') = #France.
 	self assert: (b convertIntoSVGCountryName: 'UK') = #GreatBritian.
 	self assert: (b convertIntoSVGCountryName: 'DE') = #Germany.

@@ -28,12 +28,12 @@ b view elements @ RTHighlightableWithCursor.
 -=-=-=
 b := RTMondrian new.
 b shape circle size: 10.
-b interaction showEdge 
+b interaction showEdge
 	connectToAll: #subclasses.
 
-b interaction showLabel 
+b interaction showLabel
 	highlightObjects: #subclasses.
-	
+
 
 nodes := b nodes: (Collection withAllSubclasses).
 nodes @ RTHighlightableWithCursor.

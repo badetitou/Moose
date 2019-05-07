@@ -17,13 +17,13 @@ RTInteractionBuilderTest >> setUp [
 RTInteractionBuilderTest >> testAddingAndRemovingInteraction [
 	builder addInteraction: RTDraggable new.
 	self assert: builder numberOfInteractions equals: 1.
-	
+
 	builder removeInteractionOfType: RTAbstractDraggable.
 	self assert: builder numberOfInteractions equals: 0.
-	
+
 	builder addInteraction: RTConstrainedDraggable new.
 	self assert: builder numberOfInteractions equals: 1.
-	
+
 	builder removeInteractionOfType: RTAbstractDraggable.
 	self assert: builder numberOfInteractions equals: 0.
 
@@ -40,11 +40,11 @@ RTInteractionBuilderTest >> testAddingTwoActions [
 	| e |
 	builder action: #inspect; action: #browse.
 	self assert: builder numberOfInteractions equals: 2.
-	
+
 	e := RTElement new.
 	builder setUpElements: (Array with: e) asGroup.
 	self assert: e announcer numberOfSubscriptions equals: 1.
-	
+
 ]
 
 { #category : #tests }

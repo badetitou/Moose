@@ -1,5 +1,5 @@
 "
-RTExperimentalExample new installTitle: 'BoxSelectionForEdges' 
+RTExperimentalExample new installTitle: 'BoxSelectionForEdges'
 		code:
 		'
 <gtExample>
@@ -26,7 +26,7 @@ RTExperimentalExample class >> bumpLayer: n [
 		x := 1 / (0.1 + rand next).
 		y := (2 * rand next)-0.5.
 		z := 10 / (0.1 + rand next).
-		
+
 		(1 to: n) do: [ :i | | val w |
 			w := (((i -1)/n) - y)*z.
 			val := (a at: i) + (x * ((w negated * w) exp)).
@@ -34,7 +34,7 @@ RTExperimentalExample class >> bumpLayer: n [
 	arr := Array new: n.
 	(1 to: n) do: [ :i | arr at: i put: 0].
 	(1 to: 5) do: [ :i | bump value: arr ].
-	
+
 	^ arr collectWithIndex: [ :d :i | i@(0 max: d)].
 ]
 
@@ -46,21 +46,21 @@ colorRamp: (Array with: (0.0 -> (Color white alpha: 0.4)) with: (1.0 -> Color tr
 "	color := Color blue.
 	base := Color r: 0 g: 84 b: 85 range: 256.
 	shape := RTCompositeShape new
-		add: (RTEllipse new width: 103; height: 50; 
+		add: (RTEllipse new width: 103; height: 50;
 			color: Color gray);
 		add: (RTLabel new text: 'Swap Data'; color: Color white).
 
-	
+
 "	base := Color r: 0 g: 84 b: 85 range: 256.
 	shape := RTCompositeShape new
-		add: (RTEllipse new width: 103; height: 50; 
+		add: (RTEllipse new width: 103; height: 50;
 			color: Color gray);
-		add: (RTEllipse new width: 97; height: 47; 
+		add: (RTEllipse new width: 97; height: 47;
 			color: base );
 		add: (RTEllipse new width: 71; height: 21;
 			color: color) translateBy: 0@ -10;
 		add: (RTLabel new text: 'Swap Data'; color: Color white).
-"		
+"
 	^ shape element.
 
 
@@ -85,7 +85,7 @@ b edgeBuilderDo: [ :ebuilder|
 	ebuilder shape: (RTArrowedLine new line: b bezier; yourself).
 	ebuilder connectToAll: #dependentClasses  ].
 ^ b
-	
+
 ]
 
 { #category : #icons }
@@ -333,7 +333,7 @@ b bezier color: Color blue trans.
 b useBezierlineWith: #dependentClasses.
 b sliderShape: nil.
 ^ b
-	
+
 ]
 
 { #category : #icons }
@@ -576,7 +576,7 @@ b := RTBundleBuilder new.
 b explore: Collection using: #subclasses.
 b useBezierlineWith: nil.
 ^ b
-	
+
 ]
 
 { #category : #icons }
@@ -724,7 +724,7 @@ RTExperimentalExample >> exampleClusterBezierAndSlider [
 
 | b lb |
 b := RTBundleBuilder new.
-b from: (Array with: TRObject with: TRTest) using: #subclasses. 
+b from: (Array with: TRObject with: TRTest) using: #subclasses.
 b edges shape line color: Color black.
 b bezier color: (Color blue alpha: 0.5).
 b useBezierlineWith: #dependentClasses.
@@ -739,7 +739,7 @@ lb build.
 ^ b view
 
 
-	
+
 ]
 
 { #category : #icons }
@@ -1122,7 +1122,7 @@ RTExperimentalExample >> exampleFisheye [
 	v := RTLayoutExample new exampleForce.
 	v @ (RTFisheye radius: 120).
 	^ v
-	
+
 ]
 
 { #category : #icons }
@@ -1155,7 +1155,7 @@ GMofiD8Qf/kD8QfiL38g/kD85Q/EH4i//IH4A/GXPxB/+QPxB+IvfyD+QPzlD8QfiL/8gfgD
 
 { #category : #sources }
 RTExperimentalExample >> exampleFlowerBuilder [
- 
+
 | v angles angle b color size block bcolor arcs update |
 angle := 360 / 12.
 angles := 0 to: 360 by: angle.
@@ -1180,35 +1180,35 @@ b menu: 'Color' submenu: 'Black' callback: [ color := Color black ].
 block := [ :i |
 	 b menu: 'Size' submenu: i asString callback: [ size := i ] ].
 1 to: 10 do: [ :i | block value: i ].
-b menu: 'Base' submenu: 'Show' callback: [ 
+b menu: 'Base' submenu: 'Show' callback: [
 	bcolor := Color random.
 	update value. ].
-b menu: 'Base' submenu: 'Hide' callback: [ 
+b menu: 'Base' submenu: 'Hide' callback: [
 	bcolor := Color black.
 	update value. ].
-b menu: 'Clear' callback: [ 
+b menu: 'Clear' callback: [
 	(v elements select: [ :e | e shape class = RTEllipse ]) do: #remove.
 	v signalUpdate. ].
 
 v when: TRMouseDragging do: [ :evt | | els p dist degrees |
-	els := (RTEllipse new 
+	els := (RTEllipse new
 		color: color;
 		size: size) elementsOn: angles.
 	p := evt positionFromCamera.
 	dist := (p squaredDistanceTo: 0@0) sqrt.
-	degrees := p degrees.   
+	degrees := p degrees.
 	els doWithIndex: [ :e :i | | ang |
 		ang := i odd
 			ifTrue: [ e model + degrees ]
 			ifFalse: [ e model + angle - degrees ].
 		ang := ang degreesToRadians.
 		e translateTo: (dist * ang  cos)@(dist * ang sin) ].
-	
+
 	v addAll: els.
 	evt signalUpdate. ].
 ^ v
 
-	
+
 ]
 
 { #category : #sources }
@@ -1231,7 +1231,7 @@ b interaction popupText: [ :cls | cls name,'
 LOC: ', cls numberOfLinesOfCode asString].
 b explore: Collection using: #subclasses.
 
-b normalizer 
+b normalizer
 	normalizeSize: #numberOfLinesOfCode.
 ^ b
 
@@ -1392,7 +1392,7 @@ rkJggg=='
 
 { #category : #sources }
 RTExperimentalExample >> exampleRTCache [
-	<gtExample> 
+	<gtExample>
 	<noTest>
 "This example shows a lot elements and draw it in a fast way"
 | b cache |
@@ -1807,7 +1807,7 @@ rkJggg=='
 
 { #category : #sources }
 RTExperimentalExample >> exampleRadarOnSVGMap [
- 
+
 | view radar |
 view := RTSVGExample new theWorld.
 radar := RTRadar on: view.
@@ -2031,7 +2031,7 @@ color := [:n | | k i |
 	k := n.
 	i := k indexOf: Character space.
 	i isZero ifFalse: [ k := k copyFrom: 1 to: i -1 ].
-	d at: k ifAbsentPut: [ 
+	d at: k ifAbsentPut: [
 		i := d size +1.
 		i > colors size ifTrue: [ i := i // colors size.  ].
 		colors at: i ] ].
@@ -2054,13 +2054,13 @@ sankey shape box
 	borderWidth: 1;
 	width: 15;
 	color: color.
-(sankey interaction 
+(sankey interaction
 	popupText: [ :n | n, String cr, (form value: n) ])
 	backgroundColor: Color white;
 	alphaPopupBackground: 1;
 	borderColor: Color gray.
 (sankey interactionEdge
-	popupText: [ :ass | ass key ,' → ', 
+	popupText: [ :ass | ass key ,' → ',
 		ass value, String cr, (form value: ass). ])
 	backgroundColor: Color white;
 	alphaPopupBackground: 1;
@@ -2196,7 +2196,7 @@ NyMAAAAASUVORK5CYII='
 
 { #category : #sources }
 RTExperimentalExample >> exampleScaleLog [
- 
+
 | g s extent x y superscript |
 
 extent := 500@300.
@@ -2206,7 +2206,7 @@ g extent: extent.
 x := RTScale linear
 	domain: #(0 100);
 	range: (Array with: 0 with: extent x).
-	
+
 y := RTScale log
 	base: Float e;
 	domain: (#(0 9) collect: #exp);
@@ -2215,22 +2215,22 @@ s := RTData new.
 s points: (0 to: 100).
 s x: [ :n | n ].
 s y: [ :n | y scale: ((n * n)) ].
-s interaction popup text: [ :n| 
+s interaction popup text: [ :n|
 	'Number: ',n asString,'
 Value: ', (y scale: (n*n)) asString ].
 g add: s.
 g axisX numberOfTicks: 10.
-g axisY 
+g axisY
 	numberOfTicks: 10;
-	labelConversion: [:n | | v | 
+	labelConversion: [:n | | v |
 
 		v:= (y invert: n) ln + 1.
-		v := v isInfinite 
+		v := v isInfinite
 			ifTrue: [ 1 ]
 			ifFalse: [ v rounded ].
 		v > 10 ifTrue: [ v := 10 ].
 		'e', (superscript at: v) asString ].
-	
+
 g build.
 ^ g view.
 ]
@@ -2264,7 +2264,7 @@ RTExperimentalExample >> exampleScatterplotMatrix [
 	<gtExample>
 | b data block d lb |
 data := RTTabTable new input: (TRPlatform current downloadContent: 'http://mbostock.github.io/d3/talk/20111116/iris.csv') usingDelimiter: $,.
-data 
+data
 	removeFirstRow;
 	convertColumns: #( 2 3 4 5) to: #asNumber.
 
@@ -2272,18 +2272,18 @@ b := RTScatterplotMatrix new.
 
 b objects: data values.
 
-block := [ :n | n == n asInteger 
-	ifTrue: [ n asInteger ] 
+block := [ :n | n == n asInteger
+	ifTrue: [ n asInteger ]
 	ifFalse: [ n asFloat ] ].
-b axisX 
+b axisX
 	numberOfTicks: 5;
 	rotateLabels;
 	labelConversion: block.
-b axisY 
+b axisY
 	numberOfTicks: 5;
 	labelConversion: block.
 
-d := Dictionary newFromPairs: (Array 
+d := Dictionary newFromPairs: (Array
 	with: 'setosa' with: Color red
 	with: 'versicolor' with: Color green
 	with: 'virginica' with: Color blue ).
@@ -2294,7 +2294,7 @@ b shape circle
 b metrics
 	at: 'Sepal length' put: #second;
 	at: 'Sepal width' put: #third;
-	at: 'Petal length' put: #fourth; 
+	at: 'Petal length' put: #fourth;
 	at: 'Petal width' put: #fifth.
 
 b build.
@@ -2302,7 +2302,7 @@ b build.
 lb := RTLegendBuilder new.
 lb view: b view.
 lb positionDo: [ :p |
-	p 
+	p
 		verticalPadding: -150;
 		horizontalPadding: 50;
 		outer; right; top; move ].
@@ -2429,15 +2429,15 @@ searchTree := nil.
 searchTree := [ :s :t| t key = s ifTrue: [ t ]
 	ifFalse: [ | r |
 		r := nil.
-		t value do: [ :child | 
+		t value do: [ :child |
 			r ifNil: [ r := searchTree value: s value: child.] ].
 		r ] ].
 relationsBlock := [ :str| | res strings |
 	res := Dictionary new.
 	(str substrings: '
-') do: [:s| 
+') do: [:s|
 		strings := s substrings:' '.
-		res at: strings first put: 
+		res at: strings first put:
 			(strings allButFirst collect: [:st |
 				searchTree value: st value: tree] )].
 	res	 ].
@@ -2641,7 +2641,7 @@ rH+dCf+KeXxZKtog+L4ZbZCzTeoWX07/D0I/I0c+pwKjAAAAAElFTkSuQmCC'
 
 { #category : #sources }
 RTExperimentalExample >> exampleStackOnRoassal [
-<gtExample> 
+<gtExample>
 <noTest>
 | s classes extent layers x y color area maxY dates |
 
@@ -2649,13 +2649,13 @@ RTExperimentalExample >> exampleStackOnRoassal [
 	ifFalse: [ ^ self ].
 
 classes := (RTShape withAllSubclasses reverseSortedAs: #ageInDaysRounded ) select: #hasMethods.
-dates := (classes flatCollect: [ :cls | cls rtmethods collect: #date ]) 
+dates := (classes flatCollect: [ :cls | cls rtmethods collect: #date ])
 	asSet asSortedCollection.
 extent := 500@300.
 
-s := RTExperimentalStack new 
+s := RTExperimentalStack new
 	offset: #zero;
-	values: [ :cls| dates collect: [ :d | 
+	values: [ :cls| dates collect: [ :d |
 			d -> (cls rtmethods select: [ :m | d >= m date ]) ] ];
 	x: [ :asso| asso key julianDayNumber ];
 	y: [ :asso| | temp |
@@ -2667,11 +2667,11 @@ s := RTExperimentalStack new
 layers := s stack: classes.
 maxY := layers inject: 0 into: [ :max :arr | arr inject: max into: [ :a :each| a max: (each y0 + each y) ] ].
 
-x := RTScale linear 
-	domain: (Array with: layers first first x with: layers first last x); 
+x := RTScale linear
+	domain: (Array with: layers first first x with: layers first last x);
 	range: (Array with: 0 with: extent x).
 
-y := RTScale linear 
+y := RTScale linear
 	domain: (Array with: 0 with: maxY);
 	range: (Array with: extent y with: 0).
 color := RTScale linear range: (Array with: Color green with: Color darkGray).
@@ -2689,9 +2689,9 @@ area build.
 RTAxisConfiguration new builder: area; minValue: maxY; maxValue: 0; title: 'Number of lines of code'; titlePosition: -0 @ 320;numberOfLabels: 10;tickLabelOffset: -20@0;noDecimal; axisFrom: -15 @0 to: -15 @ extent y.
 
 RTAxisConfiguration new builder: area; minValue: layers first first x; maxValue: layers first last x; title: 'Time'; titlePosition: -30 @ 0; labelRotation: -30; labelConversion: [:v | (Date julianDayNumber: v) ]; numberOfLabels: 15; axisFrom: 0 @(extent y+15) to: extent x @ (extent y+15).
-	
+
 ^ area view @ RTDraggableView.
-	
+
 ]
 
 { #category : #icons }
@@ -2801,9 +2801,9 @@ pG/SByJ9kz4Q6QORvkkfiPSBSN+kD0T6QKRv0gciZftf8P6QkgrlZKAAAAAASUVORK5CYII='
 
 { #category : #sources }
 RTExperimentalExample >> exampleStackSilhouette [
- 
+
 	^ RTExperimentalExample new helper: #silhouette colorA: (Color r: 177/255.0 g: 175/255.0 b: 134/255.0) colorB: (Color r: 98/255.0 g: 101/255.0 b: 73/255.0)
-	
+
 ]
 
 { #category : #icons }
@@ -2943,9 +2943,9 @@ yOnFLz6MkAORkcr1PjEz3fDFh+H0+n828f4P/oRAcAAAAABJRU5ErkJggg=='
 
 { #category : #sources }
 RTExperimentalExample >> exampleStackWiggle [
- 
+
 	^ RTExperimentalExample new helper: #wiggle colorA: Color cyan colorB: Color blue
-	
+
 ]
 
 { #category : #icons }
@@ -3050,9 +3050,9 @@ PxD1H+oHon4g6j/UD0T9h/qBqB+I+g/1A1E/EPUfdj/+D7pRsP1BIMzcAAAAAElFTkSuQmCC'
 
 { #category : #sources }
 RTExperimentalExample >> exampleStackZero [
- 
+
 	^ RTExperimentalExample new helper: #zero colorA: Color black colorB: Color green
-	
+
 ]
 
 { #category : #icons }
@@ -3139,12 +3139,12 @@ RTExperimentalExample >> exampleStars [
 	height := 500.
 	rotation := 0.
 	diagonal := ((width * width) + (height * height)) sqrt / 2.
-	
+
 	random := Random new.
-	next2 := [ :v :w | RTScale linear 
+	next2 := [ :v :w | RTScale linear
 		range: (Array with: v with: w); scale: random next ].
 	next := [ :v | next2 value: 0 value: v ].
-	
+
 	init := [ :e | | n |
 		e attributes
 			at: #l put: 1;
@@ -3157,17 +3157,17 @@ RTExperimentalExample >> exampleStars [
 		(n/o) arcTan * width / (Float pi / 2)].
 	view := RTView new.
 	view canvas color: Color black.
-	
+
 	shape := RTEllipse new colorElement: Color white.
 	elements := shape elementsOn: (1 to: 200).
 	elements do: [ :e | init value: e ].
 	view addAll: elements.
 	view when: TRMouseDragStart do: [ view canvas clearBackground: false ].
 	view when: TRMouseDragEnd do: [ view canvas clearBackground: true ].
-	
+
 	view addAnimation: (RTActiveAnimation new
 		intervalInMilliseconds: 50;
-		blockToExecute: [ 
+		blockToExecute: [
 			rotation := rotation - 0.002.
 			elements do: [ :e | | l o r d s color |
 				l := (e attributes at: #l) + 1.
@@ -3185,7 +3185,7 @@ RTExperimentalExample >> exampleStars [
 			 ]).
 	view canvas camera scale: 1.5501711431096248.
 	^ view
-	
+
 
 
 ]
@@ -3202,12 +3202,12 @@ g/ggfj6Inw/ig/j5ID6Inw/ig/j5ID6Inw/i54P4IH4+iA/i54P4IH4+iA/i54P4+SA+iJ8P
 
 { #category : #sources }
 RTExperimentalExample >> exampleTextNamesAndShapes [
-	<gtExample> 
+	<gtExample>
 	<noTest>
 | v elements data edges e |
 
 v := RTView new.
-data := Array 
+data := Array
 	with: (Array with: 'j' with: 'Joel' with: 65 with: '#6FB1FC' with: #star)
 	with: (Array with: 'e' with: 'Eunis' with: 45 with: '#EDA1ED' with: #ellipse)
 	with: (Array with: 'k' with: 'Kramer' with: 75 with: '#86B342' with: #octagon)
@@ -3223,7 +3223,7 @@ edges := OrderedCollection new
 	add: (Array with: 'k' with: 'g' with: '#86B342' with: 100);
 	add: (Array with: 'g' with: 'j' with: '#F5A45D' with: 90);
 	yourself.
-	
+
 elements := (RTSelectiveShape new
 	shape: #fifth;
 	width: [ :m | RTScale linear domain: #(40 80); range: #(20 60); scale: m third.];
@@ -3236,10 +3236,10 @@ elements @ RTDraggable.
 edges do: [ :edge| | from to line |
 	from := elements detect: [ :el | el model first = edge first ] ifNone: [ nil ].
 	to:= elements detect: [ :el | el model first = edge second ] ifNone: [ nil ].
-	line := RTDecoratedLine new 
+	line := RTDecoratedLine new
 		filledArrowHead;
 		filledCircleTail;
-		line: (RTBezier3Line new 
+		line: (RTBezier3Line new
 			width: [ :m | RTScale linear domain: #(60 100); range: #(2 6); scale: m fourth ]);
 		attachPoint: (RTBorderAttachPoint new offset: 9);
 		color: (Color colorFrom: edge third) trans.
@@ -3471,21 +3471,21 @@ m := 200."Number of samples per layer"
 width := 960.
 height := 500.
 
-s := RTExperimentalStack new 
+s := RTExperimentalStack new
 	offset: method; yourself.
 
 layers0 := self dataFor: m@num stack: s.
 layers1 := self dataFor: m@num stack: s.
 
-x := RTScale linear 
+x := RTScale linear
 	domain: (Array with: 1 with: m);
 	range: (Array with: 0 with: width).
-y := RTScale linear 
+y := RTScale linear
 	domain: (Array with: 0 with: (self maxYValueFor: layers0 and: layers1));
 	range: (Array with: height with: 0).
 color := RTScale linear range: (Array with: colorA with: colorB).
 
-area := RTAreaBuilder new 
+area := RTAreaBuilder new
 	x: [ :d | x scale: d x  ];
 	y0: [:d | y scale: d y0 ];
 	y1: [:d | y scale: d y0 + d y];
@@ -3503,7 +3503,7 @@ button when: TRMouseClick do: [ | temp |
 	layers0 := layers1.
 	layers1 := temp.
 	elements doWithIndex: [ :e :i | e model: (layers0 at: i) ].
-	area view addAnimation: (RTXPSVGAnimation new 
+	area view addAnimation: (RTXPSVGAnimation new
 		on: elements
 		during: 2.5
 		path: area). ].
@@ -3518,16 +3518,16 @@ RTExperimentalExample >> label [
 ]
 
 { #category : #utility }
-RTExperimentalExample >> maxYValueFor: layers0 and: layers1 [ 
+RTExperimentalExample >> maxYValueFor: layers0 and: layers1 [
 
-	^ ((layers0, layers1) inject: Float fmin 
+	^ ((layers0, layers1) inject: Float fmin
 	into: [ :max :arr | arr inject: max into: [:a :each | a max: (each y0 + each y) ] ])
 ]
 
 { #category : #'sources data' }
 RTExperimentalExample >> sankeyData [
-	^ Dictionary new 
-		at: 'nodes' put: (OrderedCollection new 
+	^ Dictionary new
+		at: 'nodes' put: (OrderedCollection new
 			add: 'Agricultural ''waste''';
 			add: 'Bio-conversion';
 			add: 'Liquid';
@@ -3577,7 +3577,7 @@ RTExperimentalExample >> sankeyData [
 			add: 'Wave';
 			add: 'Wind';
 			yourself);
-		at: 'links' put: (OrderedCollection new 
+		at: 'links' put: (OrderedCollection new
 			add: (Dictionary new at: 'source' put: 0; at: 'target' put: 1; at: 'value' put: 124.729; yourself);
 			add: (Dictionary new at: 'source' put: 1; at: 'target' put: 2; at: 'value' put: 0.597; yourself);
 			add: (Dictionary new at: 'source' put: 1; at: 'target' put: 3; at: 'value' put: 26.862; yourself);

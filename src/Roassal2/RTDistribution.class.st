@@ -22,7 +22,7 @@ Class {
 }
 
 { #category : #public }
-RTDistribution class >> on: anArray [ 
+RTDistribution class >> on: anArray [
 	^ self new on: anArray
 ]
 
@@ -36,12 +36,12 @@ RTDistribution >> annotatedFrequency [
 	"Return a list of elements, each following the template:
 	{numberOfV . v} "
 	| fr result |
-	
+
 	self sortObjectsAndDefineNumbers.
 	fr := self frequencyMin: self numbers min max: self numbers max amountOfIntervals: self defaultNumberOfIntervals.
-	
+
 	result := fr collect: [ :f | Array with: f size with: f ].
-	
+
 	^ result asArray
 ]
 
@@ -49,48 +49,48 @@ RTDistribution >> annotatedFrequency [
 RTDistribution >> annotatedFrequencyMin: numMin max: numMax amountOfIntervals: aNbOfIntervals [
 	"	Return a list of elements, each following the template:
 	{numberOfElementOfV . V} "
-	| fr result |	
+	| fr result |
 
 	fr := self frequencyMin: numMin max: numMax amountOfIntervals: aNbOfIntervals.
-	
+
 	result := fr collect: [ :f | Array with: f size with: f ].
-	
+
 	^ result asArray
-	
+
 ]
 
 { #category : #public }
-RTDistribution >> annotatedFrequencyWithAmountOfIntervals: aSmallInteger [ 
-	
-	self sortObjectsAndDefineNumbers.	
+RTDistribution >> annotatedFrequencyWithAmountOfIntervals: aSmallInteger [
+
+	self sortObjectsAndDefineNumbers.
 	^ self annotatedFrequencyMin: self numbers min max: self numbers max amountOfIntervals: aSmallInteger
 ]
 
 { #category : #public }
 RTDistribution >> defaultMetric [
 	"This block define the metric to apply to the object"
-	
-	self metric ifNil: [ 
-		(self objects first isKindOf: Number) ifTrue: [ 
+
+	self metric ifNil: [
+		(self objects first isKindOf: Number) ifTrue: [
 			self metric: #yourself ] ifFalse: [ self metric: [:o | o hash] ]
 		]
 ]
 
 { #category : #computing }
 RTDistribution >> defaultNumberOfIntervals [
-	^ (self numbers size) log * 3.3 + 1 
+	^ (self numbers size) log * 3.3 + 1
 ]
 
 { #category : #public }
 RTDistribution >> defaultStrategyBlock [
 	"This block define which bucket to store in, a given number"
-	self strategyBlock: 
+	self strategyBlock:
 		[ :obj |
 			|number|
 			number := (self metric rtValue: obj).
 			number = self numberMax
 				ifTrue: self nbOfIntervals
-				ifFalse: [ ((number - self numberMin) / self interval) floor + 1] 
+				ifFalse: [ ((number - self numberMin) / self interval) floor + 1]
 				].
 ]
 
@@ -100,7 +100,7 @@ RTDistribution >> deprecatedAnnotatedFrequencyMin: numMin max: numMax amountOfIn
 	{ c1 . c2 . elements that are between c1 and c2 }
 	{ c2 . c3 . elements that are between c2 and c3 }
 	...
-	
+
 	We have c1 <= c2 <= c3 <= ...
 	c1 = numberMin
 	cN = numberMax
@@ -113,18 +113,18 @@ RTDistribution >> deprecatedAnnotatedFrequencyMin: numMin max: numMax amountOfIn
 	self nbOfIntervals: aNbOfIntervals.
 	interval := ((numberMax + 1 - numberMin) / nbOfIntervals).
 	running := numberMin.
-	
+
 	tmp := numbers copy.
 	result := OrderedCollection new.
-	[ running asFloat <= numberMax ] whileTrue: [ 
+	[ running asFloat <= numberMax ] whileTrue: [
 		| c |
 		c := tmp select: [ :v | v >= running and: [ v < (running + interval) ]].
 		result add: (Array with: running with: interval + running with: c asArray).
 		tmp := tmp copyWithoutAll: c.
 		running := running + interval ].
-	
+
 	^ result asArray
-	
+
 ]
 
 { #category : #public }
@@ -137,13 +137,13 @@ RTDistribution >> frequency [
 { #category : #public }
 RTDistribution >> frequencyMin: numMin max: numMax amountOfIntervals: aNbOfIntervals [
 	| tmp result bucketFor |
-	
+
 	self sorted ifFalse: [self sortObjectsAndDefineNumbers].
-	
+
 	self numberMax: numMax.
 	self numberMin: numMin.
 	self nbOfIntervals: aNbOfIntervals.
-	
+
 	self interval: (self numberMax - self numberMin) / (self nbOfIntervals floor).
 
 	bucketFor := self strategyBlock.
@@ -154,8 +154,8 @@ RTDistribution >> frequencyMin: numMin max: numMax amountOfIntervals: aNbOfInter
 ]
 
 { #category : #public }
-RTDistribution >> frequencyWithAmountOfIntervals: aSmallInteger [ 
-	
+RTDistribution >> frequencyWithAmountOfIntervals: aSmallInteger [
+
 	self sortObjectsAndDefineNumbers.
 	^ self frequencyMin: self numbers min max: self numbers max amountOfIntervals: aSmallInteger
 ]
@@ -192,12 +192,12 @@ RTDistribution >> metric: aBlockOrSymbol [
 
 { #category : #public }
 RTDistribution >> nbOfIntervals [
-	^ nbOfIntervals 
+	^ nbOfIntervals
 ]
 
 { #category : #public }
 RTDistribution >> nbOfIntervals: aNumber [
-	nbOfIntervals := aNumber 
+	nbOfIntervals := aNumber
 ]
 
 { #category : #public }
@@ -207,27 +207,27 @@ RTDistribution >> numberMax [
 
 { #category : #public }
 RTDistribution >> numberMax: aNumber [
-	numberMax := aNumber 
+	numberMax := aNumber
 ]
 
 { #category : #public }
 RTDistribution >> numberMin [
-	^ numberMin 
+	^ numberMin
 ]
 
 { #category : #public }
 RTDistribution >> numberMin: aNumber [
-	numberMin := aNumber 
+	numberMin := aNumber
 ]
 
 { #category : #public }
 RTDistribution >> numbers [
-	^ numbers 
+	^ numbers
 ]
 
 { #category : #public }
 RTDistribution >> numbers: aCollectionOfNumbers [
-	numbers := aCollectionOfNumbers 
+	numbers := aCollectionOfNumbers
 ]
 
 { #category : #public }
@@ -244,7 +244,7 @@ RTDistribution >> objects: aCollectionOfObjects [
 RTDistribution >> on: collectionOfObjects [
 	self assert: (collectionOfObjects isNotEmpty).
 	self objects: collectionOfObjects.
-	
+
 
 ]
 
@@ -252,7 +252,7 @@ RTDistribution >> on: collectionOfObjects [
 RTDistribution >> sortObjectsAndDefineNumbers [
 	self defaultMetric.
 	self objects: (self objects copy sort: [ :o1 :o2 | (self metric rtValue: o1) < (self metric rtValue: o2)  ]).
-	self numbers: (self objects collect: [ :o | self metric rtValue: o ]). 	
+	self numbers: (self objects collect: [ :o | self metric rtValue: o ]).
 	self sorted: true.
 
 ]
@@ -275,5 +275,5 @@ RTDistribution >> strategyBlock [
 { #category : #public }
 RTDistribution >> strategyBlock: aBlock [
 "This block define which bucket to store in, a given number"
-	strategyBlock := aBlock 
+	strategyBlock := aBlock
 ]

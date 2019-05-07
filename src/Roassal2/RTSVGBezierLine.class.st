@@ -19,7 +19,7 @@ RTSVGBezierLine >> addCurves: stream with: visitor [
 		nextPutAll: (visitor number: p1 x);
 		nextPutAll: ',';
 		nextPutAll: (visitor number: p1 y).
-	2 to: points size - 2 do: [ :i | 
+	2 to: points size - 2 do: [ :i |
 		p1 := points at: i.
 		p2 := (p1 + (points at: i + 1)) / 2.
 		stream

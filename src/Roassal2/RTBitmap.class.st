@@ -1,5 +1,5 @@
 "
-A RTBitmap represents a bitmap shape 
+A RTBitmap represents a bitmap shape
 
 Here is an example:
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -65,14 +65,14 @@ RTBitmap >> trachelShapeClass [
 RTBitmap >> updateFor: anElement trachelShape: trachelShape [
 	| ex |
 	trachelShape isNil ifTrue: [ ^ self ].
-	
-	form isNil ifTrue: [ 
+
+	form isNil ifTrue: [
 		ex := (self widthFor: anElement) @ (self heightFor: anElement).
 		trachelShape extent: ex
-	] ifFalse: [ 
+	] ifFalse: [
 		trachelShape form: (self form rtValue: anElement). ].
 
-	trachelShape 
+	trachelShape
 		rotateByDegrees:  (self rotationFor: anElement);
 		scaleBy: (self scaleFor: anElement)
 

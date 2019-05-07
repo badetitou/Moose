@@ -1,5 +1,5 @@
 "
-I provide element resizing in all eight directions. 
+I provide element resizing in all eight directions.
 
 Resizing handles are displayed after clicking on an associated element, and are automatically removed when clicked on a view or another element.
 
@@ -118,7 +118,7 @@ RTResizable >> basicCallbackFor: aHandle corner: aCorner [
 	oppositeCorner := RTResizableRectangle oppositeCornerFor: aCorner.
 	oppositeCornerPosition := element encompassingRectangle perform: oppositeCorner.
 	element trachelShape
-		doWithoutCallbacks: [ 
+		doWithoutCallbacks: [
 			element trachelShape extent: newExtent.
 			element shape extent: newExtent.
 			self translateCorner: oppositeCorner of: element to: oppositeCornerPosition ].
@@ -141,7 +141,7 @@ RTResizable >> callbackFor: aHandle corner: aCorner [
 { #category : #hooks }
 RTResizable >> connectAllHandles [
 	handles
-		withIndexDo: [ :each :i | 
+		withIndexDo: [ :each :i |
 			| to |
 			to := handles at: i % handles size + 1.
 			element view
@@ -158,7 +158,7 @@ RTResizable >> connectWithView: aView [
 
 	aView
 		when: TRResizeCanceled
-		do: [ :event | 
+		do: [ :event |
 			event shape = element trachelShape
 				ifFalse: [ self removeHandles ] ]
 ]
@@ -271,7 +271,7 @@ RTResizable >> setupView: aView [
 RTResizable >> showHandles [
 	handles ifNotEmpty: [ ^ self ].
 	handles := RTResizableRectangle cornersAndSides
-		collect: [ :corner | 
+		collect: [ :corner |
 			| handle |
 			handle := self createHandle.
 			self attachHandle: handle toCorner: corner.

@@ -1,5 +1,5 @@
 "
-RTLegendBuilderExample new installTitle: 'OnDemand' 
+RTLegendBuilderExample new installTitle: 'OnDemand'
 		code:
 		'
 | l lb |
@@ -23,7 +23,7 @@ lb addRectanglePolymetricWidth: ''number of methods'' height: ''Line of code'' b
 lb build.
 
 ^ b view'
-	
+
 "
 Class {
 	#name : #RTLegendBuilderExample,
@@ -49,7 +49,7 @@ RTLegendBuilderExample >> exampleBackgroundNPosition [
 	lb := RTLegendBuilder new.
 	lb view: b view.
 	lb right.
-	lb nestDo: [ :n :e :g | 
+	lb nestDo: [ :n :e :g |
 		n padding:10.
 		n on: e nest: g.
 		n resizeWithoutRecursion: e for: g ].

@@ -34,7 +34,7 @@ Class {
 
 { #category : #'instance creation' }
 RTNColorLinearNormalizer class >> inContext: aCollection lowColor: lowColor highColor: highColor [
-	
+
 	| normalizer |
 	normalizer := self inContext: aCollection.
 	normalizer lowColor: lowColor.
@@ -44,7 +44,7 @@ RTNColorLinearNormalizer class >> inContext: aCollection lowColor: lowColor high
 
 { #category : #'instance creation' }
 RTNColorLinearNormalizer class >> inContext: aCollection lowColor: lowColor lowThreshold: lowThreshold highColor: highColor highThreshold: highThreshold [
-	
+
 	| normalizer |
 	normalizer := self inContext: aCollection.
 	normalizer lowColor: lowColor.
@@ -56,7 +56,7 @@ RTNColorLinearNormalizer class >> inContext: aCollection lowColor: lowColor lowT
 
 { #category : #'instance creation' }
 RTNColorLinearNormalizer class >> inContext: aCollection withCommand: aBlock lowColor: lowColor highColor: highColor [
-	
+
 	| normalizer |
 	normalizer := self inContext: aCollection withCommand: aBlock.
 	normalizer lowColor: lowColor.
@@ -66,7 +66,7 @@ RTNColorLinearNormalizer class >> inContext: aCollection withCommand: aBlock low
 
 { #category : #'instance creation' }
 RTNColorLinearNormalizer class >> inContext: aCollection withCommand: aBlock lowColor: lowColor lowThreshold: lowThreshold highColor: highColor highThreshold: highThreshold [
-	
+
 	| normalizer |
 	normalizer := self inContext: aCollection withCommand: aBlock.
 	normalizer lowColor: lowColor.
@@ -83,7 +83,7 @@ RTNColorLinearNormalizer >> blend: aColor with: aColorValue weight: wt [
 	"Simply interpolates in RGB space."
 
 	| rv gv bv invWt av |
-	
+
 	invWt := 1-wt.
 	rv := ((aColor red * invWt) + ((aColorValue red)*wt)) "rounded".
 	gv := ((aColor green  * invWt) + ((aColorValue green)*wt)) "rounded".
@@ -94,19 +94,19 @@ RTNColorLinearNormalizer >> blend: aColor with: aColorValue weight: wt [
 
 { #category : #accessing }
 RTNColorLinearNormalizer >> highColor: aBlock [
-	
+
 	highColor := aBlock
 ]
 
 { #category : #'translator protocol' }
 RTNColorLinearNormalizer >> highColorFor: anEntity [
-	
+
 	^highColor rtValue: anEntity
 ]
 
 { #category : #'initialize-release' }
 RTNColorLinearNormalizer >> initialize [
-	
+
 	super initialize.
 	lowColor := Color white.
 	highColor := Color black
@@ -114,25 +114,25 @@ RTNColorLinearNormalizer >> initialize [
 
 { #category : #accessing }
 RTNColorLinearNormalizer >> lowColor: aBlock [
-	
+
 	lowColor := aBlock
 ]
 
 { #category : #'translator protocol' }
 RTNColorLinearNormalizer >> lowColorFor: anEntity [
-	
+
 	^lowColor rtValue: anEntity
 ]
 
 { #category : #accessing }
 RTNColorLinearNormalizer >> maxBrightness: aBlock [
-	
+
 	maxBrightness := aBlock
 ]
 
 { #category : #'translator protocol' }
 RTNColorLinearNormalizer >> maxBrightnessFor: anEntity [
-	
+
 	^maxBrightness isNil
 		ifTrue: [1.0]
 		ifFalse: [maxBrightness rtValue: anEntity]
@@ -140,13 +140,13 @@ RTNColorLinearNormalizer >> maxBrightnessFor: anEntity [
 
 { #category : #accessing }
 RTNColorLinearNormalizer >> minBrightness: aBlock [
-	
+
 	minBrightness := aBlock
 ]
 
 { #category : #'translator protocol' }
 RTNColorLinearNormalizer >> minBrightnessFor: anEntity [
-	
+
 	^minBrightness isNil
 		ifTrue: [0.0]
 		ifFalse: [minBrightness rtValue: anEntity]
@@ -155,7 +155,7 @@ RTNColorLinearNormalizer >> minBrightnessFor: anEntity [
 { #category : #accessing }
 RTNColorLinearNormalizer >> rtValue: anEntity [
 	"Calculates the color of the entity based on the context."
-	
+
 	| myValue myHighColor myLowColor myMinBrightness myMaxBrightness weight minValue maxValue |
 	"Get color specific data"
 	minValue :=  self minimumValue: anEntity.
@@ -164,9 +164,9 @@ RTNColorLinearNormalizer >> rtValue: anEntity [
 	myMaxBrightness := self maxBrightnessFor: anEntity.
 	myHighColor := self highColorFor: anEntity.
 	myLowColor := self lowColorFor: anEntity.	"Get data"
-	weight := minValue = maxValue 
+	weight := minValue = maxValue
 		ifTrue: [(myMinBrightness + myMaxBrightness) / 2]
-		ifFalse: [	
+		ifFalse: [
 			myValue := (self command rtValue: anEntity) - (self minimumValue: anEntity).
 			myMinBrightness + (myValue abs / (maxValue - minValue) * (myMaxBrightness - myMinBrightness)) ].
 	^self blend: myLowColor with: myHighColor weight: weight

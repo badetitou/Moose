@@ -5,8 +5,8 @@ Class {
 }
 
 { #category : #rendering }
-RTHorizontalAllValuesDecorator >> render [	
-	self addAll: self datasetValuesX asSet. 
+RTHorizontalAllValuesDecorator >> render [
+	self addAll: self datasetValuesX asSet.
 	super render.
 
 ]

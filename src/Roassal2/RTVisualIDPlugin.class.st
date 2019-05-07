@@ -17,7 +17,7 @@ RTVisualIDPlugin >> execute [
 		smalltalkhubUser: 'abergel' project: 'VisualIDGlyph';
 		package: 'VisualIDGlyph';
 		load.
-		
+
 "	Metacello new
 	  baseline: 'VisualID';
 	  repository: 'github://bergel/VisualID:master';
@@ -28,7 +28,7 @@ RTVisualIDPlugin >> execute [
 		configurationOf: 'VisualID';
 		loadBleedingEdge.
 		"
-		
+
 "	Gofer new
 		smalltalkhubUser: 'IgnacioFernandez' project: 'VisualiDs';
 		package: 'VisualID';
@@ -43,7 +43,7 @@ RTVisualIDPlugin >> execute [
 { #category : #testing }
 RTVisualIDPlugin >> isLoaded [
 	^ RPackageOrganizer default includesPackageNamed: 'VisualIDGlyph'
- 
+
 ]
 
 { #category : #hooks }

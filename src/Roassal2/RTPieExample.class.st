@@ -1,9 +1,9 @@
 "
-RTPieExample new installTitle: 'GroupOfGroups' 
+RTPieExample new installTitle: 'GroupOfGroups'
 		code:
 		'
 v canvas'
-	
+
 "
 Class {
 	#name : #RTPieExample,
@@ -19,11 +19,11 @@ RTPieExample >> exampleEmphasis [
 	b interaction popup.
 	b objects: (Array with: Dictionary with: Collection with: Set with: OrderedCollection ).
 	b slice: #numberOfMethods.
-	b normalizer distinctColor.	
+	b normalizer distinctColor.
 	b labeled.
 	b emphasize: Set by: 20.
 	b emphasize: Dictionary by: 20.
-	^ b 
+	^ b
 ]
 
 { #category : #icons }
@@ -66,7 +66,7 @@ RTPieExample >> exampleLabelledChart [
 	b interaction popup.
 	b objects: (Array with: Dictionary with: Collection with: Set with: OrderedCollection).
 	b slice: #numberOfMethods.
-	b normalizer distinctColor.	
+	b normalizer distinctColor.
 	b labeled.
 	^ b
 ]
@@ -108,7 +108,7 @@ RTPieExample >> exampleLabelledIf [
 	b interaction popup.
 	b objects: RTShape withAllSubclasses.
 	b slice: #numberOfMethods.
-	b normalizer distinctColor.	
+	b normalizer distinctColor.
 	b labeledIf: [ :c | c numberOfMethods > 18 ].
 	^ b
 ]
@@ -166,12 +166,12 @@ RTPieExample >> examplePieAndLegend [
 	b interaction popup.
 	b objects: myClasses.
 	b slice: #numberOfMethods.
-	b normalizer distinctColor.	
+	b normalizer distinctColor.
 	b labeled.
 	b emphasize: Set by: 20.
 	b emphasize: Dictionary by: 20.
 	b build.
-	
+
 	"Legend"
 	lb := RTLegendBuilder new.
 	lb view: b view.
@@ -182,7 +182,7 @@ RTPieExample >> examplePieAndLegend [
 		lb addColor: aColor text: aClass name.
 	].
 	lb build.
-	
+
 	^ b view
 ]
 
@@ -242,16 +242,16 @@ RTPieExample >> exampleRefreshPie [
 	"We create an empty view. The view will contain the button and the pie."
 	view := RTView new.
 
-	"fillView is block that: 
-		(i) remove all the elements in the view (except the button); 
+	"fillView is block that:
+		(i) remove all the elements in the view (except the button);
 		(ii) create a new pie with totally random data
 		(iii) force a screen refresh with #signalUpdate"
-	fillView := 
+	fillView :=
 	[
 		| b |
 		view clean.
 		b := RTPieBuilder new.
-		
+
 		"The RTPieBuilder will create the pie in the view"
 		b view: view.
 		b interaction popup.
@@ -318,7 +318,7 @@ RTPieExample >> exampleRingChart [
 		externalRadius: 100.
 	b objects: (Array with: Dictionary with: Collection with: Set with: OrderedCollection ).
 	b slice: #numberOfMethods.
-	b normalizer distinctColor.	
+	b normalizer distinctColor.
 	^ b
 ]
 

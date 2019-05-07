@@ -35,9 +35,9 @@ RTTreeMapBuilder >> defaultInset [
 { #category : #customizing }
 RTTreeMapBuilder >> depthShadedBorder [
 	| normalizer |
-	normalizer := RTNColorLinearNormalizer 
-		inContext: self elements 
-		withCommand: [ :e | e attributes at: #depth ] 
+	normalizer := RTNColorLinearNormalizer
+		inContext: self elements
+		withCommand: [ :e | e attributes at: #depth ]
 		lowColor: Color gray
 		highColor: Color white darker.
 	self elements do: [ :e | e trachelShape strokePaint: (normalizer rtValue: e) ].
@@ -51,7 +51,7 @@ RTTreeMapBuilder >> extent [
 { #category : #accesing }
 RTTreeMapBuilder >> extent: anObject [
 	extent := anObject.
-	
+
 ]
 
 { #category : #'layout-utils' }
@@ -74,7 +74,7 @@ RTTreeMapBuilder >> highestAspectRatioFor: row remainingSpace: remainingSpace [
 { #category : #initialization }
 RTTreeMapBuilder >> initialize [
 	super initialize.
-	self shape rectangle 
+	self shape rectangle
 		fillColor: Color white;
 		borderColor: Color gray.
 	self interaction popup; draggable.
@@ -98,10 +98,10 @@ RTTreeMapBuilder >> layoutChildrenOfRow: row [
 	oldCanvas := self rectangle veryDeepCopy.
 	row do: [ :each | | children |
 		children := each attributes at: self childrenKey ifAbsent: [ #() ].
-		self 
-			squarify: children 
+		self
+			squarify: children
 			inRectangle: (RTRectangleTreeMap fromContainerBounds: (each position extent: each extent) withInset: self inset) ].
-	
+
 	self rectangle: oldCanvas.
 ]
 
@@ -110,18 +110,18 @@ RTTreeMapBuilder >> layoutElements [
 	self squarify: rootNodes
 		inRectangle: (RTRectangleTreeMap origin: 0@0 extent: self extent).
 
-	
+
 ]
 
 { #category : #'layout-utils' }
-RTTreeMapBuilder >> layoutHorizontalRow: row [ 
+RTTreeMapBuilder >> layoutHorizontalRow: row [
 
 	| container totalWidth areaToLayout height |
 	container := self rectangle currentSubrectangle.
-	totalWidth := container width.	
+	totalWidth := container width.
 	areaToLayout := row inject: 0 into: [ :s :e | s + (e attributes at: #area) ].
 	height := areaToLayout / totalWidth.
-	row do: [ :each | each extent: (((each attributes at: #area) / height) @ height) ].	
+	row do: [ :each | each extent: (((each attributes at: #area) / height) @ height) ].
 	self translateElementsHorizontally: row in: container.
 ]
 
@@ -156,14 +156,14 @@ RTTreeMapBuilder >> popup [
 RTTreeMapBuilder >> prepareElementsForLayout: elms inRectangle: rec [
 	| elementsArea viewArea area |
 	elms isEmpty ifTrue: [ ^ elms ].
-	elementsArea := elms inject: 0 into: [ :s :e | 
+	elementsArea := elms inject: 0 into: [ :s :e |
 		s + (weight rtValue: e) ].
-	
+
 	viewArea := rec width * rec height.
 	elms do: [ :e|
 		area := ((viewArea * (weight rtValue: e))/elementsArea) asFloat.
 		e attributes at: #area put: area. ].
-	
+
 	^ elms
 ]
 
@@ -188,8 +188,8 @@ RTTreeMapBuilder >> rectangle: anObject [
 RTTreeMapBuilder >> renderIn: aView [
 	super renderIn: aView.
 	self layoutElements.
-	
-	
+
+
 ]
 
 { #category : #layout }
@@ -200,18 +200,18 @@ RTTreeMapBuilder >> squarify: children currentRow: row remainingSpace: remaining
 		| oldRatio newElementRatio |
 		oldRatio := self highestAspectRatioFor: row remainingSpace: remainingSpace.
 		newElementRatio := self highestAspectRatioFor: (row, (Array with: firstElement)) remainingSpace: remainingSpace.
-		oldRatio >= newElementRatio ] ) 
-	ifTrue: [ 
+		oldRatio >= newElementRatio ] )
+	ifTrue: [
 		remainingChildren := children allButFirst.
 		(remainingChildren isEmpty) ifTrue: [ self layoutRow: (row, (Array with: firstElement)) ]
-		ifFalse: [ 
-			self 
+		ifFalse: [
+			self
 				squarify: remainingChildren
 				currentRow: (row, (Array with: firstElement) )
 				remainingSpace: remainingSpace ]
-	 ] ifFalse: [ 
+	 ] ifFalse: [
 		self layoutRow: row.
-		self 
+		self
 			squarify: children
 			currentRow: (OrderedCollection new)
 			remainingSpace: self getRemainingSpace.
@@ -226,7 +226,7 @@ RTTreeMapBuilder >> squarify: children inRectangle: aTreeRectangle [
 	children isEmpty ifTrue: [ ^ self  ].
 	self rectangle: aTreeRectangle.
 	elementsToLayout := self prepareElementsForLayout: children inRectangle: aTreeRectangle.
-	self 
+	self
 		squarify: elementsToLayout
 		currentRow: OrderedCollection new
 		remainingSpace: (aTreeRectangle width min: aTreeRectangle height).
@@ -247,7 +247,7 @@ RTTreeMapBuilder >> translateElementsHorizontally: row in: container [
 RTTreeMapBuilder >> translateElementsVertically: row in: container [
 	| currentPoint |
 	currentPoint := container origin.
-	row do: [ :each | 
+	row do: [ :each |
 		each translateBy: currentPoint+(each extent/2).
 		currentPoint := currentPoint + (0@(each height)) ]
 ]
@@ -256,10 +256,10 @@ RTTreeMapBuilder >> translateElementsVertically: row in: container [
 RTTreeMapBuilder >> withShadedFramesFromColor: fromColor toColor: toColor [
 
 	| normalizer |
-	
-	normalizer := RTNColorLinearNormalizer 
-		inContext: self elements 
-		withCommand: [ :e | weight rtValue: e ] 
+
+	normalizer := RTNColorLinearNormalizer
+		inContext: self elements
+		withCommand: [ :e | weight rtValue: e ]
 		lowColor: fromColor highColor: toColor.
 	self elements do: [ :e | e trachelShape strokePaint: (normalizer rtValue: e ) ].
 ]

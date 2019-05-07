@@ -38,7 +38,7 @@ RTDoubleArrowedLine >> attachPoint: anAttachPoint [
 RTDoubleArrowedLine >> color: aColor [
 	super color: aColor.
 	headStart color: aColor.
-	headEnd color: aColor.	
+	headEnd color: aColor.
 ]
 
 { #category : #accessing }
@@ -82,17 +82,17 @@ RTDoubleArrowedLine >> trachelShapeClass [
 { #category : #public }
 RTDoubleArrowedLine >> trachelShapeFor: anEdge [
 	| lineTrachelShape headStartTrachelShape headEndTrachelShape |
-	(self isSelfLoopAllowedFor: anEdge) ifFalse: [ 
+	(self isSelfLoopAllowedFor: anEdge) ifFalse: [
 		^ TRNoShape instance ].
 	lineTrachelShape := line trachelShapeFor: anEdge.
 	headStartTrachelShape := headStart trachelShapeFor: anEdge.
 	headEndTrachelShape := headEnd trachelShapeFor: anEdge.
-	^ TRCompositeShape new 
-			addShape: lineTrachelShape; 
-			addShape: headStartTrachelShape; 
+	^ TRCompositeShape new
+			addShape: lineTrachelShape;
+			addShape: headStartTrachelShape;
 			addShape: headEndTrachelShape;
 			yourself
-	
+
 ]
 
 { #category : #rendering }

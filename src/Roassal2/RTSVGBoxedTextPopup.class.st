@@ -31,7 +31,7 @@ RTSVGBoxedTextPopup >> addEventHandlers: aStream id: aString element: aRTElement
 		nextPutAll: '<g id="',aString,'pop" " visibility="hidden">';
 		nextPutAll: String cr,'<rect x="',(x - (rectangle width/10)) asString,'" y="',(y - (3 *rectangle height / 4))  asString,'" width="',rectangle width asString,'" height="',rectangle height asString,'"  style="fill:',self backgroundColor asHTMLColor,'; stroke:',self borderColor asHTMLColor,';stroke-width:1"/>';
 		nextPutAll: String cr,'<text id="',aString,'pop" x="',x asString,'" y="',y asString,'" font-size="',self fontSize asString,'" style="fill:',self color asHTMLColor,'"><tspan font-family = "',self font,'">',(converter convertString: rText),'</tspan></text>';
-		nextPutAll: String cr, (self mouseAction: aString), '</g>' 
+		nextPutAll: String cr, (self mouseAction: aString), '</g>'
 ]
 
 { #category : #accessing }

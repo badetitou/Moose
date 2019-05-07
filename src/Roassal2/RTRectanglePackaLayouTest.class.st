@@ -11,7 +11,7 @@ RTRectanglePackaLayouTest >> testBasic [
 	v := RTView new.
 	es := RTBox new size: 5; elementsOn: (1 to: 3).
 	RTRectanglePackLayout on: es.
-	
+
 	v addAll: es.
 	"for vw Set positions are diferent"
 	block := [:p | Array with: p x with: p y].

@@ -31,11 +31,11 @@ Class {
 
 { #category : #accessing }
 RTAxisConfiguration >> adjustNumberOfTicksAndLabelsIfNecessaryPriorityOnLabels [
-	"This methods is called after each change of the number of ticks or labels. 
+	"This methods is called after each change of the number of ticks or labels.
 	The rule is that an axis config cannot have more than labels than ticks"
 	"Cannot have more labels than ticks"
 	"The number of labels remains fixed"
-	
+
 	self numberOfTicks < self numberOfLabels
 		ifTrue: [ self numberOfTicks: self numberOfLabels ]
 
@@ -43,11 +43,11 @@ RTAxisConfiguration >> adjustNumberOfTicksAndLabelsIfNecessaryPriorityOnLabels [
 
 { #category : #accessing }
 RTAxisConfiguration >> adjustNumberOfTicksAndLabelsIfNecessaryPriorityOnTicks [
-	"This methods is called after each change of the number of ticks or labels. 
+	"This methods is called after each change of the number of ticks or labels.
 	The rule is that an axis config cannot have more than labels than ticks"
 	"Cannot have more labels than ticks"
 	"The number of ticks remains fixed"
-		
+
 	self numberOfTicks < self numberOfLabels
 		ifTrue: [ self numberOfLabels: self numberOfTicks ]
 
@@ -60,7 +60,7 @@ RTAxisConfiguration >> areLabelRotated [
 ]
 
 { #category : #rendering }
-RTAxisConfiguration >> axisFrom: fromPosition to: toPosition [ 
+RTAxisConfiguration >> axisFrom: fromPosition to: toPosition [
 	| renderer |
 	renderer := RTAxisRenderer new.
 	renderer builder: self builder.
@@ -135,12 +135,12 @@ RTAxisConfiguration >> getStringFromNumber: aNumber [
 
 { #category : #testing }
 RTAxisConfiguration >> hasMaxValueBeenManuallySet [
-	^ maxValueManuallySet 
+	^ maxValueManuallySet
 ]
 
 { #category : #testing }
 RTAxisConfiguration >> hasMinValueBeenManuallySet [
-	^ minValueManuallySet 
+	^ minValueManuallySet
 ]
 
 { #category : #initialization }
@@ -174,18 +174,18 @@ RTAxisConfiguration >> labelConversion [
 { #category : #accessing }
 RTAxisConfiguration >> labelConversion: aOneArgBlock [
 	"The argument is a one arg block taking the numerical value and returning another numerical value or a string
-	
+
 #labelConversion: can be used to move the orgin of the graph. For example:
 -=-=-=-=
 graphCenter := 5 @ 10.
-data := (-3.1415 to: 3.1415 by: 0.1) collect: [ :x |  x @ (x sin * 3 + 10) ]. 
-b := RTGrapher new. 
+data := (-3.1415 to: 3.1415 by: 0.1) collect: [ :x |  x @ (x sin * 3 + 10) ].
+b := RTGrapher new.
 ds := RTData new.
-ds noDot; connectColor: Color blue. 
-ds points: data. 
-ds x: [ :p | p x - graphCenter x ]. 
+ds noDot; connectColor: Color blue.
+ds points: data.
+ds x: [ :p | p x - graphCenter x ].
 ds y: [ :p | p y - graphCenter y ].
-b add: ds. 
+b add: ds.
 b axisX labelConversion: [ :v | (v + graphCenter x) asFloat round: 2 ].
 b axisY labelConversion: [ :v | (v + graphCenter x) asFloat round: 2 ].
 b.
@@ -199,19 +199,19 @@ b.
     ds := RTData new.
     ds points: values.
 	ds y: [ :value | value - lo ].
-    ds dotShape ellipse 
+    ds dotShape ellipse
         color: (Color blue alpha: 0.3).
     ds connectColor: Color blue.
     b := RTGrapher new.
-    b add: ds. 
+    b add: ds.
     b axisX noLabel; numberOfTicks: (values size / 10).
     b axisY numberOfTicks: 5.
     b axisY labelConversion: [ :v | v + lo ].
     ^ b
 -=-=-=-=
 	"
-	
-	
+
+
 	labelConvertion := aOneArgBlock
 ]
 
@@ -395,16 +395,16 @@ RTAxisConfiguration >> smallFontSize [
 { #category : #accessing }
 RTAxisConfiguration >> step [
 	"Return the step between each tick"
-	
+
 	^ (self maxValue - self minValue) / self numberOfTicks.
 "	| s |
 	s := (self maxValue - self minValue) / self numberOfTicks.
 	((self minValue to: self maxValue by: s) includes: 0.0) ifTrue: [ ^ s ].
-	
+
 	numberOfTicks := numberOfTicks + 1.
 	s := (self maxValue - self minValue) / self numberOfTicks.
 
-	self maxValue: (self maxValue / s) asInteger * s. 
+	self maxValue: (self maxValue / s) asInteger * s.
 	s := (self maxValue - self minValue) / self numberOfTicks.
 	^ s"
 ]
@@ -470,5 +470,5 @@ RTAxisConfiguration >> twoDecimals [
 { #category : #configuration }
 RTAxisConfiguration >> withThousandsSeparator [
 	"Make the labels on the axis using comma separatation of thousands"
-	self labelConversion: [ :number | number asInteger asStringWithCommas ] 
+	self labelConversion: [ :number | number asInteger asStringWithCommas ]
 ]

@@ -12,7 +12,7 @@ Class {
 
 { #category : #UI }
 RTEvolutionDSM >> defaultCellShape [
-	^ (RTCompositeShape new 
+	^ (RTCompositeShape new
 		add: (RTPolygon rectangle);
 		add: ( RTSparkline new
 			size: self cellSize);
@@ -26,7 +26,7 @@ RTEvolutionDSM >> initialize [
 	self timeline: [ :evoline |
 		nil ].
 	self createObjectBlock: [ :assoc | | inst |
-		inst := RTEvolutionLine new 
+		inst := RTEvolutionLine new
 			xvalue: assoc key;
 			yvalue: assoc value.
 		inst timeline: (self timeline value: inst).

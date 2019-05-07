@@ -6,7 +6,7 @@ Class {
 
 { #category : #hooks }
 RTVoronojPlugin >> description [
-	^ 'A Voronoi diagram is a partitioning of a plane into regions based on distance 
+	^ 'A Voronoi diagram is a partitioning of a plane into regions based on distance
 to points in a specific subset of the plane.'
 ]
 
@@ -24,7 +24,7 @@ RTVoronojPlugin >> execute [
 { #category : #testing }
 RTVoronojPlugin >> isLoaded [
 	^ RPackageOrganizer default includesPackageNamed: 'ConfigurationOfVoronoiDiagram'
- 
+
 ]
 
 { #category : #hooks }

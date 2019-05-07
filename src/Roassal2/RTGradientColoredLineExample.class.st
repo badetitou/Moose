@@ -1,5 +1,5 @@
 "
-RTGradientColoredLineExample new installTitle: 'Dependencies' 
+RTGradientColoredLineExample new installTitle: 'Dependencies'
 		code:
 		'| eb |
 v := RTView new.
@@ -53,7 +53,7 @@ RTGradientColoredLineExample >> edgePaletteColored [
 	v add: elem2.
 	edge := RTEdge from:elem1 to:elem2.
 	v add: (edge + (RTMultiColoredLine new colors: (RTColorPalette qualitative colors: 12 scheme:'Paired'); colorShape)).
-	^ v 
+	^ v
 
 ]
 
@@ -70,7 +70,7 @@ RTGradientColoredLineExample >> exampleA [
 	elem2 translateBy: 300@0.
 	v add: elem1.
 	v add: elem2.
-	
+
 	edge := RTEdge from:elem1 to:elem2.
 	v add: (edge + (RTGradientColoredLine new colors: (Array with: (elem1 color) with: (elem2 color)); precision: 100; gradientColorShape)).
 
@@ -103,7 +103,7 @@ RTGradientColoredLineExample >> exampleB [
 	elem2 translateBy: 300@0.
 	v add: elem1.
 	v add: elem2.
-	
+
 	edge := RTEdge from:elem1 to:elem2.
 	v add: (edge + (RTGradientColoredLine new colors: (Array with: (elem1 color) with: (elem2 color)); precision: 100; gradientColorShape)).
 
@@ -126,7 +126,7 @@ ID6Inw/ig/j5ID6Inw/ig/j5IH4+iA/i54P4IH4+iA/i54P4IH4+iJ8P4oP4+SA+iJ8P4oP4
 
 { #category : #sources }
 RTGradientColoredLineExample >> exampleDependencies [
-	
+
 	| eb v es |
 	v := RTView new.
 
@@ -154,7 +154,7 @@ RTGradientColoredLineExample >> exampleDependencies [
 	eb := RTEdgeBuilder new.
 	eb view: v.
 	eb shape gradientLineFrom: Color green to: Color white.
-	eb 
+	eb
 		objects: RTShape withAllSubclasses, TRShape withAllSubclasses;
 		connectFrom: #yourself to: #superclass.
 
@@ -258,7 +258,7 @@ bds3rYWUFCD5+g6aOqZiGN2vxqYAUeT/N3NbBL6mxdQAAAAASUVORK5CYII='
 
 { #category : #sources }
 RTGradientColoredLineExample >> exampleedgePaletteColored [
-	
+
 	| v elem1 elem2 edge|
 	v := RTView new.
 	elem1 := (RTEllipse new color: (Color blue alpha:0.6); size:10) elementOn: 1.
@@ -270,7 +270,7 @@ RTGradientColoredLineExample >> exampleedgePaletteColored [
 	v add: elem2.
 	edge := RTEdge from:elem1 to:elem2.
 	v add: (edge + (RTMultiColoredLine new colors: (RTColorPalette qualitative colors: 12 scheme:'Paired'); colorShape)).
-	^ v 
+	^ v
 ]
 
 { #category : #icons }

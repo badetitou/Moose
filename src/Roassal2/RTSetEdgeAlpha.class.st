@@ -49,12 +49,12 @@ RTSetEdgeAlpha >> initializeElement: element [
 	self setLowAlphaFor: element.
 	element
 		when: TRMouseEnter
-		do: [ :e | 
+		do: [ :e |
 			self setHighAlphaFor: element.
 			e signalUpdate ].
 	element
 		when: TRMouseLeave
-		do: [ :e | 
+		do: [ :e |
 			self setLowAlphaFor: element.
 			e signalUpdate ]
 ]

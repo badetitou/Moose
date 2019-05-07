@@ -27,7 +27,7 @@ e3 @ RTDraggable.
 e2 translateBy: 80 @ 50.
 e3 translateBy: 40 @ 25.
 
-v 
+v
 -=-=-=-=-=
 "
 Class {
@@ -60,12 +60,12 @@ RTBezier3Line >> controlPointFor: cp1 and: cp3 [
 	(vector isZero and: [ l isZero ])
 		ifTrue: [ ^ 0@0 ].
 	vectorNorm := vector/l.
-	
+
 	vectorNormInverse := vectorNorm y negated @ vectorNorm x.
 	"distanceFromMidpoint :=  (0.5 - pairEdges.length / 2 + i) * stepSize."
 	distanceFromMidPoint := -20.
 	^ mid + (vectorNormInverse * distanceFromMidPoint).
-	
+
 
 ]
 
@@ -79,7 +79,7 @@ RTBezier3Line >> pointsFor: edge [
 		ifNotNil: [ controlElement isPoint
 				ifTrue: [ controlElement ]
 				ifFalse: [ controlElement position ] ].
-			
+
 	^ Array with: cp1 with: cp2 with: cp3
 ]
 
@@ -91,7 +91,7 @@ RTBezier3Line >> pointsForOneElement: edge [
 	h := e height/2.
 	cp1 := e rightCenter.
 	cp3 := e topCenter.
-	^ OrderedCollection new 
+	^ OrderedCollection new
 		add:cp1;
 		add: cp1 + (w @0);
 		add: (cp1 x + w)@cp3 y;
@@ -100,8 +100,8 @@ RTBezier3Line >> pointsForOneElement: edge [
 		add: (cp1 x-w)@(cp3 y - h);
 		add: cp3;
 		yourself.
-		
-	
+
+
 ]
 
 { #category : #hooks }
@@ -113,7 +113,7 @@ RTBezier3Line >> trachelShapeClass [
 { #category : #hooks }
 RTBezier3Line >> trachelShapeFor: anEdge [
 	| trachelShape |
-	(self isSelfLoopAllowedFor: anEdge) ifFalse: [ 
+	(self isSelfLoopAllowedFor: anEdge) ifFalse: [
 		^ nil ].
 	trachelShape := (anEdge from = anEdge to
 		ifTrue: [ TRBezierShape ]
@@ -130,7 +130,7 @@ RTBezier3Line >> updateFor: edge trachelShape: trachelShape [
 	points := edge from = edge to
 		ifTrue: [ self pointsForOneElement: edge ]
 		ifFalse: [ self pointsFor: edge ].
-	
+
 	trachelShape points: points.
 	trachelShape color: (self colorFor: edge).
 	trachelShape width: (self widthFor: edge).

@@ -38,7 +38,7 @@ RTAbstractFlowLayout class >> isAbstract [
 
 { #category : #'instance creation' }
 RTAbstractFlowLayout class >> withMaxWidth: anInteger [
-	
+
 	^(self new)
 		maxWidth: anInteger;
 		yourself
@@ -46,7 +46,7 @@ RTAbstractFlowLayout class >> withMaxWidth: anInteger [
 
 { #category : #'instance creation' }
 RTAbstractFlowLayout class >> withMaxWidth: anInteger withGap: anotherInteger [
-	
+
 	^(self new)
 		maxWidth: anInteger;
 		gapSize: anotherInteger;
@@ -75,8 +75,8 @@ RTAbstractFlowLayout >> defaultGapSize [
 
 { #category : #configuration }
 RTAbstractFlowLayout >> defaultMaxWidth [
-	
-	^ [ :elements | 
+
+	^ [ :elements |
 		(elements size < 4) ifTrue: [ (((elements collect: [ :each | each width * each height]) * 2) sum ) + (elements size * (gapSize squared)) ]
 			ifFalse: [
 			((((elements collect: [ :each | each width * each height]) * 2) sum) + (elements size * (gapSize squared))) sqrt ceiling truncated.
@@ -86,19 +86,19 @@ RTAbstractFlowLayout >> defaultMaxWidth [
 
 { #category : #accessing }
 RTAbstractFlowLayout >> gapSize [
-	
+
 	^gapSize
 ]
 
 { #category : #accessing }
 RTAbstractFlowLayout >> gapSize: aSizeInPixels [
-	
+
 	gapSize := aSizeInPixels
 ]
 
 { #category : #'initialize-release' }
 RTAbstractFlowLayout >> initialize [
-	
+
 	super initialize.
 	maxWidth := self defaultMaxWidth.
 	gapSize := self defaultGapSize.
@@ -121,12 +121,12 @@ RTAbstractFlowLayout >> isAlignTop [
 
 { #category : #private }
 RTAbstractFlowLayout >> maxWidth [
-	
+
 	^maxWidth
 ]
 
 { #category : #accessing }
 RTAbstractFlowLayout >> maxWidth: aSizeInPixels [
-	
+
 	maxWidth := aSizeInPixels
 ]

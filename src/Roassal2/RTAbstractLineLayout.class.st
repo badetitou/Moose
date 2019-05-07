@@ -59,7 +59,7 @@ RTAbstractLineLayout class >> isAbstract [
 
 { #category : #'instance creation' }
 RTAbstractLineLayout class >> withGap: anInteger [
-	
+
 	^(self new)
 		gapSize: anInteger;
 		yourself
@@ -67,7 +67,7 @@ RTAbstractLineLayout class >> withGap: anInteger [
 
 { #category : #accessing }
 RTAbstractLineLayout >> alignBottom [
-	
+
 	alignment := #bottom
 ]
 
@@ -79,31 +79,31 @@ RTAbstractLineLayout >> alignCenter [
 
 { #category : #accessing }
 RTAbstractLineLayout >> alignLeft [
-	
+
 	alignment := #left
 ]
 
 { #category : #accessing }
 RTAbstractLineLayout >> alignRight [
-	
+
 	alignment := #right
 ]
 
 { #category : #accessing }
 RTAbstractLineLayout >> alignTop [
-	
+
 	alignment := #top
 ]
 
 { #category : #accessing }
 RTAbstractLineLayout >> alignment [
-	
+
 	^alignment
 ]
 
 { #category : #accessing }
 RTAbstractLineLayout >> alignment: anObject [
-	
+
 	alignment := anObject
 ]
 
@@ -114,69 +114,69 @@ RTAbstractLineLayout >> center [
 
 { #category : #hook }
 RTAbstractLineLayout >> deltaFor: aNodeFigure [
-	
+
 	^self subclassResponsibility
 ]
 
 { #category : #hook }
 RTAbstractLineLayout >> doCenter: aGraph [
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #hook }
-RTAbstractLineLayout >> doExecute: elements [ 
+RTAbstractLineLayout >> doExecute: elements [
 	| pointer delta |
-	horizontallyStretchable ifTrue: 
+	horizontallyStretchable ifTrue:
 		[ self doStretchHorizontal: elements ].
-	verticallyStretchable ifTrue: 
+	verticallyStretchable ifTrue:
 		[ self doStretchVertical: elements ].
 	pointer := self positionOriginalPointer: elements.
 
-	elements do: 
+	elements do:
 		[ :element |
 		delta := self deltaFor: element.
 		translator translateTopLeftOf: element to: pointer - delta.
-		pointer := self 
+		pointer := self
 					movePointer: pointer
 					accordingToFigure: element.
 		self step ].
 ]
 
 { #category : #hook }
-RTAbstractLineLayout >> doStretchHorizontal: aCollectionOfElements [ 
+RTAbstractLineLayout >> doStretchHorizontal: aCollectionOfElements [
 
 	self subclassResponsibility
 ]
 
 { #category : #hook }
-RTAbstractLineLayout >> doStretchVertical: aCollectionOfElements [ 
+RTAbstractLineLayout >> doStretchVertical: aCollectionOfElements [
 
 	self subclassResponsibility
 ]
 
 { #category : #accessing }
 RTAbstractLineLayout >> gapSize [
-	
+
 	^gapSize
 ]
 
 { #category : #accessing }
 RTAbstractLineLayout >> gapSize: aNumber [
 	gapSize := aNumber. " This value is never used actually "
-	
+
 	verticalGap := 2 * aNumber.
 	horizontalGap := 2 * aNumber
 ]
 
 { #category : #accessing }
 RTAbstractLineLayout >> horizontalGap [
-	
+
 	^horizontalGap
 ]
 
 { #category : #accessing }
 RTAbstractLineLayout >> horizontalGap: anInteger [
-	
+
 	horizontalGap := anInteger
 ]
 
@@ -187,7 +187,7 @@ RTAbstractLineLayout >> horizontallyStretchable [
 
 { #category : #'initialize-release' }
 RTAbstractLineLayout >> initialize [
-	
+
 	super initialize.
 	verticalGap := 10.
 	horizontalGap := 10.
@@ -197,13 +197,13 @@ RTAbstractLineLayout >> initialize [
 
 { #category : #hook }
 RTAbstractLineLayout >> movePointer: pointer accordingToFigure: aNodeFigure [
-	
+
 	self subclassResponsibility
 ]
 
 { #category : #hook }
 RTAbstractLineLayout >> positionOriginalPointer: aGraph [
-	
+
 	^self subclassResponsibility
 ]
 
@@ -224,13 +224,13 @@ RTAbstractLineLayout >> stretchVertically [
 
 { #category : #accessing }
 RTAbstractLineLayout >> verticalGap [
-	
+
 	^verticalGap
 ]
 
 { #category : #accessing }
 RTAbstractLineLayout >> verticalGap: anInteger [
-	
+
 	verticalGap := anInteger
 ]
 

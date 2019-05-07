@@ -5,8 +5,8 @@ For example:
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 | v  shape element |
 v := RTView new.
-shape := 
-	RTPolygon new 
+shape :=
+	RTPolygon new
 		vertices:{
 		25 @ 00 .
 		10 @ 50 .
@@ -44,7 +44,7 @@ RTPolygon class >> fitPolygonToSquare: points [
 	| maxx minx maxy miny sx sy x y |
 	minx := maxx :=  points first x.
 	miny := maxy :=  points first y.
-	points do: [ :p | 
+	points do: [ :p |
 		minx := minx min: p x.
 		miny := miny min: p y.
 		maxx := maxx max: p x.
@@ -60,7 +60,7 @@ RTPolygon class >> fitPolygonToSquare: points [
 		miny := miny min: y.
 		maxx := maxx max: x.
 		maxy := maxy max: y ].
-	miny < -1 ifTrue: [ 
+	miny < -1 ifTrue: [
 		points doWithIndex: [ :p :i |
 			points at: i put: p x @ ( p y - 1 - miny ) ] ].
 	^ points.
@@ -77,9 +77,9 @@ RTPolygon class >> generateUnitNgonPoints: sides rotation: rotationAngle [
 		ifTrue: [ (Float pi / 2) + (increment / 2) ]
 		ifFalse: [ Float pi / 2 ].
 	startAngle := startAngle + rotationAngle.
-	
+
 	points := Array new: sides.
-	0 to: sides - 1 do: [ :i | 
+	0 to: sides - 1 do: [ :i |
 		currentAngle := i * increment + startAngle.
 		points at: i+1 put: currentAngle cos @ currentAngle negated sin ].
 	^ points
@@ -160,7 +160,7 @@ RTPolygon class >> star [
 	innerPoints
 		doWithIndex: [ :p :i | innerPoints at: i put: (p x * innerRadius) @ (p y * innerRadius) ].
 	star5Points
-		doWithIndex: [ :p :i | 
+		doWithIndex: [ :p :i |
 			ar := i even
 				ifTrue: [ outerPoints ]
 				ifFalse: [ innerPoints ].
@@ -214,10 +214,10 @@ RTPolygon >> updateFor: anElement trachelShape: trachelShape [
 		vertices: (self verticesFor: anElement);
 		rotateByDegrees: (self rotationFor: anElement);
 		scaleBy: (self scaleFor: anElement).
-		
+
 	(width notNil and: [height notNil])
 		ifTrue: [ trachelShape extent: (self widthFor: anElement) @ (self heightFor: anElement) ]
-	
+
 ]
 
 { #category : #accessing }

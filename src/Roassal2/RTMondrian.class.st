@@ -94,7 +94,7 @@ b build ] ] timeToRun
 { #category : #public }
 RTMondrian >> build [
 	super build.
-	self applyLayout 
+	self applyLayout
 ]
 
 { #category : #'deprecated - compatibility layer' }
@@ -156,8 +156,8 @@ RTMondrian >> currentFrame [
 
 { #category : #accessing }
 RTMondrian >> edges [
-	edgeBuilder 
-		elements: self currentElements; 
+	edgeBuilder
+		elements: self currentElements;
 		view: view;
 		shapeBuilder: shapeBuilder.
 	^ edgeBuilder
@@ -168,7 +168,7 @@ RTMondrian >> edges: objects from: fromBlock to: toBlock [
 	^ self edges
 			objects: objects;
 			connectFrom: fromBlock to: toBlock
-		
+
 ]
 
 { #category : #'deprecated - compatibility layer' }
@@ -192,7 +192,7 @@ RTMondrian >> initialize [
 
 { #category : #accessing }
 RTMondrian >> layout [
-	^ layoutBuilder 
+	^ layoutBuilder
 ]
 
 { #category : #hooks }
@@ -203,7 +203,7 @@ RTMondrian >> metricNormalizerClass [
 { #category : #'public - nodes' }
 RTMondrian >> node: anObject [
 	"Add a new node represengint an object to the view
-	
+
 	For example:
 	b := RTMondrian new.
 	b node: 10.
@@ -216,7 +216,7 @@ RTMondrian >> node: anObject [
 { #category : #'public - nodes' }
 RTMondrian >> node: anObject forIt: aBlock [
 	"Add a new node represengint an object to the view. The node is a container for other objects.
-	
+
 	For example:
 	b := RTMondrian new.
 	b node: 10 forIt: [ b nodes: (1 to: 5) ].
@@ -229,33 +229,33 @@ RTMondrian >> node: anObject forIt: aBlock [
 { #category : #'public - nodes' }
 RTMondrian >> nodes: objects [
 	"Add a new node represengint an object to the view. The node is a container for other objects.
-	
+
 	For example:
 	b := RTMondrian new.
 	b nodes: (1 to: 10).
 	b layout force.
 	b open
-	
-	
+
+
 	Another example:
 	b := RTMondrian new.
 	b shape box size: #numberOfMethods.
 	b nodes: Collection withAllSubclasses.
 	b layout flow.
 	b open
-	
+
 	Another example:
 	b := RTMondrian new.
 	b shape box size: #numberOfMethods.
 	b nodes: Collection withAllSubclasses.
 	b edges connectFrom: #superclass.
-	b normalizer 
+	b normalizer
 		normalizeSize: #numberOfMethods;
 		normalizeColor: #numberOfMethods.
 	b layout cluster.
 	b open
 	"
-	
+
 	| els |
 	self assert: [ objects isCollection ] description: 'You need to provide a collection to #nodes:'.
 	els := self elementsOn: objects.
@@ -270,16 +270,16 @@ RTMondrian >> nodes: objects [
 { #category : #'public - nodes' }
 RTMondrian >> nodes: objects forEach: aOneArgBlock [
 	"Add new nodes representing for each object to the view. Each node is a container for other objects.
-	
+
 	For example:
 	b := RTMondrian new.
-	b nodes: (1 to: 10) forEach: [ :valueBetween1And10 | 
+	b nodes: (1 to: 10) forEach: [ :valueBetween1And10 |
 		b nodes: (1 to: valueBetween1And10).
 		b layout grid ].
 	b layout grid.
 	b open
 
-	
+
 	Another example:
 	b := RTMondrian new.
 	b shape box size: #numberOfMethods.
@@ -292,14 +292,14 @@ RTMondrian >> nodes: objects forEach: aOneArgBlock [
 	"
 	| result |
 	result := self nodes: objects.
-	
-	result do: [ :element | 
+
+	result do: [ :element |
 		self pushNewFrame.
 		self resetShapeBuilder.
 		self resetLayoutBuilder.
 		self resetEdgeBuilder.
 		self resetInteraction.
-			
+
 		aOneArgBlock rtValue: element model.
 		RTNest new
 			layout: layoutBuilder layout;
@@ -345,11 +345,11 @@ RTMondrian >> recurTo: anObject [
 { #category : #'public - recursive nodes' }
 RTMondrian >> recursiveNodes: aDataStructure forEach: aOneArgBlock [
 	"This method enables one to create recursive nested nodes"
-	
+
 	"
 	Here is an example:
 
--=-=-=-=	
+-=-=-=-=
 	allElements := #(((1 2 (39 ) 2 )) 3).
 	b := RTMondrian new.
 	b recursiveNodes: allElements forEach: [ :elements |
@@ -366,7 +366,7 @@ RTMondrian >> recursiveNodes: aDataStructure forEach: aOneArgBlock [
     b := RTMondrian new.
     b
         recursiveNodes: root
-        forEach: [ :aFileReference | 
+        forEach: [ :aFileReference |
             b shape box if: [ :aFile | aFile basename endsWith: '.pdf' ] color: Color green.
             aFileReference isDirectory
                 ifTrue: [ b nodes: aFileReference children forEach: [ :aFileRef | b recurTo: aFileRef ] ]
@@ -375,7 +375,7 @@ RTMondrian >> recursiveNodes: aDataStructure forEach: aOneArgBlock [
     b
 -=-=-=-=
 	"
-	
+
 	recurrentBlock := aOneArgBlock.
 	aOneArgBlock value: aDataStructure.
 	recurrentBlock := nil

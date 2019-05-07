@@ -18,7 +18,7 @@ RTScaleOrdinal >> domain: arr [
 	domain := OrderedCollection new.
 	dictionary := Dictionary new.
 	arr do: [ :xi |
-		(dictionary includes: xi) ifFalse: [ 
+		(dictionary includes: xi) ifFalse: [
 			domain add: xi.
 			dictionary at: xi put: domain size ] ].
 	self perform: ranger withArguments: argument
@@ -30,8 +30,8 @@ RTScaleOrdinal >> initialize [
 	ranger := #range:.
 	argument := #( #() ).
 	self domain: #().
-	
-	
+
+
 ]
 
 { #category : #accessing }
@@ -67,8 +67,8 @@ RTScaleOrdinal >> rangeBands: x padding: padding outerPadding: outerPadding [
 		t := start. start := stop. stop := t.
 		reverse := true. ].
 	step := (stop - start) / (domain size - padding + (2*outerPadding)).
-	
-	range := self 
+
+	range := self
 		steps: start + (step * outerPadding)
 		and: step.
 	reverse ifTrue: [ range := range reverse ].
@@ -95,11 +95,11 @@ RTScaleOrdinal >> rangePoints: x padding: padding [
 	step := domain size < 2
 		ifTrue: [ start := (start  + stop)/2. 0 ]
 		ifFalse: [ (stop - start)/(domain size - 1 + padding) ].
-	range := self 
+	range := self
 		steps: start + (step * padding / 2)
 		and: step.
 	rangeBand := 0.
-	
+
 	ranger := #rangePoints:padding:.
 	argument := Array with: x with: padding
 ]
@@ -124,8 +124,8 @@ RTScaleOrdinal >> rangeRoundBands: x padding: padding outerPadding: outerPadding
 		t := start. start := stop. stop := t.
 		reverse := true. ].
 	step := ((stop - start) / (domain size - padding + (2*outerPadding))) floor.
-	
-	range := self 
+
+	range := self
 		steps: start + ( (stop - start - ((domain size - padding) * step) ) / 2 ) rounded
 		and: step.
 	reverse ifTrue: [ range := range reverse ].
@@ -148,9 +148,9 @@ RTScaleOrdinal >> rangeRoundPoints: x padding: padding [
 		ifTrue: [ start := stop := ((start + stop)/2) rounded. 0 ]
 		ifFalse: [[ (stop - start)/(domain size -1 + padding)]
 			on: Error do: [ :ex | 0 ] ].
-		
-	range := self 
-		steps: start + ((step * padding / 2) + (stop - start - 
+
+	range := self
+		steps: start + ((step * padding / 2) + (stop - start -
 			((domain size - 1 + padding)* step) )/ 2) rounded
 		and: step.
 	rangeBand := 0.
@@ -168,7 +168,7 @@ RTScaleOrdinal >> scale: x [
 		].
 	index ifNil: [ self error: 'invalid input' ].
 	index := index % range size.
-	index isZero 
+	index isZero
 		ifTrue: [ index := range size ].
 	^ range at: index
 ]

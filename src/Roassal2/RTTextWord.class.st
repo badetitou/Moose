@@ -27,7 +27,7 @@ RTTextWord >> interval [
 ]
 
 { #category : #accessing }
-RTTextWord >> interval: aCollection [ 
+RTTextWord >> interval: aCollection [
 	interval := aCollection
 ]
 
@@ -37,6 +37,6 @@ RTTextWord >> text [
 ]
 
 { #category : #accessing }
-RTTextWord >> text: aString [ 
+RTTextWord >> text: aString [
 	text := aString
 ]

@@ -41,7 +41,7 @@ RTBox >> updateFor: anElement trachelShape: trachelShape [
 	trachelShape isNil
 		ifTrue: [ ^ self ].
 	ex := (self widthFor: anElement) @ (self heightFor: anElement).
-	trachelShape 
+	trachelShape
 		extent: ex;
 		color: (self colorFor: anElement);
 		strokePaint: (self borderColorFor: anElement);

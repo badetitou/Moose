@@ -6,7 +6,7 @@ Class {
 
 { #category : #hooks }
 RTExtensibleLabel >> trachelShapeFor: anElement [
-	|  shape |	
+	|  shape |
 	shape := TRExtensibleLabelShape new.
 	shape text: (self textFor: anElement);
 			color: (self colorFor: anElement);

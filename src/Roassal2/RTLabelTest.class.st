@@ -9,8 +9,8 @@ RTLabelTest >> DOESNOTWORKtestFont [
 	| v shape es firstShape fontList |
 	v := RTView new.
 	fontList := TRPlatform current fontListStrings.
-	shape := RTLabel new 
-		fontName: [ :i | fontList at: i ]; 
+	shape := RTLabel new
+		fontName: [ :i | fontList at: i ];
 		text: 'The quick brown fox jumps over the lazy dog'.
 
 	es := shape elementsOn: (1 to: fontList size).
@@ -135,7 +135,7 @@ RTLabelTest >> testMultiline01 [
 	v := RTView new.
 	lbl := RTLabel elementOn: 'Hello', String cr, 'World'.
 	v add: lbl.
-	
+
 	lbl trachelShape setAsFixed.
 	self assert: lbl trachelShape class == TRCompositeShape
 ]
@@ -156,10 +156,10 @@ RTLabelTest >> testUpdatingShape [
 	view := RTView new.
 	el := (RTLabel new text: 'Hello') element.
 	view add: el.
-	
+
 	self assert: el trachelShape class == TRLabelShape.
 	self assert: el trachelShape text = 'Hello'.
-	
+
 	el shape text: 'Change'; color: Color red. el update.
 	self assert: el trachelShape class == TRLabelShape.
 	self assert: el trachelShape text = 'Change'.

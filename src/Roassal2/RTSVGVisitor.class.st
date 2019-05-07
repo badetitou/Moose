@@ -52,7 +52,7 @@ RTSVGVisitor class >> visit: view on: stream with: interactions canvas: aRectang
 RTSVGVisitor >> addContainedInteractions: id element: e [
 	| aNumber |
 	aNumber := self alignPoint: e center.
-	(interactions at: e ifAbsent: [OrderedCollection new]) 
+	(interactions at: e ifAbsent: [OrderedCollection new])
 		do: [ :i | i contained
 			ifTrue: [ i addEventHandlers: stream id: id  element: e center: aNumber] ]
 ]
@@ -62,9 +62,9 @@ RTSVGVisitor >> addEmbeddingInteractions: id element: e [
 	|closings aNumber |
 	aNumber := self alignPoint: e center.
 	closings := OrderedCollection new.
-	(interactions at: e ifAbsent: [OrderedCollection new]) 
+	(interactions at: e ifAbsent: [OrderedCollection new])
 		do: [ :i | (i external not and: [i contained not])
-			ifTrue: [ 
+			ifTrue: [
 				closings add: (i addEventHandlers: stream id: id  element: e center: aNumber)] ].
 	^(closings reverse)
 ]
@@ -73,17 +73,17 @@ RTSVGVisitor >> addEmbeddingInteractions: id element: e [
 RTSVGVisitor >> addExternalInteractions: id element: el [
 	| aNumber |
 	aNumber := self alignPoint: el center.
-	(interactions at: el ifAbsent: [OrderedCollection new]) 
+	(interactions at: el ifAbsent: [OrderedCollection new])
 		do: [ :i | i external
-			ifTrue: [ 
+			ifTrue: [
 				self stream
 					nextPutAll: ' onmousemove="showPopup(evt, ''';
 					nextPutAll: id;
 					nextPutAll: ''')" onmouseout="hidePopup(''';
 					nextPutAll: id;
 					nextPutAll: ''')"'.
-		
-				self afterStream add: [:e | 
+
+				self afterStream add: [:e |
 					i addEventHandlers: stream id: id  element: el center: aNumber] ]]
 ]
 
@@ -106,7 +106,7 @@ RTSVGVisitor >> alignLine: aLine [
 	fromX := aLine from x + distanceX.
 	fromY := aLine from y + distanceY.
 	^(TRLineShape new from: fromX@fromY; to: (fromX + aLine to x) @ (fromY + aLine to y))
-	
+
 ]
 
 { #category : #alignment }
@@ -117,7 +117,7 @@ RTSVGVisitor >> alignPoint: aPoint [
 	originX := aPoint x + distanceX.
 	originY := aPoint y + distanceY.
 	^originX@originY
-	
+
 ]
 
 { #category : #alignment }
@@ -128,7 +128,7 @@ RTSVGVisitor >> alignRectangle: aRectangle [
 	originX := aRectangle topLeft x + distanceX.
 	originY := aRectangle topLeft y + distanceY.
 	^Rectangle origin: originX@originY corner: (originX + aRectangle width) @ (originY + aRectangle height)
-	
+
 ]
 
 { #category : #accessing }
@@ -159,23 +159,23 @@ RTSVGVisitor >> fixedEncompassingRectangle [
 	canvas := shapes first encompassingRectangle.
 	shapes do: [ :s| |rect|
 				rect := s encompassingRectangle.
-				rect height < 0 
+				rect height < 0
 					ifTrue: [ rect := Rectangle origin: rect bottomLeft corner: rect topRight].
 				canvas := canvas merge: rect.
 				 ].
-	^canvas 
+	^canvas
 ]
 
 { #category : #utils }
 RTSVGVisitor >> getCorrespondingLine: decorator from: lines [
 	lines do: [ :l |
-		(l class = TRBezierShape) 
-			ifTrue: [ decorator to = l points last 
+		(l class = TRBezierShape)
+			ifTrue: [ decorator to = l points last
 				ifTrue: [
-					lines remove: l. 
+					lines remove: l.
 					^ Array with: l with: decorator ] ]
-			ifFalse: [ decorator to = l to ifTrue: [ 
-					lines remove: l. 
+			ifFalse: [ decorator to = l to ifTrue: [
+					lines remove: l.
 					^ Array with: l with: decorator ] ].
 		 ].
 	^nil
@@ -190,7 +190,7 @@ RTSVGVisitor >> getDecorationId: aLineDecorationShape [
 	s := aLineDecorationShape strokePaint.
 	lw := aLineDecorationShape width.
 	^(t asString, w asString, ((c red * 256) + (s red * 256)) rounded asString, ((c green * 256) + (s green * 256)) rounded asString, ((c blue * 256) + (s blue * 256)) rounded asString, lw asString)
-	
+
 ]
 
 { #category : #initialization }
@@ -226,7 +226,7 @@ RTSVGVisitor >> names: anObject [
 RTSVGVisitor >> separateDecorated: lines decorations: decorations [
 	|decorated temp |
 	decorated := OrderedCollection new.
-	decorations do: [ :d | 
+	decorations do: [ :d |
 		temp := (self getCorrespondingLine: d from: lines).
 		decorated add: temp.
 		].
@@ -273,13 +273,13 @@ RTSVGVisitor >> visit [
 { #category : #visitor }
 RTSVGVisitor >> visitAbstractLine: anAbstractLine [
 	anAbstractLine accept: anAbstractLine
-	
+
 ]
 
 { #category : #visitor }
 RTSVGVisitor >> visitAbstractLineDecorationShape: anAbstractLineDecoration [
 	anAbstractLineDecoration accept: anAbstractLineDecoration
-	
+
 ]
 
 { #category : #visitor }
@@ -287,7 +287,7 @@ RTSVGVisitor >> visitArcShape: aShape [
 	|sCenter svgE|
 	sCenter := self alignPoint: (aShape position).
 	svgE := RTSVGArc new element: (aShape) center: sCenter r1: (aShape innerRadius) r2: (aShape externalRadius) aAngle: (aShape alphaAngle) bAngle: (aShape betaAngle) color: (aShape color).
-	svgE addOn: stream using: self. 
+	svgE addOn: stream using: self.
 ]
 
 { #category : #visitor }
@@ -299,13 +299,13 @@ RTSVGVisitor >> visitArrowHeadShape: arrowHeadShape [
 	w := arrowHeadShape width.
 	s := arrowHeadShape mySize.
 	(markers contains: aid)
-		ifFalse: [  
+		ifFalse: [
 			svgE := RTSVGArrowHeadMarker new id: aid fillColor: color borderColor: bColor width: w size: s.
-			svgE addOn: stream using: self. 
-			markers add: aid. 
+			svgE addOn: stream using: self.
+			markers add: aid.
 			]
-		
-	
+
+
 ]
 
 { #category : #visitor }
@@ -316,13 +316,13 @@ RTSVGVisitor >> visitArrowShape: arrowShape [
 	w := arrowShape width.
 	s := arrowShape mySize.
 	(markers includes: aid)
-		ifFalse: [ 
+		ifFalse: [
 			svgE := RTSVGArrowMarker new id: aid fillColor: nil borderColor: bColor width: w size: s.
-			svgE addOn: stream using: self. 
-			markers add: aid. 
+			svgE addOn: stream using: self.
+			markers add: aid.
 			]
-		
-	
+
+
 ]
 
 { #category : #visitor }
@@ -344,7 +344,7 @@ RTSVGVisitor >> visitBezierShape: aBezierShape with: aLineDecoration [
 	points:= aBezierShape points copy.
 	points := points collect: [ :p | self alignPoint: p].
 	svgE := RTSVGBezierLine new element: (aBezierShape) points: points width: (aBezierShape width) color: (aBezierShape strokePaint) decoration: aLineDecoration.
-	svgE addOn: stream using: self. 
+	svgE addOn: stream using: self.
 ]
 
 { #category : #visitor }
@@ -355,7 +355,7 @@ RTSVGVisitor >> visitBitMapShape: aBitmapShape [
 	box := self alignRectangle: (aBitmapShape encompassingRectangle).
 	svgE := RTSVGBitmap new element: (aBitmapShape element) form: form box: box.
 	svgE addOn: stream using: self."
-	
+
 ]
 
 { #category : #visitor }
@@ -368,14 +368,14 @@ RTSVGVisitor >> visitBoxShape: aBox [
 		ifFalse: [ borderColor := aBox strokePaint].
 	box := self alignRectangle: (aBox encompassingRectangle).
 	svgE := RTSVGRectangle new element: aBox box: box fillColor: fillColor borderWidth: 1 borderColor: borderColor.
-	svgE addOn: stream using: self. 
+	svgE addOn: stream using: self.
 ]
 
 { #category : #visitor }
 RTSVGVisitor >> visitCanvas: aCanvas [
 	|elementShapes edgeShapes decoratedEdgeShapes decorationShapes nonDecorationShapes lineClasses lineDecorationClasses canvasShapes|
-	
-	
+
+
 	canvasShapes := aCanvas shapes.
 	lineClasses := Array with: TRLineShape with: TRBezierShape.
 	lineDecorationClasses := TRAbstractLineDecoratorShape withAllSubclasses.
@@ -384,11 +384,11 @@ RTSVGVisitor >> visitCanvas: aCanvas [
 	nonDecorationShapes := (canvasShapes reject: [ :e | lineDecorationClasses includes: e class ]) asOrderedCollection.
 	decorationShapes := canvasShapes select: [ :e |  lineDecorationClasses includes: e class].
 	decoratedEdgeShapes := self separateDecorated: edgeShapes decorations: decorationShapes.
-	
-	stream 
+
+	stream
 		nextPutAll: '<defs>'.
 	decorationShapes do: [:s | s accept: self ].
-	stream 
+	stream
 		nextPutAll: '</defs>'.
 	nonDecorationShapes do:[:s | s accept: self].
 	decoratedEdgeShapes do:[:p | p first accept: self with: p second].
@@ -403,17 +403,17 @@ RTSVGVisitor >> visitDiamondShape: diamondShape [
 	w := diamondShape width.
 	s := diamondShape mySize.
 	(markers contains: aid)
-		ifFalse: [  
+		ifFalse: [
 			svgE := RTSVGDiamondMarker new id: aid fillColor: color borderColor: bColor width: w size: s.
-			svgE addOn: stream using: self. 
-			markers add: aid. 
+			svgE addOn: stream using: self.
+			markers add: aid.
 			]
-		
-	
+
+
 ]
 
 { #category : #visitor }
-RTSVGVisitor >> visitEllipseShape: anEllipse [	
+RTSVGVisitor >> visitEllipseShape: anEllipse [
 	|borderColor fillColor box svgE|
 	((anEllipse color) isNil)
 		ifTrue: [ fillColor := Color r: 0 g: 0 b: 0]
@@ -433,15 +433,15 @@ RTSVGVisitor >> visitGroup: aRTGroup [
 { #category : #visitor }
 RTSVGVisitor >> visitLabelShape: aLabel [
 	| color rectangle position text svgE|
-	color := aLabel color.	
+	color := aLabel color.
 	rectangle := aLabel encompassingRectangle.
 	position := self alignPoint: ((rectangle topLeft x + (rectangle width/4)) @ rectangle center y).
 	text := aLabel text.
-	svgE := RTSVGText new 
-		element: aLabel 
-		text: text 
-		at: position 
-		color: color 
+	svgE := RTSVGText new
+		element: aLabel
+		text: text
+		at: position
+		color: color
 		angle: aLabel angleInDegrees.
 	svgE addOn: stream using: self.
 ]
@@ -452,7 +452,7 @@ RTSVGVisitor >> visitLineShape: aLine [
 	startingPoint := self alignPoint: (aLine from).
 	endingPoint := self alignPoint: (aLine to).
 	svgE := RTSVGLine new element: (aLine) from: startingPoint to: endingPoint width: 1 color: (aLine strokePaint).
-	svgE addOn: stream using: self. 
+	svgE addOn: stream using: self.
 ]
 
 { #category : #visitor }
@@ -461,7 +461,7 @@ RTSVGVisitor >> visitLineShape: aLine with: aLineDecoration [
 	startingPoint := self alignPoint: (aLine from).
 	endingPoint := self alignPoint: (aLine to).
 	svgE := RTSVGLine new element: (aLine) from: startingPoint to: endingPoint width: 1 color: (aLine strokePaint) decoration: aLineDecoration.
-	svgE addOn: stream using: self. 
+	svgE addOn: stream using: self.
 ]
 
 { #category : #visitor }
@@ -475,7 +475,7 @@ RTSVGVisitor >> visitNoShape: aNoShape [
 ]
 
 { #category : #visitor }
-RTSVGVisitor >> visitPolygonShape: aPolygon [	
+RTSVGVisitor >> visitPolygonShape: aPolygon [
 	|borderColor fillColor box svgE|
 	((aPolygon color) isNil)
 		ifTrue: [ fillColor := Color r: 0 g: 0 b: 0]
@@ -483,10 +483,10 @@ RTSVGVisitor >> visitPolygonShape: aPolygon [
 	((aPolygon strokePaint) isNil)
 		ifFalse: [ borderColor := aPolygon strokePaint].
 	box := self alignRectangle: (aPolygon encompassingRectangle).
-	svgE := RTSVGPolygon new 
-		element: aPolygon 
-		box: box 
-		color: fillColor 
+	svgE := RTSVGPolygon new
+		element: aPolygon
+		box: box
+		color: fillColor
 		borderWidth: 1
 		borderColor: borderColor.
 	svgE addOn: stream using: self.
@@ -495,7 +495,7 @@ RTSVGVisitor >> visitPolygonShape: aPolygon [
 { #category : #visitor }
 RTSVGVisitor >> visitRotatedLabelShape: aRotatedLabel [
 	| color rectangle position text angle svgE|
-	color := aRotatedLabel color.	
+	color := aRotatedLabel color.
 	rectangle := aRotatedLabel encompassingRectangle.
 	position := self alignPoint: ((rectangle topLeft x + (rectangle width/4)) @ rectangle center y).
 	text := aRotatedLabel text.
@@ -513,19 +513,19 @@ RTSVGVisitor >> visitSVGPath: aSVGPath [
 	aSVGPath strokePaint isNil
 		ifTrue: [ borderColor := fillColor ]
 		ifFalse: [ borderColor := aSVGPath strokePaint].
-	
-	svgE := RTSVGPathEntity new 
+
+	svgE := RTSVGPathEntity new
 		element: aSVGPath
 		path: aSVGPath pathString
 		center: (self alignPoint: aSVGPath position)
 		scale: aSVGPath scale
-		fillColor: fillColor 
-		borderColor: borderColor 
+		fillColor: fillColor
+		borderColor: borderColor
 		width: 1.
-	svgE addOn: stream using: self. 
+	svgE addOn: stream using: self.
 ]
 
 { #category : #visitor }
 RTSVGVisitor >> visitShape: aShape [
-	aShape accept: self 
+	aShape accept: self
 ]

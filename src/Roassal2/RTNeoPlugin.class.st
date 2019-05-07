@@ -11,12 +11,12 @@ RTNeoPlugin >> description [
 
 { #category : #hooks }
 RTNeoPlugin >> execute [
-	Gofer new 
+	Gofer new
 		smalltalkhubUser: 'SvenVanCaekenberghe' project: 'Neo';
 		package: 'ConfigurationOfNeoJSON'; load.
 	(Smalltalk at: #ConfigurationOfNeoJSON) loadBleedingEdge.
-	
-	Gofer new 
+
+	Gofer new
 		smalltalkhubUser: 'SvenVanCaekenberghe' project: 'Neo';
 		package: 'ConfigurationOfNeoCSV'; load.
 	(Smalltalk at: #ConfigurationOfNeoCSV) loadBleedingEdge.
@@ -25,7 +25,7 @@ RTNeoPlugin >> execute [
 { #category : #testing }
 RTNeoPlugin >> isLoaded [
 	^ (RPackageOrganizer default includesPackageNamed: 'Neo-JSON-Core') and: [ RPackageOrganizer default includesPackageNamed: 'Neo-CSV-Core' ]
- 
+
 ]
 
 { #category : #hooks }

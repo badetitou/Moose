@@ -7,18 +7,18 @@ Here is an example:
 	data := #(#(WP1 0 5) #(WP2 5 8) #(WP3 7 10)).
 
 	b := RTTimeline new.
-	
+
 	s := RTTimelineSet new.
 	s objects: data.
 	s lineIdentifier: #first.
 	s start: #second.
 	s end: #third.
 	b add: s.
-	
-	b axisX 
+
+	b axisX
 		numberOfLabels: 5;
 		labelRotation: -45;
-		labelConversion: [ :v | Date year: 2015 day: v ]. 
+		labelConversion: [ :v | Date year: 2015 day: v ].
 
 	d := RTVerticalTickLineDecorator new.
 	d shape line color: Color white.
@@ -113,13 +113,13 @@ RTTimeline >> numberOfSets [
 RTTimeline >> renderIn: aView [
 	self setsComputeMinAndMax.
 	self defineAxesIfNecessary.
-	
+
 	self renderAllDecoratorsBehind.
 	elements := OrderedCollection new.
-	sets do: [ :aSet | 
+	sets do: [ :aSet |
 			aSet renderIn: aView using: self.
 			elements addAll: aSet elements ].
-	self renderAxis.	
+	self renderAxis.
 	self renderAllDecoratorsInFront.
 	self renderTimeLineLabels.
 ]
@@ -131,7 +131,7 @@ RTTimeline >> renderTimeLineLabels [
 	labelElements := RTGroup new.
 	labels
 		doWithIndex:
-			[ :aLabel :index | 
+			[ :aLabel :index |
 			position := self getPixelPositionOf: 0 @ index.
 			labelElements add: (self label: aLabel on: position) ].
 	halfVerticalStep := (self getPixelPositionOf: 0 @ 1) y / -2.
@@ -149,13 +149,13 @@ RTTimeline >> setsComputeMinAndMax [
 	"We are here compute the minimum and maximum of the timeline (X-axis, Y-axis)"
 	| globalMin globalMax |
 	self numberOfSets = 0 ifTrue: [ ^ self ].
-	
+
 	globalMin := (sets collect: #localMin) min.
 	globalMax := (sets collect: #localMax) max.
-	
+
 	sets do: [ :s | s globalMin: globalMin ].
 	sets do: [ :s | s globalMax: globalMax ].
-	
+
 	self maxX: globalMax.
 	self maxY: self numberOfLines.
 

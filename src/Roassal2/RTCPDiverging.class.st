@@ -5,7 +5,7 @@ Check it out by executing:
 ColorPalette diverging show
 
 More info:
-http://colorbrewer2.org/learnmore/schemes_full.html#diverging 
+http://colorbrewer2.org/learnmore/schemes_full.html#diverging
 
 ---Copyright:
 All colors, palettes and schemes are from www.ColorBrewer.org by Cynthia A. Brewer, Geography, Pennsylvania State University.

@@ -56,7 +56,7 @@ RTShape class >> compoundElementsOn: models [
 	| group aShape |
 	group := RTGroup new.
 	aShape := self instance.
-	models do: [ :m | 
+	models do: [ :m |
 		group add: (aShape compoundElementOn: m) ].
 	^ group
 ]
@@ -85,7 +85,7 @@ RTShape class >> elementsOn: models [
 	| group aShape |
 	group := RTGroup new.
 	aShape := self instance.
-	models do: [ :m | 
+	models do: [ :m |
 		group add: (aShape elementOn: m) ].
 	^ group
 ]
@@ -206,7 +206,7 @@ RTShape >> geometryFor: anElement [
 RTShape >> initialize [
 	super initialize.
 	color := self defaultColor.
-	rotation := 0. 
+	rotation := 0.
 	scale := 1.
 ]
 
@@ -257,7 +257,7 @@ RTShape >> scaleFor: anElement [
 
 { #category : #hooks }
 RTShape >> trachelShapeClass [
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #public }

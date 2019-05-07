@@ -19,7 +19,7 @@ RTStackBarRow >> title [
 ]
 
 { #category : #accessing }
-RTStackBarRow >> title: aString [ 
+RTStackBarRow >> title: aString [
 	title := aString
 ]
 
@@ -34,6 +34,6 @@ RTStackBarRow >> values [
 ]
 
 { #category : #accessing }
-RTStackBarRow >> values: aCollection [ 
+RTStackBarRow >> values: aCollection [
 	values := aCollection
 ]

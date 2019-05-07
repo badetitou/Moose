@@ -74,10 +74,10 @@ RTPolyLineSegment >> segmentWithPointFor: aNumber [
 	balance := self absoluteBalanceFor: aNumber.
 	self segments
 		do:
-			[ :each | 
+			[ :each |
 			newSum := sum + each length.
 			(balance between: sum and: newSum)
-				ifTrue: [ 
+				ifTrue: [
 					^ Array with: each with:	(each pointForBalance: balance - sum) ].
 			sum := newSum ].
 	self error: 'failed to find a segment'

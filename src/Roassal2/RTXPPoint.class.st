@@ -29,7 +29,7 @@ RTXPPoint >> x: aNumber [
 
 { #category : #accessing }
 RTXPPoint >> y [
-	^ y 
+	^ y
 ]
 
 { #category : #accessing }

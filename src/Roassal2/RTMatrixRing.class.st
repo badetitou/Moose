@@ -123,7 +123,7 @@ RTMatrixRing >> renderColumnGapsIn: aView [
 		v2 := boxShape element.
 		v1 translateTo: (self innerRadius - 4 * ang cos)@(self innerRadius - 4 * ang sin).
 		v2 translateTo: (self externalRadius * ang cos)@(self externalRadius * ang sin).
-		aView 
+		aView
 			add: v1;
 			add: v2;
 			add: (self lineShape edgeFrom: v1 to: v2).
@@ -145,21 +145,21 @@ RTMatrixRing >> renderMatrixIn: aView [
 	theMatrix := rowBlock rtValue: self matrix.
 	rowSize := theMatrix size.
 	theMatrix doWithIndex: [:row :rowIndex |
-		theRow := columnBlock rtValue: row. 
+		theRow := columnBlock rtValue: row.
 		columnSize := theRow size.
 		betaAngle := 360 / columnSize.
 		exRadius := (self externalRadius - self innerRadius)/rowSize.
-		theRow doWithIndex: [:obj :column |  
+		theRow doWithIndex: [:obj :column |
 			el := self shape elementOn: obj.
-			el attributes 
+			el attributes
 				at: #row put:	rowIndex;
 				at: #column put: column.
 			alphaAngle := betaAngle * (column - 1).
 			inRadius := self innerRadius + (exRadius*(rowIndex - 1)).
-			el trachelShape 
-				alphaAngle: alphaAngle 
+			el trachelShape
+				alphaAngle: alphaAngle
 				betaAngle:  alphaAngle + betaAngle
-				innerRadius: inRadius 
+				innerRadius: inRadius
 				externalRadius: inRadius + exRadius - self rowGap.
 			self elements add: el. ]
 	].

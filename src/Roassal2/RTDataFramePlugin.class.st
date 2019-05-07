@@ -20,7 +20,7 @@ RTDataFramePlugin >> execute [
 { #category : #testing }
 RTDataFramePlugin >> isLoaded [
 	^ RPackageOrganizer default includesPackageNamed: 'DataFrame-Core'
- 
+
 ]
 
 { #category : #hooks }

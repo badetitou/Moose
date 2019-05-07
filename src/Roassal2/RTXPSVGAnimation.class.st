@@ -19,13 +19,13 @@ RTXPSVGAnimation >> curvesFor: index [
 	acurves := curves0 at: index.
 	bcurves := curves1 at: index .
 	res := Array new: acurves size.
-	
-	acurves doWithIndex: [ :c1 :i | 
+
+	acurves doWithIndex: [ :c1 :i |
 		c2 := bcurves at: i.
-		res at: i put: (Array with: c1 first with: 
+		res at: i put: (Array with: c1 first with:
 			(c1 second collect: [:point | point interpolateTo: c2 second first at: t]) )
 		].
-	
+
 	^ res
 ]
 
@@ -36,10 +36,10 @@ RTXPSVGAnimation >> hasCompleted [
 
 { #category : #public }
 RTXPSVGAnimation >> on: elements during: seconds path: aBlock [
-	
+
 	| time |
 	element := (elements isKindOf: RTGroup)
-		ifTrue: [ elements] 
+		ifTrue: [ elements]
 		ifFalse: [ RTGroup new add: elements ].
 	curves0 := element collect: [ :e | e trachelShape curves ].
 	curves1 := element collect: [ :e | e trachelShape path:( aBlock rtValue: e); curves.].
@@ -48,7 +48,7 @@ RTXPSVGAnimation >> on: elements during: seconds path: aBlock [
 		evaluator: [ :t | t ];
 		timer: (TRVITimer new cycleLength: time);
 		yourself.
-		
+
 ]
 
 { #category : #refreshing }
@@ -60,7 +60,7 @@ RTXPSVGAnimation >> refresh [
 		].
 	element signalUpdate.
 
-	
+
 ]
 
 { #category : #actions }

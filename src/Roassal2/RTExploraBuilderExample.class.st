@@ -14,14 +14,14 @@ RTExploraBuilderExample >> exampleCircularList [
 	lst := LinkedList new.
 	lst add: 1; add: 2; add: 3; add: 4.
 	lst lastLink nextLink: (lst firstLink).
-	
+
 	builder := RTExploraBuilder new.
 	builder layout: RTCircleLayout new;
 		withPopup;
 		node: lst firstLink;
 		onClickExplore: [ :link | Array with: link nextLink ].
 	builder build.
-	^ builder 
+	^ builder
 ]
 
 { #category : #icons }
@@ -96,7 +96,7 @@ RTExploraBuilderExample >> exampleClassHierarchy3 [
 		height: [ :cls | cls numberOfMethods / 2 max: 5];
 		color: (Color blue alpha: 0.5);
 		if: [ :cls | cls subclasses notEmpty ] borderColor: (Color red alpha: 0.5).
-		
+
 	builder
 		layout: [ RTClusterLayout new horizontalGap: 80 ];
 		onClickExplore: [ :cls | cls subclasses ];
@@ -197,19 +197,19 @@ RTExploraBuilderExample >> exploreCircularList [
 	self new exploreCircularList
 	"
 	| builder lst |
-	
+
 	" A circular linked list "
 	lst := LinkedList new.
 	lst add: 1; add: 2; add: 3; add: 4.
 	lst lastLink nextLink: (lst firstLink).
-	
+
 	builder := RTExploraBuilder new.
 	builder layout: RTCircleLayout new;
 		withPopup;
 		node: lst firstLink;
 		onClickExplore: [ :link | Array with: link nextLink ].
-	
-	^ builder 
+
+	^ builder
 ]
 
 { #category : #basic }
@@ -266,7 +266,7 @@ RTExploraBuilderExample >> exploreClassHierarchy3 [
 		height: [ :cls | cls numberOfMethods / 2 max: 5];
 		color: (Color blue alpha: 0.5);
 		if: [ :cls | cls subclasses notEmpty ] borderColor: (Color red alpha: 0.5).
-		
+
 	builder
 		layout: [ RTClusterLayout new horizontalGap: 80 ];
 		onClickExplore: [ :cls | cls subclasses ];

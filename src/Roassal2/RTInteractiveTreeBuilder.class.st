@@ -31,11 +31,11 @@ RTInteractiveTreeBuilder >> clickOnElement: e [
 	| translator |
 	translator := RTSmoothLayoutTranslator new.
 	translator nbCycles: 1.
-	
+
 	(self isElementOpened: e)
 		ifTrue: [ self closeElement: e ]
 		ifFalse: [ self openElement: e ].
-		
+
 	layoutBuilder layout
 		translator: translator;
 		on: (e view elements select: [ :el | el shape class = self shape shape class ]).
@@ -47,7 +47,7 @@ RTInteractiveTreeBuilder >> clickOnElement: e [
 { #category : #interactions }
 RTInteractiveTreeBuilder >> closeElement: e [
 	| children |
-	
+
 	children := e attributes at: self childrenKey.
 	self closeNodes: children.
 	e attributes at: #open put: false.
@@ -68,15 +68,15 @@ RTInteractiveTreeBuilder >> closeNodes: arr [
 RTInteractiveTreeBuilder >> controlPointsFor: anEdge [
 	| x1 y1 x2 y2 |
 	(layout = #leftward or: [ layout = #rightward ])
-		ifTrue: [ 
+		ifTrue: [
 			x1 := x2 := (anEdge from position x + anEdge to position x) / 2.
 			y1 := anEdge from position y.
 			y2 := anEdge to position y ]
-		ifFalse: [ 
+		ifFalse: [
 			y1 := y2 := (anEdge from position y + anEdge to position y) / 2.
 			x1 := anEdge from position x.
 			x2 := anEdge to position x] .
-	
+
 	^ Array with: x1@y1 with: x2@y2.
 ]
 
@@ -107,9 +107,9 @@ RTInteractiveTreeBuilder >> createLabels [
 			isLeaf ifTrue: [ const right ] ].
 		layout = #leftward ifTrue: [ const right.
 			isLeaf ifTrue: [ const left ] ].
-		layout = #upward 
+		layout = #upward
 			ifTrue: [ const right; top ].
-		layout = #downward 
+		layout = #downward
 			ifTrue: [ const right; top  ].
 		const stick.
 		lbl
@@ -150,17 +150,17 @@ RTInteractiveTreeBuilder >> horizontalPadding: aNumber [
 { #category : #initialization }
 RTInteractiveTreeBuilder >> initialize [
 	super initialize.
-	self shape circle size: 15; color: Color white; 
+	self shape circle size: 15; color: Color white;
 		borderColor: (Color colorFrom: '#4682B4'); borderWidth: 2.
-	
+
 	labelShape := RTShapeBuilder new.
 	labelShape shape: (RTRotatedLabel new).
 	labelShape color: Color black; text: #yourself.
 	self afterClose: [ :e | e trachelShape color: Color blue ].
 	self afterOpen: [ :e | e trachelShape color: Color white ].
-	self interaction draggable; popup; 
+	self interaction draggable; popup;
 		when: TRMouseClick do: [:evt | self clickOnElement: evt element ].
-	
+
 	layoutBuilder := RTLayoutBuilder new.
 	lineShape := RTShapeBuilder new.
 	lineShape shape: (RTBezier4Line new
@@ -168,7 +168,7 @@ RTInteractiveTreeBuilder >> initialize [
 	self paddingText: 10@0.
 	self gap: 100@100.
 	self rightward.
-	
+
 ]
 
 { #category : #interactions }
@@ -185,7 +185,7 @@ RTInteractiveTreeBuilder >> labelShape [
 RTInteractiveTreeBuilder >> leftward [
 	layout := #leftward.
 	layoutBuilder horizontalTree horizontallyReverse.
-	
+
 ]
 
 { #category : #accessing }
@@ -199,7 +199,7 @@ RTInteractiveTreeBuilder >> openChildren: arr parent: p [
 	temp := OrderedCollection new.
 	arr do: [ :e |
 		(self isElementOpened: e)
-			ifFalse: [ 
+			ifFalse: [
 				e attributes at: #open put: true.
 				afterOpen ifNotNil: [ afterOpen rtValue: e ] ].
 		temp add: e.
@@ -209,13 +209,13 @@ RTInteractiveTreeBuilder >> openChildren: arr parent: p [
 		temp addAll: (self openChildren: (e attributes at: self childrenKey) parent: e)
 		 ].
 	^ temp
-	
+
 ]
 
 { #category : #interactions }
 RTInteractiveTreeBuilder >> openElement: e [
 	| children |
-	
+
 	children := e attributes at: self childrenKey.
 	e view addAll: (self openChildren: children parent: e).
 	e attributes at: #open put: true.
@@ -244,15 +244,15 @@ RTInteractiveTreeBuilder >> renderIn: aView [
 	edges := self createEdges: self rootNodes.
 	aView addAll: edges.
 	edges pushBack.
-	
-	layoutBuilder layout 
+
+	layoutBuilder layout
 		horizontalGap: gap x;
 		verticalGap: gap y;
 		on: elements.
-		
+
 	labels := self createLabels.
 	aView addAll: labels.
-	
+
 ]
 
 { #category : #layout }

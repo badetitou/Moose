@@ -1,5 +1,5 @@
 "
-A RTMapBuilder is xxxxxxxxx. 
+A RTMapBuilder is xxxxxxxxx.
 
 Instance Variables
 	cities:		<Object>
@@ -143,7 +143,7 @@ RTMapBuilder >> countries: objects named: aBlockOrSymbol [
 	countries := OrderedCollection new.
 	objects do: [ :o | countries add: o ].
 	countryNames := aBlockOrSymbol.
-	 
+
 ]
 
 { #category : #utility }
@@ -154,13 +154,13 @@ RTMapBuilder >> geoDistanceBetween: aPoint and: anotherPoint [
 	lat1 := aPoint x degreesToRadians.
 	lat2 := anotherPoint x degreesToRadians.
 	lon1 := aPoint y degreesToRadians.
-	lon2 := anotherPoint y degreesToRadians.	
+	lon2 := anotherPoint y degreesToRadians.
 	dLat := (lat2 - lat1).
 	dLon := (lon2 - lon1).
-	
+
 	a := ((dLat / 2) sin squared) + (((dLon / 2) sin squared) * (lat1 cos) * (lat2 cos)).
 	c := 2 * (a sqrt arcTan: (1 - a) sqrt).
-	
+
 	^ r * c
 ]
 
@@ -180,12 +180,12 @@ RTMapBuilder >> initialize [
 RTMapBuilder >> open [
 	super open.
 	cityBuilder evolutionPeriod isEmpty ifFalse: [
-		
+
 		self view addMenu: '<-' callback: [
 			cityBuilder stepBack.
 			self refreshView.
 		].
-		
+
 		self view addMenu: '->' callback: [
 			cityBuilder stepForward.
 			self refreshView.
@@ -279,14 +279,14 @@ RTMapBuilder >> scale: aNumber [
 { #category : #utility }
 RTMapBuilder >> translateGeoPositionToPixels: point [
 	"From https://github.com/thebyrd/world-news"
-	
+
 	| longitud latitud xFactor xoffset yFactor yoffset |
 	latitud := point x.
 	longitud := point y.
-	
+
 	xFactor := 2.6938.
 	xoffset := 465.4.
-	
+
 	yFactor := -2.6938.
 	yoffset := 227.066.
 	^ ((longitud * xFactor) + xoffset) @ ((latitud * yFactor) + yoffset)
@@ -295,15 +295,15 @@ RTMapBuilder >> translateGeoPositionToPixels: point [
 { #category : #utility }
 RTMapBuilder >> translatePixelsToGeoPosition: point [
 	"From https://github.com/thebyrd/world-news"
-	
+
 	| xFactor xoffset yFactor yoffset |
-	
+
 	xFactor := 2.6938.
 	xoffset := 465.4.
-	
+
 	yFactor := -2.6938.
 	yoffset := 227.066.
-	
+
 	^ (point y - yoffset / yFactor) @ (point x - xoffset / xFactor)
 ]
 

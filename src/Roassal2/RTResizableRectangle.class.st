@@ -23,7 +23,7 @@ RTResizableRectangle class >> cornerDirectionFor: aCorner [
 { #category : #accessing }
 RTResizableRectangle class >> cornerDirections [
 	^ cornerDirections
-		ifNil: [ 
+		ifNil: [
 			cornerDirections := (OrderedCollection new
 				add: (#top -> (0 @ 1));
 				add: (	#bottom -> (0 @ -1));
@@ -62,7 +62,7 @@ RTResizableRectangle class >> oppositeCornerFor: aCorner [
 { #category : #'as yet unclassified' }
 RTResizableRectangle class >> oppositeCorners [
 	^ oppositeCorners
-		ifNil: [ 
+		ifNil: [
 			oppositeCorners := (OrderedCollection new
 				add: (#topRight -> #bottomLeft);
 				add: (#bottomLeft -> #topRight);

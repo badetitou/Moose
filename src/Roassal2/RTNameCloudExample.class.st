@@ -1,9 +1,9 @@
 "
-RTNameCloudExample new installTitle: 'SimpleExample' 
+RTNameCloudExample new installTitle: 'SimpleExample'
 		code:
 		'
 | b |
-b := RTNameCloud new 
+b := RTNameCloud new
 		addString: ''open
 
 		| v shape |
@@ -15,7 +15,7 @@ b := RTNameCloud new
 b open.
 b  view canvas.
 		'
-	
+
 "
 Class {
 	#name : #RTNameCloudExample,
@@ -25,13 +25,13 @@ Class {
 
 { #category : #sources }
 RTNameCloudExample >> exampleRoassalCode [
-	<gtExample> 
+	<gtExample>
 	<noTest>
 	| b |
 	(TRPlatform current dialogConfirm: 'This example takes a long time to load, execute?')
 	ifFalse: [ ^ self ].
 	b := RTNameCloud new.
-	RTObject withAllSubclasses do: [ :c | 
+	RTObject withAllSubclasses do: [ :c |
 		b addStrings: (c rtmethods collect: #sourceCode) ].
 	^ b
 ]
@@ -111,7 +111,7 @@ fYa0X9pnSMvlb3YRJmtrSplOAAAAAElFTkSuQmCC'
 RTNameCloudExample >> exampleSimpleExample [
 
 | b |
-b := RTNameCloud new 
+b := RTNameCloud new
 		addString: 'open
 
 		| v shape |

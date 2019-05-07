@@ -9,7 +9,7 @@ b nodes: (Collection withAllSubclasses).
 b layout grid.
 b normalizer normalizeColor: #numberOfMethods.
 b view @ RTFilterInView.
-b 
+b
 -=-=-=
 
 With edges:
@@ -24,7 +24,7 @@ b layout tree.
 
 b view @ RTFilterInView.
 
-b 
+b
 -=-=-=
 
 "
@@ -75,7 +75,7 @@ RTFilterInView >> initializeElement: aView [
 		callback: [ string := self askForPattern.
 			string ifNotNil:
 				[ self filterOutUsing: string ] ].
-		
+
 	view
 		addMenu: 'Reset'
 		callback: [ self reset ]

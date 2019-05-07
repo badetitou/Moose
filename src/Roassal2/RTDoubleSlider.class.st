@@ -26,7 +26,7 @@ Class {
 RTDoubleSlider >> addDraggableInteractions [
 	| draggable w1 w2 |
 	draggable := RTConstrainedDraggable new.
-	draggable rectangle: [ 
+	draggable rectangle: [
 		w1 := (cursorMin encompassingRectangle width/2)@0.
 		(extremity1 position - w1) corner: (extremity2 position+w1) ].
 	draggable afterBlock: [ self eventForCursorMin: true ].
@@ -40,21 +40,21 @@ RTDoubleSlider >> addDraggableInteractions [
 	draggable afterBlock: [ self eventForCursorMax: true ].
 	cursorMax @ draggable.
 	cursorMax translateTo: 200 @ 0.
-	
+
 	draggable := RTConstrainedDraggable new.
 	draggable rectangle: [ extremity1 position corner: extremity2 position].
 	draggable afterBlock: [ self eventForLineCursor ].
 	lineCursor @ draggable.
 	lineCursor translateTo: 100@0.
 	lineCursor trachelShape width: 200.
-	
+
 ]
 
 { #category : #private }
 RTDoubleSlider >> addLabelsIfNecessary [
 	| positionMin positionMax |
 	labelled ifFalse: [ ^ self ].
-	
+
 	positionMin := (cursorMin position x - extremity1 position x)
 		/ (extremity2 position x - extremity1 position x).
 	positionMin := positionMin * (max - min) + min.
@@ -97,7 +97,7 @@ RTDoubleSlider >> callback [
 
 { #category : #accessing }
 RTDoubleSlider >> callback: aTwoArgBlock [
-	"everytime the slider is moved the aTwoArgBlock will be evaluated with 2 arguments which correspond 
+	"everytime the slider is moved the aTwoArgBlock will be evaluated with 2 arguments which correspond
 	to the position of the 2 cursors of the double slider, from the configured min value to the configured max value"
 	callback := aTwoArgBlock
 ]
@@ -109,11 +109,11 @@ RTDoubleSlider >> createElements [
 	extremity2 := (RTBox new width: 5; height: 10) element.
 	line := (RTLine new width: 5) edgeFrom: extremity1 to: extremity2.
 	extremity2 translateTo: 200 @ 0.
-	
+
 	cursorMin := self elementOn: nil.
 	cursorMax := self elementOn: nil.
 	lineCursor := (RTBox new height: 8; color: Color blue trans) element.
-	
+
 	sliderElements
 		add: extremity1;
 		add: extremity2;
@@ -147,10 +147,10 @@ RTDoubleSlider >> eventForCursor: propagate order: order [
 	pmax := (p2 x - e1 x)/(e2 x - e1 x).
 	pmax := (pmax * (max - min))+min.
 	res := Array with: pmin with: pmax.
-	propagate ifTrue: [ 
+	propagate ifTrue: [
 		callback rtValue: res.
 		self updateLineCursor ].
-	self updateLabel: order 
+	self updateLabel: order
 		with: (order ifTrue: [ pmin ] ifFalse: [ pmax ] ).
 	^ res
 ]
@@ -184,22 +184,22 @@ RTDoubleSlider >> example01 [
 	"
 	| v label1 label2 doubleSlider composer |
 	v := RTView new.
-	
+
 	composer := RTComposer new.
 	composer view: v.
-	
+
 	label1 := RTLabel elementOn: 0.
 	v add: label1.
 	composer group: label1.
-	
+
 	label2 := RTLabel elementOn: 0.
 	v add: label2.
 	composer group: label2.
-	
+
 	doubleSlider := RTDoubleSlider new.
 	doubleSlider view: v.
 	doubleSlider labeled.
-	doubleSlider callback: [ :cursor1 :cursor2 | 
+	doubleSlider callback: [ :cursor1 :cursor2 |
 		label1 model: cursor1 * 100.
 		label1 updateShape.
 		label2 model: cursor2 * 100.
@@ -207,10 +207,10 @@ RTDoubleSlider >> example01 [
 	doubleSlider move: #below.
 	doubleSlider build.
 	composer group: doubleSlider.
-	
+
 	composer layout: (RTVerticalLineLayout new gapSize: 25; center).
 	^ v
-	 
+
 ]
 
 { #category : #initialization }
@@ -273,18 +273,18 @@ RTDoubleSlider >> renderIn: aView [
 	aView addAll: sliderElements.
 	self addDraggableInteractions.
 	self addLabelsIfNecessary.
-	
+
 ]
 
 { #category : #private }
 RTDoubleSlider >> updateLabel: order with: value [
 	| label |
 	label := order ifTrue: [ cursorMin ] ifFalse: [ cursorMax ].
-	(label attributes includesKey: #RTLabelledLabel) 
+	(label attributes includesKey: #RTLabelledLabel)
 		ifTrue: [label := label attributeAt: #RTLabelledLabel.]
 		ifFalse: [ ^ self ].
-	labelled ifTrue: [ 
-		label text: (useIntegerLabel 
+	labelled ifTrue: [
+		label text: (useIntegerLabel
 			ifTrue: [ (value round: 0) asInteger]
 			ifFalse: [ value round: 2 ] ) asString. ]
 ]
@@ -294,8 +294,8 @@ RTDoubleSlider >> updateLineCursor [
 	| p1 p2 |
 	p1 := cursorMax position.
 	p2 := cursorMin position.
-	
-	lineCursor trachelShape 
+
+	lineCursor trachelShape
 		width: p1 x - p2 x;
 		translateTo: (p1 interpolateTo: p2 at: 0.5).
 ]

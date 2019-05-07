@@ -25,7 +25,7 @@ RTMenu >> add: menuitem [
 { #category : #accessing }
 RTMenu >> buttonLabelBackgroundShapeAndColor: aColor [
 	| box |
-	
+
 	box := TRBoxShape new extent: label encompassingRectangle extent + (10@7).
 	self labelBackground: box.
 	box color: aColor.
@@ -71,7 +71,7 @@ RTMenu >> executeTextHighlight [
 { #category : #'hide entries' }
 RTMenu >> hideAll [
 	view canvas fixedShapes do: [ :s |
-		
+
 		(s element isKindOf: RTMenu) ifTrue: [ s element hideItems ]. ]
 ]
 
@@ -83,7 +83,7 @@ RTMenu >> hideItems [
 	self items do: [:item |
 		item rawmenu remove].
 	menuBackground remove.
-	self endHighlight.	
+	self endHighlight.
 ]
 
 { #category : #accessing }
@@ -165,7 +165,7 @@ RTMenu >> labelBackgroundColor: aColor [
 
 { #category : #accessing }
 RTMenu >> menuBackground [
-	^ menuBackground 
+	^ menuBackground
 ]
 
 { #category : #accessing }
@@ -175,18 +175,18 @@ RTMenu >> menuBackground: aShape [
 
 { #category : #accessing }
 RTMenu >> menuBackgroundColor [
-	^ menuBackgroundColor 
+	^ menuBackgroundColor
 ]
 
 { #category : #accessing }
 RTMenu >> menuBackgroundColor: aColor [
-	menuBackgroundColor := aColor 
+	menuBackgroundColor := aColor
 ]
 
 { #category : #accessing }
 RTMenu >> menuLabelBackgroundShapeAndColor: aColor [
 	| box form |
-	
+
 	box := TRBoxShape new extent: label encompassingRectangle extent + (20@7).
 	self labelBackground: box.
 	box color: aColor.
@@ -196,7 +196,7 @@ RTMenu >> menuLabelBackgroundShapeAndColor: aColor [
 	form := TRPolygonShape new color: Color black; vertices: (Array with: 0@0 with: 6@0 with: 3@6).
 	form strokePaint: (Color black).
 	TRConstraint move: form onTheRightOf: box.
-	
+
 	view canvas addFixedShape: form.
 	form translateBy: (-12)@(2).
 	label translateBy: (-5)@(0).
@@ -207,31 +207,31 @@ RTMenu >> menuLabelBackgroundShapeAndColor: aColor [
 
 { #category : #accessing }
 RTMenu >> saveLabelBackgroundColor [
-	savedLabelBackgroundColor :=  self labelBackground color. 
+	savedLabelBackgroundColor :=  self labelBackground color.
 ]
 
 { #category : #accessing }
 RTMenu >> savedLabelBackgroundColor [
-	^ savedLabelBackgroundColor. 
+	^ savedLabelBackgroundColor.
 ]
 
 { #category : #accessing }
 RTMenu >> update [
 |pos1 pos2 maxWidth parentMenu y |
-		
+
 	parentMenu := view canvas fixedShapes select: [ :t | t class == TRLabelShape and: [ t text = label text ] ].
 	parentMenu := parentMenu first.
-	
+
 	y := 0.
 	maxWidth := items ifNotEmpty: [(items collect: [ :item | item rawmenu width]) max] ifEmpty: [0].
 	pos1:= parentMenu position + ((((parentMenu width)/2 + 5)negated)@((parentMenu height)/2+3.4)).
 	items do: [ :item | y := y + (item rawmenu height).].
 	pos2:= pos1 + ((maxWidth+20)@(y + 5)).
 	self menuBackground: (TRBoxShape new from: pos1 to: pos2; color: (self menuBackgroundColor); strokePaint: nil"(Color gray darker alpha: 0.3)").
-	
+
 	view canvas addFixedShape: (self menuBackground).
 	(self menuBackground) pushBack.
-	^ (self menuBackground). 
+	^ (self menuBackground).
 ]
 
 { #category : #accessing }

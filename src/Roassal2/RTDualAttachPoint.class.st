@@ -14,23 +14,23 @@ Class {
 { #category : #public }
 RTDualAttachPoint class >> on: els attachFrom: anAttachPoint [
 	^ self on: els thenDo: [ :ins | ins attachFrom: anAttachPoint ].
-	
+
 ]
 
 { #category : #public }
 RTDualAttachPoint class >> on: els attachFrom: anAttachPoint1 attachTo: anAttachPoint2 [
-	^ self on: els thenDo: [ :ins | 
+	^ self on: els thenDo: [ :ins |
 		ins
 			attachFrom: anAttachPoint1;
 			attachTo: anAttachPoint2
 		 ].
-	
+
 ]
 
 { #category : #public }
 RTDualAttachPoint class >> on: els attachTo: anAttachPoint [
 	^ self on: els thenDo: [ :ins | ins attachTo: anAttachPoint ].
-	
+
 ]
 
 { #category : #accessing }
@@ -69,5 +69,5 @@ RTDualAttachPoint >> initialize [
 	super initialize.
 	default := RTCenteredAttachPoint instance.
 	self attachFrom: default;
-		attachTo: default. 
+		attachTo: default.
 ]

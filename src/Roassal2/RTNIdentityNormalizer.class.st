@@ -38,7 +38,7 @@ RTNIdentityNormalizer class >> beginingAtRed [
 
 { #category : #'instance creation' }
 RTNIdentityNormalizer class >> withCommand: aBlock [
-	
+
 	^(self new)
 		command: aBlock;
 		yourself
@@ -51,7 +51,7 @@ RTNIdentityNormalizer >> colors [
 
 { #category : #'initialize-release' }
 RTNIdentityNormalizer >> initialize [
-	
+
 	super initialize.
 	colorIndex := 0.
 	dictionary := Dictionary new.
@@ -60,14 +60,14 @@ RTNIdentityNormalizer >> initialize [
 
 { #category : #private }
 RTNIdentityNormalizer >> nextColor [
-	
+
 	colorIndex := colorIndex \\ self colors size + 1.
 	^self colors at: colorIndex
 ]
 
 { #category : #accessing }
 RTNIdentityNormalizer >> rtValue: anEntity [
-	
+
 	^dictionary
 		at: (command rtValue: anEntity)
 		ifAbsentPut: [ self nextColor ]
@@ -75,8 +75,8 @@ RTNIdentityNormalizer >> rtValue: anEntity [
 
 { #category : #private }
 RTNIdentityNormalizer >> setIndexTo: aColor [
-	"colorAsSymbol has to be one of Color colorNames. 
+	"colorAsSymbol has to be one of Color colorNames.
 	The method set the current index to the color given in parameter"
-	
+
 	colorIndex := (self colors indexOf: aColor) - 1
 ]

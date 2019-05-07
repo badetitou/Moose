@@ -34,7 +34,7 @@ RTDirectedLine >> pointsFrom: from To: to [
 "	| point1 point2 mid   |
 	mid := ((to x + from x) / 2) @ ((to y + from y) / 2).
 	point1 := from rotateBy: (Float pi /16) about: mid.
-	point2 := from rotateBy: (15*(Float pi /16)) about: mid.	
+	point2 := from rotateBy: (15*(Float pi /16)) about: mid.
 	^ {from.
 	point1.
 	point2.

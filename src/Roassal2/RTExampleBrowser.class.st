@@ -15,7 +15,7 @@ RTExampleBrowser class >> menuCommandOn: aBuilder [
 	withSeparatorAfter;
 	with: [
 		(aBuilder item: #'Roassal Examples')
-			order: 0.1; 
+			order: 0.1;
 			parent: #Roassal;
 			label: 'Roassal examples';
 			help: 'Browse Roassal interactive examples';
@@ -27,16 +27,16 @@ RTExampleBrowser class >> menuCommandOn: aBuilder [
 RTExampleBrowser >> checkSendingData [
 	| result |
 	Privacy sendDiagnosticsAndUsageData ifTrue: [ ^ self ].
-	result := UIManager default questionWithoutCancel: 'Please, do you want to let us know how you use the Roassal example browser? 
+	result := UIManager default questionWithoutCancel: 'Please, do you want to let us know how you use the Roassal example browser?
 
-Roassal is free to use, but you can retribute to it by letting us know which examples 
-interest you the most. 
+Roassal is free to use, but you can retribute to it by letting us know which examples
+interest you the most.
 
-By pressing YES, you will send to our server the name of the example you have pressed on later on.  
+By pressing YES, you will send to our server the name of the example you have pressed on later on.
 Note that answering YES will also activate other monitoring mechanism, such as Spotter.
 
 __ All the data is sent anonymously__
-	' title: 'Send Us Usage Data'. 
+	' title: 'Send Us Usage Data'.
 	result ifNil: [ ^ self ].
 	result ifTrue: [ Privacy sendDiagnosticsAndUsageData: true ]
 ]
@@ -51,12 +51,12 @@ RTExampleBrowser >> examples [
 { #category : #'instance creation' }
 RTExampleBrowser >> open [
 	| pager |
-	self shouldEventBeManaged ifTrue: [ self checkSendingData ]. 
+	self shouldEventBeManaged ifTrue: [ self checkSendingData ].
 	pager := GLMPager new.
 	pager title: 'Roassal examples browser'.
 	pager showFirst: [ :a | a list format: #label. ].
 	pager
-		show: [ :a :each | 
+		show: [ :a :each |
 			a title: [ GTInspector new printObjectAsAnItem: each ].
 			a dynamicActions: [ :aPresentation | each gtInspectorActions asOrderedCollection ].
 			a dynamic

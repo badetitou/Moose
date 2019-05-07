@@ -1,17 +1,17 @@
 "
 I am the super class of all the roassal examples.
 
-Try to use this script to know the excecution of roassal examples 
+Try to use this script to know the excecution of roassal examples
 
 | examples errors |
 examples := OrderedCollection new.
 errors := OrderedCollection new.
-(RTAbstractExample subclasses collect: #new) 
-	do: [ :example | 
+(RTAbstractExample subclasses collect: #new)
+	do: [ :example |
 		example gtExamples do: [:met | | time builder |
 			time := DateAndTime now.
 			[builder := example perform: met selector.
-			(builder isKindOf: RTBuilder) 
+			(builder isKindOf: RTBuilder)
 				ifTrue: [ builder build ].
 			time := DateAndTime now - time.
 			time > (1 asDuration)
@@ -48,7 +48,7 @@ RTAbstractExample class >> createIcon [
 
 { #category : #announcement }
 RTAbstractExample class >> initialize [
-	self announcer when: Announcement do: [ :announcement | 
+	self announcer when: Announcement do: [ :announcement |
 			"RTEventCollector uniqueInstance add: announcement" ]
 ]
 
@@ -60,12 +60,12 @@ RTAbstractExample class >> runningAllExamples [
 	"
 
 	"Useful to find examples that may trigger an error"
-	
+
 	| examples result w |
 	w := '/tmp/result.txt' asFileReference writeStream.
 	self withAllSubclasses do: [ :cls |
 		examples := cls selectors select: [ :k |( k beginsWith: 'example')  and: [ (k endsWith: 'Icon') not ] ].
-		examples do: [ :k | 
+		examples do: [ :k |
 			w nextPutAll: 'About to run ', cls name, '>>', k, ' ...'.
 			result := cls new perform: k.
 			[ result class == RTView or: [ result isKindOf: RTBuilder ] ] assert.
@@ -85,7 +85,7 @@ RTAbstractExample >> installOn: aView [
 	el := (RTLabel new text: (self label)) element.
 	el @ RTHighlightable.
 	aView add: el.
-	
+
 	el when: TRMouseClick do: [ :evt |
 		aView clean.
 		self openOn: aView.
@@ -129,8 +129,8 @@ RTAbstractExample >> installTitle: aTitle code: sourceCode [
 RTAbstractExample >> justToTry [
 
 
-	
-	RTGrapherExample new installTitle: 'ForceLayoutWithGreatCharge' 
+
+	RTGrapherExample new installTitle: 'ForceLayoutWithGreatCharge'
 		code:
 		'
 
@@ -145,7 +145,7 @@ RTAbstractExample >> justToTry [
 		connectTo: [ :c | c subclasses ];
 		shape: (RTLine new color: Color gray).
 
-	b layout 
+	b layout
 		use: (RTForceBasedLayout new charge: -180).
 
 	b global
@@ -155,7 +155,7 @@ RTAbstractExample >> justToTry [
 	b addAll: (RTObject withAllSubclasses).
 	b open.
 	b view canvas'
-	
+
 ]
 
 { #category : #accessing }
@@ -171,7 +171,7 @@ RTAbstractExample >> open [
 	v @ RTDraggableView.
 	self openOn: v.
 	v open.
-	
+
 ]
 
 { #category : #'instance creation' }
@@ -179,25 +179,25 @@ RTAbstractExample >> openOn: v [
 
 	| exampleSymbols icon64Mime form element  helpBar |
 
-	exampleSymbols := self class selectors 
-								select: [ :symbol | (symbol beginsWith: 'example') 
+	exampleSymbols := self class selectors
+								select: [ :symbol | (symbol beginsWith: 'example')
 															and: [ (symbol endsWith: 'Icon') not ] ].
 	exampleSymbols do: [ :k |
 		icon64Mime := self perform: (k, #Icon) asSymbol.
-		form := TRPlatform current formClass fromBinaryStream: 
+		form := TRPlatform current formClass fromBinaryStream:
 							(TRPlatform current mimeDecodeToBytes: icon64Mime readStream).
 		element := (RTBitmap new form: form) element.
 		element @ (RTPopup new text: k asString).
 		element when: TRMouseLeftClick do: [ :evt | self class new perform: k ].
 		element when: TRMouseRightClick do: [ :evt | (self class >> k) browse ].
-		element @ (RTEventForwarder new eventClass: TRMouseDragging). 
+		element @ (RTEventForwarder new eventClass: TRMouseDragging).
 		v add: element.
 	].
 
 	RTGridLayout new on: v elements.
-	
+
 	helpBar := TRLabelShape new text: ' Left to run / Right for code'.
 	v canvas addFixedShape: helpBar.
 	TRConstraint stickAtTheBottomOfTheWindow: helpBar.
-	
+
 ]

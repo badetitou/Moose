@@ -32,32 +32,32 @@ RTFlowerBuilder >> addChildren: el [
 { #category : #private }
 RTFlowerBuilder >> addOrRemove: el [
 	| key |
-	
+
 	key := #click.
 	(el attributes includesKey: key)
-		ifTrue: [ 
+		ifTrue: [
 			self addChildren: el.
 			view edges pushBack.
 			el trachelShape strokeWidth: 1 ]
 		ifFalse: [
-			el attributes at: key put: 0. 
+			el attributes at: key put: 0.
 			self removeChildren: el.
 			(el attributes at: self childrenKey)
 				ifNotEmpty: [ el trachelShape strokeWidth: 2  ] ].
 
-		
+
 ]
 
 { #category : #private }
 RTFlowerBuilder >> createEdges: array [
 	| children |
-	array do: [ :e | 
+	array do: [ :e |
 		children := (e attributes at: self childrenKey).
 		children do: [ :ch |
 			view add: (self line edgeFrom: e to: ch)].
 		self createEdges: children. ]
-		
-		
+
+
 ]
 
 { #category : #initialization }
@@ -86,7 +86,7 @@ RTFlowerBuilder >> removeChildren: el [
 	| ch |
 	ch := el attributes at: self childrenKey.
 	ch do: [ :c |
-		c view ifNotNil: [ 
+		c view ifNotNil: [
 			c remove.
 			stepping removeNode: c.
 			self removeChildren: c. ] ]
@@ -108,8 +108,8 @@ RTFlowerBuilder >> renderIn: aView [
 		view: aView.
 	stepping layout: force.
 	aView addAnimation: stepping.
-	
-		
-	
-	
+
+
+
+
 ]

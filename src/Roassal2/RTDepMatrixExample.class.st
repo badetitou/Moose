@@ -63,7 +63,7 @@ RTDepMatrixExample >> example05DuplicationClasses [
 	self new example05DuplicationClasses
 	"
 	| m cls1 cls2 str |
-	 
+
 	str := WriteStream on: String new.
 	RTLine fileOutOn: str.
 	cls1 := str contents lines.

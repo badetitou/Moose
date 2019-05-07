@@ -17,17 +17,17 @@ RTScriptOfTheDayPlugin >> doesItLoadCode [
 { #category : #hooks }
 RTScriptOfTheDayPlugin >> execute [
 
-	(Smalltalk includesKey: #DSWebhookClient) ifFalse: [ 
+	(Smalltalk includesKey: #DSWebhookClient) ifFalse: [
 		Metacello new
 		    baseline: #DiscordSt;
 		    repository: 'github://JurajKubelka/DiscordSt/src';
-		    load: #webhook ]. 
-	
-	Gofer new 
+		    load: #webhook ].
+
+	Gofer new
 		smalltalkhubUser: 'ObjectProfile' project: 'Roassal2';
 		package: 'Roassal2ScriptOfTheDay'; load.
-	
-	
+
+
 ]
 
 { #category : #testing }

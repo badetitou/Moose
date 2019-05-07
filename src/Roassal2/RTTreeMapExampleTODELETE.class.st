@@ -14,12 +14,12 @@ RTTreeMapExampleTODELETE >> example02 [
 	"
 	| b |
 	b := RTTreeMapBuilder new.
-	b shape 
+	b shape
 		if: [ :cls| Smalltalk includesKey: (cls name, 'Test') asSymbol ] fillColor: Color lightGreen;
 		if: [ :cls | cls name endsWith: 'Line' ] fillColor: Color purple;
 		if: [ :cls | cls hasAbstractMethods ] fillColor: Color red.
 	b popup text: [ :cls | cls name, ' number of methods: ', cls numberOfMethods asString ].
-	
+
 	b
 		extent: 400@400;
 		explore: TRShape using: #subclasses;
@@ -34,10 +34,10 @@ RTTreeMapExampleTODELETE >> example03 [
 	"
 	| b mt |
 	b := RTTreeMapBuilder new.
-	b shape 
+	b shape
 		if: [ :m| Smalltalk includesKey: (m name,'Test') asSymbol ] fillColor: Color lightGreen;
 		if: [ :m| m hasAbstractMethods ] fillColor: Color red.
-	
+
 	b
 		extent: 400@400;
 		weight: 1.
@@ -60,7 +60,7 @@ RTTreeMapExampleTODELETE >> example04 [
 		weight: [:n | n ].
 	b shape if: [ :n | n even ] fillColor: Color blue;
 		if: [ :n | n odd ] fillColor: Color lightGray.
-		
+
 	b from: (1 to: 10)
 		using: [:n | n < 5 ifTrue: [ Array with: n+1 with: n+2 ] ifFalse: [ #() ] ].
 	^ b
@@ -73,7 +73,7 @@ RTTreeMapExampleTODELETE >> example05 [
 	"
 	| b normalizer tally methods mt |
 	b := RTTreeMapBuilder new.
-	b shape 
+	b shape
 		if: [ :m| Smalltalk includesKey: (m theClass name,'Test') asSymbol ] fillColor: Color lightGreen;
 		if: [ :m| m theClass hasAbstractMethods ] fillColor: Color red.
 	mt := TRPlatform current messageTallyClass.
@@ -81,11 +81,11 @@ RTTreeMapExampleTODELETE >> example05 [
 		spyEvery: 1
 		on: [Object browse]; yourself).
 	methods := tally withDeepCollect: #children.
-	
+
 	normalizer := RTNColorLinearNormalizer inContext: methods withCommand: #tally lowColor: Color gray highColor: Color red.
 	b shape borderColor: [ :e |normalizer rtValue: e ];
 		borderWidth: 2.
-	
+
 	b
 		extent: 500@500;
 		weight: [:m | m tally ].
@@ -102,11 +102,11 @@ RTTreeMapExampleTODELETE >> example06 [
 	"
 	| b mt |
 	b := RTTreeMapBuilder new.
-	b shape 
+	b shape
 		if: [ :m| Smalltalk includesKey: (m name,'Test') asSymbol ] fillColor: Color lightGreen;
 		if: [ :m| m hasAbstractMethods ] fillColor: Color red;
 		borderWidth: 2.
-	
+
 	b
 		extent: 400@400;
 		weight: 1.
@@ -115,7 +115,7 @@ RTTreeMapExampleTODELETE >> example06 [
 		using: #subclasses.
 	b withShadedFramesFromColor: Color gray toColor: Color red.
 	b elements do: [ :e | e when: TRMouseClick do: [ :evt | e model inspect ] ].
-	
+
 	^ b
 ]
 

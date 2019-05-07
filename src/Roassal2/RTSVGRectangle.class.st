@@ -22,9 +22,9 @@ RTSVGRectangle >> addOn: stream using: aSVGVisitor [
 	self addFillColor: stream.
 	self addFillOpacity: stream.
 	((self strokeWidth) > 0 and: (self strokeColor) ~= nil)
-		ifTrue: [ 
+		ifTrue: [
 			self addStrokeColor: stream.
-			self addStrokeWidth: stream ].	
+			self addStrokeWidth: stream ].
 	self closeTag: stream.
 	self startClass: stream.
 	self addContainedInteractions: aSVGVisitor.

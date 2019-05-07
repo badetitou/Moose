@@ -27,8 +27,8 @@ RTSVGArc >> addOn: stream using: aSVGVisitor [
 	self closeTag: stream.
 	self addExternalInteractions: aSVGVisitor.
 	self closeDef: stream.
-	
-	
+
+
 ]
 
 { #category : #adding }
@@ -45,7 +45,7 @@ RTSVGArc >> addPath: stream [
 	asin := aAngle sin negated.
 	bcos := bAngle cos.
 	bsin := bAngle sin negated.
-	
+
 	c := self center.
 	b := [ :a | a asFloat asString ].
 	stream

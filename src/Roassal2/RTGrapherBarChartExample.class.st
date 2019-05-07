@@ -1,5 +1,5 @@
 "
-RTGrapherBarChartExample new installTitle: 'HorizontalClasses' 
+RTGrapherBarChartExample new installTitle: 'HorizontalClasses'
 		code:
 		'
 | b ds hasTest |
@@ -9,14 +9,14 @@ b := RTGrapher new.
 b extent: 500@500.
 ds := RTHorizontalData new.
 ds points: RTShape withAllSubclasses.
-ds barShape 
+ds barShape
 	color: Color purple trans;
 	if: hasTest color: Color green trans.
 
 ds interaction popupText: [ :cls | cls name, ''
 LOC: '', cls numberOfLinesOfCode asString ].
-ds x: [ :cls | cls numberOfLinesOfCode * 
-	( (hasTest value: cls) 
+ds x: [ :cls | cls numberOfLinesOfCode *
+	( (hasTest value: cls)
 		ifTrue: [ 1 ]
 		ifFalse: [ -1 ] ) ].
 b add: ds.
@@ -24,7 +24,7 @@ b axisY decimalIfNecessary.
 b axisX numberOfTicks: 4.
 ^ b
 '
-	
+
 "
 Class {
 	#name : #RTGrapherBarChartExample,
@@ -130,30 +130,30 @@ DqzquEBjAy0AAAAASUVORK5CYII='
 RTGrapherBarChartExample >> exampleBarChart2 [
 	| b ds |
 	b := RTGrapher new.
-	
+
 	"We defien the size of the charting area"
 	b extent: 500 @ 100.
-	
+
 	ds := RTData new.
 	"When the mouse is above a bar, say which class we are point at"
 	ds interaction popup.
-	
+
 	"Each subclass of RTShape will be a bar"
 	ds points: RTShape withAllSubclasses.
-	
+
 	"The height of a bar will be the number of methods (defined in the instance side)"
 	ds y: [ :c | c rtmethods size ].
-	
+
 	"We set a color of the rectangle"
 	ds dotShape rectangle color: Color blue.
-	
+
 	"Set the width of a bar"
 	ds barShape color: Color blue; width: 10.
 	b add: ds.
-	
+
 	b axisX.
 	b axisYWithNumberOfTicks: 4.
-	
+
 	^ b
 ]
 
@@ -182,7 +182,7 @@ RTGrapherBarChartExample >> exampleBarChartWithNegativeValues [
 
 	| data b ds |
 	data := (1 to: 20) collect: [ :v | 10 atRandom - 5 ].
-	 
+
 	b := RTGrapher new.
 
 	b extent: 300 @ 200.
@@ -190,7 +190,7 @@ RTGrapherBarChartExample >> exampleBarChartWithNegativeValues [
 	ds := RTData new.
 	ds interaction popup.
 	ds points: data.
-	ds barShape width: 8; 
+	ds barShape width: 8;
 	      color: (Color green alpha: 0.3);
 	     if: [:value | value < 0 ] fillColor: (Color red alpha: 0.3).
 	b add: ds.
@@ -228,20 +228,20 @@ RTGrapherBarChartExample >> exampleBarchart [
 	| grapher dataSet |
 	grapher := RTGrapher new.
 	grapher extent: 300 @ 200.
-	
-	dataSet := RTData new. 
+
+	dataSet := RTData new.
 	dataSet barShape width: 10.
-	dataSet 
-		points: RTShape withAllSubclasses; 
+	dataSet
+		points: RTShape withAllSubclasses;
 		y: #numberOfMethods.
-	 
+
 	grapher add: dataSet.
 
 	dataSet := RTData new.
 	dataSet dotShape color: (Color red alpha: 0.3).
-	dataSet 
-		points: RTShape withAllSubclasses; 
-		y: #numberOfMethods. 
+	dataSet
+		points: RTShape withAllSubclasses;
+		y: #numberOfMethods.
 	grapher add: dataSet.
 
 	grapher axisY.
@@ -276,7 +276,7 @@ RTGrapherBarChartExample >> exampleBarsAndDots [
 
 | data b ds |
 data := (-5 to: 5 by: 0.1).
- 
+
 b := RTGrapher new.
 
 b extent: 300 @ 200.
@@ -347,21 +347,21 @@ ds := RTData new.
 ds dotShape rectangle size: 0.
 ds points: RTShape withAllSubclasses.
 ds y: [ :c | c rtmethods size ].
-ds barShape rectangle 
+ds barShape rectangle
 	color: Color veryLightGray.
-ds interaction 
+ds interaction
 	highlightColored: Color red.
 
-ds interaction popup 
-	named: [ :c | c name, ' methods' ] 
-	background: Color veryVeryLightGray 
-	group: [ :group :element | 
+ds interaction popup
+	named: [ :c | c name, ' methods' ]
+	background: Color veryVeryLightGray
+	group: [ :group :element |
 		| s ms |
 		s := RTBox new size: #numberOfLinesOfCode; color: Color red.
 		ms := element model rtmethods sortedAs: #numberOfLinesOfCode.
 		group addAll: (s elementsOn: ms).
 		RTGridLayout on: group ].
-	
+
 b add: ds.
 
 b axisX noTick; noLabel.
@@ -428,14 +428,14 @@ b := RTGrapher new.
 b extent: 500@500.
 ds := RTHorizontalData new.
 ds points: RTShape withAllSubclasses.
-ds barShape 
+ds barShape
 	color: Color purple trans;
 	if: hasTest color: Color green trans.
 
 ds interaction popupText: [ :cls | cls name, '
 LOC: ', cls numberOfLinesOfCode asString ].
-ds x: [ :cls | cls numberOfLinesOfCode * 
-	( (hasTest value: cls) 
+ds x: [ :cls | cls numberOfLinesOfCode *
+	( (hasTest value: cls)
 		ifTrue: [ 1 ]
 		ifFalse: [ -1 ] ) ].
 b add: ds.

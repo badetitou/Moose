@@ -232,7 +232,7 @@ RTDecoratedLine >> tail [
 { #category : #accessing }
 RTDecoratedLine >> tail: aLineTail [
 	(tail := aLineTail)
-		ifNotNil: [ 
+		ifNotNil: [
 			tail attachPoint: attachPoint.
 			tail color: color ]
 ]

@@ -73,7 +73,7 @@ RTBuilder >> defaultWindowName [
 ]
 
 { #category : #public }
-RTBuilder >> edgeFrom: source to: target [ 
+RTBuilder >> edgeFrom: source to: target [
 	"source and target are elements"
 	| newEdge |
 	newEdge := shapeBuilder edgeFrom: source to: target.
@@ -143,7 +143,7 @@ RTBuilder >> nestedElementsAttribute [
 RTBuilder >> normalizer [
 	"
 	:: Void->RTMetricNormalizer
-	
+
 	This metric normalizer assumes that elements have been already created. Which may not be the case...
 	"
 

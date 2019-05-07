@@ -14,7 +14,7 @@ RTScrollPadBuilderExamples >> example2 [
 	"
 	| b b2 |
 	b := RTMondrian new.
-	b shape rectangle 
+	b shape rectangle
 				withBorder;
 				width: [ :cls | cls numberOfVariables * 5];
 				height: #numberOfMethods;
@@ -38,7 +38,7 @@ RTScrollPadBuilderExamples >> padWithScalableBar [
 	"
 	| b b2 |
 	b := RTMondrian new.
-	b shape rectangle 
+	b shape rectangle
 				withBorder;
 				width: [ :cls | cls numberOfVariables * 5];
 				height: #numberOfMethods;

@@ -28,7 +28,7 @@ RTInteractiveTreeBuilderTest >> test02 [
 	b verticalGap: 10.
 	b horizontalPadding: 10.
 	self assert: b interaction numberOfInteractions equals: 3.
-	
+
 	b explore: Collection using: #subclasses.
 	b build
 ]

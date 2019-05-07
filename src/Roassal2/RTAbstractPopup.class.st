@@ -16,15 +16,15 @@ RTAbstractPopup class >> lastPopup [
 	"Return the group of elements that have been recently added as a popup"
 	lastPopup isNil ifTrue: [ ^ nil ].
 	^ RTGroup withAll: lastPopup
-	
+
 "	^ lastPopup isNil
 		ifTrue: [ nil ]
 		ifFalse: [ lastPopup first ]"
 
 
-"	(lastPopup notNil and: [ lastPopup size > 0 ]) ifTrue: [ ^ lastPopup first ]. 
+"	(lastPopup notNil and: [ lastPopup size > 0 ]) ifTrue: [ ^ lastPopup first ].
 	^ nil."
-	
+
 "	^ lastPopup isNil
 		ifTrue: [ nil ]
 		ifFalse: [ lastPopup ]
@@ -45,7 +45,7 @@ RTAbstractPopup class >> lastPopup: anObject [
 RTAbstractPopup class >> removeLastPopup [
 	self lastPopup ifNil: [ ^ self ].
 	self lastPopup view
-		ifNil: [ 
+		ifNil: [
 			self resetLastPopup.
 			^ self ].
 	self lastPopup remove.
@@ -73,21 +73,21 @@ RTAbstractPopup >> closestPositionOf: popup from: position inView: aView [
 	"Happens if we are in a test"
 	winSize ifNil: [ winSize := 500 @ 500 ].
 	"Check if the element is within the width of the view"
-	virtualPositionX := 
-		((idealVirtualPosition x + popup width + self popupOffset x) < winSize x) 
+	virtualPositionX :=
+		((idealVirtualPosition x + popup width + self popupOffset x) < winSize x)
 			ifTrue: [ idealVirtualPosition x + self popupOffset x ]
 			ifFalse: [ winSize x - popup width - self popupOffset x ].
 	virtualPositionX < 0
 		ifTrue: [ virtualPositionX := self popupOffset x ].
 
-	virtualPositionY := 
-		((idealVirtualPosition y + popup height + self popupOffset y) < winSize y) 
+	virtualPositionY :=
+		((idealVirtualPosition y + popup height + self popupOffset y) < winSize y)
 			ifTrue: [ idealVirtualPosition y + self popupOffset y ]
 			ifFalse: [ idealVirtualPosition y - popup height - self popupOffset y ].
 	virtualPositionY  < 0
 		ifTrue: [ virtualPositionY := self popupOffset y ].
 
-	
+
 	^ virtualPositionX @ virtualPositionY
 ]
 
@@ -95,16 +95,16 @@ RTAbstractPopup >> closestPositionOf: popup from: position inView: aView [
 RTAbstractPopup >> createAndShowPopupFor: element event: event [
 	| popupPosition popup idealPosition |
 	self removeLastPopup.
-	
+
 	popup := self getNewPopupFor: element.
 	self lastPopup: popup.
-	
+
 	"The following is useful when testing"
 	event position isNil
 		ifTrue: [ idealPosition := element position ]
 		ifFalse: [ idealPosition := event position ].
 	popupPosition := self closestPositionOf: popup from: idealPosition inView: element view.
-	popup translateTo: popupPosition.	
+	popup translateTo: popupPosition.
 
 ]
 
@@ -139,29 +139,29 @@ RTAbstractPopup >> getNewPopupFor: element [
 RTAbstractPopup >> initializeElement: element [
 	element
 		when: TRMouseClick
-		do: [ :event | 
+		do: [ :event |
 			self removeLastPopup.
 			element trachelShape signalUpdate ].
-		
+
 	element
 		when: TRMouseEnter
-		do: [ :event | 
+		do: [ :event |
 			self createAndShowPopupFor: element event: event ].
 	element
 		when: TRMouseLeave
-		do: [ :event | 
+		do: [ :event |
 			self removeLastPopup.
 			element trachelShape signalUpdate ].
 	element
 		when: TRMouseDragging
-		do: [ :event | 
+		do: [ :event |
 			self removeLastPopup.
 			element trachelShape signalUpdate ]
 ]
 
 { #category : #utility }
 RTAbstractPopup >> lastPopup: anElement [
- 
+
 	self class lastPopup: anElement
 ]
 

@@ -51,7 +51,7 @@ RTMorphDropInteraction >> initialize [
 RTMorphDropInteraction >> initializeElement: anElement [
 	anElement
 		when: TRMorphWantsDrop
-		do: [ :event | 
+		do: [ :event |
 			(self wantsDroppedMorph: event droppedMorph event: event dropMorphEvent)
 				ifTrue: [ event handledBy: event shape ] ].
 	anElement

@@ -28,7 +28,7 @@ RTLineDecoration >> attachPoint: anObject [
 { #category : #accessing }
 RTLineDecoration >> baseSize: aNumberOrBlockOrIdentifier [
 	baseSize := [ :e | aNumberOrBlockOrIdentifier rtValue: e].
-	
+
 ]
 
 { #category : #configuration }
@@ -63,7 +63,7 @@ RTLineDecoration >> mySize [
 { #category : #accessing }
 RTLineDecoration >> percentage: aNumberOrBlockOrIdentifier [
 	percentage := [ :e | aNumberOrBlockOrIdentifier rtValue: e ].
-	
+
 ]
 
 { #category : #hooks }
@@ -74,12 +74,12 @@ RTLineDecoration >> percentageFor: anElement [
 { #category : #accessing }
 RTLineDecoration >> size: aNumberOrBlockOrIdentifier [
 	size := [ :e | aNumberOrBlockOrIdentifier rtValue: e ].
-	
+
 ]
 
 { #category : #hooks }
 RTLineDecoration >> trachelShapeClass [
-	^ TRAbstractLineDecoratorShape 
+	^ TRAbstractLineDecoratorShape
 ]
 
 { #category : #public }
@@ -105,7 +105,7 @@ RTLineDecoration >> trachelShapeFor: anEdge [
 		size: (self mySize rtValue: anEdge)
 		color: (self colorFor: anEdge)
 		stroke: (self colorFor: anEdge).
-	shape 
+	shape
 		baseSize: (baseSize rtValue: anEdge);
 		percentage: (self percentageFor: anEdge).
 	^ shape

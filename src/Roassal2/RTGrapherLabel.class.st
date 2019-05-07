@@ -36,28 +36,28 @@ RTGrapherLabel >> min: aNumber [
 { #category : #accessing }
 RTGrapherLabel >> numberOfTicks [
 	| ticks |
-	min < 0 ifTrue: [ 
+	min < 0 ifTrue: [
 		ticks := max < 0 ifTrue: [ (max - min) abs ] ifFalse: [ max+min abs  ]
-		 ] ifFalse: [ 
+		 ] ifFalse: [
 		ticks := max - min ].
 	^ (ticks / step).
-	
+
 ]
 
 { #category : #printing }
 RTGrapherLabel >> printOn: aStream [
 	| x |
-	aStream 
+	aStream
 		nextPutAll: '(Score: ';
 		nextPutAll: (score printShowingDecimalPlaces: 2);
 		nextPutAll: ') '.
 	x := min.
-	[x <= max ] whileTrue: [ 
+	[x <= max ] whileTrue: [
 		aStream nextPutAll: (x printShowingDecimalPlaces: 2).
 		aStream nextPutAll: String tab.
 		x := x + step ].
-	
-	
+
+
 ]
 
 { #category : #accessing }

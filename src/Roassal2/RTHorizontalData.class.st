@@ -33,24 +33,24 @@ RTHorizontalData >> renderBarChartIn: aView [
 	elements := barBuilder elementsOn: self points.
 	aView addAll: elements.
 	interaction setUpElements: elements.
-	RTMetricNormalizer new 
+	RTMetricNormalizer new
 		elements: elements;
 		normalizeElementY: [ :anElement | y rtValue: anElement ]
 			min: 0
-			max: builder extent y negated 
+			max: builder extent y negated
 			minValue: (yScale rtValue: minY)
 			maxValue: (yScale rtValue: maxY)
 			using: xScale.
 	positiveElements := OrderedCollection new.
 	negativeElements := OrderedCollection new.
-	elements do: [ :el | 
-		((x rtValue: el) >= 0 
+	elements do: [ :el |
+		((x rtValue: el) >= 0
 			ifTrue: [ positiveElements ]
 			ifFalse: [ negativeElements ]) add: el ].
 	"positive elements"
-	positiveElements ifNotEmpty: [ 
+	positiveElements ifNotEmpty: [
 		RTMetricNormalizer new
-			elements: positiveElements; 
+			elements: positiveElements;
 			normalizeElementWidth: [ :el | x rtValue: el ]
 				min: 0
 				max: builder extent x - centralDot position x
@@ -58,9 +58,9 @@ RTHorizontalData >> renderBarChartIn: aView [
 				maxValue: (xScale rtValue: maxX)
 				using: xScale.
 		RTAlignment new elements: positiveElements; fixedElement: centralDot; left].
-	
+
 	"negative elements"
-	negativeElements ifNotEmpty: [ 
+	negativeElements ifNotEmpty: [
 		RTMetricNormalizer new
 			elements: negativeElements;
 			normalizeElementWidth: [ :el | x rtValue: el ]
@@ -70,17 +70,17 @@ RTHorizontalData >> renderBarChartIn: aView [
 				maxValue: 0
 				using: xScale.
 		RTAlignment new elements: negativeElements; fixedElement: centralDot; right ].
-	
+
 	self executeUserDeclaredActions.
-	
+
 ]
 
 { #category : #rendering }
 RTHorizontalData >> renderDotAndLinesIn: aView [
-	
+
 	aView addAll: elements.
 	interaction setUpElements: elements.
-	RTMetricNormalizer new 
+	RTMetricNormalizer new
 		elements: elements;
 		normalizeElementY: [ :el | y rtValue: el ]
 			min: 0
@@ -104,9 +104,9 @@ RTHorizontalData >> renderDotAndLinesIn: aView [
 RTHorizontalData >> resetShapeBuilderForBar [
 	barBuilder := RTShapeBuilder new.
 	barBuilder rectangle.
-	
+
 	"Default height that compute an appropriate height"
-	barBuilder height: [ :object | 
+	barBuilder height: [ :object |
 		(builder extent y / (self numberOfPoints * 2)) asFloat ]
 ]
 

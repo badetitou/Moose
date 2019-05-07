@@ -9,6 +9,6 @@ Class {
 }
 
 { #category : #enumerating }
-RTTextLine >> wordsDo: aBlockClosure [ 
+RTTextLine >> wordsDo: aBlockClosure [
 	^ self do: aBlockClosure
 ]

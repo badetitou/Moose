@@ -1,9 +1,9 @@
 "
-RTBundleExample new installTitle: 'GroupOfGroups' 
+RTBundleExample new installTitle: 'GroupOfGroups'
 		code:
 		'
 ^ v'
-	
+
 "
 Class {
 	#name : #RTBundleExample,
@@ -274,7 +274,7 @@ AYG2GZgPeeQAAAAASUVORK5CYII='
 RTBundleExample >> exampleClusterBezierAndSlider [
 | b lb |
 b := RTBundleBuilder new.
-b from: (Array with: TRObject with: TRTest) using: #subclasses. 
+b from: (Array with: TRObject with: TRTest) using: #subclasses.
 b edges shape line color: Color black.
 b bezier color: (Color blue alpha: 0.5).
 b useBezierlineWith: #dependentClasses.
@@ -735,15 +735,15 @@ searchTree := nil.
 searchTree := [ :s :t| t key = s ifTrue: [ t ]
 	ifFalse: [ | r |
 		r := nil.
-		t value do: [ :child | 
+		t value do: [ :child |
 			r ifNil: [ r := searchTree value: s value: child.] ].
 		r ] ].
 relationsBlock := [ :str| | res strings |
 	res := Dictionary new.
 	(str substrings: '
-') do: [:s| 
+') do: [:s|
 		strings := s substrings:' '.
-		res at: strings first put: 
+		res at: strings first put:
 			(strings allButFirst collect: [:st |
 				searchTree value: st value: tree] )].
 	res	 ].

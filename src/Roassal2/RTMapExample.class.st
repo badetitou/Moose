@@ -1,24 +1,24 @@
 "
-RTMapExample new installTitle: 'ColoredAfrica03' 
+RTMapExample new installTitle: 'ColoredAfrica03'
 		code:
 		'
-		
-			b := RTMapBuilder new.	
-		
+
+			b := RTMapBuilder new.
+
 	countries := RTMapBuilder africanPopulation.
 	countriesName := countries collect: #first.
 	max := (countries collect: [ :c | c at: 2 ]) max.
-	
+
 	cn := RTMultiLinearColor new
 		colors: (ColorPalette sequential colors: 8 scheme: ''GnBu'');
 		command: [ :aCountry | (countries detect: [ :c | c first = aCountry ]) second / max ].
-	
+
 	b countries: countriesName.
 	b color: cn.
 	b scale: 2.
 	b build.
 	^ b view'
-	
+
 "
 Class {
 	#name : #RTMapExample,
@@ -30,16 +30,16 @@ Class {
 RTMapExample >> exampleAfricanPopulation [
 
 	| b countries cn sum|
-	b := RTMapBuilder new.	
-		
+	b := RTMapBuilder new.
+
 	countries := RTMapBuilder countriesPopulation select: [ :c | RTSVGPath africa includes: (c at: 1) ].
 	sum := (countries collect: [ :c | c at: 2 ])inject: 0 into: [ :acc :n | acc + n ].
-	
+
 	cn := RTNColorLinearNormalizer
 		inContext: (countries collect: [:c | c at: 2])
 		lowColor: (Color r:0.8 g:0.8 b:1)
 		highColor: (Color r:0 g:0 b:0.3).
-	
+
 	b countries: countries named: [ :c | c at: 1 ].
 	b color: [ :c | cn rtValue: (c at: 2) ].
 	b withPopup: [ :c |
@@ -139,7 +139,7 @@ RTMapExample >> exampleCity01 [
 
 	| b |
 	b := RTMapBuilder new.
-	
+
 	b countries: RTMapBuilder southAmerica.
 	b cities: #( " (name, population) pairs "
 		#('Santiago' 6027000)
@@ -153,18 +153,18 @@ RTMapExample >> exampleCity01 [
 		#('Sao Paulo' 19889559)
 		#('Caracas' 2104000))
 		named: [ :c | c at: 1 ].
-	
+
 	" Cities' pop-ups show their population "
 	b cities
 		withPopup: [ :c | (c at: 1), ': ', (((c at: 2) / 1000000 roundTo: 0.01) asString), 'M'].
-	
+
 	" Cities' size and color depend on the population "
 	b cities shape
 		size: [ :c | (c at: 2)/300000 + 10 ];
 		if: [ :c | (c at: 2) < 1000000 ] fillColor: (Color green alpha: 0.5);
 		if: [ :c | (c at: 2) >= 1000000 and: (c at: 2) < 5000000 ] fillColor: (Color yellow alpha: 0.5);
 		if: [ :c | (c at: 2) >= 5000000 ] fillColor: (Color red alpha: 0.5).
-	
+
 	" We define some routes and color them, then we set the pop-ups to show each route's length "
 	b routes
 		from: 'Santiago' toAll: #('Buenos Aires' 'Lima' 'Sao Paulo');
@@ -172,7 +172,7 @@ RTMapExample >> exampleCity01 [
 		ifRoute: [ :r | r fromCityName = 'Bogota' ] lineColor: (Color brown);
 		ifRoute: [ :r | r fromCityName = 'Santiago' ] lineColor: (Color blue);
 		withPopup: #lengthString.
-	
+
 	" We set the countries' colors, scale, and pop-up "
 	b color: Color veryVeryLightGray.
 	b scale: 3.
@@ -271,10 +271,10 @@ AAAASUVORK5CYII='
 { #category : #sources }
 RTMapExample >> exampleCity01WithNames [
 
-	
+
 	| b |
 	b := RTMapBuilder new.
-	
+
 	b countries: RTMapBuilder southAmerica.
 	b cities: #( " (name, population) pairs "
 		#('Santiago' 6027000)
@@ -288,11 +288,11 @@ RTMapExample >> exampleCity01WithNames [
 		#('Sao Paulo' 19889559)
 		#('Caracas' 2104000))
 		named: [ :c | c at: 1 ].
-	
+
 	" Cities' pop-ups show their population "
 	b cities
 		withPopup: [ :c | (c at: 1), ': ', (((c at: 2) / 1000000 roundTo: 0.01) asString), 'M'].
-	
+
 	" Cities' size and color depend on the population "
 	b cities shape
 		size: [ :c | (c at: 2)/300000 + 10 ];
@@ -300,7 +300,7 @@ RTMapExample >> exampleCity01WithNames [
 		if: [ :c | (c at: 2) >= 1000000 and: (c at: 2) < 5000000 ] fillColor: (Color yellow alpha: 0.5);
 		if: [ :c | (c at: 2) >= 5000000 ] fillColor: (Color red alpha: 0.5);
 		withTextAbove: #first.
-	
+
 	" We define some routes and color them, then we set the pop-ups to show each route's length "
 	b routes
 		from: 'Santiago' toAll: #('Buenos Aires' 'Lima' 'Sao Paulo');
@@ -308,7 +308,7 @@ RTMapExample >> exampleCity01WithNames [
 		ifRoute: [ :r | r fromCityName = 'Bogota' ] lineColor: (Color brown);
 		ifRoute: [ :r | r fromCityName = 'Santiago' ] lineColor: (Color blue);
 		withPopup: #lengthString.
-	
+
 	" We set the countries' colors, scale, and pop-up "
 	b color: Color veryVeryLightGray.
 	b scale: 3.
@@ -408,17 +408,17 @@ EoX1ox+KifZ/ZFKa/WzLbnsAAAAASUVORK5CYII='
 { #category : #sources }
 RTMapExample >> exampleColoredAfrica [
 
-	| b countries countriesName max cn |	
-	b := RTMapBuilder new.	
-		
+	| b countries countriesName max cn |
+	b := RTMapBuilder new.
+
 	countries := RTMapBuilder africanPopulation.
 	countriesName := countries collect: #first.
 	max := (countries collect: [ :c | c at: 2 ]) max.
-	
+
 	cn := RTMultiLinearColor new
 		colors: (RTColorPalette sequential colors: 8 scheme: 'Reds');
 		command: [ :aCountry | (countries detect: [ :c | c first = aCountry ]) second / max ].
-	
+
 	b countries: countriesName.
 	b color: cn.
 	b scale: 2.
@@ -429,17 +429,17 @@ RTMapExample >> exampleColoredAfrica [
 { #category : #sources }
 RTMapExample >> exampleColoredAfrica02 [
 
-	|b countries countriesName max cn|	
-			b := RTMapBuilder new.	
-		
+	|b countries countriesName max cn|
+			b := RTMapBuilder new.
+
 	countries := RTMapBuilder africanPopulation.
 	countriesName := countries collect: #first.
 	max := (countries collect: [ :c | c at: 2 ]) max.
-	
+
 	cn := RTMultiLinearColor new
 		colors: (RTColorPalette sequential colors: 8 scheme: 'Purples');
 		command: [ :aCountry | (countries detect: [ :c | c first = aCountry ]) second / max ].
-	
+
 	b countries: countriesName.
 	b color: cn.
 	b scale: 2.
@@ -534,17 +534,17 @@ B8J9INw37gPhPhDuG/eBcB8I9437QLgPhPvGfSDct6D2f5ytsauNCeQ3AAAAAElFTkSuQmCC'
 { #category : #sources }
 RTMapExample >> exampleColoredAfrica03 [
 
-	|b countries countriesName max cn|	
-			b := RTMapBuilder new.	
-		
+	|b countries countriesName max cn|
+			b := RTMapBuilder new.
+
 	countries := RTMapBuilder africanPopulation.
 	countriesName := countries collect: #first.
 	max := (countries collect: [ :c | c at: 2 ]) max.
-	
+
 	cn := RTMultiLinearColor new
 		colors: (RTColorPalette sequential colors: 8 scheme: 'GnBu');
 		command: [ :aCountry | (countries detect: [ :c | c first = aCountry ]) second / max ].
-	
+
 	b countries: countriesName.
 	b color: cn.
 	b scale: 2.
@@ -727,16 +727,16 @@ g/AfhP/FfxD+g/C/+A/CfxD+F/9B+A/C/+I/CP/LZf0/s7zN1BIhG9gAAAAASUVORK5CYII='
 RTMapExample >> exampleSouthAmericaPopulation [
 
 	| b countries cn sum|
-	b := RTMapBuilder new.	
-		
+	b := RTMapBuilder new.
+
 	countries := RTMapBuilder countriesPopulation select: [ :c | RTSVGPath southAmerica includes: (c at: 1) ].
 	sum := (countries collect: [ :c | c at: 2 ])inject: 0 into: [ :acc :n | acc + n ].
-	
+
 	cn := RTNColorLinearNormalizer
 		inContext: (countries collect: [:c | c at: 2])
 		lowColor: (Color r:0.8 g:0.8 b:1)
 		highColor: (Color r:0 g:0 b:0.3).
-	
+
 	b countries: countries named: [ :c | c at: 1 ].
 	b color: [ :c | cn rtValue: (c at: 2) ].
 	b withPopup: [ :c |
@@ -805,15 +805,15 @@ iAAAAABJRU5ErkJggg=='
 RTMapExample >> exampleWorldPopulation [
 
 	| b countries cn |
-	b := RTMapBuilder new.	
-		
+	b := RTMapBuilder new.
+
 	countries := RTMapBuilder countriesPopulation select: [ :c | RTSVGPath countries includes: (c at: 1) ].
-	
+
 	cn := RTNColorLinearNormalizer
 		inContext: (countries collect: [:c | c at: 2])
 		lowColor: (Color r:0.8 g:0.8 b:1)
 		highColor: (Color r:0 g:0 b:0.3).
-	
+
 	b countries: countries named: [ :c | c at: 1 ].
 	b color: [ :dic | cn rtValue: (dic at: 2) ].
 	b withPopup: [ :c | (c at: 1) asString, ': ',(((c at: 2) / 1000000 asFloat roundTo: 0.001) asString, ' Million') ].

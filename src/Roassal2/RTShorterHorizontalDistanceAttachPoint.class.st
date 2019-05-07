@@ -32,10 +32,10 @@ RTShorterHorizontalDistanceAttachPoint >> attachPointsFor: anEdge on: anElement 
 	| rec center |
 	rec := anElement encompassingRectangle.
 	center := rec center.
-	^ Array 		
+	^ Array
 		 "right side"
 		with: (rec right @ (center y))
 		"left side"
 		with: (rec left @ (center y))
-	
+
 ]

@@ -41,8 +41,8 @@ RTShorterDistanceWithOffsetAttachPoint >> attachPointsFor: anEdge on: anElement 
 	| rec center |
 	rec := anElement encompassingRectangle.
 	center := rec center.
-	
-	^ Array 
+
+	^ Array
 		"upper side"
 		with: ((center x) @ rec top)
 		 "right side"
@@ -51,7 +51,7 @@ RTShorterDistanceWithOffsetAttachPoint >> attachPointsFor: anEdge on: anElement 
 		with: ((center x) @ rec bottom)
 		"left side"
 		with: (rec left @ (center y))
-	
+
 ]
 
 { #category : #'public - hooks' }
@@ -86,13 +86,13 @@ RTShorterDistanceWithOffsetAttachPoint >> offsetNormalFor: anEdge [
     "Return the offset in case of multiple edges with the same starting and ending points"
     | indexOfEdge multipleEdges normal pos |
     multipleEdges := OrderedCollection new.
-    multipleEdges addAll: 
-        (anEdge to connectedEdges select: [ :e | 
-            (e from == anEdge from) and: [ e to == anEdge to ] ]).    
+    multipleEdges addAll:
+        (anEdge to connectedEdges select: [ :e |
+            (e from == anEdge from) and: [ e to == anEdge to ] ]).
 
-    multipleEdges addAll: 
-        (anEdge to connectedEdges select: [ :e | 
-            (e to == anEdge from) and: [ e from == anEdge to ] ]).    
+    multipleEdges addAll:
+        (anEdge to connectedEdges select: [ :e |
+            (e to == anEdge from) and: [ e from == anEdge to ] ]).
 
 	multipleEdges size <= 1 ifTrue: [ ^ 0 @ 0 ].
 	indexOfEdge := multipleEdges indexOf: anEdge.

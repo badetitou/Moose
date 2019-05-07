@@ -1,5 +1,5 @@
 "
-A RTVisible is an interaction for element. It allows one to define behavior when an element become visible or visible. 
+A RTVisible is an interaction for element. It allows one to define behavior when an element become visible or visible.
 
 The interaction has to be used after having added the element to a view.
 
@@ -34,12 +34,12 @@ RTVisible >> doUpdate: element [
 	| isVisible |
 	isVisible := element trachelShape isVisible.
 	isVisible ~= (element attributeAt: #isVisible)
-		ifTrue: [ 
+		ifTrue: [
 			isVisible
 				ifTrue: [ self doVisibleBlockOn: element ]
 				ifFalse: [ self doInvisibleBlockOn: element ].
 			element attributeAt: #isVisible put: isVisible ].
-	
+
 ]
 
 { #category : #utility }
@@ -59,7 +59,7 @@ RTVisible >> initializeElement: element [
 	| c |
 	self prepareElement: element.
 	self doUpdate: element.
-	
+
 	c := TRTranslationCallback new.
 	c block: [ :aShape :aStep | self doUpdate: element ].
 	element trachelShape addCallback: c.

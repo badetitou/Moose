@@ -9,7 +9,7 @@ Consider the following example:
 	b minY: -200; maxY: 200.
 
 	b y: #yourself.
-	 
+
 	b barShape color: (Color red alpha: 0.3).
 	b view addMenu: '+ 1' callback: [ b add: 400 atRandom - 200 ].
 	b open
@@ -43,13 +43,13 @@ RTDynamicStackedGrapher >> add: anObject [
 		ifTrue: [ el translateTo: self barXPosition @ (positionInView y + (barHeight / 2)) + graphCenter ]
 		ifFalse: [ el translateTo: self barXPosition @ (positionInView y - (barHeight / 2)) + graphCenter ].
 	view add: el.
-	
-	textBelow ifNotNil: [ 
+
+	textBelow ifNotNil: [
 		| l |
 		l := RTLabeled new text: textBelow.
 		yValue > 0 ifTrue: [ l below ].
 		el @ l ].
-	
+
 	view signalUpdate.
 	allAddedElements add: el.
 	^ el
@@ -58,7 +58,7 @@ RTDynamicStackedGrapher >> add: anObject [
 { #category : #adding }
 RTDynamicStackedGrapher >> addAll: someObjects [
 	^ someObjects collect: [ :o | self add: o ]
-	
+
 ]
 
 { #category : #public }
@@ -85,7 +85,7 @@ RTDynamicStackedGrapher >> barXPosition [
 { #category : #accessing }
 RTDynamicStackedGrapher >> centerElement [
 	"Return the center of the element, the position 0 @ 0"
-	^ centerElement 
+	^ centerElement
 ]
 
 { #category : #'private - bar management' }
@@ -135,10 +135,10 @@ RTDynamicStackedGrapher >> example01 [
 	b minY: -200; maxY: 200.
 
 	b y: #yourself.
-	 
+
 	b barShape color: (Color red alpha: 0.3).
 	b view addMenu: '+ 1' callback: [ b add: 400 atRandom - 200 ].
-	^ b  
+	^ b
 ]
 
 { #category : #'private - bar management' }
@@ -170,12 +170,12 @@ RTDynamicStackedGrapher >> numberOfBars: anInteger [
 ]
 
 { #category : #'private - bar management' }
-RTDynamicStackedGrapher >> removeExceedingBar [	
+RTDynamicStackedGrapher >> removeExceedingBar [
 	allAddedElements size = numberOfBars
-		ifTrue: [ 
+		ifTrue: [
 			allAddedElements first remove.
-			allAddedElements do: [ :e | 
-				
+			allAddedElements do: [ :e |
+
 				"e translateBy: self barWidthWithGap negated @ 0"
 				layoutTranslator translate: e by: (self barWidthWithGap negated @ 0).
 				"view addAnimation: (RTLinearMove new by: (self barWidthWithGap negated @ 0) during: 0.1 on: e)."
@@ -187,7 +187,7 @@ RTDynamicStackedGrapher >> removeExceedingBar [
 RTDynamicStackedGrapher >> renderIn: aView [
 	self defineAxesIfNecessary.
 	self renderAxis.
-	
+
 ]
 
 { #category : #'public - cleaning' }

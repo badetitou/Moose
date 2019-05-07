@@ -1,5 +1,5 @@
 "
-RTGrapherDecorationExample new installTitle: 'RangeBelowXAxis' 
+RTGrapherDecorationExample new installTitle: 'RangeBelowXAxis'
 		code:
 		'
 	| b d |
@@ -11,7 +11,7 @@ RTGrapherDecorationExample new installTitle: 'RangeBelowXAxis'
 	b addDecorator: (RTRangeBelowXAxis new startValue: 2.5; endValue: 4; label: ''A'').
 	b addDecorator: (RTRangeBelowXAxis new startValue: 0; endValue: 2; label: ''B'').
 	^ b'
-	
+
 "
 Class {
 	#name : #RTGrapherExample,
@@ -146,11 +146,11 @@ RTGrapherExample >> exampleColoredAndInteractionLabel [
 	| b |
 	b := RTDoubleBarBuilder new.
 	b interaction action: #inspect.
-	b shape label 
+	b shape label
 		text: [ :cls | '<', cls name, '>' ];
 		if: [ :cls | cls name endsWith: 'Shape' ] fillColor: Color green;
 		if: [ :cls | cls name endsWith: 'Box' ] fillColor: Color red.
-	
+
 	b points: RTShape withAllSubclasses.
 	b bottomValue: #numberOfMethods.
 	b topValue: #numberOfVariables.
@@ -282,18 +282,18 @@ RTGrapherExample >> exampleDoubleYAXis [
 	| b ds |
 	b := RTDoubleGrapher new.
 	b extent: 300 @ 200.
-	
+
 	ds := RTData new.
 	ds points: #(4 3 2 2).
 	ds barShape width: 40.
 	b add: ds.
-	
+
 	ds := RTData new.
 	ds points: (10 to: 13).
 	ds dotShape color: Color blue.
 	ds connectColor: Color red.
 	b addRight: ds.
-	
+
 	b axisX noLabel.
 	b axisYRight color: Color red.
 	^ b
@@ -369,15 +369,15 @@ RTGrapherExample >> exampleEbola [
 	b extent: 400 @ 200.
 
 	ds := RTData new.
-	ds interaction fixedPopupText: [ :row | row value at: 12 ]. 
-	ds dotShape ellipse 
+	ds interaction fixedPopupText: [ :row | row value at: 12 ].
+	ds dotShape ellipse
 		color: (Color blue alpha: 0.3);
 		size: [ :row  | (row at: 11) / 5 ].
 	ds points: data.
 	ds connectColor: Color blue.
 	ds y: [ :r | r at: 10 ].
 	ds highlightIf: [ :row | (row at: 10) > 100 ] using: [ :row | row third year ].
-	b add: ds. 
+	b add: ds.
 
 	b axisX noLabel; numberOfTicks: tab values size.
 	b axisY noDecimal.
@@ -438,7 +438,7 @@ RTGrapherExample >> exampleFunctions [
 	| b ds |
 	b := RTGrapher new.
 	b extent: 300 @ 300.
-	
+
 	(Array with: Color red with: Color blue with: Color green with: Color yellow) doWithIndex: [ :color :i |
 		ds := RTData new.
 		ds label: 'x^', i asString.
@@ -449,7 +449,7 @@ RTGrapherExample >> exampleFunctions [
 		ds y: [ :v | v raisedTo: i ].
 		b add: ds.
 	].
-	
+
 	b axisXWithNumberOfTicks: 3.
 	b axisYWithNumberOfTicks: 4.
 b legend right.
@@ -504,7 +504,7 @@ data withIndexDo: [ :each :i | |c|
 	ds points: each.
 	ds x: #key.
 	ds y: #value.
-	
+
 	ds interaction noInteractions.
 	ds interaction highlightDataset: c.
 
@@ -571,7 +571,7 @@ ds barShape createdElements do: [ :back |
 		top ; center ; inner; padding: 5; move.
 ].
 
-^ b 
+^ b
 ]
 
 { #category : #icons }
@@ -597,7 +597,7 @@ RTGrapherExample >> exampleLinesAndBars [
 	d points: #(3 4 3.5).
 	d barShape.
 	b add: d.
-	
+
 	d := RTData new.
 	d points: #(3 4 3.5).
 	d connectColor: Color red.
@@ -635,7 +635,7 @@ RTGrapherExample >> exampleMethodSize [
 	| b classes normalizer |
 	b := RTGrapher new.
 	b extent: 400 @ 200.
-	
+
 	classes := RTShape withAllSubclasses.
 	normalizer := RTMultiLinearColorForIdentity new objects: classes.
 	classes do: [ :c |
@@ -662,14 +662,14 @@ RTGrapherExample >> exampleMethodSize2 [
 	| b classes normalizer |
 	b := RTGrapher new.
 	b extent: 400 @ 200.
-	
+
 	classes := RTShape withAllSubclasses.
 	normalizer := RTMultiLinearColorForIdentity new objects: classes.
 	classes do: [ :c |
 		| data ds |
 		ds := RTData new.
 		data := (c rtmethods reverseSortedAs: #numberOfLinesOfCode ).
-		
+
 		ds interaction popup.
 		ds dotShape rectangle color: (normalizer rtValue: c).
 		ds points: data.
@@ -840,7 +840,7 @@ d addMetric: #fourth.
 d barChartWithBarTitle: #first rotation: -30.
 
 b add: d.
-^ b 
+^ b
 ]
 
 { #category : #icons }
@@ -892,7 +892,7 @@ g2 add: ds2.
 g1 axisY
 	title: 'y 1';
 	color: Color red.
-	
+
 g2 axisY
 	title: 'y 2';
 	color: Color blue.
@@ -1192,7 +1192,7 @@ tab convertColumnsAsInteger: #('POPESTIMATE2013' 'POPEST18PLUS2013').
 
 b := RTDoubleBarBuilder new.
 b pointName: [ :row | row at: (tab indexOfName: 'NAME') ].
-b points: tab values allButFirst. 
+b points: tab values allButFirst.
 b bottomValue: [ :row | ((row at: (tab indexOfName: 'POPESTIMATE2013')) / 1000) asInteger ] titled: 'Pop estimate'.
 b topValue: [ :row | ((row at: (tab indexOfName: 'POPEST18PLUS2013')) / 1000) asInteger ] titled: 'Pop +18 estimate'.
 b build.
@@ -1344,7 +1344,7 @@ RTGrapherExample >> examplePopupOnCurves [
 	b add: ds.
 
 	b build.
-	^ b view 
+	^ b view
 ]
 
 { #category : #icons }
@@ -1406,7 +1406,7 @@ RTGrapherExample >> examplePrimeNumberSpace [
 
 	anim := RTActiveAnimation new.
 	anim intervalInMilliseconds: 100.
-	anim blockToExecute: [ 
+	anim blockToExecute: [
 	    v canvas camera scale: v canvas camera scale + 0.2.
 	    v signalUpdate.
 	].
@@ -1462,7 +1462,7 @@ RTGrapherExample >> exampleRandomCurves [
 b := RTGrapher new.
 b extent: 300 @ 200.
 
-5 timesRepeat: [ 
+5 timesRepeat: [
 	ds := RTData new.
 	ds noDot.
 	ds points: ((1 to: 500) collect: [ :i | 50 atRandom - 25 ]) cumsum.
@@ -1537,14 +1537,14 @@ RTGrapherExample >> exampleScatterPlot2 [
 	b := RTGrapher new.
 	b extent: 290 @ 200.
 	b interaction popup.
-	
+
 	ds := RTData new.
 	ds dotShape ellipse size: 15; color: (Color red alpha: 0.3).
 	ds points: RTObject withAllSubclasses.
-	 
+
 	ds x: #numberOfMethods; y: #numberOfVariables.
 	ds dotSize: #numberOfLinesOfCode min: 4 max: 20 using: #sqrt.
-	
+
 	b add: ds.
 	b axisXWithNumberOfTicks: 4.
 	b axisYWithNumberOfTicks: 4.
@@ -1591,7 +1591,7 @@ RTGrapherExample >> exampleScatterplotWithHighlighting [
 	| b ds |
 	b := RTGrapher new.
 	b extent: 290 @ 200.
-	
+
 	ds := RTData new.
 	ds interaction popup.
 	ds dotShape ellipse size: 15; color: (Color red alpha: 0.3).
@@ -1600,15 +1600,15 @@ RTGrapherExample >> exampleScatterplotWithHighlighting [
 	ds dotSize: #numberOfLinesOfCode min: 4 max: 20 using: #sqrt.
 	ds highlightIf: [ :c | (c numberOfLinesOfCode > 2000) or: [ c numberOfVariables > 10 ] ] using: #name.
 	b add: ds.
-	
-	b axisX 
+
+	b axisX
 			numberOfTicks: 4;
 			title: 'LOC'.
 
-	b axisY 
+	b axisY
 			numberOfTicks: 4;
 			title: 'NOM'.
-	
+
 	b build.
 	^ b view
 ]
@@ -1665,14 +1665,14 @@ RTGrapherExample >> exampleSimpleCurve [
 	| b ds |
 	b := RTGrapher new.
 	b extent: 300 @ 300.
-	
+
 	ds := RTData new.
 	ds dotShape ellipse color: (Color blue alpha: 0.5).
 	ds points: (0.0 to: 1.0 by: 0.05).
 	ds connect.
 	ds y: [ :v | v sqrt ].
 	b add: ds.
-	
+
 	b axisXWithNumberOfTicks: 3.
 	b axisYWithNumberOfTicks: 4.
 b build.
@@ -1685,14 +1685,14 @@ RTGrapherExample >> exampleSimpleCurve2 [
 	| b ds |
 	b := RTGrapher new.
 	b extent: 300 @ 300.
-	
+
 	ds := RTData new.
 	ds dotShape ellipse color: (Color blue alpha: 0.5).
 	ds points: (RTObject withAllSubclasses sortedAs: #numberOfMethods).
 	ds connect.
 	ds y: #numberOfMethods.
 	b add: ds.
-	
+
 	b axisXWithNumberOfTicks: 3.
 	b axisYWithNumberOfTicks: 4.
 b build.
@@ -1803,23 +1803,23 @@ s4kAAAAASUVORK5CYII='
 RTGrapherExample >> exampleSquaredCurve [
 
 | data b ds |
-data := (0 to: 40000 by: 1000) 
+data := (0 to: 40000 by: 1000)
 collect: [:n | n @ (Random new next * 3) floor].
 b := RTGrapher new.
-b extent: 1000@ 200. 
+b extent: 1000@ 200.
 ds := RTData new.
 ds dotShape rectangle height: 1; width: 25; color: Color blue.
-ds connectUsing: (RTLine new 
-	color: (Color blue); 
-	width: 1; 
+ds connectUsing: (RTLine new
+	color: (Color blue);
+	width: 1;
 	withHorizontalAttachPoint; yourself).
-ds 
+ds
 	points: data;
 	x: #x;
 	y: #y.
 
 b add: ds.
-b axisX. 
+b axisX.
 b axisY title: 'alles Count'.
 ^ b
 ]
@@ -1847,19 +1847,19 @@ RTGrapherExample >> exampleStackingX [
 	| b ds |
 	b := RTGrapher new.
 	b extent: 400 @ 300.
-	
+
 	ds := RTData new.
 	ds points: #( 5 6 7 ).
 	ds connectColor: Color red.
 	ds y: #yourself.
 	b add: ds.
-	
+
 	ds := RTData new.
 	ds points: #(1 7 10 4).
 	ds connectColor: Color blue.
 	ds y: #yourself.
 	b add: ds.
-	
+
 
 	b axisXWithNumberOfTicks: 4.
 	b axisYWithNumberOfTicks: 4.
@@ -1872,7 +1872,7 @@ RTGrapherExample >> exampleStackingX3 [
 	| b nbOfCurves normalizer |
 	b := RTGrapher new.
 	b extent: 400 @ 200.
-	
+
 	nbOfCurves := 3.
 	normalizer := RTMultiLinearColorForIdentity new numberOfColors: (nbOfCurves).
 	1 to: nbOfCurves do: [ :i |
@@ -2054,17 +2054,17 @@ RTGrapherExample >> exampleTwoStackedCurves [
 	| b ds |
 	b := RTGrapher new.
 	b extent: 200 @ 200.
-	
+
 	ds := RTData new.
 	ds points: #(0 1 2 3 10 20).
 	ds connectUsing: (RTLine new color: Color blue).
 	b add: ds.
-	
+
 	ds := RTData new.
 	ds points: #(0 10 20 30).
 	ds connectUsing: (RTLine new color: Color red).
 	b add: ds.
-	
+
 	b axisXWithNumberOfTicks: 3.
 	b axisYWithNumberOfTicks: 4.
 	^ b
@@ -2154,7 +2154,7 @@ RTGrapherExample >> examplesinAndCos [
 	| b ds |
 	b := RTGrapher new.
 	b extent: 400 @ 400.
-	
+
 	ds := RTData new.
 	ds label: 'sine'.
 	ds dotShape rectangle size: 0.
@@ -2163,7 +2163,7 @@ RTGrapherExample >> examplesinAndCos [
 	ds x: #yourself.
 	ds connectColor: (Color red alpha: 0.4).
 	b add: ds.
-	
+
 	ds := RTData new.
 	ds label: 'cosine'.
 	ds dotShape rectangle size: 0.

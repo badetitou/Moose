@@ -41,7 +41,7 @@ RTScaleLog >> initialize [
 	linear := self class linear.
 	base := 10.
 	positive := true.
-	domain := #(1 10). 
+	domain := #(1 10).
 ]
 
 { #category : #accessing }
@@ -62,19 +62,19 @@ RTScaleLog >> invert: x [
 { #category : #'math functions' }
 RTScaleLog >> lg: x [
 	"logarithm"
-	^ (positive 
+	^ (positive
 		ifTrue: [ (x max: 0) ln ]
 		ifFalse: [ (x > 0 ifTrue: [ 0 ] ifFalse: [ 0 - x ] ) ln negated ])
 		/ (base ln).
-		
+
 ]
 
 { #category : #'math functions' }
 RTScaleLog >> pow: x [
-	^ positive  
+	^ positive
 		ifTrue: [ base raisedTo: x ]
 		ifFalse: [ (base raisedTo: x negated) negated ].
-		
+
 ]
 
 { #category : #accessing }

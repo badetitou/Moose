@@ -8,6 +8,6 @@ Class {
 }
 
 { #category : #enumerating }
-RTTextLines >> linesDo: aBlockClosure [ 
-	^ self do: aBlockClosure 
+RTTextLines >> linesDo: aBlockClosure [
+	^ self do: aBlockClosure
 ]
